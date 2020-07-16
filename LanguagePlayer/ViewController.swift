@@ -8,36 +8,66 @@
 
 import UIKit
 import AVKit
+import Combine
 
 class ViewController: UIViewController {
+    
+    var controller: PlayerController?
+    var subscriber: AnyCancellable?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let localUrl = Bundle.main.url(forResource: "rdrSub", withExtension: "srt")!
-        let s = SubtitlesExtractorSrt(with: localUrl)
-        let q = s.getSubtitle(for: 10345)
-        print(q)
-    }
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        let subtitleUrl = Bundle.main.url(forResource: "rdrSub", withExtension: "srt")!
+//        let subtitlesExtractor = SubtitlesExtractorSrt(with: subtitleUrl)
+////        let q = s.getSubtitle(for: 10345)
+////        print(q)
+//
+////        let player = AVPlayer(url: localUrl)
+////        player.publisher(for: \.currentItem?.curre)
+////        player.curr
+//
+//        let localUrl = Bundle.main.url(forResource: "rdr", withExtension: "mp4")!
+//        let controller = PlayerController(url: localUrl)
+//        self.subscriber = controller.timeInMillisecondsPublisher.sink { time in
+//            if let s = subtitlesExtractor.getSubtitle(for: time) {
+//                print(s)
+//            }
+//        }
+//        controller.play()
+//
+//        self.controller = controller
+//    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)
 //
-//        let localUrl = Bundle.main.url(forResource: "rdr", withExtension: "mp4")!
-//        let player = AVPlayer(url: localUrl)
-//        let playerViewController = AVPlayerViewController()
-//        playerViewController.player = player
-//
-//
 //        let label = UILabel()
-//        label.text = "qwesd aw asd w asiduqowa"
 //        label.textColor = .white
+//        label.font = .systemFont(ofSize: 20, weight: .bold)
 //        label.sizeToFit()
+//
+//        let subtitleUrl = Bundle.main.url(forResource: "rdrSub", withExtension: "srt")!
+//        let subtitlesExtractor = SubtitlesExtractorSrt(with: subtitleUrl)
+//
+//        let localUrl = Bundle.main.url(forResource: "rdr", withExtension: "mp4")!
+//        let controller = PlayerController(url: localUrl)
+//        self.controller = controller
+//        self.subscriber = controller.timeInMillisecondsPublisher.sink { time in
+//            if let s = subtitlesExtractor.getSubtitle(for: time) {
+//                label.text = s
+//                label.sizeToFit()
+//            }
+//        }
+//        controller.play()
+//
+//        let playerViewController = AVPlayerViewController()
+//        playerViewController.player = controller.avPlayer
 //        playerViewController.view.addSubview(label)
-//        playerViewController.view.bringSubviewToFront(label)
 //
 //        self.present(playerViewController, animated: true) {
-//            playerViewController.player!.play()
+//            controller.play()
+//            playerViewController.view.bringSubviewToFront(label)
 //        }
 //    }
 

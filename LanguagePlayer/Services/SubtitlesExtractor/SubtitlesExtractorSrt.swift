@@ -73,7 +73,7 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
     }
     
     func getSubtitle(for timeInMilliseconds: TimeInterval) -> String? {
-        self.parts.first { $0.fromTime <= timeInMilliseconds && timeInMilliseconds <= $0.toTime }?.text
+        self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }?.text
     }
     
 }
