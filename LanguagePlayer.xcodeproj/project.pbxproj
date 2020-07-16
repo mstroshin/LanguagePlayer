@@ -15,6 +15,8 @@
 		D2154EA224C0803E00F52815 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2154EA024C0803E00F52815 /* LaunchScreen.storyboard */; };
 		D2154EAC24C0844800F52815 /* rdr.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D2154EAA24C0844800F52815 /* rdr.mp4 */; };
 		D2154EAD24C0844800F52815 /* rdrSub.srt in Resources */ = {isa = PBXBuildFile; fileRef = D2154EAB24C0844800F52815 /* rdrSub.srt */; };
+		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
+		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		D2154EA324C0803E00F52815 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2154EAA24C0844800F52815 /* rdr.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = rdr.mp4; sourceTree = "<group>"; };
 		D2154EAB24C0844800F52815 /* rdrSub.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rdrSub.srt; sourceTree = "<group>"; };
+		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
+		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2154EB024C0875600F52815 /* Services */,
+				D2154EAF24C0852A00F52815 /* UserStories */,
 				D2154EA924C0843600F52815 /* Videos */,
 				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
 				D2154E9724C0803C00F52815 /* SceneDelegate.swift */,
@@ -79,6 +85,38 @@
 				D2154EAB24C0844800F52815 /* rdrSub.srt */,
 			);
 			path = Videos;
+			sourceTree = "<group>";
+		};
+		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VideoPlayer;
+			sourceTree = "<group>";
+		};
+		D2154EAF24C0852A00F52815 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				D2154EAE24C0852100F52815 /* VideoPlayer */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		D2154EB024C0875600F52815 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D2154EB124C0876200F52815 /* SubtitlesExtractor */ = {
+			isa = PBXGroup;
+			children = (
+				D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */,
+				D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */,
+			);
+			path = SubtitlesExtractor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +194,8 @@
 			files = (
 				D2154E9A24C0803C00F52815 /* ViewController.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
+				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
+				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
