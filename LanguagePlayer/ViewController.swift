@@ -11,13 +11,14 @@ import AVKit
 import Combine
 
 class ViewController: UIViewController {
+    @IBOutlet var subtitlesView: SubtitlesView!
     
     var controller: PlayerController?
     var subscriber: AnyCancellable?
 
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
 //        let subtitleUrl = Bundle.main.url(forResource: "rdrSub", withExtension: "srt")!
 //        let subtitlesExtractor = SubtitlesExtractorSrt(with: subtitleUrl)
 ////        let q = s.getSubtitle(for: 10345)
@@ -37,7 +38,9 @@ class ViewController: UIViewController {
 //        controller.play()
 //
 //        self.controller = controller
-//    }
+        
+        self.subtitlesView.set(text: "This whole thing is pretty much done.")
+    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        super.viewDidAppear(animated)

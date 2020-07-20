@@ -18,6 +18,9 @@
 		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
 		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 		D2154EB824C0946400F52815 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB724C0946400F52815 /* PlayerController.swift */; };
+		D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435224C614DE00133EBD /* SubtitlesView.swift */; };
+		D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435424C625FE00133EBD /* TranslationView.swift */; };
+		D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3435624C6267B00133EBD /* TranslationView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
 		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 		D2154EB724C0946400F52815 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		D2C3435224C614DE00133EBD /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
+		D2C3435424C625FE00133EBD /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
+		D2C3435624C6267B00133EBD /* TranslationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,9 @@
 		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2C3435224C614DE00133EBD /* SubtitlesView.swift */,
+				D2C3435424C625FE00133EBD /* TranslationView.swift */,
+				D2C3435624C6267B00133EBD /* TranslationView.xib */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -190,6 +199,7 @@
 			files = (
 				D2154EAD24C0844800F52815 /* rdrSub.srt in Resources */,
 				D2154EA224C0803E00F52815 /* LaunchScreen.storyboard in Resources */,
+				D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */,
 				D2154E9F24C0803E00F52815 /* Assets.xcassets in Resources */,
 				D2154EAC24C0844800F52815 /* rdr.mp4 in Resources */,
 				D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */,
@@ -204,6 +214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2154E9A24C0803C00F52815 /* ViewController.swift in Sources */,
+				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
+				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
