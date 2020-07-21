@@ -10,13 +10,15 @@ import Foundation
 import UIKit
 
 protocol SubtitlesViewDelegate: class {
-    func didSelect(text: String, in rect: CGRect, in range: NSRange)
+    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String, in rect: CGRect, in range: NSRange)
 }
 
 class SubtitlesView: UIView {
+    weak var delegate: SubtitlesViewDelegate?
+    var textColor = UIColor.white
+    
     private var didSetupConstraints = false
     private let textView: UITextView
-    weak var delegate: SubtitlesViewDelegate?
     
     init() {
         self.textView = UITextView()
@@ -60,7 +62,7 @@ class SubtitlesView: UIView {
         self.textView.showsVerticalScrollIndicator = false
         self.textView.showsHorizontalScrollIndicator = false
         self.textView.backgroundColor = .clear
-        self.textView.textColor = .white
+        self.textView.textColor = self.textColor
         self.textView.textAlignment = .center
         self.textView.font = .systemFont(ofSize: 32, weight: .bold)
         self.textView.translatesAutoresizingMaskIntoConstraints = false
@@ -85,7 +87,7 @@ class SubtitlesView: UIView {
             let range = self.toRange(textRange: textRange, for: textView)
             
             let wordRect = textView.firstRect(for: textRange)
-            self.delegate?.didSelect(text: text, in: wordRect, in: range)
+            self.delegate?.subtitleView(self, didSelect: text, in: wordRect, in: range)
         }
     }
     
@@ -101,14 +103,22 @@ extension SubtitlesView {
     }
     
     func select(text: String) {
-//        let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
-//        mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: range)
-//        self.textView.attributedText = mutableText
-//        self.textView.selectedRange = range
+        guard let range = self.textView.text.range(of: text) else { return }
+        let nsRange = NSRange(range, in: self.textView.text)
+        
+        let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: nsRange)
+        self.textView.attributedText = mutableText
     }
     
     func deselectAll() {
-        
+        let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        mutableText.addAttribute(
+            NSAttributedString.Key.foregroundColor,
+            value: self.textColor,
+            range: NSRange(location: 0, length: self.textView.text.count)
+        )
+        self.textView.attributedText = mutableText
     }
     
 }

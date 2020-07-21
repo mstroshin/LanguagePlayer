@@ -26,6 +26,14 @@ class TranslationView: UIView {
         super.init(coder: coder)
     }
     
+    static func createFromXib() -> TranslationView {
+        Bundle.main.loadNibNamed(
+            String(describing: TranslationView.self),
+            owner: nil,
+            options: nil
+        )?.first as! TranslationView
+    }
+    
     @IBAction func didPressDictionaryButton(_ sender: UIButton) {
         print("TranslationView")
     }
