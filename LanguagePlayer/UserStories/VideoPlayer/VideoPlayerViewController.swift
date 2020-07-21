@@ -12,6 +12,7 @@ import UIKit
 class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
     private let translationView = TranslationView.createFromXib()
+    private var presenter: VideoPlayerPresenter!
     
     override func viewDidLoad() {
         self.setupViews()
@@ -25,6 +26,12 @@ class VideoPlayerViewController: UIViewController {
         
         self.translationView.isHidden = true
         self.view.addSubview(self.translationView)
+    }
+    
+    //MARK: - Presenter input
+    func showTranslated(text: String) {
+        self.translationView.translationLabel.text = text
+        self.translationView.isHidden = false
     }
     
 }
@@ -47,8 +54,23 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
     }
     
     private func showTranslationView(with text: String, center: CGPoint) {
+         self.translationView.wordLabel.text = text
         self.translationView.center = center
-        self.translationView.isHidden = false
+        self.presenter.translate(text: text)
+    }
+    
+}
+
+//Factory
+extension VideoPlayerViewController {
+    
+    static func factory(translationService: TranslationService = YandexTranslationService()) -> VideoPlayerViewController {
+        let view: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
+        
+        let presenter = VideoPlayerPresenter(view: view, translationService: translationService)
+        view.presenter = presenter
+        
+        return view
     }
     
 }

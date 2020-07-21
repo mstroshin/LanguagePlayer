@@ -17,10 +17,15 @@
 		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
 		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 		D2154EB824C0946400F52815 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB724C0946400F52815 /* PlayerController.swift */; };
+		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
+		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435224C614DE00133EBD /* SubtitlesView.swift */; };
 		D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435424C625FE00133EBD /* TranslationView.swift */; };
 		D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3435624C6267B00133EBD /* TranslationView.xib */; };
 		D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */; };
+		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
+		D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F124C78E10004660EE /* YandexTranslationService.swift */; };
+		D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F524C78EEF004660EE /* PropertyWrappers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,10 +41,15 @@
 		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
 		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 		D2154EB724C0946400F52815 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
+		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C3435224C614DE00133EBD /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		D2C3435424C625FE00133EBD /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
 		D2C3435624C6267B00133EBD /* TranslationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationView.xib; sourceTree = "<group>"; };
 		D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
+		D2D292EF24C78BB8004660EE /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
+		D2D292F124C78E10004660EE /* YandexTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexTranslationService.swift; sourceTree = "<group>"; };
+		D2D292F524C78EEF004660EE /* PropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,7 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2D292F324C78ED9004660EE /* Misc */,
 				D2154EB024C0875600F52815 /* Services */,
 				D2154EAF24C0852A00F52815 /* UserStories */,
 				D2154EA924C0843600F52815 /* Videos */,
@@ -97,6 +108,7 @@
 		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */,
 				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
 				D2C3435224C614DE00133EBD /* SubtitlesView.swift */,
 				D2C3435424C625FE00133EBD /* TranslationView.swift */,
@@ -116,6 +128,7 @@
 		D2154EB024C0875600F52815 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D2D292EE24C78BA0004660EE /* TranslationAPI */,
 				D2154EB624C0944900F52815 /* PlayerController */,
 				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
 			);
@@ -137,6 +150,24 @@
 				D2154EB724C0946400F52815 /* PlayerController.swift */,
 			);
 			path = PlayerController;
+			sourceTree = "<group>";
+		};
+		D2D292EE24C78BA0004660EE /* TranslationAPI */ = {
+			isa = PBXGroup;
+			children = (
+				D2D292EF24C78BB8004660EE /* TranslationService.swift */,
+				D2D292F124C78E10004660EE /* YandexTranslationService.swift */,
+			);
+			path = TranslationAPI;
+			sourceTree = "<group>";
+		};
+		D2D292F324C78ED9004660EE /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				D2D292F524C78EEF004660EE /* PropertyWrappers.swift */,
+				D2C0568324C7A62100810915 /* Extensions.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,12 +246,17 @@
 			files = (
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
+				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
+				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
+				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
+				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
+				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
