@@ -11,7 +11,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="VideoPlayerViewController" id="BYZ-38-t0r" customClass="VideoPlayerViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="ControlsView" customModule="LanguagePlayer" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -22,7 +22,7 @@
                                     <constraint firstAttribute="height" constant="64" id="uWG-ku-qjz"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-pE-Lpt" userLabel="ControlsView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-pE-Lpt" userLabel="ControlsView" customClass="ControlsView" customModule="LanguagePlayer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="16" width="992" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W8e-v7-wwi">
@@ -33,7 +33,7 @@
                                         </constraints>
                                         <state key="normal" image="xmark" catalog="system"/>
                                         <connections>
-                                            <action selector="didPressCloseButton:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="GFY-0P-4VA"/>
+                                            <action selector="didPressCloseButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="hUJ-dj-Kyy"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KmS-0B-eLZ">
@@ -44,7 +44,7 @@
                                         </constraints>
                                         <state key="normal" image="gobackward.15" catalog="system"/>
                                         <connections>
-                                            <action selector="didPressBackwardFifteenButton:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="USa-ns-2By"/>
+                                            <action selector="didPressBackwardFifteenButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="ztT-ZS-eYP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Jg-ub-1ph">
@@ -55,7 +55,7 @@
                                         </constraints>
                                         <state key="normal" image="goforward.15" catalog="system"/>
                                         <connections>
-                                            <action selector="didPressForwardFifteenButton:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="3gh-ba-huB"/>
+                                            <action selector="didPressForwardFifteenButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="CRq-QA-RME"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FeS-3p-Eyu">
@@ -66,19 +66,19 @@
                                         </constraints>
                                         <state key="normal" image="play" catalog="system"/>
                                         <connections>
-                                            <action selector="didPressPlayPauseButton:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="8Jr-Bb-qpO"/>
+                                            <action selector="didPressPlayPauseButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="h5m-VZ-0kQ"/>
                                         </connections>
                                     </button>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IQQ-gm-0Im">
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IQQ-gm-0Im">
                                         <rect key="frame" x="198" y="7" width="664" height="31"/>
                                         <connections>
-                                            <action selector="valueChangedSeekSlider:" destination="8bC-Xf-vdC" eventType="valueChanged" id="7LH-uY-P1P"/>
+                                            <action selector="valueChangedSeekSlider:" destination="PTl-pE-Lpt" eventType="valueChanged" id="rmp-uZ-jqF"/>
                                         </connections>
                                     </slider>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00:11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8m-aA-kLO">
                                         <rect key="frame" x="868" y="11.5" width="72" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="72" id="JNv-E4-qy0"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="72" id="JNv-E4-qy0"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -92,7 +92,7 @@
                                         </constraints>
                                         <state key="normal" image="rotate.left" catalog="system"/>
                                         <connections>
-                                            <action selector="didPressScreenTurnButton:" destination="8bC-Xf-vdC" eventType="touchUpInside" id="3dR-Mc-c8e"/>
+                                            <action selector="didPressScreenTurnButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="02B-E8-3mF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -115,9 +115,18 @@
                                     <constraint firstItem="zzC-m0-G9s" firstAttribute="leading" secondItem="H8m-aA-kLO" secondAttribute="trailing" constant="8" id="pZ5-ot-eU0"/>
                                     <constraint firstItem="W8e-v7-wwi" firstAttribute="leading" secondItem="PTl-pE-Lpt" secondAttribute="leading" id="xoM-6w-lSv"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="backwardFifteenButton" destination="KmS-0B-eLZ" id="kwl-pi-Ahm"/>
+                                    <outlet property="closeButton" destination="W8e-v7-wwi" id="nPX-vT-ba8"/>
+                                    <outlet property="forwardFifteenButton" destination="4Jg-ub-1ph" id="SCO-3l-BOt"/>
+                                    <outlet property="playPauseButton" destination="FeS-3p-Eyu" id="4Lh-xv-ZIE"/>
+                                    <outlet property="screenTurnButton" destination="zzC-m0-G9s" id="eAp-Ry-GcR"/>
+                                    <outlet property="seekSlider" destination="IQQ-gm-0Im" id="NCs-yy-8rM"/>
+                                    <outlet property="timeLabel" destination="H8m-aA-kLO" id="2IU-0U-aAs"/>
+                                </connections>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PTl-pE-Lpt" secondAttribute="trailing" constant="16" id="3E6-ug-izv"/>
                             <constraint firstItem="PTl-pE-Lpt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="BEw-as-rXY"/>
@@ -127,17 +136,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dKL-NB-tt7" secondAttribute="trailing" constant="16" id="tZr-1J-aBX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <connections>
-                            <outlet property="backwardFifteenButton" destination="KmS-0B-eLZ" id="aN8-QQ-lfN"/>
-                            <outlet property="closeButton" destination="W8e-v7-wwi" id="3Ii-QS-Obw"/>
-                            <outlet property="forwardFifteenButton" destination="4Jg-ub-1ph" id="6bj-CF-3dM"/>
-                            <outlet property="playPauseButton" destination="FeS-3p-Eyu" id="N8I-b5-CYG"/>
-                            <outlet property="screenTurnButton" destination="zzC-m0-G9s" id="da6-nt-NAc"/>
-                            <outlet property="seekSlider" destination="IQQ-gm-0Im" id="4RN-jl-seK"/>
-                            <outlet property="timeLabel" destination="H8m-aA-kLO" id="bTh-Rb-ZVa"/>
-                        </connections>
                     </view>
                     <connections>
+                        <outlet property="controlsView" destination="PTl-pE-Lpt" id="rkR-x0-dAQ"/>
                         <outlet property="subtitlesView" destination="dKL-NB-tt7" id="QE8-pl-Btj"/>
                     </connections>
                 </viewController>

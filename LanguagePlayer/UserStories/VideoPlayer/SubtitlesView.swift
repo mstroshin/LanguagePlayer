@@ -11,11 +11,16 @@ import UIKit
 
 protocol SubtitlesViewDelegate: class {
     func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String, in rect: CGRect, in range: NSRange)
+    func startedSelectingText(in subtitlesView: SubtitlesView)
 }
 
 class SubtitlesView: UIView {
     weak var delegate: SubtitlesViewDelegate?
     var textColor = UIColor.white
+    
+    var currentText: String {
+        self.textView.text
+    }
     
     private var didSetupConstraints = false
     private var selectedTextRange: UITextRange?
@@ -88,6 +93,7 @@ class SubtitlesView: UIView {
             {
                 self.selectedTextRange = textRange
                 self.select(text: text)
+                self.delegate?.startedSelectingText(in: self)
             }
             self.previousTextPosition = textPosition
         }

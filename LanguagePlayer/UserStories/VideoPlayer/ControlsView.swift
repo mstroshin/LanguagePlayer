@@ -16,7 +16,7 @@ protocol ControlsViewDelegate: class {
     func didPressPlay()
     func didPressPause()
     func didPressScreenTurn()
-    func seekValueChangedSeekSlider(time: TimeInterval)
+    func seekValueChangedSeekSlider(timeInSeconds: TimeInterval)
 }
 
 class ControlsView: UIView {
@@ -64,14 +64,19 @@ class ControlsView: UIView {
     }
     
     @IBAction private func valueChangedSeekSlider(_ sender: UISlider) {
-        self.delegate?.seekValueChangedSeekSlider(time: TimeInterval(sender.value))
+        self.delegate?.seekValueChangedSeekSlider(timeInSeconds: TimeInterval(sender.value))
+    }
+    
+    func set(durationInSeconds: TimeInterval) {
+        self.seekSlider.minimumValue = 0
+        self.seekSlider.maximumValue = Float(durationInSeconds)
     }
     
     func set(timeInSeconds: TimeInterval) {
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .full
+        formatter.unitsStyle = .positional
 
         let formattedString = formatter.string(from: timeInSeconds)!
         self.timeLabel.text = formattedString

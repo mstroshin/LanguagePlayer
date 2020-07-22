@@ -14,7 +14,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = VideoPlayerViewController.factory()
+            
+            let url = Bundle.main.url(forResource: "rdr", withExtension: "mp4")!
+            let playerController = PlayerController(url: url)
+            
+            let subtitleUrl = Bundle.main.url(forResource: "rdrSub", withExtension: "srt")!
+            let subtitlesExtractor = SubtitlesExtractorSrt(with: subtitleUrl)
+            
+            window.rootViewController = VideoPlayerViewController.factory(
+                playerController: playerController,
+                subtitlesExtractor: subtitlesExtractor
+            )
             window.makeKeyAndVisible()
             self.window = window
         }

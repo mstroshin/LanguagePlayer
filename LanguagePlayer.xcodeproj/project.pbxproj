@@ -114,10 +114,10 @@
 			children = (
 				D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */,
 				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
+				D2C0568724C7E28000810915 /* ControlsView.swift */,
 				D2C3435224C614DE00133EBD /* SubtitlesView.swift */,
 				D2C3435424C625FE00133EBD /* TranslationView.swift */,
 				D2C3435624C6267B00133EBD /* TranslationView.xib */,
-				D2C0568724C7E28000810915 /* ControlsView.swift */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
