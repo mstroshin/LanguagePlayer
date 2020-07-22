@@ -40,10 +40,7 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
     
     func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String, in rect: CGRect, in range: NSRange) {
         print("Text: \(text), rect: \(rect), range: \(range)")
-        
-        subtitlesView.deselectAll()
-        subtitlesView.select(text: text)
-        
+                
         let rectInRootView = subtitlesView.convert(rect, to: self.view)
         let yOffset: CGFloat = 40
         let center = CGPoint(

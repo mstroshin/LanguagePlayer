@@ -32,10 +32,8 @@ class YandexTranslationService {
         request.httpBody = bodyString.data(using: .utf8, allowLossyConversion: true)
         
         return self.session.dataTaskPublisher(for: request)
-//            .mapError { _ in NetworkError.accessDenied }
             .map { $0.data }
             .decode(type: IAMToken.self, decoder: JSONDecoder())
-//            .mapError { _ in NetworkError.jsonParsingFailure }
             .map { //Side effect
                 self.iamTokenDate = Date()
                 self.iamToken = $0
@@ -58,10 +56,8 @@ class YandexTranslationService {
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
         return self.session.dataTaskPublisher(for: request)
-//            .mapError { _ in NetworkError.accessDenied }
             .map { $0.data }
             .decode(type: Translations.self, decoder: JSONDecoder())
-//            .mapError { _ in NetworkError.jsonParsingFailure }
             .map { $0.translations.first!.text }
             .eraseToAnyPublisher()
     }
@@ -83,7 +79,6 @@ extension YandexTranslationService: TranslationService {
 //Json entities
 private struct IAMToken: Decodable {
     let iamToken: String
-//    let expiresAt: Date
 }
 
 private struct Translations: Decodable {

@@ -18,6 +18,8 @@ class SubtitlesView: UIView {
     var textColor = UIColor.white
     
     private var didSetupConstraints = false
+    private var selectedTextRange: UITextRange?
+    private var previousTextPosition: UITextPosition?
     private let textView: UITextView
     
     init() {
@@ -67,32 +69,74 @@ class SubtitlesView: UIView {
         self.textView.font = .systemFont(ofSize: 32, weight: .bold)
         self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.textView)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(textTapped))
-        tapGesture.numberOfTapsRequired = 1
+                
+        let tapGesture = SelectionGestureRecognizer(target: self, action: #selector(textTapped))
         self.textView.addGestureRecognizer(tapGesture)
     }
     
     @objc private func textTapped(recognizer: UITapGestureRecognizer) {
-        guard let textView = recognizer.view as? UITextView else { return }
-        let layoutManager = textView.layoutManager
-        
+        let textView = self.textView
         let location = recognizer.location(in: textView)
-        let charIndex = layoutManager.characterIndex(for: location, in: textView.textContainer, fractionOfDistanceBetweenInsertionPoints: nil)
-        guard charIndex != 0 else { return }
-                        
-        if let textPosition = textView.closestPosition(to: location),
-            let textRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.forward)),
-            let text = textView.text(in: textRange) {
-            let range = self.toRange(textRange: textRange, for: textView)
+        guard let textPosition = textView.closestPosition(to: location) else { return }
+        
+        if recognizer.state == .began
+        {
+            self.deselectAll()
             
+            if let textRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.forward)),
+                let text = textView.text(in: textRange)
+            {
+                self.selectedTextRange = textRange
+                self.select(text: text)
+            }
+            self.previousTextPosition = textPosition
+        }
+        else if let selectedTextRange = self.selectedTextRange,
+            let previousTextPosition = self.previousTextPosition,
+            recognizer.state == .changed
+        {
+            var textRange: UITextRange?
+            if textView.compare(previousTextPosition, to: textPosition) == .orderedAscending {
+                //Forward
+                if let endTextRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.forward)) {
+                    textRange = textView.textRange(from: selectedTextRange.start, to: endTextRange.end)
+                }
+            } else if textView.compare(previousTextPosition, to: textPosition) == .orderedDescending {
+                //Backward
+                if let endTextRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.backward)) {
+                    textRange = textView.textRange(from: endTextRange.start, to: selectedTextRange.end)
+                }
+            }
+            
+            if let textRange = textRange, let text = textView.text(in: textRange) {
+                self.selectedTextRange = textRange
+                self.deselectAll()
+                self.select(text: text)
+            }
+            
+            self.previousTextPosition = textPosition
+        }
+        else if let textRange = self.selectedTextRange,
+            let text = textView.text(in: textRange),
+            recognizer.state == .ended
+        {
             let wordRect = textView.firstRect(for: textRange)
+            let range = self.toRange(textRange: textRange, for: textView)
             self.delegate?.subtitleView(self, didSelect: text, in: wordRect, in: range)
+            
+            self.previousTextPosition = nil
+            self.selectedTextRange = nil
         }
     }
     
-    
-    
+    private func select(text: String) {
+        guard let range = self.textView.text.range(of: text) else { return }
+        let nsRange = NSRange(range, in: self.textView.text)
+        
+        let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
+        mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: nsRange)
+        self.textView.attributedText = mutableText
+    }
 }
 
 //Public methods
@@ -100,15 +144,6 @@ extension SubtitlesView {
     
     func set(text: String) {
         self.textView.text = text
-    }
-    
-    func select(text: String) {
-        guard let range = self.textView.text.range(of: text) else { return }
-        let nsRange = NSRange(range, in: self.textView.text)
-        
-        let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
-        mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: nsRange)
-        self.textView.attributedText = mutableText
     }
     
     func deselectAll() {

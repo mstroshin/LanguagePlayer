@@ -23,17 +23,18 @@ class VideoPlayerPresenter {
     }
     
     func translate(text: String) {
-        let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(let error):
-                    print(error.localizedDescription)
-                case .finished:
-                    print("finished")
-                }
-            }) { translatedText in
-                self.view?.showTranslated(text: translatedText)
-        }
-        self.cancellables.append(cancellable)
+//        let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
+//            .sink(receiveCompletion: { completion in
+//                switch completion {
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                case .finished:
+//                    print("finished")
+//                }
+//            }) { translatedText in
+//                self.view?.showTranslated(text: translatedText)
+//        }
+//        self.cancellables.append(cancellable)
+        self.view?.showTranslated(text: text)
     }
 }

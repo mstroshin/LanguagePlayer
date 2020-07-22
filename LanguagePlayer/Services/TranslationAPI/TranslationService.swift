@@ -9,11 +9,6 @@
 import Foundation
 import Combine
 
-enum NetworkError: Error {
-    case accessDenied
-    case jsonParsingFailure
-}
-
 protocol TranslationService {
     func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error>
 }
