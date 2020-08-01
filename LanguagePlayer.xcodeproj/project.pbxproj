@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0618C6D4EB0B1CFD19D86A7E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
 		D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9724C0803C00F52815 /* SceneDelegate.swift */; };
 		D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2154E9B24C0803C00F52815 /* Main.storyboard */; };
@@ -17,6 +18,12 @@
 		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
 		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 		D2154EB824C0946400F52815 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB724C0946400F52815 /* PlayerController.swift */; };
+		D287497324D519FB00687095 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497224D519FB00687095 /* VideosViewController.swift */; };
+		D287497524D51A9600687095 /* VideosNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497424D51A9600687095 /* VideosNavigationViewController.swift */; };
+		D287497724D51AFD00687095 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497624D51AFD00687095 /* VideoDetailViewController.swift */; };
+		D287497A24D5915400687095 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = D287497924D5915400687095 /* Swifter */; };
+		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
+		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
 		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -31,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2154E9724C0803C00F52815 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +53,11 @@
 		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
 		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 		D2154EB724C0946400F52815 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		D287497224D519FB00687095 /* VideosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosViewController.swift; sourceTree = "<group>"; };
+		D287497424D51A9600687095 /* VideosNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosNavigationViewController.swift; sourceTree = "<group>"; };
+		D287497624D51AFD00687095 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		D287497F24D5A17000687095 /* VideosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewController.swift; sourceTree = "<group>"; };
+		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
 		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -61,17 +76,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0618C6D4EB0B1CFD19D86A7E /* Pods_LanguagePlayer.framework in Frameworks */,
+				D287497A24D5915400687095 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B75CEADA856FB3647C49C12 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */,
+				CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D2154E8924C0803C00F52815 = {
 			isa = PBXGroup;
 			children = (
 				D2154E9424C0803C00F52815 /* LanguagePlayer */,
 				D2154E9324C0803C00F52815 /* Products */,
+				0B75CEADA856FB3647C49C12 /* Pods */,
+				DC1CC6C3956E32531DBC2003 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +153,8 @@
 		D2154EAF24C0852A00F52815 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				D287497E24D5A15800687095 /* VideosList */,
+				D287497124D519DA00687095 /* Videos */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
 			);
 			path = UserStories;
@@ -157,6 +187,25 @@
 			path = PlayerController;
 			sourceTree = "<group>";
 		};
+		D287497124D519DA00687095 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				D287497424D51A9600687095 /* VideosNavigationViewController.swift */,
+				D287497624D51AFD00687095 /* VideoDetailViewController.swift */,
+				D287497224D519FB00687095 /* VideosViewController.swift */,
+			);
+			path = Videos;
+			sourceTree = "<group>";
+		};
+		D287497E24D5A15800687095 /* VideosList */ = {
+			isa = PBXGroup;
+			children = (
+				D287497F24D5A17000687095 /* VideosListViewController.swift */,
+				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
+			);
+			path = VideosList;
+			sourceTree = "<group>";
+		};
 		D2D292EE24C78BA0004660EE /* TranslationAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +225,14 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		DC1CC6C3956E32531DBC2003 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,15 +240,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2154EA624C0803E00F52815 /* Build configuration list for PBXNativeTarget "LanguagePlayer" */;
 			buildPhases = (
+				0FD5E9ED9CD139429C58AE8E /* [CP] Check Pods Manifest.lock */,
 				D2154E8E24C0803C00F52815 /* Sources */,
 				D2154E8F24C0803C00F52815 /* Frameworks */,
 				D2154E9024C0803C00F52815 /* Resources */,
+				5F326D8690409E2EB7A819B4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LanguagePlayer;
+			packageProductDependencies = (
+				D287497924D5915400687095 /* Swifter */,
+			);
 			productName = LanguagePlayer;
 			productReference = D2154E9224C0803C00F52815 /* LanguagePlayer.app */;
 			productType = "com.apple.product-type.application";
@@ -220,6 +282,9 @@
 				Base,
 			);
 			mainGroup = D2154E8924C0803C00F52815;
+			packageReferences = (
+				D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */,
+			);
 			productRefGroup = D2154E9324C0803C00F52815 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -245,6 +310,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0FD5E9ED9CD139429C58AE8E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LanguagePlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F326D8690409E2EB7A819B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D2154E8E24C0803C00F52815 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -255,6 +362,7 @@
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
 				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
+				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
 				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
@@ -263,7 +371,11 @@
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
+				D287497724D51AFD00687095 /* VideoDetailViewController.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
+				D287497324D519FB00687095 /* VideosViewController.swift in Sources */,
+				D287497524D51A9600687095 /* VideosNavigationViewController.swift in Sources */,
+				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +518,7 @@
 		};
 		D2154EA724C0803E00F52815 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -425,6 +538,7 @@
 		};
 		D2154EA824C0803E00F52815 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -464,6 +578,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/httpswift/swifter.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D287497924D5915400687095 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D2154E8A24C0803C00F52815 /* Project object */;
 }
