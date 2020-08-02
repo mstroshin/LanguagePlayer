@@ -1,7 +1,7 @@
 import Foundation
 import DifferenceKit
 
-struct VideoState: Equatable {
+struct VideoState: FluxState, Equatable, Codable {
     let id: ID
     let title: String
     let url: URL

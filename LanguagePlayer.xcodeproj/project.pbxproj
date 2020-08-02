@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0618C6D4EB0B1CFD19D86A7E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
 		D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9724C0803C00F52815 /* SceneDelegate.swift */; };
 		D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2154E9B24C0803C00F52815 /* Main.storyboard */; };
@@ -25,6 +24,17 @@
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
 		D28749A524D6674900687095 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A424D6674900687095 /* AppState.swift */; };
 		D28749A724D66B0800687095 /* VideoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A624D66B0800687095 /* VideoState.swift */; };
+		D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A924D6758600687095 /* UserDefaultsDataStore.swift */; };
+		D28749AD24D675B900687095 /* AppStateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AC24D675B900687095 /* AppStateActions.swift */; };
+		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
+		D28749B124D6B7B500687095 /* VideosListStateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B024D6B7B500687095 /* VideosListStateAction.swift */; };
+		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
+		D28749B524D6BB1A00687095 /* Thunks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B424D6BB1A00687095 /* Thunks.swift */; };
+		D28749B824D6C2B800687095 /* Redux.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B724D6C2B800687095 /* Redux.swift */; };
+		D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BA24D6C4E600687095 /* DifferenceKit */; };
+		D28749BE24D6C54200687095 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BD24D6C54200687095 /* Swifter */; };
+		D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749BF24D6C59500687095 /* AppEnvironment.swift */; };
+		D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749C324D6CA8100687095 /* AppStateReducer.swift */; };
 		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -40,8 +50,6 @@
 
 /* Begin PBXFileReference section */
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
-		CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2154E9724C0803C00F52815 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +69,15 @@
 		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
 		D28749A424D6674900687095 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D28749A624D66B0800687095 /* VideoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoState.swift; sourceTree = "<group>"; };
+		D28749A924D6758600687095 /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
+		D28749AC24D675B900687095 /* AppStateActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateActions.swift; sourceTree = "<group>"; };
+		D28749AE24D6B4ED00687095 /* LocalWebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServer.swift; sourceTree = "<group>"; };
+		D28749B024D6B7B500687095 /* VideosListStateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListStateAction.swift; sourceTree = "<group>"; };
+		D28749B224D6BA1300687095 /* LocalDiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDiskStore.swift; sourceTree = "<group>"; };
+		D28749B424D6BB1A00687095 /* Thunks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunks.swift; sourceTree = "<group>"; };
+		D28749B724D6C2B800687095 /* Redux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redux.swift; sourceTree = "<group>"; };
+		D28749BF24D6C59500687095 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		D28749C324D6CA8100687095 /* AppStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateReducer.swift; sourceTree = "<group>"; };
 		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -79,28 +96,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0618C6D4EB0B1CFD19D86A7E /* Pods_LanguagePlayer.framework in Frameworks */,
+				D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */,
+				D28749BE24D6C54200687095 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B75CEADA856FB3647C49C12 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */,
-				CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		D2154E8924C0803C00F52815 = {
 			isa = PBXGroup;
 			children = (
 				D2154E9424C0803C00F52815 /* LanguagePlayer */,
 				D2154E9324C0803C00F52815 /* Products */,
-				0B75CEADA856FB3647C49C12 /* Pods */,
 				DC1CC6C3956E32531DBC2003 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -116,12 +124,13 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D28749B624D6C27700687095 /* Redux */,
 				D2D292F324C78ED9004660EE /* Misc */,
 				D2154EB024C0875600F52815 /* Services */,
-				D28749A324D6621400687095 /* State */,
 				D2154EAF24C0852A00F52815 /* UserStories */,
 				D2154EA924C0843600F52815 /* Videos */,
 				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
+				D28749BF24D6C59500687095 /* AppEnvironment.swift */,
 				D2154E9724C0803C00F52815 /* SceneDelegate.swift */,
 				D2154E9B24C0803C00F52815 /* Main.storyboard */,
 				D2154E9E24C0803E00F52815 /* Assets.xcassets */,
@@ -166,9 +175,11 @@
 		D2154EB024C0875600F52815 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D28749A824D6756D00687095 /* DataStore */,
 				D2D292EE24C78BA0004660EE /* TranslationAPI */,
 				D2154EB624C0944900F52815 /* PlayerController */,
 				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
+				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -209,13 +220,59 @@
 			path = VideosList;
 			sourceTree = "<group>";
 		};
-		D28749A324D6621400687095 /* State */ = {
+		D28749A324D6621400687095 /* States */ = {
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
 				D28749A624D66B0800687095 /* VideoState.swift */,
 			);
-			path = State;
+			path = States;
+			sourceTree = "<group>";
+		};
+		D28749A824D6756D00687095 /* DataStore */ = {
+			isa = PBXGroup;
+			children = (
+				D28749A924D6758600687095 /* UserDefaultsDataStore.swift */,
+				D28749B224D6BA1300687095 /* LocalDiskStore.swift */,
+			);
+			path = DataStore;
+			sourceTree = "<group>";
+		};
+		D28749AB24D675AA00687095 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				D28749AC24D675B900687095 /* AppStateActions.swift */,
+				D28749B024D6B7B500687095 /* VideosListStateAction.swift */,
+				D28749B424D6BB1A00687095 /* Thunks.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		D28749B624D6C27700687095 /* Redux */ = {
+			isa = PBXGroup;
+			children = (
+				D28749C224D6CA6500687095 /* Reducers */,
+				D28749A324D6621400687095 /* States */,
+				D28749AB24D675AA00687095 /* Actions */,
+				D28749C124D6C66D00687095 /* Middlewares */,
+				D28749B724D6C2B800687095 /* Redux.swift */,
+			);
+			path = Redux;
+			sourceTree = "<group>";
+		};
+		D28749C124D6C66D00687095 /* Middlewares */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Middlewares;
+			sourceTree = "<group>";
+		};
+		D28749C224D6CA6500687095 /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				D28749C324D6CA8100687095 /* AppStateReducer.swift */,
+			);
+			path = Reducers;
 			sourceTree = "<group>";
 		};
 		D2D292EE24C78BA0004660EE /* TranslationAPI */ = {
@@ -252,11 +309,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2154EA624C0803E00F52815 /* Build configuration list for PBXNativeTarget "LanguagePlayer" */;
 			buildPhases = (
-				0FD5E9ED9CD139429C58AE8E /* [CP] Check Pods Manifest.lock */,
 				D2154E8E24C0803C00F52815 /* Sources */,
 				D2154E8F24C0803C00F52815 /* Frameworks */,
 				D2154E9024C0803C00F52815 /* Resources */,
-				5F326D8690409E2EB7A819B4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -264,6 +319,8 @@
 			);
 			name = LanguagePlayer;
 			packageProductDependencies = (
+				D28749BA24D6C4E600687095 /* DifferenceKit */,
+				D28749BD24D6C54200687095 /* Swifter */,
 			);
 			productName = LanguagePlayer;
 			productReference = D2154E9224C0803C00F52815 /* LanguagePlayer.app */;
@@ -294,6 +351,8 @@
 			);
 			mainGroup = D2154E8924C0803C00F52815;
 			packageReferences = (
+				D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */,
+				D28749BC24D6C54200687095 /* XCRemoteSwiftPackageReference "swifter" */,
 			);
 			productRefGroup = D2154E9324C0803C00F52815 /* Products */;
 			projectDirPath = "";
@@ -320,48 +379,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0FD5E9ED9CD139429C58AE8E /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-LanguagePlayer-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5F326D8690409E2EB7A819B4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		D2154E8E24C0803C00F52815 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -369,24 +386,33 @@
 			files = (
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
+				D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */,
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
 				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
+				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
+				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
 				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
 				D28749A524D6674900687095 /* AppState.swift in Sources */,
+				D28749B124D6B7B500687095 /* VideosListStateAction.swift in Sources */,
+				D28749B824D6C2B800687095 /* Redux.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
+				D28749AD24D675B900687095 /* AppStateActions.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
+				D28749B524D6BB1A00687095 /* Thunks.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
+				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				D287497724D51AFD00687095 /* VideoDetailViewController.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287497324D519FB00687095 /* VideosViewController.swift in Sources */,
 				D287497524D51A9600687095 /* VideosNavigationViewController.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
+				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D28749A724D66B0800687095 /* VideoState.swift in Sources */,
 			);
@@ -530,7 +556,6 @@
 		};
 		D2154EA724C0803E00F52815 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85CFD5E24626F365A5AA2DF0 /* Pods-LanguagePlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -550,7 +575,6 @@
 		};
 		D2154EA824C0803E00F52815 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CFA429C15AA197C966F0D4FA /* Pods-LanguagePlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -590,6 +614,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ra1028/DifferenceKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.5;
+			};
+		};
+		D28749BC24D6C54200687095 /* XCRemoteSwiftPackageReference "swifter" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/httpswift/swifter.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D28749BA24D6C4E600687095 /* DifferenceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */;
+			productName = DifferenceKit;
+		};
+		D28749BD24D6C54200687095 /* Swifter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D28749BC24D6C54200687095 /* XCRemoteSwiftPackageReference "swifter" */;
+			productName = Swifter;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D2154E8A24C0803C00F52815 /* Project object */;
 }
