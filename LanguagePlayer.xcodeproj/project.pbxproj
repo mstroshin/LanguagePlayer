@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -21,9 +21,10 @@
 		D287497324D519FB00687095 /* VideosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497224D519FB00687095 /* VideosViewController.swift */; };
 		D287497524D51A9600687095 /* VideosNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497424D51A9600687095 /* VideosNavigationViewController.swift */; };
 		D287497724D51AFD00687095 /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497624D51AFD00687095 /* VideoDetailViewController.swift */; };
-		D287497A24D5915400687095 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = D287497924D5915400687095 /* Swifter */; };
 		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
+		D28749A524D6674900687095 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A424D6674900687095 /* AppState.swift */; };
+		D28749A724D66B0800687095 /* VideoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A624D66B0800687095 /* VideoState.swift */; };
 		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -58,6 +59,8 @@
 		D287497624D51AFD00687095 /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		D287497F24D5A17000687095 /* VideosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewController.swift; sourceTree = "<group>"; };
 		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
+		D28749A424D6674900687095 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D28749A624D66B0800687095 /* VideoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoState.swift; sourceTree = "<group>"; };
 		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -77,7 +80,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0618C6D4EB0B1CFD19D86A7E /* Pods_LanguagePlayer.framework in Frameworks */,
-				D287497A24D5915400687095 /* Swifter in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +118,7 @@
 			children = (
 				D2D292F324C78ED9004660EE /* Misc */,
 				D2154EB024C0875600F52815 /* Services */,
+				D28749A324D6621400687095 /* State */,
 				D2154EAF24C0852A00F52815 /* UserStories */,
 				D2154EA924C0843600F52815 /* Videos */,
 				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
@@ -206,6 +209,15 @@
 			path = VideosList;
 			sourceTree = "<group>";
 		};
+		D28749A324D6621400687095 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				D28749A424D6674900687095 /* AppState.swift */,
+				D28749A624D66B0800687095 /* VideoState.swift */,
+			);
+			path = State;
+			sourceTree = "<group>";
+		};
 		D2D292EE24C78BA0004660EE /* TranslationAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,7 +264,6 @@
 			);
 			name = LanguagePlayer;
 			packageProductDependencies = (
-				D287497924D5915400687095 /* Swifter */,
 			);
 			productName = LanguagePlayer;
 			productReference = D2154E9224C0803C00F52815 /* LanguagePlayer.app */;
@@ -283,7 +294,6 @@
 			);
 			mainGroup = D2154E8924C0803C00F52815;
 			packageReferences = (
-				D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */,
 			);
 			productRefGroup = D2154E9324C0803C00F52815 /* Products */;
 			projectDirPath = "";
@@ -366,6 +376,7 @@
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
 				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
+				D28749A524D6674900687095 /* AppState.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
@@ -377,6 +388,7 @@
 				D287497524D51A9600687095 /* VideosNavigationViewController.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
+				D28749A724D66B0800687095 /* VideoState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,25 +590,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/httpswift/swifter.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.7;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D287497924D5915400687095 /* Swifter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D287497824D5915400687095 /* XCRemoteSwiftPackageReference "swifter" */;
-			productName = Swifter;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D2154E8A24C0803C00F52815 /* Project object */;
 }

@@ -1,21 +1,11 @@
 import UIKit
-import GCDWebServer
 import Swifter
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var webUploader: GCDWebUploader?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-//        if let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
-//            let webUploader = GCDWebUploader(uploadDirectory: docPath)
-//            webUploader.start()
-////            print("Visit \(String(describing: webUploader.serverURL))")
-//
-//            self.webUploader = webUploader
-//        }
-        
+                
         self.runSwifter()
         
         return true
@@ -56,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         do {
             try server.start(9099)
-            print(getWiFiAddress())
+            print(getWiFiAddress() ?? "No ip")
         } catch {
             print("Server start error: \(error)")
         }

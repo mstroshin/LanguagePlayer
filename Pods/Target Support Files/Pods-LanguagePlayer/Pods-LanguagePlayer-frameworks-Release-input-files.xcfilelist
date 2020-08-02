@@ -1,2 +1,9 @@
 ${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks.sh
-${BUILT_PRODUCTS_DIR}/GCDWebServer/GCDWebServer.framework
+${BUILT_PRODUCTS_DIR}/DifferenceKit/DifferenceKit.framework
+${BUILT_PRODUCTS_DIR}/ReSwift/ReSwift.framework
+${BUILT_PRODUCTS_DIR}/ReSwiftThunk/ReSwiftThunk.framework
+${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
+${BUILT_PRODUCTS_DIR}/RxKeyboard/RxKeyboard.framework
+${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework
+${BUILT_PRODUCTS_DIR}/Swifter/Swifter.framework

@@ -1,18 +1,54 @@
 PODS:
-  - GCDWebServer/Core (3.5.4)
-  - GCDWebServer/WebUploader (3.5.4):
-    - GCDWebServer/Core
+  - DifferenceKit/Core (1.1.5)
+  - DifferenceKit/UIKitExtension (1.1.5):
+    - DifferenceKit/Core
+  - ReSwift (5.0.0)
+  - ReSwiftThunk (1.2.0):
+    - ReSwift (~> 5.0)
+    - ReSwiftThunk/Core (= 1.2.0)
+  - ReSwiftThunk/Core (1.2.0):
+    - ReSwift (~> 5.0)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxKeyboard (1.0.0):
+    - RxCocoa (~> 5.0)
+    - RxSwift (~> 5.0)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.1)
+  - Swifter (1.4.7)
 
 DEPENDENCIES:
-  - GCDWebServer/WebUploader (~> 3.0)
+  - DifferenceKit/UIKitExtension
+  - ReSwift (~> 5.0)
+  - ReSwiftThunk
+  - RxCocoa (~> 5)
+  - RxKeyboard
+  - RxSwift (~> 5)
+  - Swifter (~> 1.4.7)
 
 SPEC REPOS:
   trunk:
-    - GCDWebServer
+    - DifferenceKit
+    - ReSwift
+    - ReSwiftThunk
+    - RxCocoa
+    - RxKeyboard
+    - RxRelay
+    - RxSwift
+    - Swifter
 
 SPEC CHECKSUMS:
-  GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
+  ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
+  ReSwiftThunk: 23c8ea9092d9dc94b72005f19352dbd37fa42533
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxKeyboard: 6683c4344304a00f943c158bd8a43ce5469c82a7
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
+  Swifter: 2327ef5d872c638aebab79646ce494af508b0c8f
 
-PODFILE CHECKSUM: a52ecfadfb13c3b8fa8d806775666be538ccbcdf
+PODFILE CHECKSUM: cfffc6169df09c0ab0d1d9d222958bf412ec30e9
 
 COCOAPODS: 1.9.3
