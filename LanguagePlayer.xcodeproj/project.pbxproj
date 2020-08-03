@@ -43,6 +43,19 @@
 		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
 		D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F124C78E10004660EE /* YandexTranslationService.swift */; };
 		D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F524C78EEF004660EE /* PropertyWrappers.swift */; };
+		D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */; };
+		D2E616C224D7F45B00D80F26 /* fontawesome-webfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B124D7F45B00D80F26 /* fontawesome-webfont.woff2 */; };
+		D2E616C324D7F45B00D80F26 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B224D7F45B00D80F26 /* fontawesome-webfont.ttf */; };
+		D2E616C424D7F45B00D80F26 /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B324D7F45B00D80F26 /* fontawesome-webfont.woff */; };
+		D2E616C524D7F45B00D80F26 /* jquery.ui.widget.js in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B524D7F45B00D80F26 /* jquery.ui.widget.js */; };
+		D2E616C624D7F45B00D80F26 /* jquery.fileupload.js in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B624D7F45B00D80F26 /* jquery.fileupload.js */; };
+		D2E616C724D7F45B00D80F26 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B724D7F45B00D80F26 /* index.js */; };
+		D2E616C824D7F45B00D80F26 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B824D7F45B00D80F26 /* jquery.min.js */; };
+		D2E616C924D7F45B00D80F26 /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B924D7F45B00D80F26 /* bootstrap.min.js */; };
+		D2E616CA24D7F45B00D80F26 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BB24D7F45B00D80F26 /* index.html */; };
+		D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */; };
+		D2E616CC24D7F45B00D80F26 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BE24D7F45B00D80F26 /* index.css */; };
+		D2E616CD24D7F45B00D80F26 /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616C024D7F45B00D80F26 /* font-awesome.min.css */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +96,21 @@
 		D2D292EF24C78BB8004660EE /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		D2D292F124C78E10004660EE /* YandexTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexTranslationService.swift; sourceTree = "<group>"; };
 		D2D292F524C78EEF004660EE /* PropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappers.swift; sourceTree = "<group>"; };
+		D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fontawesome-webfont.svg"; sourceTree = "<group>"; };
+		D2E616B124D7F45B00D80F26 /* fontawesome-webfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff2"; sourceTree = "<group>"; };
+		D2E616B224D7F45B00D80F26 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		D2E616B324D7F45B00D80F26 /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		D2E616B524D7F45B00D80F26 /* jquery.ui.widget.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.ui.widget.js; sourceTree = "<group>"; };
+		D2E616B624D7F45B00D80F26 /* jquery.fileupload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.fileupload.js; sourceTree = "<group>"; };
+		D2E616B724D7F45B00D80F26 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		D2E616B824D7F45B00D80F26 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		D2E616B924D7F45B00D80F26 /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
+		D2E616BA24D7F45B00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
+		D2E616BB24D7F45B00D80F26 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
+		D2E616BE24D7F45B00D80F26 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.css.map; sourceTree = "<group>"; };
+		D2E616C024D7F45B00D80F26 /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +146,7 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2E616AE24D7F43900D80F26 /* html */,
 				D28749B624D6C27700687095 /* Redux */,
 				D2D292F324C78ED9004660EE /* Misc */,
 				D2154EB024C0875600F52815 /* Services */,
@@ -269,6 +298,52 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		D2E616AE24D7F43900D80F26 /* html */ = {
+			isa = PBXGroup;
+			children = (
+				D2E616BC24D7F45B00D80F26 /* css */,
+				D2E616AF24D7F45B00D80F26 /* fonts */,
+				D2E616BB24D7F45B00D80F26 /* index.html */,
+				D2E616B424D7F45B00D80F26 /* js */,
+			);
+			path = html;
+			sourceTree = "<group>";
+		};
+		D2E616AF24D7F45B00D80F26 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */,
+				D2E616B124D7F45B00D80F26 /* fontawesome-webfont.woff2 */,
+				D2E616B224D7F45B00D80F26 /* fontawesome-webfont.ttf */,
+				D2E616B324D7F45B00D80F26 /* fontawesome-webfont.woff */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		D2E616B424D7F45B00D80F26 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				D2E616B524D7F45B00D80F26 /* jquery.ui.widget.js */,
+				D2E616B624D7F45B00D80F26 /* jquery.fileupload.js */,
+				D2E616B724D7F45B00D80F26 /* index.js */,
+				D2E616B824D7F45B00D80F26 /* jquery.min.js */,
+				D2E616B924D7F45B00D80F26 /* bootstrap.min.js */,
+				D2E616BA24D7F45B00D80F26 /* bootstrap.min.js.map */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		D2E616BC24D7F45B00D80F26 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */,
+				D2E616BE24D7F45B00D80F26 /* index.css */,
+				D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */,
+				D2E616C024D7F45B00D80F26 /* font-awesome.min.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
 		DC1CC6C3956E32531DBC2003 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -344,8 +419,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2154EA224C0803E00F52815 /* LaunchScreen.storyboard in Resources */,
+				D2E616C524D7F45B00D80F26 /* jquery.ui.widget.js in Resources */,
+				D2E616C224D7F45B00D80F26 /* fontawesome-webfont.woff2 in Resources */,
+				D2E616C424D7F45B00D80F26 /* fontawesome-webfont.woff in Resources */,
+				D2E616C324D7F45B00D80F26 /* fontawesome-webfont.ttf in Resources */,
+				D2E616C924D7F45B00D80F26 /* bootstrap.min.js in Resources */,
+				D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */,
+				D2E616CA24D7F45B00D80F26 /* index.html in Resources */,
+				D2E616CC24D7F45B00D80F26 /* index.css in Resources */,
+				D2E616C724D7F45B00D80F26 /* index.js in Resources */,
 				D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */,
+				D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */,
 				D2154E9F24C0803E00F52815 /* Assets.xcassets in Resources */,
+				D2E616C624D7F45B00D80F26 /* jquery.fileupload.js in Resources */,
+				D2E616C824D7F45B00D80F26 /* jquery.min.js in Resources */,
+				D2E616CD24D7F45B00D80F26 /* font-awesome.min.css in Resources */,
 				D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,17 +14,23 @@ class LocalWebServer {
             return .ok(.json(jsonMap))
         }
         
-        let uploadBody = """
-        <form method=\"POST\" action=\"/upload\" enctype=\"multipart/form-data\">
-        <input name=\"my_file\" type=\"file\"/>
-        <button type=\"submit\">Send File</button>
-        </form>
-        """
-
-        server.get["/"] = { r in
-            .ok(.htmlBody(uploadBody))
-        }
+        server["/js/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
+        server["/fonts/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
+        server["/css/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
         
+//        server.get["js/index.js"] = { r in
+//            print(r)
+//            
+//            return .forbidden
+//        }
+                
+        if let indexHtmlUrl = Bundle.main.url(forResource: "index", withExtension: "html"),
+            let indexHtml = try? String(contentsOf: indexHtmlUrl) {
+            server.get["/"] = { r in
+                .ok(.html(indexHtml))
+            }
+        }
+
         server.post["/upload"] = { r in
             if let myFileMultipart = r.parseMultiPartFormData().filter({ $0.name == "my_file" }).first {
                 let data: NSData = myFileMultipart.body.withUnsafeBufferPointer { pointer in
@@ -38,7 +44,7 @@ class LocalWebServer {
         }
 
         do {
-            try server.start(9099)
+            try server.start(9099, forceIPv4: true)
             print(getWiFiAddress() ?? "No ip")
         } catch {
             print("Server start error: \(error)")
