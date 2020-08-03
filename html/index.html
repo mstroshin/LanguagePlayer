@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</head>
+
+<body>
+    <div class=".container-sm">
+        <div class=".container-sm">
+            <form id="upload" method="post" action="/upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="btn btn-primary m-1 w-25">
+                        Video <input id="videoFileInput" type="file" name="video" onchange="fileSelected(this)" hidden>
+                    </label>
+                    <label class="btn btn-primary m-1 w-25">
+                        Source Subtitle <input id="subtitleFileInput" type="file" name="sourceSubtitle" onchange="fileSelected(this)" hidden>
+                    </label>
+                    <button type="submit" class="btn btn-primary m-1 w-5"><i
+                            class="fa fa-camera-retro fa-lg"></i></button>
+                </div>
+                <ul id="fileList">
+                </ul>
+            </form>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Video</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody id="tableBodyId">
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
