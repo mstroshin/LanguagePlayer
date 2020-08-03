@@ -56,6 +56,8 @@
 		D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */; };
 		D2E616CC24D7F45B00D80F26 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BE24D7F45B00D80F26 /* index.css */; };
 		D2E616CD24D7F45B00D80F26 /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616C024D7F45B00D80F26 /* font-awesome.min.css */; };
+		D2E616D024D7FBE300D80F26 /* bootstrap.min.js.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */; };
+		D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,12 +107,12 @@
 		D2E616B724D7F45B00D80F26 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
 		D2E616B824D7F45B00D80F26 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
 		D2E616B924D7F45B00D80F26 /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
-		D2E616BA24D7F45B00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
 		D2E616BB24D7F45B00D80F26 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
 		D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
 		D2E616BE24D7F45B00D80F26 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.css.map; sourceTree = "<group>"; };
 		D2E616C024D7F45B00D80F26 /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
+		D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,7 +330,7 @@
 				D2E616B724D7F45B00D80F26 /* index.js */,
 				D2E616B824D7F45B00D80F26 /* jquery.min.js */,
 				D2E616B924D7F45B00D80F26 /* bootstrap.min.js */,
-				D2E616BA24D7F45B00D80F26 /* bootstrap.min.js.map */,
+				D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */,
 			);
 			path = js;
 			sourceTree = "<group>";
@@ -421,10 +423,12 @@
 				D2154EA224C0803E00F52815 /* LaunchScreen.storyboard in Resources */,
 				D2E616C524D7F45B00D80F26 /* jquery.ui.widget.js in Resources */,
 				D2E616C224D7F45B00D80F26 /* fontawesome-webfont.woff2 in Resources */,
+				D2E616D024D7FBE300D80F26 /* bootstrap.min.js.map in Resources */,
 				D2E616C424D7F45B00D80F26 /* fontawesome-webfont.woff in Resources */,
 				D2E616C324D7F45B00D80F26 /* fontawesome-webfont.ttf in Resources */,
 				D2E616C924D7F45B00D80F26 /* bootstrap.min.js in Resources */,
 				D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */,
+				D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */,
 				D2E616CA24D7F45B00D80F26 /* index.html in Resources */,
 				D2E616CC24D7F45B00D80F26 /* index.css in Resources */,
 				D2E616C724D7F45B00D80F26 /* index.js in Resources */,
@@ -622,6 +626,7 @@
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				INFOPLIST_FILE = LanguagePlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -641,6 +646,7 @@
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				INFOPLIST_FILE = LanguagePlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

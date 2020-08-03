@@ -19,10 +19,10 @@
 <body>
     <div class=".container-sm">
         <div class=".container-sm">
-            <form id="upload" method="post" action="/upload" enctype="multipart/form-data">
+            <form id="upload" method="POST" action="/upload" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="btn btn-primary m-1 w-25">
-                        Video <input id="videoFileInput" type="file" name="video" onchange="fileSelected(this)" hidden>
+                        Video <input id="videoFileInput" type="file" name="video" onchange="fileSelected(this)" accept="video/mp4" hidden>
                     </label>
                     <label class="btn btn-primary m-1 w-25">
                         Source Subtitle <input id="subtitleFileInput" type="file" name="sourceSubtitle" onchange="fileSelected(this)" hidden>

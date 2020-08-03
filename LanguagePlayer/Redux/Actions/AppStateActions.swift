@@ -11,7 +11,8 @@ struct AppStateActions {
     struct SaveAppState: Action {}
     
     struct SaveVideo: Action {
-        let data: Data
+        let videoData: Data
+        let sourceSubtitleData: Data
     }
     
 }

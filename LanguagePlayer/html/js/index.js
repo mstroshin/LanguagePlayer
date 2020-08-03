@@ -65,10 +65,10 @@ function removeVideo(id) {
 }
 
 function fileSelected(element) {
-    var input = $(element);
-    var html = input.parent().html().trim();
-    var inputString = " <input" + html.split("<input")[1];
-    input.parent().html(input.val() + inputString);
+//    var input = $(element);
+//    var html = input.parent().html().trim();
+//    var inputString = " <input" + html.split("<input")[1];
+//    input.parent().html(input.val() + inputString);
 }
 
 $(function(){
@@ -85,7 +85,7 @@ $(function(){
 
             data.context = tpl.appendTo(ul);
 
-            tpl.find('input').knob();
+//            tpl.find('input').knob();
 
             tpl.find('span').click(function(){
 

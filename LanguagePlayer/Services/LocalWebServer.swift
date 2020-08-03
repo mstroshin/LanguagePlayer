@@ -17,13 +17,7 @@ class LocalWebServer {
         server["/js/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
         server["/fonts/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
         server["/css/:path"] = shareFilesFromDirectory(Bundle.main.bundlePath)
-        
-//        server.get["js/index.js"] = { r in
-//            print(r)
-//            
-//            return .forbidden
-//        }
-                
+                        
         if let indexHtmlUrl = Bundle.main.url(forResource: "index", withExtension: "html"),
             let indexHtml = try? String(contentsOf: indexHtmlUrl) {
             server.get["/"] = { r in
@@ -32,14 +26,29 @@ class LocalWebServer {
         }
 
         server.post["/upload"] = { r in
-            if let myFileMultipart = r.parseMultiPartFormData().filter({ $0.name == "my_file" }).first {
-                let data: NSData = myFileMultipart.body.withUnsafeBufferPointer { pointer in
-                    return NSData(bytes: pointer.baseAddress, length: myFileMultipart.body.count)
+            let multiPartFormData = r.parseMultiPartFormData()
+            
+            if let videoPart = multiPartFormData.filter({ $0.name == "video" }).first,
+                let sourceSubtitlePart = multiPartFormData.filter({ $0.name == "sourceSubtitle" }).first {
+                let videoData: NSData = videoPart.body.withUnsafeBufferPointer { pointer in
+                    return NSData(bytes: pointer.baseAddress, length: videoPart.body.count)
                 }
-                store.dispatch(action: AppStateActions.SaveVideo(data: data as Data))
+                let sourceSubtitleData: NSData = sourceSubtitlePart.body.withUnsafeBufferPointer { pointer in
+                    return NSData(bytes: pointer.baseAddress, length: sourceSubtitlePart.body.count)
+                }
+                print(videoData)
+                print(sourceSubtitleData)
+                
+                let action = AppStateActions.SaveVideo(
+                    videoData: videoData as Data,
+                    sourceSubtitleData: sourceSubtitleData as Data
+                )
+                store.dispatch(action: action)
                 
                 return .ok(.html("Your file has been uploaded !"))
             }
+            
+            print("internalServerError")
             return .internalServerError
         }
 

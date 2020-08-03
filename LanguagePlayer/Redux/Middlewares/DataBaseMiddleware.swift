@@ -13,7 +13,7 @@ struct DataBaseMiddleware: Middleware {
             guard let state = getState() as? AppState else { return }
             UserDefaultsDataStore.save(appState: state)
         case let action as AppStateActions.SaveVideo:
-            if let videoUrl = LocalDiskStore().save(data: action.data) {
+            if let videoUrl = LocalDiskStore().save(data: action.videoData) {
                 dispatch(VideosListStateActions.AddedVideo(url: videoUrl))
             } else {
                 print("Video was not saved")
