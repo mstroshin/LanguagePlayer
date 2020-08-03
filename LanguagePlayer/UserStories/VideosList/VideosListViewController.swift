@@ -36,10 +36,10 @@ extension VideosListViewController {
 }
 
 extension VideosListViewController: StoreSubscriber {
+    typealias State = AppState
     
-    func newState(state: FluxState) {
-        let appState = state as! AppState
-        self.collectionView.diffUpdate(source: self.videosList, target: appState.videos.videos) {
+    func newState(state: AppState) {
+        self.collectionView.diffUpdate(source: self.videosList, target: state.videos.videos) {
             self.videosList = $0
         }
     }

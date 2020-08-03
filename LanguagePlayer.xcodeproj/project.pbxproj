@@ -24,7 +24,6 @@
 		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
 		D28749B124D6B7B500687095 /* VideosListStateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B024D6B7B500687095 /* VideosListStateAction.swift */; };
 		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
-		D28749B524D6BB1A00687095 /* Thunks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B424D6BB1A00687095 /* Thunks.swift */; };
 		D28749B824D6C2B800687095 /* Redux.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B724D6C2B800687095 /* Redux.swift */; };
 		D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BA24D6C4E600687095 /* DifferenceKit */; };
 		D28749BE24D6C54200687095 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BD24D6C54200687095 /* Swifter */; };
@@ -32,6 +31,7 @@
 		D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749C324D6CA8100687095 /* AppStateReducer.swift */; };
 		D288C69E24D7E272004E9525 /* DataBaseMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C69D24D7E272004E9525 /* DataBaseMiddleware.swift */; };
 		D288C6A024D7EBE2004E9525 /* VideosListStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C69F24D7EBE2004E9525 /* VideosListStateReducer.swift */; };
+		D288C6A224D7ED48004E9525 /* VideosListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C6A124D7ED48004E9525 /* VideosListState.swift */; };
 		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -66,12 +66,12 @@
 		D28749AE24D6B4ED00687095 /* LocalWebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServer.swift; sourceTree = "<group>"; };
 		D28749B024D6B7B500687095 /* VideosListStateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListStateAction.swift; sourceTree = "<group>"; };
 		D28749B224D6BA1300687095 /* LocalDiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDiskStore.swift; sourceTree = "<group>"; };
-		D28749B424D6BB1A00687095 /* Thunks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thunks.swift; sourceTree = "<group>"; };
 		D28749B724D6C2B800687095 /* Redux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redux.swift; sourceTree = "<group>"; };
 		D28749BF24D6C59500687095 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D28749C324D6CA8100687095 /* AppStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateReducer.swift; sourceTree = "<group>"; };
 		D288C69D24D7E272004E9525 /* DataBaseMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseMiddleware.swift; sourceTree = "<group>"; };
 		D288C69F24D7EBE2004E9525 /* VideosListStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListStateReducer.swift; sourceTree = "<group>"; };
+		D288C6A124D7ED48004E9525 /* VideosListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListState.swift; sourceTree = "<group>"; };
 		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -197,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
+				D288C6A124D7ED48004E9525 /* VideosListState.swift */,
 				D28749A624D66B0800687095 /* VideoState.swift */,
 			);
 			path = States;
@@ -216,7 +217,6 @@
 			children = (
 				D28749AC24D675B900687095 /* AppStateActions.swift */,
 				D28749B024D6B7B500687095 /* VideosListStateAction.swift */,
-				D28749B424D6BB1A00687095 /* Thunks.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -378,7 +378,6 @@
 				D288C6A024D7EBE2004E9525 /* VideosListStateReducer.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
-				D28749B524D6BB1A00687095 /* Thunks.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
@@ -387,6 +386,7 @@
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D28749A724D66B0800687095 /* VideoState.swift in Sources */,
+				D288C6A224D7ED48004E9525 /* VideosListState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

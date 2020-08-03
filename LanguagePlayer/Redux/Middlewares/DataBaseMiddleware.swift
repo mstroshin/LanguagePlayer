@@ -2,7 +2,7 @@ import Foundation
 
 struct DataBaseMiddleware: Middleware {
     
-    func execute(getState: StateSupplier, action: Action, dispatch: @escaping DispatchFunction) {
+    func execute<T: FluxState>(getState: () -> T?, action: Action, dispatch: @escaping DispatchFunction) {
         
         switch action {
         case _ as AppStateActions.LoadAppState:

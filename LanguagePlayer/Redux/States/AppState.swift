@@ -1,9 +1,5 @@
 typealias ID = Int
 
-struct AppState: FluxState, Equatable, Codable {
+struct AppState: FluxState {
     var videos = VideosListState()
-}
-
-struct VideosListState: FluxState, Equatable, Codable {
-    var videos = [VideoState]()
 }

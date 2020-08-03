@@ -2,7 +2,7 @@ import Foundation
 import Combine
 
 //MARK: - State
-public protocol FluxState { }
+public protocol FluxState: Equatable, Codable { }
 
 //MARK: - Action
 public protocol Action { }
@@ -15,10 +15,8 @@ public typealias Reducer<FluxState> =
 (_ state: FluxState, _ action: Action) -> FluxState
 
 //MARK: - Middleware
-public typealias StateSupplier = () -> FluxState?
-
 public protocol Middleware {
-    func execute(getState: StateSupplier, action: Action, dispatch: @escaping DispatchFunction)
+    func execute<T: FluxState>(getState: () -> T?, action: Action, dispatch: @escaping DispatchFunction)
 }
 
 //MARK: - Store
@@ -62,7 +60,7 @@ final public class Store<StoreState: FluxState>: ObservableObject {
     
     public func subscribe<T: StoreSubscriber>(_ subscriber: T) {
         let cancellable = self.stateChangingNotifier.sink { state in
-            subscriber.newState(state: state)
+            subscriber.newState(state: state as! T.State)
         }
         self.cancellableMap[subscriber.hashValue] = cancellable
     }
@@ -73,5 +71,7 @@ final public class Store<StoreState: FluxState>: ObservableObject {
 }
 
 public protocol StoreSubscriber: Hashable {
-    func newState(state: FluxState)
+    associatedtype State: FluxState
+    
+    func newState(state: State)
 }
