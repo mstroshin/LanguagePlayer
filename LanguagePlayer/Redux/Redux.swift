@@ -24,16 +24,18 @@ public protocol Middleware {
 //MARK: - Store
 final public class Store<StoreState: FluxState>: ObservableObject {
     public var state: StoreState
-    public let stateChangingNotifier = PassthroughSubject<StoreState, Never>()
+    public let stateChangingNotifier: CurrentValueSubject<StoreState, Never>
 
     private var dispatchFunction: DispatchFunction!
     private let reducer: Reducer<StoreState>
+    private var cancellableMap = [Int: AnyCancellable]()
     
     public init(reducer: @escaping Reducer<StoreState>,
                 middleware: [Middleware] = [],
                 state: StoreState) {
         self.reducer = reducer
         self.state = state
+        self.stateChangingNotifier = CurrentValueSubject(state)
         
         var dispatchFunction = { [unowned self] action in self._dispatch(action: action) }
         middleware
@@ -55,13 +57,21 @@ final public class Store<StoreState: FluxState>: ObservableObject {
     
     private func _dispatch(action: Action) {
         self.state = reducer(state, action)
+        self.stateChangingNotifier.send(self.state)
     }
     
-    public func subscribe(_ subscriber: StoreSubscriber) {
-//        self.stateChangingNotifier
+    public func subscribe<T: StoreSubscriber>(_ subscriber: T) {
+        let cancellable = self.stateChangingNotifier.sink { state in
+            subscriber.newState(state: state)
+        }
+        self.cancellableMap[subscriber.hashValue] = cancellable
+    }
+    
+    public func unsubscribe<T: StoreSubscriber>(_ subscriber: T) {
+        self.cancellableMap.removeValue(forKey: subscriber.hashValue)?.cancel()
     }
 }
 
-public protocol StoreSubscriber {
+public protocol StoreSubscriber: Hashable {
     func newState(state: FluxState)
 }

@@ -2,7 +2,7 @@ import Foundation
 
 class LocalDiskStore {
     
-    func save(data: NSData) -> URL? {
+    func save(data: Data) -> URL? {
         guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return nil
         }
@@ -10,7 +10,7 @@ class LocalDiskStore {
             return nil
         }
         print(fileSaveUrl)
-        data.write(to: fileSaveUrl, atomically: true)
+        NSData(data: data).write(to: fileSaveUrl, atomically: true)
         
         return fileSaveUrl
     }

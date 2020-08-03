@@ -30,7 +30,7 @@ class LocalWebServer {
                 let data: NSData = myFileMultipart.body.withUnsafeBufferPointer { pointer in
                     return NSData(bytes: pointer.baseAddress, length: myFileMultipart.body.count)
                 }
-                store.dispatch(uploadedVideo(data: data))
+                store.dispatch(action: AppStateActions.SaveVideo(data: data as Data))
                 
                 return .ok(.html("Your file has been uploaded !"))
             }

@@ -1,15 +1,12 @@
-func appStateReducer(action: Action, state: AppState) -> AppState {
+func appStateReducer(state: AppState, action: Action) -> AppState {
     var state = state
     
-    guard let appStateAction = action as? AppStateAction else {
-        state.videos = VideosListState.reducer(action: action, state: state.videos)
-        return state
+    switch action {
+    case let action as AppStateActions.LoadedAppState:
+        return action.state
+    default:
+        state.videos = videosListStateReducer(state: state.videos, action: action)
     }
     
-    switch appStateAction {
-    case .loadState(let loadedState):
-        return loadedState
-    }
-    
-    //        return state
+    return state
 }

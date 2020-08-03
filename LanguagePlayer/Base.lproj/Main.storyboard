@@ -11,7 +11,7 @@
         <!--Videos-->
         <scene sceneID="4R1-fj-nrI">
             <objects>
-                <collectionViewController id="JyF-Eg-hZf" sceneMemberID="viewController">
+                <collectionViewController id="JyF-Eg-hZf" customClass="VideosListViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="et4-zk-P2U">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -248,6 +248,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="FGP-AM-e0J" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rN1-sB-xwW">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>

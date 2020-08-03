@@ -6,12 +6,12 @@ class VideosListViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        store.subscribe(self)
+        store.subscribe(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        store.unsubscribe(self)
+        store.unsubscribe(self)
     }
     
 }
@@ -35,12 +35,13 @@ extension VideosListViewController {
     
 }
 
-//extension VideosListViewController: StoreSubscriber {
-//    typealias StoreSubscriberStateType = AppState
-//    
-//    func newState(state: AppState) {
-//        self.collectionView.diffUpdate(source: self.videosList, target: state.videos.videos) {
-//            self.videosList = $0
-//        }
-//    }
-//}
+extension VideosListViewController: StoreSubscriber {
+    
+    func newState(state: FluxState) {
+        let appState = state as! AppState
+        self.collectionView.diffUpdate(source: self.videosList, target: appState.videos.videos) {
+            self.videosList = $0
+        }
+    }
+    
+}

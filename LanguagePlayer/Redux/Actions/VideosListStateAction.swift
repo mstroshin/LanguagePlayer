@@ -1,5 +1,9 @@
 import Foundation
 
-enum VideosListStateAction: Action {
-    case addVideo(URL)
+struct VideosListStateActions {
+    
+    struct AddedVideo: Action {
+        let url: URL
+    }
+    
 }

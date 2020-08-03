@@ -1,7 +1,7 @@
 import UIKit
 import Swifter
 
-var store: Store<AppState>?
+var store: Store<AppState>!
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
