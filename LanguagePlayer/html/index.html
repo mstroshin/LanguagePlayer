@@ -19,19 +19,19 @@
 <body>
     <div class=".container-sm">
         <div class=".container-sm">
-            <form id="upload" method="POST" action="/upload" enctype="multipart/form-data">
+            <form id="uploadForm" method="POST" action="/upload" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="btn btn-primary m-1 w-25">
-                        Video <input id="videoFileInput" type="file" name="video" onchange="fileSelected(this)" accept="video/mp4" hidden>
+                        Video <input id="videoFileInput" type="file" name="video" accept="video/mp4" hidden>
                     </label>
                     <label class="btn btn-primary m-1 w-25">
-                        Source Subtitle <input id="subtitleFileInput" type="file" name="sourceSubtitle" onchange="fileSelected(this)" hidden>
+                        Source Subtitle <input id="subtitleFileInput" type="file" name="sourceSubtitle" accept=".srt"
+                            hidden>
                     </label>
-                    <button type="submit" class="btn btn-primary m-1 w-5"><i
-                            class="fa fa-camera-retro fa-lg"></i></button>
+                    <button class="btn btn-primary m-1 w-5" onclick="onSubmitUpload()">
+                        <i class="fa fa-camera-retro fa-lg"></i>
+                    </button>
                 </div>
-                <ul id="fileList">
-                </ul>
             </form>
         </div>
         <table class="table">
