@@ -1,19 +1,14 @@
 import Foundation
-import DifferenceKit
 
-struct VideoState: FluxState {
+struct VideoState: Codable {
     let id: ID
     let title: String
-    let url: URL
-//    let previewImage: URL
-    let sourceSubtitleUrl: URL?
-    let targetSubtitleUrl: URL?
+    let savedFileName: String
 }
 
-extension VideoState: Differentiable {
-    typealias DifferenceIdentifier = Int?
-
-    var differenceIdentifier: Int? {
-        return id
-    }
+struct UploadedVideo {
+    let videoTitle: String
+    let videoData: Data
+    let sourceSubtitleTitle: String
+    let sourceSubtitleData: Data
 }

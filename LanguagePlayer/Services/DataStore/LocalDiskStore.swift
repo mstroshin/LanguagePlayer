@@ -2,20 +2,24 @@ import Foundation
 
 class LocalDiskStore {
     
-    func save(data: Data) -> URL? {
+    func save(data: Data, fileName: String) -> Bool {
         guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return nil
+            return false
         }
-        guard let fileSaveUrl = URL(string: "name_for_file.txt", relativeTo: documentsUrl) else {
-            return nil
+        guard let fileSaveUrl = URL(string: fileName, relativeTo: documentsUrl) else {
+            return false
         }
-        print(fileSaveUrl)
-        NSData(data: data).write(to: fileSaveUrl, atomically: true)
+        let success = NSData(data: data).write(to: fileSaveUrl, atomically: true)
+        if success {
+            print("Saved file: \(fileSaveUrl.absoluteString)")
+        } else {
+            print("Did not save file: \(fileSaveUrl.absoluteString)")
+        }
         
-        return fileSaveUrl
+        return success
     }
     
-    func removeDate(from url: URL) -> Bool {
+    func removeData(from url: URL) -> Bool {
         do {
             try FileManager.default.removeItem(at: url)
             return true

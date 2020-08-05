@@ -1,3 +1,8 @@
+import ReSwift
+import ReSwift_Thunk
+
+var store: Store<AppState>!
+
 struct AppEnvironment {
     let store: Store<AppState>
 }
@@ -5,9 +10,8 @@ struct AppEnvironment {
 extension AppEnvironment {
     static func bootstrap() -> AppEnvironment {
         let appState = AppState()
-        let middlewares: [Middleware] = []
-        
-        let store = Store(reducer: appStateReducer, middleware: middlewares, state: appState)
+        let thunkMiddleware: Middleware<AppState> = createThunkMiddleware()
+        let store = Store(reducer: appStateReducer, state: appState, middleware: [thunkMiddleware], automaticallySkipsRepeats: true)
                 
         return AppEnvironment(store: store)
     }

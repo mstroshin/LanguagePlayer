@@ -69,6 +69,7 @@ function onSubmitUpload() {
     // let progressBar = $("#myBar");
 
     var request = new XMLHttpRequest();
+    request.open('post', uploadForm.action, true);
     request.upload.onprogress = function (e) {
         console.log("progress " + e.loaded + "/" + e.total);
 
@@ -81,7 +82,6 @@ function onSubmitUpload() {
 
         // progressBar.width(100 + '%').html(100 + '%');
     }
-    request.open('post', uploadForm.action, true);
     request.setRequestHeader("Content-Type", "multipart/form-data");
     request.send(new FormData(uploadForm));
 }

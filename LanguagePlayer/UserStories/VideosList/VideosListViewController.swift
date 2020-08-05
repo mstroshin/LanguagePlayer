@@ -1,12 +1,21 @@
 import Foundation
 import UIKit
+import AVFoundation
+import ReSwift
 
 class VideosListViewController: UICollectionViewController {
-    var videosList: [VideoState] = []
+    var videosList: [VideoViewState] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = "Video Library"
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        store.subscribe(self)
+        store.subscribe(self, transform: {
+            $0.select(VideoListViewState.init)
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -27,8 +36,8 @@ extension VideosListViewController {
             withReuseIdentifier: VideoCollectionViewItem.identifier,
             for: indexPath
         ) as! VideoCollectionViewItem
-        cell.image.image = nil
-        cell.titleLabel.text = self.videosList[indexPath.row].title
+        cell.image.image = self.videosList[indexPath.row].videoPreviewImage
+        cell.titleLabel.text = self.videosList[indexPath.row].videoTitle
         
         return cell
     }
@@ -36,11 +45,13 @@ extension VideosListViewController {
 }
 
 extension VideosListViewController: StoreSubscriber {
-    typealias State = AppState
+    typealias State = VideoListViewState
     
-    func newState(state: AppState) {
-        self.collectionView.diffUpdate(source: self.videosList, target: state.videos.videos) {
-            self.videosList = $0
+    func newState(state: VideoListViewState) {
+        DispatchQueue.main.async {
+            self.collectionView.diffUpdate(source: self.videosList, target: state.videos) {
+                self.videosList = $0
+            }
         }
     }
     

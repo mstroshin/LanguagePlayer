@@ -30,3 +30,15 @@ extension UICollectionView {
         reload(using: changeset, setData: setData)
     }
 }
+
+extension FileManager {
+    func urls() -> [URL]? {
+        let documentsURL = urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURLs = try? contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
+        return fileURLs
+    }
+    
+    func url(for fileName: String) -> URL? {
+        self.urls()?.first { $0.lastPathComponent == fileName }
+    }
+}

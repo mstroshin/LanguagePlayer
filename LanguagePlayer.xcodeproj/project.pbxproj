@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */; };
+		D204D7AF24DB29CC002AAD60 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D204D7AE24DB29CC002AAD60 /* ReSwift */; };
+		D204D7B224DB2C32002AAD60 /* ReSwift-Thunk in Frameworks */ = {isa = PBXBuildFile; productRef = D204D7B124DB2C32002AAD60 /* ReSwift-Thunk */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
 		D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9724C0803C00F52815 /* SceneDelegate.swift */; };
 		D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2154E9B24C0803C00F52815 /* Main.storyboard */; };
@@ -22,16 +25,11 @@
 		D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A924D6758600687095 /* UserDefaultsDataStore.swift */; };
 		D28749AD24D675B900687095 /* AppStateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AC24D675B900687095 /* AppStateActions.swift */; };
 		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
-		D28749B124D6B7B500687095 /* VideosListStateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B024D6B7B500687095 /* VideosListStateAction.swift */; };
 		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
-		D28749B824D6C2B800687095 /* Redux.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B724D6C2B800687095 /* Redux.swift */; };
 		D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BA24D6C4E600687095 /* DifferenceKit */; };
 		D28749BE24D6C54200687095 /* Swifter in Frameworks */ = {isa = PBXBuildFile; productRef = D28749BD24D6C54200687095 /* Swifter */; };
 		D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749BF24D6C59500687095 /* AppEnvironment.swift */; };
 		D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749C324D6CA8100687095 /* AppStateReducer.swift */; };
-		D288C69E24D7E272004E9525 /* DataBaseMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C69D24D7E272004E9525 /* DataBaseMiddleware.swift */; };
-		D288C6A024D7EBE2004E9525 /* VideosListStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C69F24D7EBE2004E9525 /* VideosListStateReducer.swift */; };
-		D288C6A224D7ED48004E9525 /* VideosListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288C6A124D7ED48004E9525 /* VideosListState.swift */; };
 		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -62,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewState.swift; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2154E9724C0803C00F52815 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,14 +78,9 @@
 		D28749A924D6758600687095 /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
 		D28749AC24D675B900687095 /* AppStateActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateActions.swift; sourceTree = "<group>"; };
 		D28749AE24D6B4ED00687095 /* LocalWebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServer.swift; sourceTree = "<group>"; };
-		D28749B024D6B7B500687095 /* VideosListStateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListStateAction.swift; sourceTree = "<group>"; };
 		D28749B224D6BA1300687095 /* LocalDiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDiskStore.swift; sourceTree = "<group>"; };
-		D28749B724D6C2B800687095 /* Redux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Redux.swift; sourceTree = "<group>"; };
 		D28749BF24D6C59500687095 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D28749C324D6CA8100687095 /* AppStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateReducer.swift; sourceTree = "<group>"; };
-		D288C69D24D7E272004E9525 /* DataBaseMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseMiddleware.swift; sourceTree = "<group>"; };
-		D288C69F24D7EBE2004E9525 /* VideosListStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListStateReducer.swift; sourceTree = "<group>"; };
-		D288C6A124D7ED48004E9525 /* VideosListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListState.swift; sourceTree = "<group>"; };
 		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -120,6 +114,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D204D7B224DB2C32002AAD60 /* ReSwift-Thunk in Frameworks */,
+				D204D7AF24DB29CC002AAD60 /* ReSwift in Frameworks */,
 				D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */,
 				D28749BE24D6C54200687095 /* Swifter in Frameworks */,
 			);
@@ -220,6 +216,7 @@
 			children = (
 				D287497F24D5A17000687095 /* VideosListViewController.swift */,
 				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
+				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
 			);
 			path = VideosList;
 			sourceTree = "<group>";
@@ -228,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
-				D288C6A124D7ED48004E9525 /* VideosListState.swift */,
 				D28749A624D66B0800687095 /* VideoState.swift */,
 			);
 			path = States;
@@ -247,7 +243,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749AC24D675B900687095 /* AppStateActions.swift */,
-				D28749B024D6B7B500687095 /* VideosListStateAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -259,7 +254,6 @@
 				D28749A324D6621400687095 /* States */,
 				D28749AB24D675AA00687095 /* Actions */,
 				D28749C124D6C66D00687095 /* Middlewares */,
-				D28749B724D6C2B800687095 /* Redux.swift */,
 			);
 			path = Redux;
 			sourceTree = "<group>";
@@ -267,7 +261,6 @@
 		D28749C124D6C66D00687095 /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
-				D288C69D24D7E272004E9525 /* DataBaseMiddleware.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -276,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749C324D6CA8100687095 /* AppStateReducer.swift */,
-				D288C69F24D7EBE2004E9525 /* VideosListStateReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -373,6 +365,8 @@
 			packageProductDependencies = (
 				D28749BA24D6C4E600687095 /* DifferenceKit */,
 				D28749BD24D6C54200687095 /* Swifter */,
+				D204D7AE24DB29CC002AAD60 /* ReSwift */,
+				D204D7B124DB2C32002AAD60 /* ReSwift-Thunk */,
 			);
 			productName = LanguagePlayer;
 			productReference = D2154E9224C0803C00F52815 /* LanguagePlayer.app */;
@@ -405,6 +399,8 @@
 			packageReferences = (
 				D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */,
 				D28749BC24D6C54200687095 /* XCRemoteSwiftPackageReference "swifter" */,
+				D204D7AD24DB29CC002AAD60 /* XCRemoteSwiftPackageReference "ReSwift" */,
+				D204D7B024DB2C32002AAD60 /* XCRemoteSwiftPackageReference "ReSwift-Thunk" */,
 			);
 			productRefGroup = D2154E9324C0803C00F52815 /* Products */;
 			projectDirPath = "";
@@ -459,17 +455,14 @@
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
-				D288C69E24D7E272004E9525 /* DataBaseMiddleware.swift in Sources */,
 				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
 				D28749A524D6674900687095 /* AppState.swift in Sources */,
-				D28749B124D6B7B500687095 /* VideosListStateAction.swift in Sources */,
-				D28749B824D6C2B800687095 /* Redux.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
 				D28749AD24D675B900687095 /* AppStateActions.swift in Sources */,
-				D288C6A024D7EBE2004E9525 /* VideosListStateReducer.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
+				D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
@@ -478,7 +471,6 @@
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D28749A724D66B0800687095 /* VideoState.swift in Sources */,
-				D288C6A224D7ED48004E9525 /* VideosListState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +674,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D204D7AD24DB29CC002AAD60 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReSwift/ReSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		D204D7B024DB2C32002AAD60 /* XCRemoteSwiftPackageReference "ReSwift-Thunk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReSwift/ReSwift-Thunk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ra1028/DifferenceKit.git";
@@ -701,6 +709,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D204D7AE24DB29CC002AAD60 /* ReSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D204D7AD24DB29CC002AAD60 /* XCRemoteSwiftPackageReference "ReSwift" */;
+			productName = ReSwift;
+		};
+		D204D7B124DB2C32002AAD60 /* ReSwift-Thunk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D204D7B024DB2C32002AAD60 /* XCRemoteSwiftPackageReference "ReSwift-Thunk" */;
+			productName = "ReSwift-Thunk";
+		};
 		D28749BA24D6C4E600687095 /* DifferenceKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D28749B924D6C4E600687095 /* XCRemoteSwiftPackageReference "DifferenceKit" */;

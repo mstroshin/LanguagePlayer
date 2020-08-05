@@ -8,7 +8,7 @@ class LocalWebServer {
         let server = HttpServer()
         
         server.get["/list"] = { r in
-            let videoTitles = store.state.videos.videos.map(\.title)
+            let videoTitles = store.state.videos.map(\.title)
             let jsonMap = ["titles" : videoTitles]
             
             return .ok(.json(jsonMap))
@@ -39,11 +39,15 @@ class LocalWebServer {
                 print(videoData)
                 print(sourceSubtitleData)
                 
-                let action = AppStateActions.SaveVideo(
-                    videoData: videoData as Data,
-                    sourceSubtitleData: sourceSubtitleData as Data
+                let action = AppStateActions.saveVideo(
+                    data: UploadedVideo(
+                        videoTitle: videoPart.fileName ?? "Video",
+                        videoData: videoData as Data,
+                        sourceSubtitleTitle: sourceSubtitlePart.fileName ?? "SourceSubtitle",
+                        sourceSubtitleData: sourceSubtitleData as Data
+                    )
                 )
-                store.dispatch(action: action)
+                store.dispatch(action)
                 
                 return .ok(.html("Your file has been uploaded !"))
             }

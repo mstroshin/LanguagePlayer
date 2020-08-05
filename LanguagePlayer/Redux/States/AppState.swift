@@ -1,5 +1,7 @@
+import ReSwift
+
 typealias ID = Int
 
-struct AppState: FluxState {
-    var videos = VideosListState()
+struct AppState: StateType, Codable {
+    var videos = [VideoState]()
 }

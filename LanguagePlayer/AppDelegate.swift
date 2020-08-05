@@ -1,8 +1,6 @@
 import UIKit
 import Swifter
 
-var store: Store<AppState>!
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let localWebServer = LocalWebServer()
@@ -11,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let environment = AppEnvironment.bootstrap()
         store = environment.store
         
-//        store.dispatch(loadAppState)
+        store.dispatch(AppStateActions.loadAppState)
         localWebServer.run()
         
         return true
