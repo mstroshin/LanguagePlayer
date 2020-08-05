@@ -42,6 +42,14 @@ extension VideosListViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let video = self.videosList[indexPath.row]
+        
+        let vc = VideoPlayerViewController.factory(videoUrl: video.videoUrl, sourceSubtitleUrl: video.sourceSubtitleUrl)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+    
 }
 
 extension VideosListViewController: StoreSubscriber {

@@ -76,7 +76,8 @@ class VideoPlayerPresenter {
 extension VideoPlayerPresenter: ControlsViewDelegate {
     
     func didPressClose() {
-        
+        self.playerController.pause()
+        self.view?.dismiss(animated: true, completion: nil)
     }
     
     func didPressBackwardFifteen() {

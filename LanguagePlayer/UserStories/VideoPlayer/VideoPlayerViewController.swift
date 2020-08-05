@@ -127,4 +127,14 @@ extension VideoPlayerViewController {
         return view
     }
     
+    static func factory(
+        videoUrl: URL,
+        sourceSubtitleUrl: URL
+    ) -> VideoPlayerViewController {
+        let playerController = PlayerController(url: videoUrl)
+        let subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
+        
+        return factory(playerController: playerController, subtitlesExtractor: subtitlesExtractor)
+    }
+    
 }
