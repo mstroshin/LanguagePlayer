@@ -28,9 +28,9 @@ struct VideoViewState {
 }
 
 extension VideoViewState: Differentiable {
-    typealias DifferenceIdentifier = Int?
+    typealias DifferenceIdentifier = ID?
 
-    var differenceIdentifier: Int? {
+    var differenceIdentifier: ID? {
         return id
     }
     

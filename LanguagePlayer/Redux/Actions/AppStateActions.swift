@@ -24,13 +24,13 @@ struct AppStateActions {
         let savedFileName: String
     }
     
-    static func saveVideo(data: UploadedVideo) -> Thunk<AppState> {
+    static func save(video: UploadedFile, sourceSubtitle: UploadedFile) -> Thunk<AppState> {
         return Thunk<AppState> { dispatch, getState in
             let fileName = UUID().uuidString
-            if LocalDiskStore().save(data: data.videoData, fileName: fileName + ".mp4") &&
-                LocalDiskStore().save(data: data.sourceSubtitleData, fileName: fileName + ".srt") {
+            if LocalDiskStore().save(data: video.data, fileName: fileName + ".mp4") &&
+                LocalDiskStore().save(data: sourceSubtitle.data, fileName: fileName + ".srt") {
                 let action = AppStateActions.AddedVideo(
-                    videoTitle: data.videoTitle,
+                    videoTitle: video.title,
                     savedFileName: fileName
                 )
                 dispatch(action)
@@ -41,4 +41,17 @@ struct AppStateActions {
         }
     }
     
+    struct SaveTranslation: Action {
+        let source: String
+        let target: String
+        let videoID: ID
+        let fromMilliseconds: TimeInterval
+        let toMilliseconds: TimeInterval
+    }
+    
+}
+
+struct UploadedFile {
+    let title: String
+    let data: Data
 }

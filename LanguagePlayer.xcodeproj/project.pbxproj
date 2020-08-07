@@ -18,10 +18,12 @@
 		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
 		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 		D2154EB824C0946400F52815 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB724C0946400F52815 /* PlayerController.swift */; };
+		D2420ACF24DD45D6009C41F8 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */; };
+		D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */; };
+		D2420AD324DD9AFF009C41F8 /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */; };
 		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
 		D28749A524D6674900687095 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A424D6674900687095 /* AppState.swift */; };
-		D28749A724D66B0800687095 /* VideoState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A624D66B0800687095 /* VideoState.swift */; };
 		D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A924D6758600687095 /* UserDefaultsDataStore.swift */; };
 		D28749AD24D675B900687095 /* AppStateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AC24D675B900687095 /* AppStateActions.swift */; };
 		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
@@ -71,10 +73,12 @@
 		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
 		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 		D2154EB724C0946400F52815 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
+		D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewState.swift; sourceTree = "<group>"; };
+		D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
 		D287497F24D5A17000687095 /* VideosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewController.swift; sourceTree = "<group>"; };
 		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
 		D28749A424D6674900687095 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		D28749A624D66B0800687095 /* VideoState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoState.swift; sourceTree = "<group>"; };
 		D28749A924D6758600687095 /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
 		D28749AC24D675B900687095 /* AppStateActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateActions.swift; sourceTree = "<group>"; };
 		D28749AE24D6B4ED00687095 /* LocalWebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServer.swift; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			children = (
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
+				D2420ACD24DD45B7009C41F8 /* Dictionary */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -211,6 +216,16 @@
 			path = PlayerController;
 			sourceTree = "<group>";
 		};
+		D2420ACD24DD45B7009C41F8 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */,
+				D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */,
+				D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,7 +240,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
-				D28749A624D66B0800687095 /* VideoState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -454,6 +468,7 @@
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
+				D2420AD324DD9AFF009C41F8 /* DictionaryTableViewCell.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
 				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
@@ -463,14 +478,15 @@
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
 				D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */,
+				D2420ACF24DD45D6009C41F8 /* DictionaryViewController.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
+				D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
-				D28749A724D66B0800687095 /* VideoState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

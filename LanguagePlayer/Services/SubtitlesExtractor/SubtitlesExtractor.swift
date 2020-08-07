@@ -9,5 +9,12 @@
 import Foundation
 
 protocol SubtitlesExtractor {
-    func getSubtitle(for timeInMilliseconds: TimeInterval) -> String?
+    func getSubtitle(for timeInMilliseconds: TimeInterval) -> SubtitlePart?
+}
+
+struct SubtitlePart {
+    let number: Int
+    let fromTime: TimeInterval
+    let toTime: TimeInterval
+    let text: String
 }

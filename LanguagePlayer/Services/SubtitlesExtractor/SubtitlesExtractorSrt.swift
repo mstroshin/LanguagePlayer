@@ -10,7 +10,7 @@ import Foundation
 
 class SubtitlesExtractorSrt: SubtitlesExtractor {
     private let filePath: URL
-    private var parts = [SubtitleSrtPart]()
+    private var parts = [SubtitlePart]()
     
     init(with filePath: URL) {
         if filePath.pathExtension != "srt" {
@@ -30,8 +30,8 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
         }
     }
     
-    private func parse(_ subtitles: String) -> [SubtitleSrtPart] {
-        var result = [SubtitleSrtPart]()
+    private func parse(_ subtitles: String) -> [SubtitlePart] {
+        var result = [SubtitlePart]()
         
         let parts = subtitles.components(separatedBy: "\n\n")
         for part in parts {
@@ -53,7 +53,7 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
             let text = lines[2]
             
             result.append(
-                SubtitleSrtPart(number: number, fromTime: fromTime, toTime: toTime, text: text)
+                SubtitlePart(number: number, fromTime: fromTime, toTime: toTime, text: text)
             )
         }
         
@@ -72,15 +72,8 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
         return hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds
     }
     
-    func getSubtitle(for timeInMilliseconds: TimeInterval) -> String? {
-        self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }?.text
+    func getSubtitle(for timeInMilliseconds: TimeInterval) -> SubtitlePart? {
+        self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }
     }
     
-}
-
-fileprivate struct SubtitleSrtPart {
-    let number: Int
-    let fromTime: TimeInterval
-    let toTime: TimeInterval
-    let text: String
 }

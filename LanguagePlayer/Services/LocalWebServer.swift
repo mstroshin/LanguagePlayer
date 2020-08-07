@@ -39,14 +39,15 @@ class LocalWebServer {
                 print(videoData)
                 print(sourceSubtitleData)
                 
-                let action = AppStateActions.saveVideo(
-                    data: UploadedVideo(
-                        videoTitle: videoPart.fileName ?? "Video",
-                        videoData: videoData as Data,
-                        sourceSubtitleTitle: sourceSubtitlePart.fileName ?? "SourceSubtitle",
-                        sourceSubtitleData: sourceSubtitleData as Data
-                    )
+                let videoFile = UploadedFile(
+                    title: videoPart.fileName ?? "Video",
+                    data: videoData as Data
                 )
+                let sourceSubtitleFile = UploadedFile(
+                    title: sourceSubtitlePart.fileName ?? "SourceSubtitle",
+                    data: sourceSubtitleData as Data
+                )
+                let action = AppStateActions.save(video: videoFile, sourceSubtitle: sourceSubtitleFile)
                 store.dispatch(action)
                 
                 return .ok(.html("Your file has been uploaded !"))

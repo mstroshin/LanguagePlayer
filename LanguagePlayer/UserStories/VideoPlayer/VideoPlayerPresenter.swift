@@ -15,6 +15,7 @@ class VideoPlayerPresenter {
     private let playerController: PlayerController
     private let subtitlesExtractor: SubtitlesExtractor
     
+    private var currentSubtitle: SubtitlePart?
     private var cancellables = [AnyCancellable]()
     
     init(
@@ -36,8 +37,10 @@ class VideoPlayerPresenter {
             self.view?.updateTime(timeInMilliseconds)
             
             if let subtitle = self.subtitlesExtractor.getSubtitle(for: timeInMilliseconds) {
-                self.view?.show(subtitles: subtitle)
+                self.currentSubtitle = subtitle
+                self.view?.show(subtitles: subtitle.text)
             } else {
+                self.currentSubtitle = nil
                 self.view?.hideSubtitles()
             }
         }
@@ -70,6 +73,20 @@ class VideoPlayerPresenter {
 //        }
 //        self.cancellables.append(cancellable)
         self.view?.showTranslated(text: text)
+    }
+    
+    func addToDictionary(source: String, target: String) {
+        guard let subtitle = self.currentSubtitle else { return }
+        
+        let action = AppStateActions.SaveTranslation(
+            source: source,
+            target: target,
+            videoID: self.playerController.videoId,
+            fromMilliseconds: subtitle.fromTime,
+            toMilliseconds: subtitle.toTime
+        )
+        store.dispatch(action)
+        store.dispatch(AppStateActions.saveAppState)
     }
 }
 

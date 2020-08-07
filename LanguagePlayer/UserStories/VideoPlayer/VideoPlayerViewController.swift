@@ -28,6 +28,7 @@ class VideoPlayerViewController: UIViewController {
         self.subtitlesView.delegate = self
         
         self.translationView.isHidden = true
+        self.translationView.delegate = self
         self.view.addSubview(self.translationView)
         
         self.controlsView.delegate = self.presenter
@@ -79,6 +80,12 @@ class VideoPlayerViewController: UIViewController {
     
 }
 
+extension VideoPlayerViewController: TranslationViewDelegate {
+    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String) {
+        self.presenter.addToDictionary(source: source, target: target)
+    }
+}
+
 extension VideoPlayerViewController: SubtitlesViewDelegate {
     
     func startedSelectingText(in subtitlesView: SubtitlesView) {
@@ -128,10 +135,11 @@ extension VideoPlayerViewController {
     }
     
     static func factory(
+        videoId: ID,
         videoUrl: URL,
         sourceSubtitleUrl: URL
     ) -> VideoPlayerViewController {
-        let playerController = PlayerController(url: videoUrl)
+        let playerController = PlayerController(id: videoId, url: videoUrl)
         let subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
         
         return factory(playerController: playerController, subtitlesExtractor: subtitlesExtractor)

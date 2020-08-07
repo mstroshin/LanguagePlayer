@@ -11,6 +11,7 @@ import AVKit
 import Combine
 
 class PlayerController {
+    let videoId: ID
     let timeInMillisecondsPublisher = PassthroughSubject<TimeInterval, Never>()
     var currentTimeInMilliseconds: TimeInterval {
         self.currentTimeInSeconds * 1000
@@ -25,7 +26,8 @@ class PlayerController {
     let avPlayer: AVPlayer
     private var timeObservation: Any?
     
-    init(url: URL) {
+    init(id: ID, url: URL) {
+        self.videoId = id
         self.avPlayer = AVPlayer(url: url)
     }
     

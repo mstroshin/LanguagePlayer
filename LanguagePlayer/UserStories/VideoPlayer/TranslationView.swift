@@ -9,10 +9,15 @@
 import Foundation
 import UIKit
 
+protocol TranslationViewDelegate: class {
+    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String)
+}
+
 class TranslationView: UIView {
     @IBOutlet var wordLabel: UILabel!
     @IBOutlet var translationLabel: UILabel!
     @IBOutlet var dictionaryButton: UIButton!
+    weak var delegate: TranslationViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +40,10 @@ class TranslationView: UIView {
     }
     
     @IBAction func didPressDictionaryButton(_ sender: UIButton) {
-        print("TranslationView")
+        guard let source = self.translationLabel.text, let target = self.translationLabel.text else {
+            return
+        }
+        
+        self.delegate?.translationView(self, addToDictionary: source, target: target)
     }
 }
