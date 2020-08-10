@@ -35,55 +35,116 @@ class API {
 
 var api = new API();
 
-function renderVideosTable() {
-    api.list(function (json) {
-        var tableBody = $("#tableBodyId")
-        tableBody.empty();
+$(document).ready(documentReady);
 
-        json.videos.forEach(video => {
-            tableBody.append($('<tr>')
-                .attr("id", "video-" + video.id)
-                .append($('<td>')
-                    .text(video.id))
-                .append($('<td>')
-                    .text(video.title))
-                .append($('<td>')
-                    .append($('<button>')
-                        .attr("type", "button")
-                        .attr("class", "btn btn-primary m-1 w-5")
-                        .attr("onclick", "removeVideo(" + video.id + ")")
-                        .append($("<i>")
-                            .attr("class", "fa fa-camera-retro fa-lg")))));
+function documentReady() {
+    configureDropzone();
+    configureProgressBar();
+}
+
+function configureProgressBar() {
+    const uploadForm = document.getElementById("uploadForm");
+
+    uploadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        console.log(uploadForm);
+
+        const progressBar = document.getElementById("progressBar");
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/upload");
+        xhr.upload.addEventListener("progress", (e) => {
+            console.log(e);
+            const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+            console.log(percent);
+
+            progressBar.style.width = percent.toFixed(0) + "%";
+            progressBar.textContent = percent.toFixed(0) + "%";
+        });
+        xhr.send(new FormData(uploadForm));
+    });
+}
+
+function configureDropzone() {
+    document.querySelectorAll(".drop-zone__input").forEach(inputElement => {
+        const dropZoneElement = inputElement.closest(".drop-zone");
+
+        dropZoneElement.addEventListener("click", e => {
+            inputElement.click();
+        });
+
+        dropZoneElement.addEventListener("change", e => {
+            if (inputElement.files.length) {
+                updateThumbnail(dropZoneElement, inputElement.files[0]);
+            }
+        });
+
+        dropZoneElement.addEventListener("dragover", e => {
+            e.preventDefault();
+            dropZoneElement.classList.add("drop-zone--over");
+        });
+
+        ["dragleave", "dragend"].forEach(type => {
+            dropZoneElement.addEventListener(type, e => {
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        dropZoneElement.addEventListener("drop", e => {
+            e.preventDefault();
+
+            if (e.dataTransfer.files.length) {
+                let file = e.dataTransfer.files[0];
+
+                if (isAllowFile(inputElement, file)) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, file);
+                } else {
+                    alert("File format must be " + inputElement.accept);
+                }
+                updateUploadButton();
+            }
+
+            dropZoneElement.classList.remove("drop-zone--over");
         });
     });
 }
 
-function removeVideo(id) {
-    api.remove(id, function () {
-        $("#video-" + id).remove();
-    });
+function isAllowFile(input, file) {
+    return file.name.includes(input.accept);
 }
 
-function onSubmitUpload() {
-    let uploadForm = $("#uploadForm")[0];
-    // let progressBar = $("#myBar");
-
-    var request = new XMLHttpRequest();
-    request.open('post', uploadForm.action, true);
-    request.upload.onprogress = function (e) {
-        console.log("progress " + e.loaded + "/" + e.total);
-
-        // let percent = Math.round(e.loaded / e.total * 100);
-        // progressBar.width(percent + '%').html(percent + '%');
-        // progressBar[0].style.width = percent + "%";
-    }
-    request.upload.onload = function (e) {
-        console.log("progress completed");
-
-        // progressBar.width(100 + '%').html(100 + '%');
-    }
-    request.setRequestHeader("Content-Type", "multipart/form-data");
-    request.send(new FormData(uploadForm));
+function updateUploadButton() {
+    const videoInput = document.getElementById("videoInput");
+    document.getElementById("uploadButton").disabled = videoInput.files[0] == null;
 }
 
-$(document).ready(renderVideosTable);
+function updateThumbnail(dropZoneElement, file) {
+    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+
+    let promt = dropZoneElement.querySelector(".drop-zone__prompt");
+    if (promt) {
+        promt.remove();
+    }
+
+    if (!thumbnailElement) {
+        thumbnailElement = document.createElement("div");
+        thumbnailElement.classList.add("drop-zone__thumb");
+        dropZoneElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name;
+
+    if (file.type.startsWith("video/")) {
+        // let blobURL = URL.createObjectURL(file);
+        // let video = document.createElement("video");
+        // video.src = blobURL;
+        // video.currentTime = 30;
+        // thumbnailElement.appendChild(video);
+        let movieIcon = document.createElement("i");
+        movieIcon.className = 'icon-camera-retro';
+        thumbnailElement.appendChild(movieIcon);
+    }
+}
+
+

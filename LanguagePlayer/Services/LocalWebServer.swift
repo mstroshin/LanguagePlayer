@@ -53,7 +53,7 @@ class LocalWebServer {
                 return .ok(.html("Your file has been uploaded !"))
             }
             
-            print("internalServerError")
+            print("internalServerError \(multiPartFormData)")
             return .internalServerError
         }
 

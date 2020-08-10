@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
+    <title>LanguagePlayer Video Uploader</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/index.css">
@@ -17,35 +17,29 @@
 </head>
 
 <body>
-    <div class=".container-sm">
-        <div class=".container-sm">
-            <form id="uploadForm" method="POST" action="/upload" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label class="btn btn-primary m-1 w-25">
-                        Video <input id="videoFileInput" type="file" name="video" accept="video/mp4" hidden>
-                    </label>
-                    <label class="btn btn-primary m-1 w-25">
-                        Source Subtitle <input id="subtitleFileInput" type="file" name="sourceSubtitle" accept=".srt"
-                            hidden>
-                    </label>
-                    <button class="btn btn-primary m-1 w-5" onclick="onSubmitUpload()">
-                        <i class="fa fa-camera-retro fa-lg"></i>
-                    </button>
-                </div>
-            </form>
+    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="drop-zone-container">
+            <div class="drop-zone">
+                <span class="drop-zone__prompt">Drop video (mp4) here or click to upload</span>
+                <input id="videoInput" type="file" class="drop-zone__input" name="video" accept=".mp4">
+            </div>
+            <div class="drop-zone">
+                <span class="drop-zone__prompt">Drop source subtitle (srt) here or click to upload</span>
+                <input id="sourceSubtitleInput" type="file" class="drop-zone__input" name="sourceSubtitle"
+                    accept=".srt">
+            </div>
         </div>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Video</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody id="tableBodyId">
-            </tbody>
-        </table>
+        <input id="uploadButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Upload" disabled>
+    </form>
+    <div class="progress">
+        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
     </div>
+    <!-- <div class="progress-bar" id="progressBar">
+        <div class="progress-bar-fill">
+            <span class="progress-bar-fill">0%</span>
+        </div>
+    </div> -->
 </body>
 
 </html>
