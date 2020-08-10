@@ -21,6 +21,7 @@
 		D2420ACF24DD45D6009C41F8 /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */; };
 		D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */; };
 		D2420AD324DD9AFF009C41F8 /* DictionaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */; };
+		D2420AD524DDD15C009C41F8 /* Middlewares.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2420AD424DDD15C009C41F8 /* Middlewares.swift */; };
 		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
 		D28749A524D6674900687095 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A424D6674900687095 /* AppState.swift */; };
@@ -76,6 +77,7 @@
 		D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
 		D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryViewState.swift; sourceTree = "<group>"; };
 		D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTableViewCell.swift; sourceTree = "<group>"; };
+		D2420AD424DDD15C009C41F8 /* Middlewares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Middlewares.swift; sourceTree = "<group>"; };
 		D287497F24D5A17000687095 /* VideosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewController.swift; sourceTree = "<group>"; };
 		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
 		D28749A424D6674900687095 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		D28749C124D6C66D00687095 /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
+				D2420AD424DDD15C009C41F8 /* Middlewares.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
+				D2420AD524DDD15C009C41F8 /* Middlewares.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2420AD324DD9AFF009C41F8 /* DictionaryTableViewCell.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,

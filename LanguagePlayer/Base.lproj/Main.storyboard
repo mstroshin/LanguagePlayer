@@ -84,10 +84,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DictionaryTableViewCell" id="a4x-Kl-C2J" customClass="DictionaryTableViewCell" customModule="LanguagePlayer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="1024" height="62"/>
+                                        <rect key="frame" x="0.0" y="28" width="1024" height="80.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a4x-Kl-C2J" id="XSb-WX-ztZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="62"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1024" height="80.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" text="Word" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZgO-as-Kq6">
@@ -100,19 +100,19 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="240" verticalHuggingPriority="251" text="Translation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4bc-eB-x99">
-                                                    <rect key="frame" x="8" y="33" width="940" height="21"/>
+                                                    <rect key="frame" x="8" y="33" width="940" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Btl-5r-NXL">
-                                                    <rect key="frame" x="956" y="0.0" width="60" height="62"/>
+                                                    <rect key="frame" x="956" y="0.0" width="60" height="44.5"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-TW-Sn2">
-                                                            <rect key="frame" x="8" y="9" width="44" height="44"/>
+                                                            <rect key="frame" x="8" y="0.0" width="44" height="44.5"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="44" id="XY1-O3-86A"/>
                                                                 <constraint firstAttribute="width" constant="44" id="bK8-9i-p0x"/>
+                                                                <constraint firstAttribute="height" constant="44" id="uOV-in-Y4o"/>
                                                             </constraints>
                                                             <state key="normal" image="play.fill" catalog="system"/>
                                                             <connections>
@@ -122,22 +122,34 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="rpQ-TW-Sn2" firstAttribute="centerY" secondItem="Btl-5r-NXL" secondAttribute="centerY" id="Vd5-7h-AkK"/>
+                                                        <constraint firstItem="rpQ-TW-Sn2" firstAttribute="top" secondItem="Btl-5r-NXL" secondAttribute="top" id="EUs-Kz-aX0"/>
                                                         <constraint firstAttribute="trailing" secondItem="rpQ-TW-Sn2" secondAttribute="trailing" constant="8" id="dX8-h1-TKB"/>
                                                         <constraint firstItem="rpQ-TW-Sn2" firstAttribute="leading" secondItem="Btl-5r-NXL" secondAttribute="leading" constant="8" id="geJ-c3-Dxo"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rpQ-TW-Sn2" secondAttribute="bottom" id="tOL-ny-dBp"/>
                                                     </constraints>
                                                 </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-XG-MNd">
+                                                    <rect key="frame" x="947" y="52.5" width="69" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="mrp-Dc-zuG"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="Btl-5r-NXL" secondAttribute="trailing" constant="8" id="CvI-0L-whk"/>
+                                                <constraint firstAttribute="bottom" secondItem="wm0-XG-MNd" secondAttribute="bottom" constant="7" id="KJv-0M-Zpb"/>
                                                 <constraint firstItem="4bc-eB-x99" firstAttribute="top" secondItem="ZgO-as-Kq6" secondAttribute="bottom" constant="4" id="L36-Se-e7A"/>
+                                                <constraint firstItem="wm0-XG-MNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XSb-WX-ztZ" secondAttribute="leading" id="PoA-jt-gAV"/>
                                                 <constraint firstItem="ZgO-as-Kq6" firstAttribute="leading" secondItem="XSb-WX-ztZ" secondAttribute="leading" constant="8" id="RH4-2h-YpN"/>
                                                 <constraint firstItem="ZgO-as-Kq6" firstAttribute="top" secondItem="XSb-WX-ztZ" secondAttribute="top" constant="8" id="UWn-tC-Sez"/>
                                                 <constraint firstItem="4bc-eB-x99" firstAttribute="leading" secondItem="XSb-WX-ztZ" secondAttribute="leading" constant="8" id="UZT-WC-70d"/>
                                                 <constraint firstItem="Btl-5r-NXL" firstAttribute="top" secondItem="XSb-WX-ztZ" secondAttribute="top" id="X4W-Mf-JMg"/>
-                                                <constraint firstAttribute="bottom" secondItem="Btl-5r-NXL" secondAttribute="bottom" id="XEo-FQ-YIE"/>
-                                                <constraint firstAttribute="bottom" secondItem="4bc-eB-x99" secondAttribute="bottom" constant="8" id="bg2-7L-vK0"/>
+                                                <constraint firstAttribute="trailing" secondItem="wm0-XG-MNd" secondAttribute="trailing" constant="8" id="iUs-db-H0L"/>
                                                 <constraint firstItem="Btl-5r-NXL" firstAttribute="leading" secondItem="4bc-eB-x99" secondAttribute="trailing" constant="8" id="mCV-Hl-bpG"/>
+                                                <constraint firstItem="wm0-XG-MNd" firstAttribute="top" secondItem="Btl-5r-NXL" secondAttribute="bottom" constant="8" id="nVb-mC-0t4"/>
                                                 <constraint firstItem="Btl-5r-NXL" firstAttribute="leading" secondItem="ZgO-as-Kq6" secondAttribute="trailing" constant="8" id="qpM-nR-n2D"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -145,6 +157,7 @@
                                             <outlet property="playButton" destination="rpQ-TW-Sn2" id="SEW-xh-sJH"/>
                                             <outlet property="sourceLabel" destination="ZgO-as-Kq6" id="xXc-Zc-zQ4"/>
                                             <outlet property="targetLabel" destination="4bc-eB-x99" id="Snh-z8-yPk"/>
+                                            <outlet property="videoTitleLabel" destination="wm0-XG-MNd" id="X7S-iz-sQg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

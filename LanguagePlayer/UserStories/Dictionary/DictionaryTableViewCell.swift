@@ -6,12 +6,14 @@ class DictionaryTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var sourceLabel: UILabel!
     @IBOutlet private weak var targetLabel: UILabel!
+    @IBOutlet private weak var videoTitleLabel: UILabel!
     @IBOutlet private weak var playButton: UIButton!
     
     
     func configure(with translation: TranslationViewState) {
         self.sourceLabel.text = translation.source
         self.targetLabel.text = translation.target
+        self.videoTitleLabel.text = translation.videoTitle
     }
     
     @IBAction func didPressPlayButton(_ sender: UIButton) {

@@ -80,6 +80,21 @@ extension VideosListViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil
+        ) { actions -> UIMenu? in
+            let remove = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, state: .off) { _ in
+                let video = self.videosList[indexPath.row]
+                store.dispatch(AppStateActions.RemoveVideo(id: video.id))
+            }
+            return UIMenu(title: "Выберите действие:", image: nil, identifier: nil, options: .destructive, children: [remove])
+        }
+        
+        return configuration
+    }
+    
 }
 
 extension VideosListViewController: StoreSubscriber {

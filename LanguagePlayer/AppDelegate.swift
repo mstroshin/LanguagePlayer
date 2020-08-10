@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let environment = AppEnvironment.bootstrap()
         store = environment.store
         
-        store.dispatch(AppStateActions.loadAppState)
+        store.dispatch(AppStateActions.LoadAppState())
         localWebServer.run()
         
         return true

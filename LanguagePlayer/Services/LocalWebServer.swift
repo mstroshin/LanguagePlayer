@@ -47,7 +47,7 @@ class LocalWebServer {
                     title: sourceSubtitlePart.fileName ?? "SourceSubtitle",
                     data: sourceSubtitleData as Data
                 )
-                let action = AppStateActions.save(video: videoFile, sourceSubtitle: sourceSubtitleFile)
+                let action = AppStateActions.SaveVideo(video: videoFile, sourceSubtitle: sourceSubtitleFile)
                 store.dispatch(action)
                 
                 return .ok(.html("Your file has been uploaded !"))

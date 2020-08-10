@@ -1,12 +1,12 @@
 import Foundation
 
 class UserDefaultsDataStore {
-    private static let appStateKey = "AppStateStoreKey"
+    private let appStateKey = "AppStateStoreKey"
     
-    static func loadAppState() -> AppState? {
+    func loadAppState() -> AppState? {
         let userDefaults = UserDefaults.standard
         
-        guard let data = userDefaults.data(forKey: UserDefaultsDataStore.appStateKey),
+        guard let data = userDefaults.data(forKey: self.appStateKey),
             let appState = try? JSONDecoder().decode(AppState.self, from: data) else {
                 return nil
         }
@@ -14,12 +14,12 @@ class UserDefaultsDataStore {
         return appState
     }
     
-    static func save(appState: AppState) {
+    func save(appState: AppState) {
         let userDefaults = UserDefaults.standard
         
         do {
             let data = try JSONEncoder().encode(appState)
-            userDefaults.set(data, forKey: UserDefaultsDataStore.appStateKey)
+            userDefaults.set(data, forKey: self.appStateKey)
             userDefaults.synchronize()
         } catch {
             print(error)

@@ -14,7 +14,7 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
             savedFileName: action.savedFileName
         )
         state.videos.append(video)
-    case let action as AppStateActions.SaveTranslation:
+    case let action as AppStateActions.SaveTranslationToDictionary:
         let translation = TranslationState(
             id: UUID().uuidString,
             videoId: action.videoID,
@@ -24,6 +24,18 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
             toMilliseconds: action.toMilliseconds
         )
         state.translations.append(translation)
+    case let action as AppStateActions.AddTranslationToHistory:
+        let translation = TranslationState(
+            id: UUID().uuidString,
+            videoId: action.videoID,
+            source: action.source,
+            target: action.target,
+            fromMilliseconds: action.fromMilliseconds,
+            toMilliseconds: action.toMilliseconds
+        )
+        state.translationsHistory.append(translation)
+    case let action as AppStateActions.RemoveVideo:
+        state.videos.removeAll(where: { $0.id == action.id })
     default:
         break
     }

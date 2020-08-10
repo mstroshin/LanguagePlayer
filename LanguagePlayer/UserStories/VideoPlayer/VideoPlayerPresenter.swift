@@ -60,25 +60,40 @@ class VideoPlayerPresenter {
         self.playerController.pause()
         self.view?.stopPlaying()
         
-//        let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
-//            .sink(receiveCompletion: { completion in
-//                switch completion {
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                case .finished:
-//                    print("finished")
-//                }
-//            }) { translatedText in
-//                self.view?.showTranslated(text: translatedText)
-//        }
-//        self.cancellables.append(cancellable)
-        self.view?.showTranslated(text: text)
+        if let history = store.state.translationsHistory.first(where: { $0.source == text }) {
+            self.view?.showTranslated(text: history.target)
+        } else {
+    //        let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
+    //            .sink(receiveCompletion: { completion in
+    //                switch completion {
+    //                case .failure(let error):
+    //                    print(error.localizedDescription)
+    //                case .finished:
+    //                    print("finished")
+    //                }
+    //            }) { translatedText in
+    //                self.view?.showTranslated(text: translatedText)
+    //        }
+    //        self.cancellables.append(cancellable)
+            self.view?.showTranslated(text: text)
+            
+            guard let subtitle = self.currentSubtitle else { return }
+            let action = AppStateActions.AddTranslationToHistory(
+                source: text,
+                target: text,
+                videoID: self.playerController.videoId,
+                fromMilliseconds: subtitle.fromTime,
+                toMilliseconds: subtitle.toTime
+            )
+            store.dispatch(action)
+            store.dispatch(AppStateActions.SaveAppState())
+        }
     }
     
     func addToDictionary(source: String, target: String) {
         guard let subtitle = self.currentSubtitle else { return }
         
-        let action = AppStateActions.SaveTranslation(
+        let action = AppStateActions.SaveTranslationToDictionary(
             source: source,
             target: target,
             videoID: self.playerController.videoId,
@@ -86,7 +101,7 @@ class VideoPlayerPresenter {
             toMilliseconds: subtitle.toTime
         )
         store.dispatch(action)
-        store.dispatch(AppStateActions.saveAppState)
+        store.dispatch(AppStateActions.SaveAppState())
     }
 }
 
