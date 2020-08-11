@@ -51,7 +51,13 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
                 fatalError("Doesn't parse subtitle file \(self.filePath)")
             }
             
-            let text = lines[2]
+            var text = ""
+            for i in 2 ..< lines.count {
+                text.append(lines[i])
+                text.append("\n")
+            }
+            //Remove last \n
+            text.removeLast(2)
             
             result.append(
                 SubtitlePart(number: number, fromTime: fromTime, toTime: toTime, text: text)

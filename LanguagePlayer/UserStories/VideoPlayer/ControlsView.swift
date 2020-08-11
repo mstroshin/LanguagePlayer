@@ -81,7 +81,7 @@ class ControlsView: UIView {
         let formattedString = formatter.string(from: timeInSeconds)!
         self.timeLabel.text = formattedString
         
-        print(formattedString)
+//        print(formattedString)
     }
     
 }
