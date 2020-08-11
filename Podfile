@@ -1,6 +1,9 @@
 platform :ios, '13.0'
 use_frameworks!
+inhibit_all_warnings!
 
 target 'LanguagePlayer' do
-  pod "GCDWebServer", "~> 3.0"
+  pod 'GCDWebServer', '~> 3.0'
+  pod 'ReSwift', '~> 5.0.0'
+  pod 'DifferenceKit', '~> 1.1.5'
 end

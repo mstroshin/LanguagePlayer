@@ -1,18 +1,31 @@
 PODS:
+  - DifferenceKit (1.1.5):
+    - DifferenceKit/Core (= 1.1.5)
+    - DifferenceKit/UIKitExtension (= 1.1.5)
+  - DifferenceKit/Core (1.1.5)
+  - DifferenceKit/UIKitExtension (1.1.5):
+    - DifferenceKit/Core
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
+  - ReSwift (5.0.0)
 
 DEPENDENCIES:
+  - DifferenceKit (~> 1.1.5)
   - GCDWebServer (~> 3.0)
+  - ReSwift (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
+    - DifferenceKit
     - GCDWebServer
+    - ReSwift
 
 SPEC CHECKSUMS:
+  DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
+  ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
 
-PODFILE CHECKSUM: 972faca538dfa8cdb771aa6d8e15f7e85eb12c76
+PODFILE CHECKSUM: 773a518081d7cc21e5dd813da777dbd7d4a30d9e
 
 COCOAPODS: 1.9.3
