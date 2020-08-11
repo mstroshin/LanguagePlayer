@@ -8,29 +8,45 @@ func filestoreMiddleware(filestore: LocalDiskStore) -> Middleware<AppState> {
                 switch action {
                 case let action as AppStateActions.RemoveVideo:
                     let video = getState()?.videos.first { $0.id == action.id }
-                    var successRemoved = false
-                    
-                    if let videoUrl = FileManager.default.url(for: video!.savedFileName + ".mp4") {
-                        successRemoved = filestore.removeData(from: videoUrl)
-                    }
-                    if let sourceSubtitleUrl = FileManager.default.url(for: video!.savedFileName + ".srt") {
-                        successRemoved = filestore.removeData(from: sourceSubtitleUrl)
-                    }
+                    let successRemoved = filestore.removeDirectory(video!.savedInDirectoryName)
+ 
                     print("Removed \(successRemoved)")
                     next(action)
                     
                 case let action as AppStateActions.SaveVideo:
-                    let fileName = UUID().uuidString
-                    if filestore.save(data: action.video.data, fileName: fileName + ".mp4") &&
-                        filestore.save(data: action.sourceSubtitle.data, fileName: fileName + ".srt") {
+                    let directoryName = UUID().uuidString
+                    
+                    let videoSaved = filestore.save(
+                        temporaryDataPath: action.video.temporaryDataPath,
+                        fileName: action.video.fileName,
+                        directoryName: directoryName
+                    )
+                    if let sourceSubtitle = action.sourceSubtitle {
+                        let sourceSubtitleSaved = filestore.save(
+                            temporaryDataPath: sourceSubtitle.temporaryDataPath,
+                            fileName: sourceSubtitle.fileName,
+                            directoryName: directoryName
+                        )
+                        print("sourceSubtitleSaved \(sourceSubtitleSaved)")
+                    }
+                    if let targetSubtitle = action.targetSubtitle {
+                        let targetSubtitleSaved = filestore.save(
+                            temporaryDataPath: targetSubtitle.temporaryDataPath,
+                            fileName: targetSubtitle.fileName,
+                            directoryName: directoryName
+                        )
+                        print("targetSubtitleSaved \(targetSubtitleSaved)")
+                    }
+                    
+                    if videoSaved {
                         let action = AppStateActions.AddedVideo(
-                            videoTitle: action.video.title,
-                            savedFileName: fileName
+                            videoFileName: action.video.fileName,
+                            sourceSubtitleFileName: action.sourceSubtitle?.fileName,
+                            targetSubtitleFileName: action.targetSubtitle?.fileName,
+                            savedInDirectoryName: directoryName
                         )
                         next(action)
                         next(AppStateActions.SaveAppState())
-                    } else {
-                        print("Video was not saved")
                     }
                 default:
                     next(action)

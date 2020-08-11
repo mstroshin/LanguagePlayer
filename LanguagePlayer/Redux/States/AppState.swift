@@ -15,8 +15,10 @@ struct AppState: StateType, Codable {
 
 struct VideoState: Codable {
     let id: ID
-    let title: String
-    let savedFileName: String
+    let savedInDirectoryName: String
+    let fileName: String
+    let sourceSubtitleFileName: String?
+    let targetSubtitleFileName: String?
 }
 
 struct TranslationState: Codable {

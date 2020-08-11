@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
 		D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */; };
 		D204D7AF24DB29CC002AAD60 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D204D7AE24DB29CC002AAD60 /* ReSwift */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
@@ -43,6 +44,7 @@
 		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
 		D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F124C78E10004660EE /* YandexTranslationService.swift */; };
 		D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F524C78EEF004660EE /* PropertyWrappers.swift */; };
+		D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */; };
 		D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */; };
 		D2E616C224D7F45B00D80F26 /* fontawesome-webfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B124D7F45B00D80F26 /* fontawesome-webfont.woff2 */; };
 		D2E616C324D7F45B00D80F26 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B224D7F45B00D80F26 /* fontawesome-webfont.ttf */; };
@@ -62,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewState.swift; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 		D2D292EF24C78BB8004660EE /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		D2D292F124C78E10004660EE /* YandexTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexTranslationService.swift; sourceTree = "<group>"; };
 		D2D292F524C78EEF004660EE /* PropertyWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyWrappers.swift; sourceTree = "<group>"; };
+		D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportedFormatsEnums.swift; sourceTree = "<group>"; };
 		D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fontawesome-webfont.svg"; sourceTree = "<group>"; };
 		D2E616B124D7F45B00D80F26 /* fontawesome-webfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff2"; sourceTree = "<group>"; };
 		D2E616B224D7F45B00D80F26 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -122,18 +127,29 @@
 				D204D7AF24DB29CC002AAD60 /* ReSwift in Frameworks */,
 				D28749BB24D6C4E600687095 /* DifferenceKit in Frameworks */,
 				D28749BE24D6C54200687095 /* Swifter in Frameworks */,
+				868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		02533983845FAE99AE2CBBDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */,
+				66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		D2154E8924C0803C00F52815 = {
 			isa = PBXGroup;
 			children = (
 				D2154E9424C0803C00F52815 /* LanguagePlayer */,
 				D2154E9324C0803C00F52815 /* Products */,
 				DC1CC6C3956E32531DBC2003 /* Frameworks */,
+				02533983845FAE99AE2CBBDC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -303,6 +319,7 @@
 				D2D292F524C78EEF004660EE /* PropertyWrappers.swift */,
 				D2C0568324C7A62100810915 /* Extensions.swift */,
 				D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */,
+				D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -368,9 +385,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D2154EA624C0803E00F52815 /* Build configuration list for PBXNativeTarget "LanguagePlayer" */;
 			buildPhases = (
+				9A49504E88F75AA454804EC8 /* [CP] Check Pods Manifest.lock */,
 				D2154E8E24C0803C00F52815 /* Sources */,
 				D2154E8F24C0803C00F52815 /* Frameworks */,
 				D2154E9024C0803C00F52815 /* Resources */,
+				91767526DD2BFE473125FC37 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -453,11 +472,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		91767526DD2BFE473125FC37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A49504E88F75AA454804EC8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LanguagePlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D2154E8E24C0803C00F52815 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
 				D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */,
@@ -628,6 +690,7 @@
 		};
 		D2154EA724C0803E00F52815 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -648,6 +711,7 @@
 		};
 		D2154EA824C0803E00F52815 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

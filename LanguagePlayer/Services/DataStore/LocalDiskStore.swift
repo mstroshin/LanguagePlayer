@@ -1,31 +1,56 @@
 import Foundation
 
 class LocalDiskStore {
-    
-    func save(data: Data, fileName: String) -> Bool {
-        guard let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+    let fileManager = FileManager.default
+        
+    func save(temporaryDataPath path: String, fileName: String, directoryName: String) -> Bool {
+        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return false
         }
-        guard let fileSaveUrl = URL(string: fileName, relativeTo: documentsUrl) else {
+        do {
+            let directoryPathUrl = documentsUrl.appendingPathComponent(directoryName)
+            if !self.fileManager.fileExists(atPath: directoryPathUrl.path) {
+                try self.fileManager.createDirectory(at: directoryPathUrl, withIntermediateDirectories: false, attributes: nil)
+            }
+            
+            let temporaryDataUrl = URL(fileURLWithPath: path)
+            let urlToMove = directoryPathUrl.appendingPathComponent(fileName)
+        
+            try fileManager.moveItem(at: temporaryDataUrl, to: urlToMove)
+        } catch {
+            print(error)
             return false
-        }
-        let success = NSData(data: data).write(to: fileSaveUrl, atomically: true)
-        if success {
-            print("Saved file: \(fileSaveUrl.absoluteString)")
-        } else {
-            print("Did not save file: \(fileSaveUrl.absoluteString)")
         }
         
-        return success
+        return true
     }
     
-    func removeData(from url: URL) -> Bool {
+    func removeDirectory(_ name: String) -> Bool {
+        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            return false
+        }
+        let directoryPathUrl = documentsUrl.appendingPathComponent(name)
+        
         do {
-            try FileManager.default.removeItem(at: url)
+            try self.fileManager.removeItem(at: directoryPathUrl)
             return true
         } catch {
             print(error)
             return false
+        }
+    }
+    
+    func url(for directoryName: String, fileName: String?) -> URL? {
+        guard let fileName = fileName else { return nil }
+        
+        let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directoryPathUrl = documentsUrl.appendingPathComponent(directoryName)
+        let videoUrl = directoryPathUrl.appendingPathComponent(fileName)
+        
+        if self.fileManager.fileExists(atPath: videoUrl.path) {
+            return videoUrl
+        } else {
+            return nil
         }
     }
     

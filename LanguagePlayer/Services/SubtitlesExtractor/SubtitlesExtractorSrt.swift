@@ -32,6 +32,7 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
     
     private func parse(_ subtitles: String) -> [SubtitlePart] {
         var result = [SubtitlePart]()
+        let subtitles = subtitles.replacingOccurrences(of: "\r", with: "")
         
         let parts = subtitles.components(separatedBy: "\n\n")
         for part in parts {

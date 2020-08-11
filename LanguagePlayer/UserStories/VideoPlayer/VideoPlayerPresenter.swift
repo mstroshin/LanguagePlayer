@@ -13,7 +13,7 @@ class VideoPlayerPresenter {
     private weak var view: VideoPlayerViewController?
     private let translationService: TranslationService
     private let playerController: PlayerController
-    private let subtitlesExtractor: SubtitlesExtractor
+    private let subtitlesExtractor: SubtitlesExtractor?
     
     private var currentSubtitle: SubtitlePart?
     private var cancellables = [AnyCancellable]()
@@ -22,7 +22,7 @@ class VideoPlayerPresenter {
         view: VideoPlayerViewController,
         translationService: TranslationService,
         playerController: PlayerController,
-        subtitlesExtractor: SubtitlesExtractor
+        subtitlesExtractor: SubtitlesExtractor?
     ) {
         self.view = view
         self.translationService = translationService
@@ -36,7 +36,7 @@ class VideoPlayerPresenter {
         let cancellable = self.playerController.setupTimePublisher().sink { timeInMilliseconds in
             self.view?.updateTime(timeInMilliseconds)
             
-            if let subtitle = self.subtitlesExtractor.getSubtitle(for: timeInMilliseconds) {
+            if let subtitle = self.subtitlesExtractor?.getSubtitle(for: timeInMilliseconds) {
                 self.currentSubtitle = subtitle
                 self.view?.show(subtitles: subtitle.text)
             } else {

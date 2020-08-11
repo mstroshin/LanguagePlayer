@@ -12,13 +12,16 @@ struct AppStateActions {
     struct SaveAppState: Action {}
     
     struct AddedVideo: Action {
-        let videoTitle: String
-        let savedFileName: String
+        let videoFileName: String
+        let sourceSubtitleFileName: String?
+        let targetSubtitleFileName: String?
+        let savedInDirectoryName: String
     }
     
     struct SaveVideo: Action {
         let video: UploadedFile
-        let sourceSubtitle: UploadedFile
+        let sourceSubtitle: UploadedFile?
+        let targetSubtitle: UploadedFile?
     }
         
     struct SaveTranslationToDictionary: Action {
@@ -44,6 +47,6 @@ struct AppStateActions {
 }
 
 struct UploadedFile {
-    let title: String
-    let data: Data
+    let fileName: String
+    let temporaryDataPath: String
 }

@@ -10,8 +10,10 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
     case let action as AppStateActions.AddedVideo:
         let video = VideoState(
             id: UUID().uuidString,
-            title: action.videoTitle,
-            savedFileName: action.savedFileName
+            savedInDirectoryName: action.savedInDirectoryName,
+            fileName: action.videoFileName,
+            sourceSubtitleFileName: action.sourceSubtitleFileName,
+            targetSubtitleFileName: action.targetSubtitleFileName
         )
         state.videos.append(video)
     case let action as AppStateActions.SaveTranslationToDictionary:

@@ -15,14 +15,18 @@ struct VideoViewState {
     let id: ID
     let videoTitle: String
     let videoUrl: URL
-    let sourceSubtitleUrl: URL
+    let sourceSubtitleUrl: URL?
+    let targetSubtitleUrl: URL?
     let videoPreviewImage: UIImage?
     
     init(video: VideoState) {
+        let localStore = LocalDiskStore()
+        
         self.id = video.id
-        self.videoTitle = video.title
-        self.videoUrl = FileManager.default.url(for: video.savedFileName + ".mp4")!
-        self.sourceSubtitleUrl = FileManager.default.url(for: video.savedFileName + ".srt")!
+        self.videoTitle = video.fileName.components(separatedBy: ".").first!
+        self.videoUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.fileName)!
+        self.sourceSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.sourceSubtitleFileName)
+        self.targetSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.targetSubtitleFileName)
         self.videoPreviewImage = createThumbnailOfVideo(from: self.videoUrl)
     }
 }

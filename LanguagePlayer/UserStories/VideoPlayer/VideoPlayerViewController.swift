@@ -119,7 +119,7 @@ extension VideoPlayerViewController {
     static func factory(
         translationService: TranslationService = YandexTranslationService(),
         playerController: PlayerController,
-        subtitlesExtractor: SubtitlesExtractor
+        subtitlesExtractor: SubtitlesExtractor?
     ) -> VideoPlayerViewController {
         let view: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         
@@ -137,10 +137,15 @@ extension VideoPlayerViewController {
     static func factory(
         videoId: ID,
         videoUrl: URL,
-        sourceSubtitleUrl: URL
+        sourceSubtitleUrl: URL? = nil,
+        targetSubtitleUrl: URL? = nil
     ) -> VideoPlayerViewController {
         let playerController = PlayerController(id: videoId, url: videoUrl)
-        let subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
+        
+        var subtitlesExtractor: SubtitlesExtractorSrt? = nil
+        if let sourceSubtitleUrl = sourceSubtitleUrl {
+            subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
+        }
         
         return factory(playerController: playerController, subtitlesExtractor: subtitlesExtractor)
     }
