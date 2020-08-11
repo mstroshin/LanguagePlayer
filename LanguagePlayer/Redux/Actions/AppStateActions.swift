@@ -1,6 +1,5 @@
 import Foundation
 import ReSwift
-import ReSwift_Thunk
 
 struct AppStateActions {
     

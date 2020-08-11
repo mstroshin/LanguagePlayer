@@ -52,15 +52,35 @@ function configureProgressBar() {
         const progressBar = document.getElementById("progressBar");
 
         const xhr = new XMLHttpRequest();
-        xhr.open("POST", "/upload");
-        xhr.upload.addEventListener("progress", (e) => {
-            console.log(e);
+        xhr.upload.onprogress = function (e) {
+            // console.log(e);
             const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+            console.clear();
             console.log(percent);
 
             progressBar.style.width = percent.toFixed(0) + "%";
             progressBar.textContent = percent.toFixed(0) + "%";
-        });
+        }
+        xhr.upload.onload = function () {
+            // Request finished. Do processing here.
+            console.log("Finished!");
+        };
+
+        xhr.upload.ontimeout = function (e) {
+            // XMLHttpRequest timed out. Do something here.
+            console.log("XMLHttpRequest timed out!");
+        };
+
+        xhr.open("POST", "/upload");
+        // xhr.upload.addEventListener("progress", (e) => {
+        //     console.log(e);
+        //     const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
+        //     console.log(percent);
+
+        //     progressBar.style.width = percent.toFixed(0) + "%";
+        //     progressBar.textContent = percent.toFixed(0) + "%";
+        // });
+
         xhr.send(new FormData(uploadForm));
     });
 }
@@ -76,6 +96,7 @@ function configureDropzone() {
         dropZoneElement.addEventListener("change", e => {
             if (inputElement.files.length) {
                 updateThumbnail(dropZoneElement, inputElement.files[0]);
+                updateUploadButton();
             }
         });
 
@@ -111,7 +132,10 @@ function configureDropzone() {
 }
 
 function isAllowFile(input, file) {
-    return file.name.includes(input.accept);
+    const splits = file.name.split(".");
+    const format = splits[splits.length - 1];
+
+    return input.accept.includes(format);
 }
 
 function updateUploadButton() {

@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "ReSwift-Thunk",
-        "repositoryURL": "https://github.com/ReSwift/ReSwift-Thunk.git",
-        "state": {
-          "branch": null,
-          "revision": "52152497d43270f3914edfde59e9f43c8c996f6b",
-          "version": "1.2.0"
-        }
-      },
-      {
         "package": "Swifter",
         "repositoryURL": "https://github.com/httpswift/swifter.git",
         "state": {
