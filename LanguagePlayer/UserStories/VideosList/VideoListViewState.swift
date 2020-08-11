@@ -24,7 +24,7 @@ struct VideoViewState {
         
         self.id = video.id
         self.videoTitle = video.fileName.components(separatedBy: ".").first!
-        self.videoUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.fileName)!
+        self.videoUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.fileName) ?? URL(string: "http://google.com")!
         self.sourceSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.sourceSubtitleFileName)
         self.targetSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.targetSubtitleFileName)
         self.videoPreviewImage = createThumbnailOfVideo(from: self.videoUrl)

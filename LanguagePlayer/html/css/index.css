@@ -53,5 +53,11 @@
   background: rgba(0, 0, 0, 0.75);
   font-size: 14px;
   text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
 }
 

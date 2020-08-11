@@ -34,54 +34,64 @@ class API {
 }
 
 var api = new API();
+var isUploading = false;
 
 $(document).ready(documentReady);
 
 function documentReady() {
     configureDropzone();
-    configureProgressBar();
+    configureUploadForm();
 }
 
-function configureProgressBar() {
+function configureUploadForm() {
     const uploadForm = document.getElementById("uploadForm");
+    const progressBarContainer = document.getElementById("progressBarContainer");
+    const progressBar = document.getElementById("progressBar");
+    const uploadButton = document.getElementById("uploadButton");
+    const cancelButton = document.getElementById("cancelButton");
+
+    const xhr = new XMLHttpRequest();
+
+    function startedUploading() {
+        isUploading = true;
+        uploadButton.hidden = true;
+        cancelButton.hidden = false;
+        progressBarContainer.hidden = false;
+    }
+
+    function stopedUploading() {
+        isUploading = false;
+        uploadButton.hidden = false;
+        cancelButton.hidden = true;
+        progressBarContainer.hidden = true;
+        progressBar.style.width = "0%";
+    }
 
     uploadForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        console.log(uploadForm);
 
-        const progressBar = document.getElementById("progressBar");
+        xhr.upload.onloadstart = startedUploading;
+        xhr.upload.onabort = stopedUploading;
+        xhr.upload.onerror = stopedUploading;
 
-        const xhr = new XMLHttpRequest();
         xhr.upload.onprogress = function (e) {
-            // console.log(e);
             const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-            console.clear();
-            console.log(percent);
-
             progressBar.style.width = percent.toFixed(0) + "%";
             progressBar.textContent = percent.toFixed(0) + "%";
         }
         xhr.upload.onload = function () {
-            // Request finished. Do processing here.
             console.log("Finished!");
-        };
-
-        xhr.upload.ontimeout = function (e) {
-            // XMLHttpRequest timed out. Do something here.
-            console.log("XMLHttpRequest timed out!");
+            stopedUploading();
+            alert("Uploading is done!");
         };
 
         xhr.open("POST", "/upload");
-        // xhr.upload.addEventListener("progress", (e) => {
-        //     console.log(e);
-        //     const percent = e.lengthComputable ? (e.loaded / e.total) * 100 : 0;
-        //     console.log(percent);
-
-        //     progressBar.style.width = percent.toFixed(0) + "%";
-        //     progressBar.textContent = percent.toFixed(0) + "%";
-        // });
-
         xhr.send(new FormData(uploadForm));
+    });
+
+    cancelButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        xhr.abort();
     });
 }
 
@@ -90,7 +100,9 @@ function configureDropzone() {
         const dropZoneElement = inputElement.closest(".drop-zone");
 
         dropZoneElement.addEventListener("click", e => {
-            inputElement.click();
+            if (isUploading == false) {
+                inputElement.click();
+            }
         });
 
         dropZoneElement.addEventListener("change", e => {
@@ -102,31 +114,36 @@ function configureDropzone() {
 
         dropZoneElement.addEventListener("dragover", e => {
             e.preventDefault();
-            dropZoneElement.classList.add("drop-zone--over");
+            if (isUploading == false) {
+                dropZoneElement.classList.add("drop-zone--over");
+            }
         });
 
         ["dragleave", "dragend"].forEach(type => {
             dropZoneElement.addEventListener(type, e => {
-                dropZoneElement.classList.remove("drop-zone--over");
+                if (isUploading == false) {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                }
             });
         });
 
         dropZoneElement.addEventListener("drop", e => {
             e.preventDefault();
+            if (isUploading == false) {
+                if (e.dataTransfer.files.length) {
+                    let file = e.dataTransfer.files[0];
 
-            if (e.dataTransfer.files.length) {
-                let file = e.dataTransfer.files[0];
-
-                if (isAllowFile(inputElement, file)) {
-                    inputElement.files = e.dataTransfer.files;
-                    updateThumbnail(dropZoneElement, file);
-                } else {
-                    alert("File format must be " + inputElement.accept);
+                    if (isAllowFile(inputElement, file)) {
+                        inputElement.files = e.dataTransfer.files;
+                        updateThumbnail(dropZoneElement, file);
+                    } else {
+                        alert("File format must be " + inputElement.accept);
+                    }
+                    updateUploadButton();
                 }
-                updateUploadButton();
-            }
 
-            dropZoneElement.classList.remove("drop-zone--over");
+                dropZoneElement.classList.remove("drop-zone--over");
+            }
         });
     });
 }
@@ -160,11 +177,6 @@ function updateThumbnail(dropZoneElement, file) {
     thumbnailElement.dataset.label = file.name;
 
     if (file.type.startsWith("video/")) {
-        // let blobURL = URL.createObjectURL(file);
-        // let video = document.createElement("video");
-        // video.src = blobURL;
-        // video.currentTime = 30;
-        // thumbnailElement.appendChild(video);
         let movieIcon = document.createElement("i");
         movieIcon.className = 'icon-camera-retro';
         thumbnailElement.appendChild(movieIcon);

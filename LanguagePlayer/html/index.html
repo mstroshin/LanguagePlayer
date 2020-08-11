@@ -30,16 +30,12 @@
             </div>
         </div>
         <input id="uploadButton" class="btn btn-primary btn-lg btn-block" type="submit" value="Upload" disabled>
+        <input id="cancelButton" class="btn btn-danger btn-lg btn-block" type="button" value="Cancel" hidden>
     </form>
-    <div class="progress">
+    <div id="progressBarContainer" class="progress" hidden>
         <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
+            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
     </div>
-    <!-- <div class="progress-bar" id="progressBar">
-        <div class="progress-bar-fill">
-            <span class="progress-bar-fill">0%</span>
-        </div>
-    </div> -->
 </body>
 
 </html>
