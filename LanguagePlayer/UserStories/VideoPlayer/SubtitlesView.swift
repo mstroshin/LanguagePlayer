@@ -10,11 +10,20 @@ import Foundation
 import UIKit
 
 protocol SubtitlesViewDelegate: class {
-    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String, in rect: CGRect, in range: NSRange)
+    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String)
+    func subtitleView(_ subtitleView: SubtitlesView, addToDictionary source: String, target: String)
     func startedSelectingText(in subtitlesView: SubtitlesView)
 }
 
 class SubtitlesView: UIView {
+    @IBOutlet private weak var translationView: TranslationView! {
+        didSet {
+            self.translationView.delegate = self
+        }
+    }
+    @IBOutlet private weak var topTranslationViewConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var leadingTranslationViewConstraint: NSLayoutConstraint!
+    
     weak var delegate: SubtitlesViewDelegate?
     var textColor = UIColor.white
     
@@ -48,6 +57,7 @@ class SubtitlesView: UIView {
     
     private func setupConstraintsIfNeeded() {
         if self.didSetupConstraints { return }
+        self.textView.translatesAutoresizingMaskIntoConstraints = false
         
         self.addConstraints([
             self.textView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
@@ -72,7 +82,6 @@ class SubtitlesView: UIView {
         self.textView.textColor = self.textColor
         self.textView.textAlignment = .center
         self.textView.font = .systemFont(ofSize: 32, weight: .bold)
-        self.textView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.textView)
                 
         let tapGesture = SelectionGestureRecognizer(target: self, action: #selector(textTapped))
@@ -126,13 +135,19 @@ class SubtitlesView: UIView {
             let text = textView.text(in: textRange),
             recognizer.state == .ended
         {
-            let wordRect = textView.firstRect(for: textRange)
-            let range = self.toRange(textRange: textRange, for: textView)
-            self.delegate?.subtitleView(self, didSelect: text, in: wordRect, in: range)
+            self.delegate?.subtitleView(self, didSelect: text)
+            self.translationView.set(source: text)
+            self.updateTranslationViewPosition(with: textRange, in: textView)
             
             self.previousTextPosition = nil
-            self.selectedTextRange = nil
+//            self.selectedTextRange = nil
         }
+    }
+    
+    private func updateTranslationViewPosition(with selectedTextRange: UITextRange, in textView: UITextView) {
+        let wordRect = textView.firstRect(for: selectedTextRange)
+        self.topTranslationViewConstraint.constant = wordRect.origin.y - self.translationView.bounds.height
+        self.leadingTranslationViewConstraint.constant = wordRect.origin.x + wordRect.size.width / 2 - self.translationView.bounds.width / 2
     }
     
     private func select(text: String) {
@@ -142,6 +157,12 @@ class SubtitlesView: UIView {
         let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
         mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: nsRange)
         self.textView.attributedText = mutableText
+    }
+}
+
+extension SubtitlesView: TranslationViewDelegate {
+    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String) {
+        self.delegate?.subtitleView(self, addToDictionary: source, target: target)
     }
 }
 
@@ -162,6 +183,21 @@ extension SubtitlesView {
         self.textView.attributedText = mutableText
     }
     
+    func showTranslated(text: String) {
+        self.translationView.set(translation: text)
+        self.translationView.isHidden = false
+    }
+    
+    func hideTranslationView() {
+        self.translationView.isHidden = true
+    }
+    
+    func updatePositions() {
+        if let selectedTextRange = self.selectedTextRange {
+            self.updateTranslationViewPosition(with: selectedTextRange, in: self.textView)
+        }
+    }
+    
 }
 
 //Support methods
@@ -175,6 +211,18 @@ extension SubtitlesView {
         let length = textView.offset(from: start, to: end)
         
         return NSRange(location: location, length: length)
+    }
+    
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.clipsToBounds || self.isHidden || self.alpha == 0 {
+            return nil
+        }
+        
+        if !self.bounds.contains(point) {
+            return self.translationView.hitTest(self.convert(point, to: self.translationView), with: event)
+        }
+        
+        return super.hitTest(point, with: event)
     }
     
 }

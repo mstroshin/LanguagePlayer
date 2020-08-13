@@ -14,29 +14,17 @@ protocol TranslationViewDelegate: class {
 }
 
 class TranslationView: UIView {
-    @IBOutlet var wordLabel: UILabel!
-    @IBOutlet var translationLabel: UILabel!
-    @IBOutlet var dictionaryButton: UIButton!
+    @IBOutlet private var wordLabel: UILabel!
+    @IBOutlet private var translationLabel: UILabel!
+    @IBOutlet private var dictionaryButton: UIButton!
     weak var delegate: TranslationViewDelegate?
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    func set(source: String) {
+        self.wordLabel.text = source
     }
     
-    init() {
-        super.init(frame: .zero)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    static func createFromXib() -> TranslationView {
-        Bundle.main.loadNibNamed(
-            String(describing: TranslationView.self),
-            owner: nil,
-            options: nil
-        )?.first as! TranslationView
+    func set(translation: String) {
+        self.translationLabel.text = translation
     }
     
     @IBAction func didPressDictionaryButton(_ sender: UIButton) {

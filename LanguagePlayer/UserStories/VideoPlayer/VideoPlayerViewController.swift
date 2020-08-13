@@ -13,8 +13,8 @@ import UIKit
 class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
     @IBOutlet private var controlsView: ControlsView!
-    private let translationView = TranslationView.createFromXib()
     private var presenter: VideoPlayerPresenter!
+    private weak var playerLayer: AVPlayerLayer?
     
     override func viewDidLoad() {
         self.setupViews()        
@@ -23,14 +23,21 @@ class VideoPlayerViewController: UIViewController {
         self.presenter.viewDidLoad()
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { context in
+            self.playerLayer?.frame = CGRect(origin: .zero, size: size)
+            self.view.bringSubviewToFront(self.subtitlesView)
+        }) { context in
+            self.subtitlesView.updatePositions()
+        }
+    }
+    
     private func setupViews() {
         self.subtitlesView.isHidden = true
         self.subtitlesView.delegate = self
-        
-        self.translationView.isHidden = true
-        self.translationView.delegate = self
-        self.view.addSubview(self.translationView)
-        
+                
         self.controlsView.delegate = self.presenter
     }
     
@@ -39,6 +46,9 @@ class VideoPlayerViewController: UIViewController {
         let playerLayer = AVPlayerLayer(player: player)
         playerLayer.frame = self.view.bounds
         self.view.layer.addSublayer(playerLayer)
+        self.view.bringSubviewToFront(self.subtitlesView)
+        
+        self.playerLayer = playerLayer
     }
     
     func set(durationInSeconds: TimeInterval) {
@@ -50,8 +60,7 @@ class VideoPlayerViewController: UIViewController {
     }
     
     func showTranslated(text: String) {
-        self.translationView.translationLabel.text = text
-        self.translationView.isHidden = false
+        self.subtitlesView.showTranslated(text: text)
     }
     
     func startPlaying() {
@@ -75,15 +84,9 @@ class VideoPlayerViewController: UIViewController {
     }
     
     func hideTranslation() {
-        self.translationView.isHidden = true
+        self.subtitlesView.hideTranslationView()
     }
     
-}
-
-extension VideoPlayerViewController: TranslationViewDelegate {
-    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String) {
-        self.presenter.addToDictionary(source: source, target: target)
-    }
 }
 
 extension VideoPlayerViewController: SubtitlesViewDelegate {
@@ -92,23 +95,12 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
         self.presenter.startedSelectingText()
     }
     
-    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String, in rect: CGRect, in range: NSRange) {
-        print("Text: \(text), rect: \(rect), range: \(range)")
-                
-        let rectInRootView = subtitlesView.convert(rect, to: self.view)
-        let yOffset: CGFloat = 40
-        let center = CGPoint(
-            x: rectInRootView.origin.x + rectInRootView.width / 2,
-            y: rectInRootView.origin.y - yOffset
-        )
-        self.showTranslationView(with: text, center: center)
+    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String) {
+        self.presenter.translate(text: text)
     }
     
-    private func showTranslationView(with text: String, center: CGPoint) {
-         self.translationView.wordLabel.text = text
-        self.translationView.center = center
-        self.view.bringSubviewToFront(self.translationView)
-        self.presenter.translate(text: text)
+    func subtitleView(_ subtitleView: SubtitlesView, addToDictionary source: String, target: String) {
+        self.presenter.addToDictionary(source: source, target: target)
     }
     
 }

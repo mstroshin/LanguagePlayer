@@ -36,7 +36,6 @@
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
 		D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435224C614DE00133EBD /* SubtitlesView.swift */; };
 		D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435424C625FE00133EBD /* TranslationView.swift */; };
-		D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2C3435624C6267B00133EBD /* TranslationView.xib */; };
 		D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */; };
 		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
 		D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F124C78E10004660EE /* YandexTranslationService.swift */; };
@@ -93,7 +92,6 @@
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		D2C3435224C614DE00133EBD /* SubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesView.swift; sourceTree = "<group>"; };
 		D2C3435424C625FE00133EBD /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
-		D2C3435624C6267B00133EBD /* TranslationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TranslationView.xib; sourceTree = "<group>"; };
 		D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewController.swift; sourceTree = "<group>"; };
 		D2D292EF24C78BB8004660EE /* TranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationService.swift; sourceTree = "<group>"; };
 		D2D292F124C78E10004660EE /* YandexTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YandexTranslationService.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 				D2C0568724C7E28000810915 /* ControlsView.swift */,
 				D2C3435224C614DE00133EBD /* SubtitlesView.swift */,
 				D2C3435424C625FE00133EBD /* TranslationView.swift */,
-				D2C3435624C6267B00133EBD /* TranslationView.xib */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -448,7 +445,6 @@
 				D2E616CA24D7F45B00D80F26 /* index.html in Resources */,
 				D2E616CC24D7F45B00D80F26 /* index.css in Resources */,
 				D2E616C724D7F45B00D80F26 /* index.js in Resources */,
-				D2C3435724C6267B00133EBD /* TranslationView.xib in Resources */,
 				D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */,
 				D2154E9F24C0803E00F52815 /* Assets.xcassets in Resources */,
 				D2E616C624D7F45B00D80F26 /* jquery.fileupload.js in Resources */,
