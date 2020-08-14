@@ -1,39 +1,5 @@
-class API {
-    constructor() {
-        this.json = {};
-        this.json.videos = [{ id: 0, title: "Video0" }, { id: 1, title: "Video1" }];
-    }
-
-    list(callback, error) {
-        // this._request("GET", "/list", null, callback, error);
-        callback(this.json);
-    }
-
-    remove(id, callback, error) {
-        // this._request("DELETE", "/video/" + id, null, callback, error);
-
-        this.json.videos = this.json.videos.filter(video => video.id != id);
-        callback();
-    }
-
-    _request(method, url, data, callback, error) {
-        $.ajax({
-            method: method,
-            url: url,
-            data: data
-        })
-            .done(function (json) {
-                callback(json);
-            })
-            .fail(function (json) {
-                if (error) {
-                    error(json);
-                }
-            });
-    }
-}
-
-var api = new API();
+const supportedVideoFormats = ".mp4";
+const supportedSubtitlesFormats = ".srt";
 var isUploading = false;
 
 $(document).ready(documentReady);
@@ -96,6 +62,9 @@ function configureUploadForm() {
 }
 
 function configureDropzone() {
+    document.getElementById("videoInput").setAttribute("accept", supportedVideoFormats);
+    document.getElementById("sourceSubtitleInput").setAttribute("accept", supportedSubtitlesFormats);
+
     document.querySelectorAll(".drop-zone__input").forEach(inputElement => {
         const dropZoneElement = inputElement.closest(".drop-zone");
 
