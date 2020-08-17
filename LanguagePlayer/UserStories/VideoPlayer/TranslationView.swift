@@ -14,15 +14,15 @@ protocol TranslationViewDelegate: class {
 }
 
 class TranslationView: UIView {
-    @IBOutlet private var wordLabel: UILabel!
+    @IBOutlet private var backgroundView: UIView! {
+        didSet {
+            self.backgroundView.layer.cornerRadius = 8
+        }
+    }
     @IBOutlet private var translationLabel: UILabel!
     @IBOutlet private var dictionaryButton: UIButton!
     weak var delegate: TranslationViewDelegate?
-    
-    func set(source: String) {
-        self.wordLabel.text = source
-    }
-    
+        
     func set(translation: String) {
         self.translationLabel.text = translation
     }

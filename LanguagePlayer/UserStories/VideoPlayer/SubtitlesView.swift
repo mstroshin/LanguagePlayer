@@ -21,7 +21,7 @@ class SubtitlesView: UIView {
             self.translationView.delegate = self
         }
     }
-    @IBOutlet private weak var topTranslationViewConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var bottomTranslationViewConstraint: NSLayoutConstraint!
     @IBOutlet private weak var leadingTranslationViewConstraint: NSLayoutConstraint!
     
     weak var delegate: SubtitlesViewDelegate?
@@ -97,11 +97,10 @@ class SubtitlesView: UIView {
         {
             self.deselectAll()
             
-            if let textRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.forward)),
-                let text = textView.text(in: textRange)
+            if let textRange = textView.tokenizer.rangeEnclosingPosition(textPosition, with: .word, inDirection: .storage(.forward))
             {
                 self.selectedTextRange = textRange
-                self.select(text: text)
+                self.select(textRange: textRange)
                 self.delegate?.startedSelectingText(in: self)
             }
             self.previousTextPosition = textPosition
@@ -123,10 +122,10 @@ class SubtitlesView: UIView {
                 }
             }
             
-            if let textRange = textRange, let text = textView.text(in: textRange) {
+            if let textRange = textRange {
                 self.selectedTextRange = textRange
                 self.deselectAll()
-                self.select(text: text)
+                self.select(textRange: textRange)
             }
             
             self.previousTextPosition = textPosition
@@ -136,7 +135,6 @@ class SubtitlesView: UIView {
             recognizer.state == .ended
         {
             self.delegate?.subtitleView(self, didSelect: text)
-            self.translationView.set(source: text)
             self.updateTranslationViewPosition(with: textRange, in: textView)
             
             self.previousTextPosition = nil
@@ -145,18 +143,35 @@ class SubtitlesView: UIView {
     }
     
     private func updateTranslationViewPosition(with selectedTextRange: UITextRange, in textView: UITextView) {
-        let wordRect = textView.firstRect(for: selectedTextRange)
-        self.topTranslationViewConstraint.constant = wordRect.origin.y - self.translationView.bounds.height
-        self.leadingTranslationViewConstraint.constant = wordRect.origin.x + wordRect.size.width / 2 - self.translationView.bounds.width / 2
+        textView.layoutManager.ensureLayout(for: textView.textContainer)
+        let selectionRects = textView.selectionRects(for: selectedTextRange)
+        
+        var union = selectionRects.first?.rect
+        for i in 1 ..< selectionRects.count {
+            union = union?.union(selectionRects[i].rect)
+        }
+        
+        if let union = union {
+            self.bottomTranslationViewConstraint.constant = union.origin.y
+            self.leadingTranslationViewConstraint.constant = union.origin.x + union.size.width / 2 - self.translationView.bounds.width / 2
+        } else {
+            assertionFailure("union is nil")
+        }
     }
     
-    private func select(text: String) {
-        guard let range = self.textView.text.range(of: text) else { return }
-        let nsRange = NSRange(range, in: self.textView.text)
+    private func select(textRange: UITextRange) {
+        let nsRange = toNSRange(textRange: textRange, textView: self.textView)
         
         let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
         mutableText.addAttributes([NSAttributedString.Key.foregroundColor: UIColor.red], range: nsRange)
         self.textView.attributedText = mutableText
+    }
+    
+    private func toNSRange(textRange: UITextRange, textView: UITextView) -> NSRange {
+        let location = textView.offset(from: textView.beginningOfDocument, to: textRange.start)
+        let length = textView.offset(from: textRange.start, to: textRange.end)
+        
+        return NSRange(location: location, length: length)
     }
 }
 

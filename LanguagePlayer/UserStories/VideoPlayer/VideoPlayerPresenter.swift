@@ -60,23 +60,37 @@ class VideoPlayerPresenter {
         self.playerController.pause()
         self.view?.stopPlaying()
         
+        let text = text.replacingOccurrences(of: "\n", with: " ")
+        
         if let history = store.state.translationsHistory.first(where: { $0.source == text }) {
             self.view?.showTranslated(text: history.target)
         } else {
-    //        let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
-    //            .sink(receiveCompletion: { completion in
-    //                switch completion {
-    //                case .failure(let error):
-    //                    print(error.localizedDescription)
-    //                case .finished:
-    //                    print("finished")
-    //                }
-    //            }) { translatedText in
-    //                self.view?.showTranslated(text: translatedText)
-    //        }
-    //        self.cancellables.append(cancellable)
-            self.view?.showTranslated(text: text)
+//            let cancellable = self.translationService.translate(text: text, sourceLanguage: "en", targetLanguage: "ru")
+//                .sink(receiveCompletion: { completion in
+//                    switch completion {
+//                    case .failure(let error):
+//                        print(error.localizedDescription)
+//                    case .finished:
+//                        print("finished")
+//                    }
+//                }) { translatedText in
+//                    self.view?.showTranslated(text: translatedText)
+//
+//                    guard let subtitle = self.currentSubtitle else { return }
+//                    let action = AppStateActions.AddTranslationToHistory(
+//                        source: text,
+//                        target: translatedText,
+//                        videoID: self.playerController.videoId,
+//                        fromMilliseconds: subtitle.fromTime,
+//                        toMilliseconds: subtitle.toTime
+//                    )
+//                    store.dispatch(action)
+//                    store.dispatch(AppStateActions.SaveAppState())
+//            }
+//            self.cancellables.append(cancellable)
             
+            self.view?.showTranslated(text: text)
+
             guard let subtitle = self.currentSubtitle else { return }
             let action = AppStateActions.AddTranslationToHistory(
                 source: text,
