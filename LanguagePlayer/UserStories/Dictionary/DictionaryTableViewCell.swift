@@ -1,9 +1,14 @@
 import Foundation
 import UIKit
 
+protocol DictionaryTableViewCellDelegate: class {
+    func didPressPlayButton(in cell: DictionaryTableViewCell)
+}
+
 class DictionaryTableViewCell: UITableViewCell {
     static let identifier = String(describing: DictionaryTableViewCell.self)
     
+    weak var delegate: DictionaryTableViewCellDelegate?
     @IBOutlet private weak var sourceLabel: UILabel!
     @IBOutlet private weak var targetLabel: UILabel!
     @IBOutlet private weak var videoTitleLabel: UILabel!
@@ -17,6 +22,6 @@ class DictionaryTableViewCell: UITableViewCell {
     }
     
     @IBAction func didPressPlayButton(_ sender: UIButton) {
-        
+        self.delegate?.didPressPlayButton(in: self)
     }
 }

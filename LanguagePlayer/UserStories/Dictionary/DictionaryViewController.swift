@@ -36,10 +36,21 @@ extension DictionaryViewController: UITableViewDataSource {
             fatalError("Cell must be DictionaryTableViewCell subclass")
         }
         let translation = self.translations[indexPath.row]
+        cell.delegate = self
         cell.configure(with: translation)
         
         return cell
     }
+}
+
+extension DictionaryViewController: DictionaryTableViewCellDelegate {
+    
+    func didPressPlayButton(in cell: DictionaryTableViewCell) {
+        guard let indexPath = self.tableView.indexPath(for: cell) else { return }
+        let translation = self.translations[indexPath.row]
+        
+    }
+    
 }
 
 extension DictionaryViewController: StoreSubscriber {
