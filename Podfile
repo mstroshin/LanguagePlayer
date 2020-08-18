@@ -6,4 +6,5 @@ target 'LanguagePlayer' do
   pod 'GCDWebServer', '~> 3.0'
   pod 'ReSwift', '~> 5.0.0'
   pod 'DifferenceKit', '~> 1.1.5'
+  pod 'RealmSwift', '~> 5.3.4'
 end

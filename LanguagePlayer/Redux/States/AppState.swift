@@ -4,6 +4,9 @@ import Foundation
 typealias ID = String
 
 struct AppState: StateType, Codable {
+    var sourceLanguageCode = "en"
+    var targetLanguageCode = "ru"
+    
     var videos = [VideoState]()
     
     //Keeps added to Dictionary words
@@ -11,6 +14,8 @@ struct AppState: StateType, Codable {
     
     //Keeps every translated word
     var translationsHistory = [TranslationState]()
+    
+    var currentTranslation: TranslationState?
 }
 
 struct VideoState: Codable {
@@ -28,4 +33,13 @@ struct TranslationState: Codable {
     let target: String
     let fromMilliseconds: TimeInterval
     let toMilliseconds: TimeInterval
+    
+    init(from model: TranslationModel) {
+        self.id = UUID().uuidString
+        self.videoId = model.videoID
+        self.source = model.source
+        self.target = model.target
+        self.fromMilliseconds = model.fromMilliseconds
+        self.toMilliseconds = model.toMilliseconds
+    }
 }

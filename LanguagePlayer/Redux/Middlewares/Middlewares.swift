@@ -1,5 +1,6 @@
 import Foundation
 import ReSwift
+import Combine
 
 func filestoreMiddleware(filestore: LocalDiskStore) -> Middleware<AppState> {
     return { dispatch, getState in
@@ -71,6 +72,59 @@ func userDefaultsMiddleware(userDefaults: UserDefaultsDataStore) -> Middleware<A
                 case _ as AppStateActions.SaveAppState:
                     guard let state = getState() else { return }
                     userDefaults.save(appState: state)
+                default:
+                    next(action)
+                }
+            }
+        }
+    }
+}
+
+func translationMiddleware(translationService: TranslationService) -> Middleware<AppState> {
+    var cancellable: AnyCancellable?
+    
+    return { dispatch, getState in
+        return { next in
+            return { action in
+                switch action {
+                case let action as AppStateActions.Translate:
+                    guard let state = getState() else { return }
+                    if let translation = state.translationsHistory.first(where: { $0.source == action.source }) {
+                        let data = TranslationModel(
+                            source: translation.source,
+                            target: translation.target,
+                            videoID: translation.videoId,
+                            fromMilliseconds: translation.fromMilliseconds,
+                            toMilliseconds: translation.toMilliseconds
+                        )
+                        next(AppStateActions.AddTranslation(data: data))
+                        return
+                    }
+                    
+                    cancellable = translationService.translate(
+                        text: action.source,
+                        sourceLanguage: state.sourceLanguageCode,
+                        targetLanguage: state.targetLanguageCode
+                    )
+                    .sink(receiveCompletion: { completion in
+                        switch completion {
+                        case .failure(let error):
+                            print("translation error " + error.localizedDescription)
+                        case .finished:
+                            print("translation finished")
+                        }
+                    }) { translatedText in
+                        let data = TranslationModel(
+                            source: action.source,
+                            target: translatedText,
+                            videoID: action.videoID,
+                            fromMilliseconds: action.fromMilliseconds,
+                            toMilliseconds: action.toMilliseconds
+                        )
+                        next(AppStateActions.AddTranslation(data: data))
+                        next(AppStateActions.AddTranslationToHistory(data: data))
+                        next(AppStateActions.SaveAppState())
+                    }
                 default:
                     next(action)
                 }

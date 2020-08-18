@@ -11,7 +11,7 @@ import UIKit
 
 protocol SubtitlesViewDelegate: class {
     func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String)
-    func subtitleView(_ subtitleView: SubtitlesView, addToDictionary source: String, target: String)
+    func addToDictionaryPressed()
     func startedSelectingText(in subtitlesView: SubtitlesView)
 }
 
@@ -176,8 +176,8 @@ class SubtitlesView: UIView {
 }
 
 extension SubtitlesView: TranslationViewDelegate {
-    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String) {
-        self.delegate?.subtitleView(self, addToDictionary: source, target: target)
+    func addToDictionaryPressed() {
+        self.delegate?.addToDictionaryPressed()
     }
 }
 
@@ -198,8 +198,8 @@ extension SubtitlesView {
         self.textView.attributedText = mutableText
     }
     
-    func showTranslated(text: String) {
-        self.translationView.set(translation: text)
+    func showTranslated(_ state: TranslationViewState) {
+        self.translationView.set(state: state)
         self.translationView.isHidden = false
     }
     

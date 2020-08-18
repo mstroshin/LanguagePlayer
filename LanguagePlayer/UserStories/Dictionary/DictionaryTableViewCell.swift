@@ -10,7 +10,7 @@ class DictionaryTableViewCell: UITableViewCell {
     @IBOutlet private weak var playButton: UIButton!
     
     
-    func configure(with translation: TranslationViewState) {
+    func configure(with translation: DictionaryViewState.TranslationViewState) {
         self.sourceLabel.text = translation.source
         self.targetLabel.text = translation.target
         self.videoTitleLabel.text = translation.videoTitle

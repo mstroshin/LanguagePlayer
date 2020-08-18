@@ -4,7 +4,7 @@ import ReSwift
 
 class DictionaryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var translations = [TranslationViewState]()
+    var translations = [DictionaryViewState.TranslationViewState]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

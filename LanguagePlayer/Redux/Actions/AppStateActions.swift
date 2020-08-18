@@ -23,25 +23,26 @@ struct AppStateActions {
         let sourceSubtitle: UploadedFile?
         let targetSubtitle: UploadedFile?
     }
-        
-    struct SaveTranslationToDictionary: Action {
-        let source: String
-        let target: String
-        let videoID: ID
-        let fromMilliseconds: TimeInterval
-        let toMilliseconds: TimeInterval
-    }
+    
+    struct ToogleCurrentTranslationFavorite: Action {}
     
     struct AddTranslationToHistory: Action {
-        let source: String
-        let target: String
-        let videoID: ID
-        let fromMilliseconds: TimeInterval
-        let toMilliseconds: TimeInterval
+        let data: TranslationModel
     }
     
     struct RemoveVideo: Action {
         let id: ID
+    }
+    
+    struct Translate: Action {
+        let source: String
+        let videoID: ID
+        let fromMilliseconds: TimeInterval
+        let toMilliseconds: TimeInterval
+    }
+    
+    struct AddTranslation: Action {
+        let data: TranslationModel
     }
     
 }
@@ -49,4 +50,12 @@ struct AppStateActions {
 struct UploadedFile {
     let fileName: String
     let temporaryDataPath: String
+}
+
+struct TranslationModel {
+    let source: String
+    let target: String
+    let videoID: ID
+    let fromMilliseconds: TimeInterval
+    let toMilliseconds: TimeInterval
 }

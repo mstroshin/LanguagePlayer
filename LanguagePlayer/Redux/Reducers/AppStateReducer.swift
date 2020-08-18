@@ -16,28 +16,21 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
             targetSubtitleFileName: action.targetSubtitleFileName
         )
         state.videos.append(video)
-    case let action as AppStateActions.SaveTranslationToDictionary:
-        let translation = TranslationState(
-            id: UUID().uuidString,
-            videoId: action.videoID,
-            source: action.source,
-            target: action.target,
-            fromMilliseconds: action.fromMilliseconds,
-            toMilliseconds: action.toMilliseconds
-        )
-        state.translations.append(translation)
+    case _ as AppStateActions.ToogleCurrentTranslationFavorite:
+        guard let currentTranslation = state.currentTranslation else { break }
+        if let index = state.translations.firstIndex(where: { $0.source == currentTranslation.source }) {
+            state.translations.remove(at: index)
+        } else {
+            state.translations.append(currentTranslation)
+        }
     case let action as AppStateActions.AddTranslationToHistory:
-        let translation = TranslationState(
-            id: UUID().uuidString,
-            videoId: action.videoID,
-            source: action.source,
-            target: action.target,
-            fromMilliseconds: action.fromMilliseconds,
-            toMilliseconds: action.toMilliseconds
-        )
+        let translation = TranslationState(from: action.data)
         state.translationsHistory.append(translation)
     case let action as AppStateActions.RemoveVideo:
         state.videos.removeAll(where: { $0.id == action.id })
+    case let action as AppStateActions.AddTranslation:
+        let translation = TranslationState(from: action.data)
+        state.currentTranslation = translation
     default:
         break
     }

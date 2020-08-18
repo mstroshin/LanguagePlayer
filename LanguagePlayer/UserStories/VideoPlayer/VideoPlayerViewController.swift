@@ -1,14 +1,7 @@
-//
-//  VideoPlayerViewController.swift
-//  LanguagePlayer
-//
-//  Created by Maxim Troshin on 21.07.2020.
-//  Copyright © 2020 Maxim Troshin. All rights reserved.
-//
-
 import Foundation
 import AVKit
 import UIKit
+import ReSwift
 
 class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
@@ -21,6 +14,16 @@ class VideoPlayerViewController: UIViewController {
         super.viewDidLoad()
         
         self.presenter.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        store.subscribe(self, transform: { $0.select(VideoPlayerViewState.init) })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        store.unsubscribe(self)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -58,11 +61,7 @@ class VideoPlayerViewController: UIViewController {
     func updateTime(_ timeInMilliseconds: TimeInterval) {
         self.controlsView.set(timeInSeconds: timeInMilliseconds / 1000)
     }
-    
-    func showTranslated(text: String) {
-        self.subtitlesView.showTranslated(text: text)
-    }
-    
+        
     func startPlaying() {
         self.controlsView.isPlaying = true
         self.subtitlesView.deselectAll()
@@ -99,17 +98,26 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
         self.presenter.translate(text: text)
     }
     
-    func subtitleView(_ subtitleView: SubtitlesView, addToDictionary source: String, target: String) {
-        self.presenter.addToDictionary(source: source, target: target)
+    func addToDictionaryPressed() {
+        self.presenter.addToDictionaryPressed()
     }
     
+}
+
+extension VideoPlayerViewController: StoreSubscriber {
+    typealias StoreSubscriberStateType = VideoPlayerViewState
+    
+    func newState(state: VideoPlayerViewState) {
+        if let translation = state.tranlsation {
+            self.subtitlesView.showTranslated(translation)
+        }
+    }
 }
 
 //Factory
 extension VideoPlayerViewController {
     
     static func factory(
-        translationService: TranslationService = YandexTranslationService(),
         playerController: PlayerController,
         subtitlesExtractor: SubtitlesExtractor?
     ) -> VideoPlayerViewController {
@@ -117,7 +125,6 @@ extension VideoPlayerViewController {
         
         let presenter = VideoPlayerPresenter(
             view: view,
-            translationService: translationService,
             playerController: playerController,
             subtitlesExtractor: subtitlesExtractor
         )

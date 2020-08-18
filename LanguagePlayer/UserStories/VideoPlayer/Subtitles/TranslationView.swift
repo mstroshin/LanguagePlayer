@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol TranslationViewDelegate: class {
-    func translationView(_ translationView: TranslationView, addToDictionary source: String, target: String)
+    func addToDictionaryPressed()
 }
 
 class TranslationView: UIView {
@@ -23,15 +23,15 @@ class TranslationView: UIView {
     @IBOutlet private var dictionaryButton: UIButton!
     weak var delegate: TranslationViewDelegate?
         
-    func set(translation: String) {
-        self.translationLabel.text = translation
+    func set(state: TranslationViewState) {
+        self.translationLabel.text = state.translation
+        self.dictionaryButton.setImage(
+            state.isAddedInDictionary ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"),
+            for: .normal
+        )
     }
     
     @IBAction func didPressDictionaryButton(_ sender: UIButton) {
-        guard let source = self.translationLabel.text, let target = self.translationLabel.text else {
-            return
-        }
-        
-        self.delegate?.translationView(self, addToDictionary: source, target: target)
+        self.delegate?.addToDictionaryPressed()
     }
 }
