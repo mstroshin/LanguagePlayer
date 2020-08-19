@@ -19,6 +19,7 @@ class SubtitlesView: UIView {
     @IBOutlet private weak var translationView: TranslationView! {
         didSet {
             self.translationView.delegate = self
+            self.translationView.isHidden = true
         }
     }
     @IBOutlet private weak var bottomTranslationViewConstraint: NSLayoutConstraint!
@@ -72,7 +73,7 @@ class SubtitlesView: UIView {
     private func setupView() {
         self.backgroundColor = UIColor(named: "SubtitlesBackground")
         self.layer.cornerRadius = 8
-        
+                
         self.textView.isEditable = false
         self.textView.isSelectable = false
         self.textView.isScrollEnabled = false

@@ -170,10 +170,10 @@ extension VideoPlayerViewController: StoreSubscriber {
             self.subtitlesView.showTranslated(translation)
         }
         
-        if state.afterNavigation {
-            self.playerController = PlayerController(id: state.videoId!, url: state.videoUrl!)
+        if let navigationData = state.navigationData {
+            self.playerController = PlayerController(id: navigationData.videoId, url: navigationData.videoUrl)
             
-            if let sourceSubtitleUrl = state.sourceSubtitleUrl {
+            if let sourceSubtitleUrl = navigationData.sourceSubtitleUrl {
                 self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
             }
             
@@ -195,6 +195,8 @@ extension VideoPlayerViewController: StoreSubscriber {
             self.set(durationInSeconds: self.playerController.videoDurationInSeconds)
             self.playerController.play()
             self.startPlaying()
+            
+            self.playerController.seek(timeInSeconds: navigationData.fromMilliseconds / 1000)
         }
     }
 }

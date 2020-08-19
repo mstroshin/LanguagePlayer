@@ -36,6 +36,7 @@
 		D28DC02424EC593C00017E8D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02324EC593C00017E8D /* Router.swift */; };
 		D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02724EC5C4500017E8D /* NavigationActions.swift */; };
 		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
+		D28DC02E24ED8A8C00017E8D /* DictionaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
@@ -97,6 +98,7 @@
 		D28DC02324EC593C00017E8D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		D28DC02724EC5C4500017E8D /* NavigationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
+		D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRouter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				D2420ACE24DD45D6009C41F8 /* DictionaryViewController.swift */,
 				D2420AD024DD46AC009C41F8 /* DictionaryViewState.swift */,
 				D2420AD224DD9AFF009C41F8 /* DictionaryTableViewCell.swift */,
+				D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -534,6 +537,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D28DC02E24ED8A8C00017E8D /* DictionaryRouter.swift in Sources */,
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,

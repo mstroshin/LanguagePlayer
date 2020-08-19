@@ -18,6 +18,7 @@ struct DictionaryViewState {
         let fromMilliseconds: TimeInterval
         let toMilliseconds: TimeInterval
         let videoTitle: String
+        let videoId: ID
         
         init(state: TranslationState, fileName: String) {
             self.id = state.id
@@ -26,6 +27,7 @@ struct DictionaryViewState {
             self.fromMilliseconds = state.fromMilliseconds
             self.toMilliseconds = state.toMilliseconds
             self.videoTitle = fileName.components(separatedBy: ".").first!
+            self.videoId = state.videoId
         }
     }
 
