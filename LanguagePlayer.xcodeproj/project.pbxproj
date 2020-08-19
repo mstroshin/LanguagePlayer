@@ -37,6 +37,7 @@
 		D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02724EC5C4500017E8D /* NavigationActions.swift */; };
 		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
 		D28DC02E24ED8A8C00017E8D /* DictionaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */; };
+		D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
@@ -99,6 +100,7 @@
 		D28DC02724EC5C4500017E8D /* NavigationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
 		D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRouter.swift; sourceTree = "<group>"; };
+		D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -325,6 +327,7 @@
 				D28DC01F24EC342F00017E8D /* NavigationState.swift */,
 				D28DC02324EC593C00017E8D /* Router.swift */,
 				D28DC02724EC5C4500017E8D /* NavigationActions.swift */,
+				D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
+				D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */,
 				D2420AD524DDD15C009C41F8 /* Middlewares.swift in Sources */,

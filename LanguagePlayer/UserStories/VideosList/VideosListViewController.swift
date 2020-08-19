@@ -1,18 +1,19 @@
-import Foundation
 import UIKit
 import AVFoundation
 import ReSwift
 
-class VideosListViewController: UICollectionViewController {
-    var router: VideosListRouter!
+class VideosListViewController: BaseViewController {
+    @IBOutlet weak var collectionView: UICollectionView!
     var videosList: [VideoViewState] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.router = VideosListRouter(self)
+        self.router = VideosListRouter(self, screen: .videos)
         self.title = "Video Library"
         
         self.collectionView.collectionViewLayout = self.createLayout()
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -20,13 +21,11 @@ class VideosListViewController: UICollectionViewController {
         store.subscribe(self, transform: {
             $0.select(VideoListViewState.init)
         })
-        self.router.subscribe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
-        self.router.unsubscribe()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -55,13 +54,13 @@ class VideosListViewController: UICollectionViewController {
     }
 }
 
-extension VideosListViewController {
+extension VideosListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.videosList.count
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: VideoCollectionViewItem.identifier,
             for: indexPath
@@ -72,7 +71,7 @@ extension VideosListViewController {
         return cell
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let video = self.videosList[indexPath.row]
         
         store.dispatch(NavigationActions.Navigate(
@@ -82,7 +81,7 @@ extension VideosListViewController {
         ))
     }
     
-    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil

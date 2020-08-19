@@ -2,26 +2,23 @@ import Foundation
 import UIKit
 import ReSwift
 
-class DictionaryViewController: UIViewController {
-    var router: DictionaryRouter!
+class DictionaryViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var translations = [DictionaryViewState.TranslationViewState]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.router = DictionaryRouter(self)
+        self.router = DictionaryRouter(self, screen: .dictionary)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store.subscribe(self, transform: { $0.select(DictionaryViewState.init) })
-        self.router.subscribe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
-        self.router.unsubscribe()
     }
     
     private func setupViews() {
