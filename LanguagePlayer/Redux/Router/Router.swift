@@ -9,7 +9,7 @@ protocol Router: StoreSubscriber where StoreSubscriberStateType == NavigationSta
 
 extension Router {
     func subscribe() {
-        store.subscribe(self) { $0.select { $0.navigation }.skipRepeats { $0 == $1 }}
+        store.subscribe(self) { $0.select { $0.navigation }}
     }
     
     func unsubscribe() {

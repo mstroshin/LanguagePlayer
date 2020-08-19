@@ -14,20 +14,14 @@ struct VideoListViewState {
 struct VideoViewState {
     let id: ID
     let videoTitle: String
-    let videoUrl: URL
-    let sourceSubtitleUrl: URL?
-    let targetSubtitleUrl: URL?
     let videoPreviewImage: UIImage?
     
-    init(video: VideoState) {
-        let localStore = LocalDiskStore()
-        
+    init(video: VideoState) {        
         self.id = video.id
         self.videoTitle = video.fileName.components(separatedBy: ".").first!
-        self.videoUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.fileName) ?? URL(string: "http://google.com")!
-        self.sourceSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.sourceSubtitleFileName)
-        self.targetSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.targetSubtitleFileName)
-        self.videoPreviewImage = createThumbnailOfVideo(from: self.videoUrl)
+        
+        let videoUrl = LocalDiskStore().url(for: video.savedInDirectoryName, fileName: video.fileName) ?? URL(string: "http://google.com")!
+        self.videoPreviewImage = createThumbnailOfVideo(from: videoUrl)
     }
 }
 

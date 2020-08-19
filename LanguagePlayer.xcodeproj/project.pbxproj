@@ -32,14 +32,10 @@
 		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
 		D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749BF24D6C59500687095 /* AppEnvironment.swift */; };
 		D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749C324D6CA8100687095 /* AppStateReducer.swift */; };
-		D28DC01E24EC2D5E00017E8D /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC01D24EC2D5E00017E8D /* AppRouter.swift */; };
 		D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC01F24EC342F00017E8D /* NavigationState.swift */; };
-		D28DC02224EC3AA000017E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02124EC3AA000017E8D /* BaseViewController.swift */; };
 		D28DC02424EC593C00017E8D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02324EC593C00017E8D /* Router.swift */; };
-		D28DC02624EC598100017E8D /* RouterRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02524EC598100017E8D /* RouterRegistry.swift */; };
 		D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02724EC5C4500017E8D /* NavigationActions.swift */; };
 		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
-		D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
@@ -97,14 +93,10 @@
 		D28749B224D6BA1300687095 /* LocalDiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDiskStore.swift; sourceTree = "<group>"; };
 		D28749BF24D6C59500687095 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D28749C324D6CA8100687095 /* AppStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateReducer.swift; sourceTree = "<group>"; };
-		D28DC01D24EC2D5E00017E8D /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		D28DC01F24EC342F00017E8D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
-		D28DC02124EC3AA000017E8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D28DC02324EC593C00017E8D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		D28DC02524EC598100017E8D /* RouterRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterRegistry.swift; sourceTree = "<group>"; };
 		D28DC02724EC5C4500017E8D /* NavigationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
 		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
-		D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerPresenter.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -194,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				D26131DE24EBC64100381945 /* Subtitles */,
-				D2C0568124C7A45100810915 /* VideoPlayerPresenter.swift */,
 				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
 				D2C0568724C7E28000810915 /* ControlsView.swift */,
 				D26131E124EBC94300381945 /* VideoPlayerViewState.swift */,
@@ -328,11 +319,8 @@
 		D28DC01C24EC2D3D00017E8D /* Router */ = {
 			isa = PBXGroup;
 			children = (
-				D28DC01D24EC2D5E00017E8D /* AppRouter.swift */,
 				D28DC01F24EC342F00017E8D /* NavigationState.swift */,
-				D28DC02124EC3AA000017E8D /* BaseViewController.swift */,
 				D28DC02324EC593C00017E8D /* Router.swift */,
-				D28DC02524EC598100017E8D /* RouterRegistry.swift */,
 				D28DC02724EC5C4500017E8D /* NavigationActions.swift */,
 			);
 			path = Router;
@@ -553,7 +541,6 @@
 				D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */,
 				D28DC02424EC593C00017E8D /* Router.swift in Sources */,
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
-				D28DC02224EC3AA000017E8D /* BaseViewController.swift in Sources */,
 				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
@@ -563,7 +550,6 @@
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2420AD324DD9AFF009C41F8 /* DictionaryTableViewCell.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
-				D2C0568224C7A45100810915 /* VideoPlayerPresenter.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
 				D28749A524D6674900687095 /* AppState.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
@@ -576,12 +562,10 @@
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */,
-				D28DC02624EC598100017E8D /* RouterRegistry.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
-				D28DC01E24EC2D5E00017E8D /* AppRouter.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D26131E024EBC66000381945 /* TranslationViewState.swift in Sources */,

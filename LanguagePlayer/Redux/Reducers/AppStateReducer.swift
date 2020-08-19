@@ -3,6 +3,7 @@ import Foundation
 
 func appStateReducer(action: Action, state: AppState?) -> AppState {
     var state = state ?? AppState()
+    state.navigation = navigationStateReducer(action: action, state: state.navigation)
     
     switch action {
     case let action as AppStateActions.LoadedAppState:

@@ -21,13 +21,9 @@ public struct NavigationState: Equatable {
     var transitionType: TransitionType?
     var transiotionData: [AnyHashable: Any]?
     var newScreen: Screen?
-    var newScreenHierarchy: [Screen] = []
-    var currentScreen: Screen = .videos
     
     public static func == (lhs: NavigationState, rhs: NavigationState) -> Bool {
-        lhs.newScreen == rhs.newScreen ||
-            lhs.newScreenHierarchy == rhs.newScreenHierarchy ||
-            lhs.currentScreen == rhs.currentScreen
+        lhs.newScreen == rhs.newScreen
     }
 }
 

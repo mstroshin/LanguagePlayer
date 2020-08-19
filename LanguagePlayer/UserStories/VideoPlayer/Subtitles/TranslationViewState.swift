@@ -1,6 +1,6 @@
 import Foundation
 
-struct TranslationViewState {
+struct TranslationViewState: Equatable {
     let translation: String
     let isAddedInDictionary: Bool
 }
