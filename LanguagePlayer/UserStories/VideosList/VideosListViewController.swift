@@ -4,10 +4,12 @@ import AVFoundation
 import ReSwift
 
 class VideosListViewController: UICollectionViewController {
+    var router: VideosListRouter!
     var videosList: [VideoViewState] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.router = VideosListRouter(self)
         self.title = "Video Library"
         
         self.collectionView.collectionViewLayout = self.createLayout()
@@ -18,11 +20,13 @@ class VideosListViewController: UICollectionViewController {
         store.subscribe(self, transform: {
             $0.select(VideoListViewState.init)
         })
+        self.router.subscribe()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
+        self.router.unsubscribe()
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -71,13 +75,11 @@ extension VideosListViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let video = self.videosList[indexPath.row]
         
-        let vc = VideoPlayerViewController.factory(
-            videoId: video.id,
-            videoUrl: video.videoUrl,
-            sourceSubtitleUrl: video.sourceSubtitleUrl
-        )
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        store.dispatch(NavigationActions.Navigate(
+            screen: .player,
+            transitionType: .present(.fullScreen),
+            data: ["videoId": video.id]
+        ))
     }
     
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
