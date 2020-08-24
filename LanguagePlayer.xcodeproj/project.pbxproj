@@ -60,9 +60,10 @@
 		D2E616CA24D7F45B00D80F26 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BB24D7F45B00D80F26 /* index.html */; };
 		D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */; };
 		D2E616CC24D7F45B00D80F26 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BE24D7F45B00D80F26 /* index.css */; };
-		D2E616CD24D7F45B00D80F26 /* font-awesome.min.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616C024D7F45B00D80F26 /* font-awesome.min.css */; };
 		D2E616D024D7FBE300D80F26 /* bootstrap.min.js.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */; };
 		D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */; };
+		D2F7CADF24F3FB730069659F /* file-video-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CADE24F3FB730069659F /* file-video-solid.svg */; };
+		D2F7CAE124F3FF940069659F /* file-invoice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,8 +125,9 @@
 		D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
 		D2E616BE24D7F45B00D80F26 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.css.map; sourceTree = "<group>"; };
-		D2E616C024D7F45B00D80F26 /* font-awesome.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "font-awesome.min.css"; sourceTree = "<group>"; };
 		D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
+		D2F7CADE24F3FB730069659F /* file-video-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-video-solid.svg"; sourceTree = "<group>"; };
+		D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -355,6 +357,7 @@
 		D2E616AE24D7F43900D80F26 /* html */ = {
 			isa = PBXGroup;
 			children = (
+				D2F7CADD24F3FA190069659F /* icons */,
 				D2E616BC24D7F45B00D80F26 /* css */,
 				D2E616AF24D7F45B00D80F26 /* fonts */,
 				D2E616BB24D7F45B00D80F26 /* index.html */,
@@ -393,9 +396,17 @@
 				D2E616BD24D7F45B00D80F26 /* bootstrap.min.css */,
 				D2E616BE24D7F45B00D80F26 /* index.css */,
 				D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */,
-				D2E616C024D7F45B00D80F26 /* font-awesome.min.css */,
 			);
 			path = css;
+			sourceTree = "<group>";
+		};
+		D2F7CADD24F3FA190069659F /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */,
+				D2F7CADE24F3FB730069659F /* file-video-solid.svg */,
+			);
+			path = icons;
 			sourceTree = "<group>";
 		};
 		DC1CC6C3956E32531DBC2003 /* Frameworks */ = {
@@ -478,15 +489,16 @@
 				D2E616C324D7F45B00D80F26 /* fontawesome-webfont.ttf in Resources */,
 				D2E616C924D7F45B00D80F26 /* bootstrap.min.js in Resources */,
 				D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */,
+				D2F7CADF24F3FB730069659F /* file-video-solid.svg in Resources */,
 				D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */,
 				D2E616CA24D7F45B00D80F26 /* index.html in Resources */,
 				D2E616CC24D7F45B00D80F26 /* index.css in Resources */,
 				D2E616C724D7F45B00D80F26 /* index.js in Resources */,
 				D2E616CB24D7F45B00D80F26 /* bootstrap.min.css in Resources */,
+				D2F7CAE124F3FF940069659F /* file-invoice-solid.svg in Resources */,
 				D2154E9F24C0803E00F52815 /* Assets.xcassets in Resources */,
 				D2E616C624D7F45B00D80F26 /* jquery.fileupload.js in Resources */,
 				D2E616C824D7F45B00D80F26 /* jquery.min.js in Resources */,
-				D2E616CD24D7F45B00D80F26 /* font-awesome.min.css in Resources */,
 				D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

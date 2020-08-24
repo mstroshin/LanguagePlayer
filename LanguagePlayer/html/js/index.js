@@ -2,11 +2,57 @@ const supportedVideoFormats = ".mp4";
 const supportedSubtitlesFormats = ".srt";
 var isUploading = false;
 
+function localizePage() {
+    const getNavigatorLanguage = () => {
+        var locale = "";
+
+        if (navigator.languages && navigator.languages.length) {
+            locale = navigator.languages[0];
+        } else {
+            locale = navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+        }
+
+        return locale.substring(0, 2).toLowerCase();
+    }
+    var locale = getNavigatorLanguage();
+    // locale = "ru";
+
+    const l10n = {
+        pageTitle: {
+            'en': 'Language Player - Video Uploader',
+            'ru': 'Language Player - Загрузчик Видео',
+        },
+        videoDropzoneDescription: {
+            'en': `Drop video here or click to upload (supported formats ${supportedVideoFormats})`,
+            'ru': `Перетащите сюда видео файл или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedVideoFormats})`,
+        },
+        sourceSubtitleDropzoneDescription: {
+            'en': `Drop source subtitle here or click to upload (supported formats ${supportedSubtitlesFormats})`,
+            'ru': `Перетащите сюда оригинальные субтитры или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedSubtitlesFormats})`,
+        },
+        uploadButton: {
+            'en': 'Upload',
+            'ru': 'Загрузить',
+        },
+        cancelButton: {
+            'en': 'Cancel',
+            'ru': 'Отменить',
+        },
+    };
+
+    document.getElementById("pageTitle").textContent = l10n["pageTitle"][locale];
+    document.getElementById("videoDropzoneDescription").textContent = l10n["videoDropzoneDescription"][locale];
+    document.getElementById("sourceSubtitleDropzoneDescription").textContent = l10n["sourceSubtitleDropzoneDescription"][locale];
+    document.getElementById("uploadButton").setAttribute("value", l10n["uploadButton"][locale]);
+    document.getElementById("cancelButton").setAttribute("value", l10n["cancelButton"][locale]);
+}
+
 $(document).ready(documentReady);
 
 function documentReady() {
     configureDropzone();
     configureUploadForm();
+    localizePage();
 }
 
 function configureUploadForm() {
@@ -142,13 +188,21 @@ function updateThumbnail(dropZoneElement, file) {
         thumbnailElement.classList.add("drop-zone__thumb");
         dropZoneElement.appendChild(thumbnailElement);
     }
-
     thumbnailElement.dataset.label = file.name;
 
-    if (file.type.startsWith("video/")) {
-        let movieIcon = document.createElement("i");
-        movieIcon.className = 'icon-camera-retro';
-        thumbnailElement.appendChild(movieIcon);
+    if (thumbnailElement.querySelector(".dropzoneIcon") === null) {
+        if (file.type.startsWith("video/")) {
+            let movieIcon = document.createElement("img");
+            movieIcon.className = "dropzoneIcon";
+            movieIcon.src = "file-video-solid.svg";
+            thumbnailElement.appendChild(movieIcon);
+        }
+        else {
+            let movieIcon = document.createElement("img");
+            movieIcon.className = "dropzoneIcon";
+            movieIcon.src = "file-invoice-solid.svg";
+            thumbnailElement.appendChild(movieIcon);
+        }
     }
 }
 

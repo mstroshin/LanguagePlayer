@@ -1,10 +1,29 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background: #6190E8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6190E8, #A7BFE8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6190E8, #A7BFE8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.title {
+  text-align: center;
+  color: #ffffff;
+}
+
+#pageTitle {
+  margin-top: 20px;
+}
+
 .drop-zone-container {
   position: center;
 }
 
 .drop-zone {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   padding: 25px;
   margin: 20px;
   display: inline-block;
@@ -15,8 +34,8 @@
   font-size: 500;
   font-size: 20px;
   cursor: pointer;
-  color: #cccccc;
-  border: 4px dashed #009578;
+  color: #ffffff;
+  border: 4px dashed #0077ff;
   border-radius: 10px;
 }
 
@@ -37,9 +56,12 @@
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
-  background-color: #cccccc;
+  background-color: rgb(204, 204, 204, 0.25);
   background-size: cover;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .drop-zone__thumb::after {
@@ -61,3 +83,7 @@
    -webkit-box-orient: vertical;
 }
 
+.dropzoneIcon {
+  width: 120px;
+  height: 120px;
+}
