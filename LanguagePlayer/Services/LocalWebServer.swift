@@ -1,7 +1,8 @@
 import Foundation
 import GCDWebServer
+import ReSwift
 
-class LocalWebServer {
+class LocalWebServer: NSObject {
     let webServer = GCDWebServer()
     
     func run() {
@@ -46,7 +47,18 @@ class LocalWebServer {
         }
             
         webServer.start(withPort: 9099, bonjourName: "GCD Web Server")
-        print("Visit \(String(describing: webServer.serverURL)) in your web browser")
+        webServer.delegate = self
+    }
+    
+}
+
+extension LocalWebServer: GCDWebServerDelegate {
+    
+    func webServerDidCompleteBonjourRegistration(_ server: GCDWebServer) {
+        store.dispatch(AppStateActions.ServerStarted(
+            webServerIPAddress: server.serverURL?.absoluteString,
+            webServerAddress: server.bonjourServerURL?.absoluteString
+        ))
     }
     
 }

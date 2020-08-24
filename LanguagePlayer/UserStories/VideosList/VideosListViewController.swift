@@ -52,6 +52,23 @@ class VideosListViewController: BaseViewController {
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
+    
+}
+
+extension VideosListViewController: UIPopoverPresentationControllerDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "popoverSegue" {
+            let popoverViewController = segue.destination
+            popoverViewController.modalPresentationStyle = .popover
+            popoverViewController.popoverPresentationController!.delegate = self
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        .none
+    }
+    
 }
 
 extension VideosListViewController: UICollectionViewDataSource, UICollectionViewDelegate {

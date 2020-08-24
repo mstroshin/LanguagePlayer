@@ -9,6 +9,9 @@ struct AppState: StateType {
     var sourceLanguageCode = "en"
     var targetLanguageCode = "ru"
     
+    var webServerIPAddress: String?
+    var webServerAddress: String?
+    
     var videos = [VideoState]()
     
     //Keeps added to Dictionary words

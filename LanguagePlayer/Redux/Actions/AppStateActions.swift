@@ -45,6 +45,11 @@ struct AppStateActions {
         let data: TranslationModel
     }
     
+    struct ServerStarted: Action {
+        var webServerIPAddress: String?
+        var webServerAddress: String?
+    }
+    
 }
 
 struct UploadedFile {

@@ -64,6 +64,7 @@
 		D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */; };
 		D2F7CADF24F3FB730069659F /* file-video-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CADE24F3FB730069659F /* file-video-solid.svg */; };
 		D2F7CAE124F3FF940069659F /* file-invoice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */; };
+		D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 		D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
 		D2F7CADE24F3FB730069659F /* file-video-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-video-solid.svg"; sourceTree = "<group>"; };
 		D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
+		D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
 				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
 				D28DC02924ED619A00017E8D /* VideosListRouter.swift */,
+				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
 			);
 			path = VideosList;
 			sourceTree = "<group>";
@@ -583,6 +586,7 @@
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
+				D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */,
 				D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
