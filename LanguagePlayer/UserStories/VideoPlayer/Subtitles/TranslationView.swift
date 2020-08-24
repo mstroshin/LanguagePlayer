@@ -14,14 +14,14 @@ protocol TranslationViewDelegate: class {
 }
 
 class TranslationView: UIView {
-    @IBOutlet private var backgroundView: UIView! {
-        didSet {
-            self.backgroundView.layer.cornerRadius = 8
-        }
-    }
     @IBOutlet private var translationLabel: UILabel!
     @IBOutlet private var dictionaryButton: UIButton!
     weak var delegate: TranslationViewDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.layer.cornerRadius = 8
+    }
         
     func set(state: TranslationViewState) {
         self.translationLabel.text = state.translation

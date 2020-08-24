@@ -33,6 +33,14 @@ class VideoPlayerViewController: UIViewController {
         store.dispatch(NavigationActions.NavigationCompleted(currentScreen: .player))
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        .all
+    }
+    
+    override var shouldAutorotate: Bool {
+        true
+    }
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -152,7 +160,16 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     }
     
     func didPressScreenTurn() {
+        var value = UIDevice.current.orientation.rawValue
+        value += 1
+        if value > 4 {
+            value = 1
+        }
         
+//        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "interfaceOrientationChangeRequested"), object: UIInterfaceOrientation(rawValue: value))
+        UIViewController.attemptRotationToDeviceOrientation()
     }
     
     func seekValueChangedSeekSlider(timeInSeconds: TimeInterval) {

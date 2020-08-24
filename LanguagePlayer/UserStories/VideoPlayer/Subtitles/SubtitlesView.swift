@@ -20,11 +20,9 @@ class SubtitlesView: UIView {
         didSet {
             self.translationView.delegate = self
             self.translationView.isHidden = true
+            self.bringSubviewToFront(self.translationView)
         }
     }
-    @IBOutlet private weak var bottomTranslationViewConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var leadingTranslationViewConstraint: NSLayoutConstraint!
-    
     weak var delegate: SubtitlesViewDelegate?
     var textColor = UIColor.white
     
@@ -36,6 +34,15 @@ class SubtitlesView: UIView {
     private var selectedTextRange: UITextRange?
     private var previousTextPosition: UITextPosition?
     private let textView: UITextView
+    
+    private var textShadow: NSShadow {
+        let shadow = NSShadow()
+        shadow.shadowBlurRadius = 1
+        shadow.shadowOffset = CGSize(width: 2, height: 2)
+        shadow.shadowColor = UIColor.black
+        
+        return shadow
+    }
     
     init() {
         self.textView = UITextView()
@@ -71,7 +78,7 @@ class SubtitlesView: UIView {
     }
     
     private func setupView() {
-        self.backgroundColor = UIColor(named: "SubtitlesBackground")
+        self.backgroundColor = .clear
         self.layer.cornerRadius = 8
                 
         self.textView.isEditable = false
@@ -83,6 +90,11 @@ class SubtitlesView: UIView {
         self.textView.textColor = self.textColor
         self.textView.textAlignment = .center
         self.textView.font = .systemFont(ofSize: 32, weight: .bold)
+        self.textView.layer.shadowColor = UIColor.black.cgColor
+        self.textView.layer.shadowRadius = 1.0
+        self.textView.layer.shadowOpacity = 1.0
+        self.textView.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.textView.layer.masksToBounds = false
         self.addSubview(self.textView)
                 
         let tapGesture = SelectionGestureRecognizer(target: self, action: #selector(textTapped))
@@ -136,30 +148,11 @@ class SubtitlesView: UIView {
             recognizer.state == .ended
         {
             self.delegate?.subtitleView(self, didSelect: text)
-            self.updateTranslationViewPosition(with: textRange, in: textView)
-            
             self.previousTextPosition = nil
 //            self.selectedTextRange = nil
         }
     }
-    
-    private func updateTranslationViewPosition(with selectedTextRange: UITextRange, in textView: UITextView) {
-        textView.layoutManager.ensureLayout(for: textView.textContainer)
-        let selectionRects = textView.selectionRects(for: selectedTextRange)
         
-        var union = selectionRects.first?.rect
-        for i in 1 ..< selectionRects.count {
-            union = union?.union(selectionRects[i].rect)
-        }
-        
-        if let union = union {
-            self.bottomTranslationViewConstraint.constant = union.origin.y
-            self.leadingTranslationViewConstraint.constant = union.origin.x + union.size.width / 2 - self.translationView.bounds.width / 2
-        } else {
-            assertionFailure("union is nil")
-        }
-    }
-    
     private func select(textRange: UITextRange) {
         let nsRange = toNSRange(textRange: textRange, textView: self.textView)
         
@@ -210,7 +203,7 @@ extension SubtitlesView {
     
     func updatePositions() {
         if let selectedTextRange = self.selectedTextRange {
-            self.updateTranslationViewPosition(with: selectedTextRange, in: self.textView)
+            
         }
     }
     

@@ -39,6 +39,8 @@ class ControlsView: UIView {
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var screenTurnButton: UIButton!
     
+    private var isValueChanging = false
+    
     @IBAction private func didPressCloseButton(_ sender: UIButton) {
         self.delegate?.didPressClose()
     }
@@ -63,6 +65,14 @@ class ControlsView: UIView {
         self.delegate?.didPressScreenTurn()
     }
     
+    @IBAction func startChangingValue(_ sender: UISlider) {
+        self.isValueChanging = true
+    }
+    
+    @IBAction func stopChangingValue(_ sender: UISlider) {
+        self.isValueChanging = false
+    }
+    
     @IBAction private func valueChangedSeekSlider(_ sender: UISlider) {
         self.delegate?.seekValueChangedSeekSlider(timeInSeconds: TimeInterval(sender.value))
     }
@@ -81,7 +91,9 @@ class ControlsView: UIView {
         let formattedString = formatter.string(from: timeInSeconds)!
         self.timeLabel.text = formattedString
         
-//        print(formattedString)
+        if self.isValueChanging == false {
+            self.seekSlider.value = Float(timeInSeconds)
+        }
     }
     
 }
