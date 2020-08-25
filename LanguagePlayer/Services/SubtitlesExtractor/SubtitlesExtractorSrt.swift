@@ -24,7 +24,9 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
     private func prepareSubtitles() {
         do {
             let subtitles = try String(contentsOf: self.filePath)
-            self.parts = self.parse(subtitles)
+            self.parts = self.parse(subtitles).sorted(by: { lhs, rhs -> Bool in
+                lhs.fromTime < rhs.fromTime
+            })
         } catch {
             fatalError("Doesn't read subtitle file \(self.filePath)")
         }
@@ -80,7 +82,32 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
     }
     
     func getSubtitle(for timeInMilliseconds: TimeInterval) -> SubtitlePart? {
-        self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }
+        let r = self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }
+        return r
+    }
+    
+    func getPreviousSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart? {
+        if let currentSubtitle = self.getSubtitle(for: timeInMilliseconds) {
+            return self.parts.first { $0.number == currentSubtitle.number - 1 }
+        }
+        
+        return self.parts.reversed().first { $0.fromTime < timeInMilliseconds }
+    }
+    
+    func getNextSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart? {
+//        print("Next time \(timeInMilliseconds)")
+        
+        if let currentSubtitle = self.getSubtitle(for: timeInMilliseconds) {
+            let r = self.parts.first { $0.number == currentSubtitle.number + 1 }
+//            print("Next \(String(describing: r?.number))")
+            
+            return r
+        }
+        
+        let r = self.parts.first { timeInMilliseconds < $0.fromTime }
+//        print("Next 2 \(String(describing: r?.number))")
+
+        return r
     }
     
 }

@@ -17,6 +17,8 @@ protocol ControlsViewDelegate: class {
     func didPressPause()
     func didPressScreenTurn()
     func seekValueChangedSeekSlider(timeInSeconds: TimeInterval)
+    func didPressBackwardSub()
+    func didPressForwardSub()
 }
 
 class ControlsView: UIView {
@@ -75,6 +77,14 @@ class ControlsView: UIView {
     
     @IBAction private func valueChangedSeekSlider(_ sender: UISlider) {
         self.delegate?.seekValueChangedSeekSlider(timeInSeconds: TimeInterval(sender.value))
+    }
+    
+    @IBAction private func didPressBackwardSubButton(_ sender: UIButton) {
+        self.delegate?.didPressBackwardSub()
+    }
+    
+    @IBAction private func didPressForwardSubButton(_ sender: UIButton) {
+        self.delegate?.didPressForwardSub()
     }
     
     func set(durationInSeconds: TimeInterval) {

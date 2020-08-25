@@ -10,6 +10,8 @@ import Foundation
 
 protocol SubtitlesExtractor {
     func getSubtitle(for timeInMilliseconds: TimeInterval) -> SubtitlePart?
+    func getPreviousSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart?
+    func getNextSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart?
 }
 
 struct SubtitlePart {

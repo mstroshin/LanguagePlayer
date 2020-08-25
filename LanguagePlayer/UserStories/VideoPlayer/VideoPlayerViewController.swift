@@ -6,7 +6,9 @@ import Combine
 class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
     @IBOutlet private var controlsView: ControlsView!
-    var playerController: PlayerController!
+    @IBOutlet private var videoViewport: UIView!
+    
+    let playerController = PlayerController()
     var subtitlesExtractor: SubtitlesExtractor!
     
     private var currentSubtitle: SubtitlePart?
@@ -56,16 +58,8 @@ class VideoPlayerViewController: UIViewController {
         self.subtitlesView.isHidden = true
         self.subtitlesView.delegate = self
         self.controlsView.delegate = self
-    }
-    
-    //MARK: - Presenter input
-    func show(player: AVPlayer) {
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        self.view.layer.addSublayer(playerLayer)
-        self.view.bringSubviewToFront(self.subtitlesView)
         
-        self.playerLayer = playerLayer
+        self.playerController.set(viewport: self.videoViewport)
     }
     
     func set(durationInSeconds: TimeInterval) {
@@ -159,22 +153,32 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         self.stopPlaying()
     }
     
+    //TODO
     func didPressScreenTurn() {
-        var value = UIDevice.current.orientation.rawValue
-        value += 1
-        if value > 4 {
-            value = 1
-        }
         
-//        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "interfaceOrientationChangeRequested"), object: UIInterfaceOrientation(rawValue: value))
-        UIViewController.attemptRotationToDeviceOrientation()
     }
     
     func seekValueChangedSeekSlider(timeInSeconds: TimeInterval) {
         self.hideTranslation()
         self.playerController.seek(timeInSeconds: timeInSeconds)
+    }
+    
+    func didPressBackwardSub() {
+        if let subtitle = self.subtitlesExtractor?.getPreviousSubtitle(current: self.playerController.currentTimeInMilliseconds) {
+            self.currentSubtitle = subtitle
+            self.show(subtitles: "\(subtitle.number) " + subtitle.text)
+            self.playerController.seek(timeInMilliseconds: subtitle.fromTime)
+        }
+    }
+    
+    func didPressForwardSub() {
+        print("===================")
+        if let subtitle = self.subtitlesExtractor?.getNextSubtitle(current: self.playerController.currentTimeInMilliseconds) {
+            print(subtitle)
+            self.currentSubtitle = subtitle
+            self.show(subtitles: "\(subtitle.number) " + subtitle.text)
+            self.playerController.seek(timeInMilliseconds: subtitle.fromTime)
+        }
     }
     
 }
@@ -188,23 +192,27 @@ extension VideoPlayerViewController: StoreSubscriber {
         }
         
         if let navigationData = state.navigationData {
-            self.playerController = PlayerController(id: navigationData.videoId, url: navigationData.videoUrl)
+            self.playerController.set(videoUrl: navigationData.videoUrl)
+            self.playerController.videoId = navigationData.videoId
             
             if let sourceSubtitleUrl = navigationData.sourceSubtitleUrl {
                 self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
             }
-            
-            self.show(player: self.playerController.avPlayer)
-            
-            let cancellable = self.playerController.setupTimePublisher().sink { timeInMilliseconds in
+                        
+            let cancellable = self.playerController.timeInMillisecondsPublisher.sink { timeInMilliseconds in
+                print("sink \(timeInMilliseconds)")
                 self.updateTime(timeInMilliseconds)
                 
                 if let subtitle = self.subtitlesExtractor?.getSubtitle(for: timeInMilliseconds) {
-                    self.currentSubtitle = subtitle
-                    self.show(subtitles: subtitle.text)
+                    if self.currentSubtitle?.number != subtitle.number {
+                        self.currentSubtitle = subtitle
+                        self.show(subtitles: "\(subtitle.number) " + subtitle.text)
+                        print(subtitle.text)
+                    }
                 } else {
                     self.currentSubtitle = nil
                     self.hideSubtitles()
+                    print("HIDE")
                 }
             }
             self.cancellables.append(cancellable)

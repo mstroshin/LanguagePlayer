@@ -9,56 +9,66 @@
 import Foundation
 import AVKit
 import Combine
+import MobileVLCKit
 
-class PlayerController {
-    let videoId: ID
-    let timeInMillisecondsPublisher = PassthroughSubject<TimeInterval, Never>()
+class PlayerController: NSObject {
+    var videoId: ID = ""
     var currentTimeInMilliseconds: TimeInterval {
-        self.currentTimeInSeconds * 1000
+        if let value = self.player.time.value {
+            return value.doubleValue
+        }
+        
+        return 0
     }
     var currentTimeInSeconds: TimeInterval {
-        self.avPlayer.currentTime().seconds
+        self.currentTimeInMilliseconds / 1000
     }
     var videoDurationInSeconds: TimeInterval {
-        self.avPlayer.currentItem?.asset.duration.seconds ?? 0
-    }
-    
-    let avPlayer: AVPlayer
-    private var timeObservation: Any?
-    
-    init(id: ID, url: URL) {
-        self.videoId = id
-        self.avPlayer = AVPlayer(url: url)
-    }
-    
-    deinit {
-        if let timeObservation = self.timeObservation {
-            self.avPlayer.removeTimeObserver(timeObservation)
+        if let value = self.player.media.length.value {
+            return value.doubleValue / 1000
         }
+        
+        return 0
     }
     
-    func setupTimePublisher(updatePeriodicInSeconds: TimeInterval = 0.1) -> PassthroughSubject<TimeInterval, Never> {
-        self.timeObservation = self.avPlayer.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: updatePeriodicInSeconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC)),
-            queue: .main
-        ) { [weak self] time in
-            guard let self = self else { return }
-            self.timeInMillisecondsPublisher.send(time.seconds * 1000)
-        }
+    let player = VLCMediaPlayer()
+    let timeInMillisecondsPublisher = PassthroughSubject<TimeInterval, Never>()
     
-        return self.timeInMillisecondsPublisher
+    override init() {
+        super.init()
+        self.player.delegate = self
     }
     
+    func set(viewport: UIView) {
+        self.player.drawable = viewport
+    }
+    
+    func set(videoUrl: URL) {
+        self.player.media = VLCMedia(url: videoUrl)
+    }
+        
     func play() {
-        self.avPlayer.play()
+        self.player.play()
     }
     
     func pause() {
-        self.avPlayer.pause()
+        self.player.pause()
     }
     
     func seek(timeInSeconds: TimeInterval) {
-        self.avPlayer.seek(to: CMTime(seconds: timeInSeconds, preferredTimescale: CMTimeScale(NSEC_PER_SEC)))
+//        self.avPlayer.seek(to: CMTime(seconds: timeInSeconds, preferredTimescale: CMTimeScale(1)))
+    }
+    
+    func seek(timeInMilliseconds: TimeInterval) {
+        self.player.fastForward(atRate: Float(timeInMilliseconds))
+    }
+    
+}
+
+extension PlayerController: VLCMediaPlayerDelegate {
+    
+    func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+//        self.timeInMillisecondsPublisher.send(self.currentTimeInMilliseconds)
     }
     
 }
