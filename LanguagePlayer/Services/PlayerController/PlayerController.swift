@@ -1,38 +1,31 @@
-//
-//  PlayerController.swift
-//  LanguagePlayer
-//
-//  Created by Maxim Troshin on 16.07.2020.
-//  Copyright © 2020 Maxim Troshin. All rights reserved.
-//
-
-import Foundation
-import AVKit
-import Combine
 import MobileVLCKit
+
+typealias Milliseconds = Int
+
+protocol PlayerControllerDelegate: class {
+    func playerController(_ player: PlayerController, changed time: Milliseconds)
+    func playerController(_ player: PlayerController, videoDuration: Milliseconds)
+}
 
 class PlayerController: NSObject {
     var videoId: ID = ""
-    var currentTimeInMilliseconds: TimeInterval {
+    var currentTime: Milliseconds {
         if let value = self.player.time.value {
-            return value.doubleValue
+            return value.intValue
         }
         
         return 0
     }
-    var currentTimeInSeconds: TimeInterval {
-        self.currentTimeInMilliseconds / 1000
-    }
-    var videoDurationInSeconds: TimeInterval {
+    var videoDuration: Milliseconds {
         if let value = self.player.media.length.value {
-            return value.doubleValue / 1000
+            return value.intValue
         }
         
         return 0
     }
+    weak var delegate: PlayerControllerDelegate?
     
     let player = VLCMediaPlayer()
-    let timeInMillisecondsPublisher = PassthroughSubject<TimeInterval, Never>()
     
     override init() {
         super.init()
@@ -54,13 +47,9 @@ class PlayerController: NSObject {
     func pause() {
         self.player.pause()
     }
-    
-    func seek(timeInSeconds: TimeInterval) {
-//        self.avPlayer.seek(to: CMTime(seconds: timeInSeconds, preferredTimescale: CMTimeScale(1)))
-    }
-    
-    func seek(timeInMilliseconds: TimeInterval) {
-        self.player.fastForward(atRate: Float(timeInMilliseconds))
+        
+    func seek(to time: Milliseconds) {
+        self.player.time = VLCTime(number: NSNumber(value: time))
     }
     
 }
@@ -68,7 +57,13 @@ class PlayerController: NSObject {
 extension PlayerController: VLCMediaPlayerDelegate {
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
-//        self.timeInMillisecondsPublisher.send(self.currentTimeInMilliseconds)
+        self.delegate?.playerController(self, changed: self.currentTime)
+    }
+    
+    func mediaPlayerStateChanged(_ aNotification: Notification!) {
+        if let duration = self.player.media.length.value?.intValue {
+            self.delegate?.playerController(self, videoDuration: duration)
+        }
     }
     
 }

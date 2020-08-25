@@ -22,7 +22,7 @@ struct VideoPlayerViewState: Equatable {
 struct VideoPlayerNavigationData: Equatable {
     let videoId: ID
     let videoUrl: URL
-    let fromMilliseconds: TimeInterval
+    let fromTime: Milliseconds
     let sourceSubtitleUrl: URL?
     let targetSubtitleUrl: URL?
     
@@ -36,6 +36,6 @@ struct VideoPlayerNavigationData: Equatable {
         self.targetSubtitleUrl = localStore.url(for: video.savedInDirectoryName, fileName: video.targetSubtitleFileName)
         self.videoId = videoId
         
-        self.fromMilliseconds = appState.navigation.transiotionData?["from"] as? TimeInterval ?? 0
+        self.fromTime = appState.navigation.transiotionData?["from"] as? Milliseconds ?? 0
     }
 }

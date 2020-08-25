@@ -94,8 +94,8 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                             source: translation.source,
                             target: translation.target,
                             videoID: translation.videoId,
-                            fromMilliseconds: translation.fromMilliseconds,
-                            toMilliseconds: translation.toMilliseconds
+                            fromTime: translation.fromTime,
+                            toTime: translation.toTime
                         )
                         next(AppStateActions.AddTranslation(data: data))
                         return
@@ -118,8 +118,8 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                             source: action.source,
                             target: translatedText,
                             videoID: action.videoID,
-                            fromMilliseconds: action.fromMilliseconds,
-                            toMilliseconds: action.toMilliseconds
+                            fromTime: action.fromTime,
+                            toTime: action.toTime
                         )
                         next(AppStateActions.AddTranslation(data: data))
                         next(AppStateActions.AddTranslationToHistory(data: data))

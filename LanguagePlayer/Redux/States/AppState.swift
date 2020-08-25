@@ -64,15 +64,15 @@ struct TranslationState: Codable {
     let videoId: ID
     let source: String
     let target: String
-    let fromMilliseconds: TimeInterval
-    let toMilliseconds: TimeInterval
+    let fromTime: Milliseconds
+    let toTime: Milliseconds
     
     init(from model: TranslationModel) {
         self.id = UUID().uuidString
         self.videoId = model.videoID
         self.source = model.source
         self.target = model.target
-        self.fromMilliseconds = model.fromMilliseconds
-        self.toMilliseconds = model.toMilliseconds
+        self.fromTime = model.fromTime
+        self.toTime = model.toTime
     }
 }

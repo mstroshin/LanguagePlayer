@@ -48,10 +48,8 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
             let timeRange = lines[1]
             let times = timeRange.components(separatedBy: " --> ")
             
-            guard let fromTime = self.parseToMilliseconds(timeString: times[0]),
-                let toTime = self.parseToMilliseconds(timeString: times[1]) else {
-                fatalError("Doesn't parse subtitle file \(self.filePath)")
-            }
+            let fromTime = self.parse(timeString: times[0])
+            let toTime = self.parse(timeString: times[1])
             
             var text = ""
             for i in 2 ..< lines.count {
@@ -69,45 +67,36 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
         return result
     }
     
-    private func parseToMilliseconds(timeString: String) -> TimeInterval? {
+    private func parse(timeString: String) -> Milliseconds {
         let timeParts = timeString.components(separatedBy: ":")
         let secondsAndMilliseconds = timeParts[2].components(separatedBy: ",")
         
-        let hours = TimeInterval(timeParts[0])!
-        let minutes = TimeInterval(timeParts[1])!
-        let seconds = TimeInterval(secondsAndMilliseconds[0])!
-        let milliseconds = TimeInterval(secondsAndMilliseconds[1])!
+        let hours = Milliseconds(timeParts[0])!
+        let minutes = Milliseconds(timeParts[1])!
+        let seconds = Milliseconds(secondsAndMilliseconds[0])!
+        let milliseconds = Milliseconds(secondsAndMilliseconds[1])!
         
         return hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds
     }
     
-    func getSubtitle(for timeInMilliseconds: TimeInterval) -> SubtitlePart? {
-        let r = self.parts.first { timeInMilliseconds >= $0.fromTime && timeInMilliseconds <= $0.toTime }
-        return r
+    func getSubtitle(for time: Milliseconds) -> SubtitlePart? {
+        self.parts.first { time >= $0.fromTime && time <= $0.toTime }
     }
     
-    func getPreviousSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart? {
-        if let currentSubtitle = self.getSubtitle(for: timeInMilliseconds) {
+    func getPreviousSubtitle(current time: Milliseconds) -> SubtitlePart? {
+        if let currentSubtitle = self.getSubtitle(for: time) {
             return self.parts.first { $0.number == currentSubtitle.number - 1 }
         }
         
-        return self.parts.reversed().first { $0.fromTime < timeInMilliseconds }
+        return self.parts.reversed().first { $0.fromTime < time }
     }
     
-    func getNextSubtitle(current timeInMilliseconds: TimeInterval) -> SubtitlePart? {
-//        print("Next time \(timeInMilliseconds)")
-        
-        if let currentSubtitle = self.getSubtitle(for: timeInMilliseconds) {
-            let r = self.parts.first { $0.number == currentSubtitle.number + 1 }
-//            print("Next \(String(describing: r?.number))")
-            
-            return r
+    func getNextSubtitle(current time: Milliseconds) -> SubtitlePart? {
+        if let currentSubtitle = self.getSubtitle(for: time) {
+            return self.parts.first { $0.number == currentSubtitle.number + 1 }
         }
         
-        let r = self.parts.first { timeInMilliseconds < $0.fromTime }
-//        print("Next 2 \(String(describing: r?.number))")
-
-        return r
+        return self.parts.first { time < $0.fromTime }
     }
     
 }

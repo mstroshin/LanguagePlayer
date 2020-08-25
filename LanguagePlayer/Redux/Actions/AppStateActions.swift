@@ -37,8 +37,8 @@ struct AppStateActions {
     struct Translate: Action {
         let source: String
         let videoID: ID
-        let fromMilliseconds: TimeInterval
-        let toMilliseconds: TimeInterval
+        let fromTime: Milliseconds
+        let toTime: Milliseconds
     }
     
     struct AddTranslation: Action {
@@ -61,6 +61,6 @@ struct TranslationModel {
     let source: String
     let target: String
     let videoID: ID
-    let fromMilliseconds: TimeInterval
-    let toMilliseconds: TimeInterval
+    let fromTime: Milliseconds
+    let toTime: Milliseconds
 }
