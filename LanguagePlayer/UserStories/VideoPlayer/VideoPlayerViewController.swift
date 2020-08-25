@@ -6,7 +6,9 @@ import Combine
 class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
     @IBOutlet private var controlsView: ControlsView!
-    var playerController: PlayerController!
+    @IBOutlet private var videoViewport: UIView!
+    
+    let playerController = PlayerController()
     var subtitlesExtractor: SubtitlesExtractor!
     
     private var currentSubtitle: SubtitlePart?
@@ -56,24 +58,17 @@ class VideoPlayerViewController: UIViewController {
         self.subtitlesView.isHidden = true
         self.subtitlesView.delegate = self
         self.controlsView.delegate = self
-    }
-    
-    //MARK: - Presenter input
-    func show(player: AVPlayer) {
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = self.view.bounds
-        self.view.layer.addSublayer(playerLayer)
-        self.view.bringSubviewToFront(self.subtitlesView)
         
-        self.playerLayer = playerLayer
+        self.playerController.delegate = self
+        self.playerController.set(viewport: self.videoViewport)
     }
     
-    func set(durationInSeconds: TimeInterval) {
-        self.controlsView.set(durationInSeconds: durationInSeconds)
+    func set(duration: Milliseconds) {
+        self.controlsView.set(duration: duration)
     }
     
-    func updateTime(_ timeInMilliseconds: TimeInterval) {
-        self.controlsView.set(timeInSeconds: timeInMilliseconds / 1000)
+    func updateTime(_ time: Milliseconds) {
+        self.controlsView.set(time: time)
     }
         
     func startPlaying() {
@@ -119,8 +114,8 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
         store.dispatch(AppStateActions.Translate(
             source: text,
             videoID: self.playerController.videoId,
-            fromMilliseconds: subtitle.fromTime,
-            toMilliseconds: subtitle.toTime
+            fromTime: subtitle.fromTime,
+            toTime: subtitle.toTime
         ))
     }
     
@@ -140,12 +135,12 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressBackwardFifteen() {
         self.hideTranslation()
-        self.playerController.seek(timeInSeconds: self.playerController.currentTimeInSeconds - 15)
+        self.playerController.seek(to: self.playerController.currentTime - 15 * 1000)
     }
     
     func didPressForwardFifteen() {
         self.hideTranslation()
-        self.playerController.seek(timeInSeconds: self.playerController.currentTimeInSeconds + 15)
+        self.playerController.seek(to: self.playerController.currentTime + 15 * 1000)
     }
     
     func didPressPlay() {
@@ -159,22 +154,52 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         self.stopPlaying()
     }
     
+    //TODO
     func didPressScreenTurn() {
-        var value = UIDevice.current.orientation.rawValue
-        value += 1
-        if value > 4 {
-            value = 1
-        }
         
-//        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "interfaceOrientationChangeRequested"), object: UIInterfaceOrientation(rawValue: value))
-        UIViewController.attemptRotationToDeviceOrientation()
     }
     
-    func seekValueChangedSeekSlider(timeInSeconds: TimeInterval) {
+    func seekValueChangedSeekSlider(time: Milliseconds) {
         self.hideTranslation()
-        self.playerController.seek(timeInSeconds: timeInSeconds)
+        self.playerController.seek(to: time)
+    }
+    
+    func didPressBackwardSub() {
+        if let subtitle = self.subtitlesExtractor?.getPreviousSubtitle(current: self.playerController.currentTime) {
+            self.currentSubtitle = subtitle
+            self.show(subtitles: "\(subtitle.number) " + subtitle.text)
+            self.playerController.seek(to: subtitle.fromTime)
+        }
+    }
+    
+    func didPressForwardSub() {
+        if let subtitle = self.subtitlesExtractor?.getNextSubtitle(current: self.playerController.currentTime) {
+            self.currentSubtitle = subtitle
+            self.show(subtitles: subtitle.text)
+            self.playerController.seek(to: subtitle.fromTime)
+        }
+    }
+    
+}
+
+extension VideoPlayerViewController: PlayerControllerDelegate {
+    
+    func playerController(_ player: PlayerController, changed time: Milliseconds) {
+        self.updateTime(time)
+        
+        if let subtitle = self.subtitlesExtractor?.getSubtitle(for: time) {
+            if self.currentSubtitle?.number != subtitle.number {
+                self.currentSubtitle = subtitle
+                self.show(subtitles: subtitle.text)
+            }
+        } else {
+            self.currentSubtitle = nil
+            self.hideSubtitles()
+        }
+    }
+    
+    func playerController(_ player: PlayerController, videoDuration: Milliseconds) {
+        self.set(duration: videoDuration)
     }
     
 }
@@ -188,32 +213,17 @@ extension VideoPlayerViewController: StoreSubscriber {
         }
         
         if let navigationData = state.navigationData {
-            self.playerController = PlayerController(id: navigationData.videoId, url: navigationData.videoUrl)
+            self.playerController.set(videoUrl: navigationData.videoUrl)
+            self.playerController.videoId = navigationData.videoId
             
             if let sourceSubtitleUrl = navigationData.sourceSubtitleUrl {
                 self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
             }
             
-            self.show(player: self.playerController.avPlayer)
-            
-            let cancellable = self.playerController.setupTimePublisher().sink { timeInMilliseconds in
-                self.updateTime(timeInMilliseconds)
-                
-                if let subtitle = self.subtitlesExtractor?.getSubtitle(for: timeInMilliseconds) {
-                    self.currentSubtitle = subtitle
-                    self.show(subtitles: subtitle.text)
-                } else {
-                    self.currentSubtitle = nil
-                    self.hideSubtitles()
-                }
-            }
-            self.cancellables.append(cancellable)
-            
-            self.set(durationInSeconds: self.playerController.videoDurationInSeconds)
             self.playerController.play()
             self.startPlaying()
             
-            self.playerController.seek(timeInSeconds: navigationData.fromMilliseconds / 1000)
+            self.playerController.seek(to: navigationData.fromTime)
         }
     }
 }

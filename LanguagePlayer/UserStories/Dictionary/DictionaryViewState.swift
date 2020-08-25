@@ -15,8 +15,8 @@ struct DictionaryViewState {
         let id: ID
         let source: String
         let target: String
-        let fromMilliseconds: TimeInterval
-        let toMilliseconds: TimeInterval
+        let fromTime: Milliseconds
+        let toTime: Milliseconds
         let videoTitle: String
         let videoId: ID
         
@@ -24,8 +24,8 @@ struct DictionaryViewState {
             self.id = state.id
             self.source = state.source
             self.target = state.target
-            self.fromMilliseconds = state.fromMilliseconds
-            self.toMilliseconds = state.toMilliseconds
+            self.fromTime = state.fromTime
+            self.toTime = state.toTime
             self.videoTitle = fileName.components(separatedBy: ".").first!
             self.videoId = state.videoId
         }

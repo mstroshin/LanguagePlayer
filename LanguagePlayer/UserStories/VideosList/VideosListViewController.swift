@@ -55,6 +55,7 @@ class VideosListViewController: BaseViewController {
     
 }
 
+//To iPad and iPhone popover looks same
 extension VideosListViewController: UIPopoverPresentationControllerDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

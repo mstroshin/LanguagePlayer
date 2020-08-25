@@ -202,9 +202,9 @@ extension SubtitlesView {
     }
     
     func updatePositions() {
-        if let selectedTextRange = self.selectedTextRange {
-            
-        }
+//        if let selectedTextRange = self.selectedTextRange {
+//
+//        }
     }
     
 }

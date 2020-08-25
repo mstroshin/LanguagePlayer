@@ -54,8 +54,8 @@ extension DictionaryViewController: DictionaryTableViewCellDelegate {
             screen: .player,
             transitionType: .present(.fullScreen),
             data: ["videoId": translation.videoId,
-                   "from": translation.fromMilliseconds,
-                   "to": translation.toMilliseconds]
+                   "from": translation.fromTime,
+                   "to": translation.toTime]
         ))
     }
     

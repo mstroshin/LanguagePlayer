@@ -1,11 +1,3 @@
-//
-//  ControlsView.swift
-//  LanguagePlayer
-//
-//  Created by Maxim Troshin on 22.07.2020.
-//  Copyright © 2020 Maxim Troshin. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -16,7 +8,9 @@ protocol ControlsViewDelegate: class {
     func didPressPlay()
     func didPressPause()
     func didPressScreenTurn()
-    func seekValueChangedSeekSlider(timeInSeconds: TimeInterval)
+    func seekValueChangedSeekSlider(time: Milliseconds)
+    func didPressBackwardSub()
+    func didPressForwardSub()
 }
 
 class ControlsView: UIView {
@@ -74,25 +68,33 @@ class ControlsView: UIView {
     }
     
     @IBAction private func valueChangedSeekSlider(_ sender: UISlider) {
-        self.delegate?.seekValueChangedSeekSlider(timeInSeconds: TimeInterval(sender.value))
+        self.delegate?.seekValueChangedSeekSlider(time: Milliseconds(sender.value))
     }
     
-    func set(durationInSeconds: TimeInterval) {
+    @IBAction private func didPressBackwardSubButton(_ sender: UIButton) {
+        self.delegate?.didPressBackwardSub()
+    }
+    
+    @IBAction private func didPressForwardSubButton(_ sender: UIButton) {
+        self.delegate?.didPressForwardSub()
+    }
+    
+    func set(duration: Milliseconds) {
         self.seekSlider.minimumValue = 0
-        self.seekSlider.maximumValue = Float(durationInSeconds)
+        self.seekSlider.maximumValue = Float(duration)
     }
     
-    func set(timeInSeconds: TimeInterval) {
+    func set(time: Milliseconds) {
         let formatter = DateComponentsFormatter()
         formatter.zeroFormattingBehavior = .pad
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
 
-        let formattedString = formatter.string(from: timeInSeconds)!
+        let formattedString = formatter.string(from: TimeInterval(time / 1000))!
         self.timeLabel.text = formattedString
         
         if self.isValueChanging == false {
-            self.seekSlider.value = Float(timeInSeconds)
+            self.seekSlider.value = Float(time)
         }
     }
     
