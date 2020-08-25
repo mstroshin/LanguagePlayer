@@ -1,4 +1,4 @@
-const supportedVideoFormats = ".mp4";
+const supportedVideoFormats = ".mp4,.avi";
 const supportedSubtitlesFormats = ".srt";
 var isUploading = false;
 

@@ -24,6 +24,7 @@ class PlayerController: NSObject {
         return 0
     }
     weak var delegate: PlayerControllerDelegate?
+    private(set) var isPlayerReady = false
     
     let player = VLCMediaPlayer()
     
@@ -61,7 +62,22 @@ extension PlayerController: VLCMediaPlayerDelegate {
     }
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
-        if let duration = self.player.media.length.value?.intValue {
+        //Run once
+        if let duration = self.player.media.length.value?.intValue, self.isPlayerReady == false {
+            self.isPlayerReady = true
+            
+            //Disable inner subtitles
+            self.player.currentVideoSubTitleIndex = -1
+            
+            //Choose english audio track
+            let audioTrackNames = self.player.audioTrackNames as! [String]
+            if audioTrackNames.count > 2 {
+                if let (index, _) = audioTrackNames.enumerated().first(where: { $0.element.contains("en") }) {
+                    self.player.currentAudioTrackIndex = Int32(index)
+                }
+            }
+            
+            //Send video duration
             self.delegate?.playerController(self, videoDuration: duration)
         }
     }
