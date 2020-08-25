@@ -1,5 +1,5 @@
 import UIKit
-import AVFoundation
+import MobileVLCKit
 import ReSwift
 
 class VideosListViewController: BaseViewController {
@@ -83,7 +83,6 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
             withReuseIdentifier: VideoCollectionViewItem.identifier,
             for: indexPath
         ) as! VideoCollectionViewItem
-        cell.image.image = self.videosList[indexPath.row].videoPreviewImage
         cell.titleLabel.text = self.videosList[indexPath.row].videoTitle
         
         return cell
@@ -116,6 +115,21 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
     
 }
 
+extension VideosListViewController: VLCMediaThumbnailerDelegate {
+    
+    func mediaThumbnailerDidTimeOut(_ mediaThumbnailer: VLCMediaThumbnailer!) {
+        print("mediaThumbnailerDidTimeOut")
+    }
+    
+    func mediaThumbnailer(_ mediaThumbnailer: VLCMediaThumbnailer!, didFinishThumbnail thumbnail: CGImage!) {
+        if let label = mediaThumbnailer.accessibilityLabel, let row = Int(label),
+            let cell = self.collectionView.cellForItem(at: IndexPath(item: row, section: 0)) as? VideoCollectionViewItem {
+            cell.image.image = UIImage(cgImage: thumbnail)
+        }
+    }
+    
+}
+
 extension VideosListViewController: StoreSubscriber {
     typealias State = VideoListViewState
     
@@ -123,7 +137,17 @@ extension VideosListViewController: StoreSubscriber {
         DispatchQueue.main.async {
             self.collectionView.diffUpdate(source: self.videosList, target: state.videos) {
                 self.videosList = $0
+                self.makeThumbneils(for: $0)
             }
+        }
+    }
+    
+    private func makeThumbneils(for videos: [VideoViewState]) {
+        for (index, video) in videos.enumerated() {
+            let media = VLCMedia(url: video.videoUrl)
+            let thumbnailer = VLCMediaThumbnailer(media: media, andDelegate: self)
+            thumbnailer?.accessibilityLabel = "\(index)"
+            thumbnailer?.fetchThumbnail()
         }
     }
     
