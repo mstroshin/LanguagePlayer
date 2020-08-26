@@ -38,6 +38,7 @@
 		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
 		D28DC02E24ED8A8C00017E8D /* DictionaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */; };
 		D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */; };
+		D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
@@ -103,6 +104,7 @@
 		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
 		D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRouter.swift; sourceTree = "<group>"; };
 		D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewState.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -264,11 +266,11 @@
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
+				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 				D287497F24D5A17000687095 /* VideosListViewController.swift */,
 				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
 				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
 				D28DC02924ED619A00017E8D /* VideosListRouter.swift */,
-				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
 			);
 			path = VideosList;
 			sourceTree = "<group>";
@@ -335,6 +337,15 @@
 				D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		D2B29E8C24F6737000AF06A9 /* UploadTutorial */ = {
+			isa = PBXGroup;
+			children = (
+				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
+				D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */,
+			);
+			path = UploadTutorial;
 			sourceTree = "<group>";
 		};
 		D2D292EE24C78BA0004660EE /* TranslationAPI */ = {
@@ -592,6 +603,7 @@
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
+				D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */,
 				D26131E024EBC66000381945 /* TranslationViewState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

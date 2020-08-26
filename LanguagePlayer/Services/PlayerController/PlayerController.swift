@@ -9,13 +9,7 @@ protocol PlayerControllerDelegate: class {
 
 class PlayerController: NSObject {
     var videoId: ID = ""
-    var currentTime: Milliseconds {
-        if let value = self.player.time.value {
-            return value.intValue
-        }
-        
-        return 0
-    }
+    var currentTime: Milliseconds = 0
     var videoDuration: Milliseconds {
         if let value = self.player.media.length.value {
             return value.intValue
@@ -23,10 +17,13 @@ class PlayerController: NSObject {
         
         return 0
     }
+    var isPlaying: Bool {
+        self.player.isPlaying
+    }
     weak var delegate: PlayerControllerDelegate?
     private(set) var isPlayerReady = false
     
-    let player = VLCMediaPlayer()
+    private let player = VLCMediaPlayer()
     
     override init() {
         super.init()
@@ -50,7 +47,12 @@ class PlayerController: NSObject {
     }
         
     func seek(to time: Milliseconds) {
+        self.currentTime = time
         self.player.time = VLCTime(number: NSNumber(value: time))
+        
+        if self.isPlaying == false {
+            self.delegate?.playerController(self, changed: time)
+        }
     }
     
 }
@@ -58,6 +60,7 @@ class PlayerController: NSObject {
 extension PlayerController: VLCMediaPlayerDelegate {
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
+        self.currentTime ?= self.player.time.value?.intValue
         self.delegate?.playerController(self, changed: self.currentTime)
     }
     

@@ -30,3 +30,11 @@ extension UICollectionView {
         reload(using: changeset, setData: setData)
     }
 }
+
+precedencegroup AssignmentPrecedence {}
+infix operator ?=
+func ?= <T: Any> (left: inout T, right: T?) {
+    if let right = right {
+        left = right
+    }
+}

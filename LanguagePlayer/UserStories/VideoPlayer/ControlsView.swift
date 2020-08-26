@@ -98,4 +98,24 @@ class ControlsView: UIView {
         }
     }
     
+    @objc func hideAnimated() {
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 0
+        }
+    }
+    
+    func showAnimated() {
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1
+        }
+    }
+    
+    func toogleVisibility() {
+        if self.alpha == 0 {
+            self.showAnimated()
+        } else {
+            self.hideAnimated()
+        }
+    }
+    
 }

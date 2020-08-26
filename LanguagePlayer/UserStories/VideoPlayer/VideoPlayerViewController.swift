@@ -12,8 +12,6 @@ class VideoPlayerViewController: UIViewController {
     var subtitlesExtractor: SubtitlesExtractor!
     
     private var currentSubtitle: SubtitlePart?
-    private var cancellables = [AnyCancellable]()
-    private weak var playerLayer: AVPlayerLayer?
     
     override func viewDidLoad() {
         self.setupViews()        
@@ -35,23 +33,8 @@ class VideoPlayerViewController: UIViewController {
         store.dispatch(NavigationActions.NavigationCompleted(currentScreen: .player))
     }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        .all
-    }
-    
-    override var shouldAutorotate: Bool {
+    override var prefersStatusBarHidden: Bool {
         true
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: { context in
-            self.playerLayer?.frame = CGRect(origin: .zero, size: size)
-            self.view.bringSubviewToFront(self.subtitlesView)
-        }) { context in
-            self.subtitlesView.updatePositions()
-        }
     }
     
     private func setupViews() {
@@ -72,11 +55,16 @@ class VideoPlayerViewController: UIViewController {
     }
         
     func startPlaying() {
+        self.playerController.play()
+        self.hideTranslation()
         self.controlsView.isPlaying = true
         self.subtitlesView.deselectAll()
+        
+        self.controlsView.perform(#selector(ControlsView.hideAnimated), with: nil, afterDelay: 1)
     }
     
     func stopPlaying() {
+        self.playerController.pause()
         self.controlsView.isPlaying = false
     }
     
@@ -93,6 +81,10 @@ class VideoPlayerViewController: UIViewController {
     
     func hideTranslation() {
         self.subtitlesView.hideTranslationView()
+    }
+    
+    @IBAction func didTapOnViewport(_ sender: UITapGestureRecognizer) {
+        self.controlsView.toogleVisibility()
     }
     
 }
@@ -144,13 +136,10 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     }
     
     func didPressPlay() {
-        self.playerController.play()
         self.startPlaying()
-        self.hideTranslation()
     }
     
     func didPressPause() {
-        self.playerController.pause()
         self.stopPlaying()
     }
     
@@ -167,7 +156,7 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     func didPressBackwardSub() {
         if let subtitle = self.subtitlesExtractor?.getPreviousSubtitle(current: self.playerController.currentTime) {
             self.currentSubtitle = subtitle
-            self.show(subtitles: "\(subtitle.number) " + subtitle.text)
+            self.show(subtitles: subtitle.text)
             self.playerController.seek(to: subtitle.fromTime)
         }
     }
@@ -220,9 +209,7 @@ extension VideoPlayerViewController: StoreSubscriber {
                 self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
             }
             
-            self.playerController.play()
             self.startPlaying()
-            
             self.playerController.seek(to: navigationData.fromTime)
         }
     }

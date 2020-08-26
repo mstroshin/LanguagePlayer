@@ -308,6 +308,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idk-sX-0Jw">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="w8V-ly-Wd6" appends="YES" id="owe-Vq-xGj"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKL-NB-tt7" customClass="SubtitlesView" customModule="LanguagePlayer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="608" width="992" height="140"/>
@@ -543,6 +547,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="w8V-ly-Wd6">
+                    <connections>
+                        <action selector="didTapOnViewport:" destination="BYZ-38-t0r" id="4Il-S9-PLw"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1579.6875" y="136.71875"/>
         </scene>
