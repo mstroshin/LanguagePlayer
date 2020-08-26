@@ -181,7 +181,7 @@ extension VideoPlayerViewController: PlayerControllerDelegate {
                 self.currentSubtitle = subtitle
                 self.show(subtitles: subtitle.text)
             }
-        } else {
+        } else if self.currentSubtitle != nil {
             self.currentSubtitle = nil
             self.hideSubtitles()
         }

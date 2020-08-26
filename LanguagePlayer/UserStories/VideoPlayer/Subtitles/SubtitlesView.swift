@@ -201,12 +201,6 @@ extension SubtitlesView {
         self.translationView.isHidden = true
     }
     
-    func updatePositions() {
-//        if let selectedTextRange = self.selectedTextRange {
-//
-//        }
-    }
-    
 }
 
 //Support methods
