@@ -25,6 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            window.makeKeyAndVisible()
 //            self.window = window
 //        }
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+        
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

@@ -84,6 +84,7 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
             for: indexPath
         ) as! VideoCollectionViewItem
         cell.titleLabel.text = self.videosList[indexPath.row].videoTitle
+        cell.contentView.layer.cornerRadius = 12
         
         return cell
     }
