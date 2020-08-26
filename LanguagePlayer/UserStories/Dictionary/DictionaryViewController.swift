@@ -38,6 +38,7 @@ extension DictionaryViewController: UITableViewDataSource {
         }
         let translation = self.translations[indexPath.row]
         cell.delegate = self
+        cell.selectionStyle = .none
         cell.configure(with: translation)
         
         return cell
@@ -53,7 +54,7 @@ extension DictionaryViewController: DictionaryTableViewCellDelegate {
         store.dispatch(NavigationActions.Navigate(
             screen: .player,
             transitionType: .present(.fullScreen),
-            data: ["videoId": translation.videoId,
+            data: ["videoId": translation.videoId!,
                    "from": translation.fromTime,
                    "to": translation.toTime]
         ))

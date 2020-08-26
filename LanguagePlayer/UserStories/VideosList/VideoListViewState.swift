@@ -17,7 +17,7 @@ struct VideoViewState {
     init(video: VideoState) {        
         self.id = video.id
         self.videoTitle = video.fileName.components(separatedBy: ".").first!
-        self.videoUrl = LocalDiskStore().url(for: video.savedInDirectoryName, fileName: video.fileName)!
+        self.videoUrl = LocalDiskStore().url(for: video.savedInDirectoryName, fileName: video.fileName) ?? URL(fileURLWithPath: "")
     }
 }
 

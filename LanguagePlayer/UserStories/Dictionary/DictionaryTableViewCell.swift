@@ -14,11 +14,12 @@ class DictionaryTableViewCell: UITableViewCell {
     @IBOutlet private weak var videoTitleLabel: UILabel!
     @IBOutlet private weak var playButton: UIButton!
     
-    
     func configure(with translation: DictionaryViewState.TranslationViewState) {
         self.sourceLabel.text = translation.source
         self.targetLabel.text = translation.target
         self.videoTitleLabel.text = translation.videoTitle
+        
+        self.playButton.isHidden = translation.videoId == nil 
     }
     
     @IBAction func didPressPlayButton(_ sender: UIButton) {
