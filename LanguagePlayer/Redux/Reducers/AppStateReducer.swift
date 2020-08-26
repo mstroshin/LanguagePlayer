@@ -35,6 +35,8 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
     case let action as AppStateActions.ServerStarted:
         state.webServerAddress = action.webServerAddress
         state.webServerIPAddress = action.webServerIPAddress
+    case _ as AppStateActions.ClearCurrentTranslation:
+        state.currentTranslation = nil
     default:
         break
     }

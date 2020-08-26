@@ -103,30 +103,26 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCollectionViewItem" id="Jsv-Dk-BRD" customClass="VideoCollectionViewItem" customModule="LanguagePlayer" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="16" width="240" height="180"/>
+                                        <rect key="frame" x="16" y="16" width="159.5" height="172"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="GGV-oM-EeN">
-                                            <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="159.5" height="172"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HWv-ni-Ap7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="180" id="3tq-sN-EAc"/>
-                                                        <constraint firstAttribute="width" constant="240" id="qkb-Gs-OFB"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="159.5" height="172"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rE2-tZ-Yx0">
-                                                    <rect key="frame" x="0.0" y="140" width="240" height="40"/>
+                                                    <rect key="frame" x="0.0" y="132" width="159.5" height="40"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Название фильма в две строки" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwn-WQ-VEA">
-                                                            <rect key="frame" x="8" y="0.0" width="224" height="40"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <nil key="textColor"/>
+                                                            <rect key="frame" x="8" y="0.0" width="143.5" height="40"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="0.29858054577464788" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstItem="hwn-WQ-VEA" firstAttribute="leading" secondItem="rE2-tZ-Yx0" secondAttribute="leading" constant="8" id="A0s-MR-nz1"/>
                                                         <constraint firstAttribute="bottom" secondItem="hwn-WQ-VEA" secondAttribute="bottom" id="MBI-yk-3kM"/>
@@ -180,10 +176,10 @@
             </objects>
             <point key="canvasLocation" x="845.5078125" y="137.5"/>
         </scene>
-        <!--Dictionary View Controller-->
+        <!--Dictionary-->
         <scene sceneID="Sgt-bp-RAh">
             <objects>
-                <viewController id="9La-ad-bnR" customClass="DictionaryViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Dictionary" id="9La-ad-bnR" customClass="DictionaryViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0EI-lX-Qau">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -237,9 +233,10 @@
                                                         <constraint firstAttribute="bottom" secondItem="rpQ-TW-Sn2" secondAttribute="bottom" id="tOL-ny-dBp"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-XG-MNd">
-                                                    <rect key="frame" x="947" y="52.5" width="69" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wm0-XG-MNd">
+                                                    <rect key="frame" x="816" y="52.5" width="200" height="21"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="U9i-s1-wy9"/>
                                                         <constraint firstAttribute="height" constant="21" id="mrp-Dc-zuG"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -251,7 +248,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="Btl-5r-NXL" secondAttribute="trailing" constant="8" id="CvI-0L-whk"/>
                                                 <constraint firstAttribute="bottom" secondItem="wm0-XG-MNd" secondAttribute="bottom" constant="7" id="KJv-0M-Zpb"/>
                                                 <constraint firstItem="4bc-eB-x99" firstAttribute="top" secondItem="ZgO-as-Kq6" secondAttribute="bottom" constant="4" id="L36-Se-e7A"/>
-                                                <constraint firstItem="wm0-XG-MNd" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XSb-WX-ztZ" secondAttribute="leading" id="PoA-jt-gAV"/>
                                                 <constraint firstItem="ZgO-as-Kq6" firstAttribute="leading" secondItem="XSb-WX-ztZ" secondAttribute="leading" constant="8" id="RH4-2h-YpN"/>
                                                 <constraint firstItem="ZgO-as-Kq6" firstAttribute="top" secondItem="XSb-WX-ztZ" secondAttribute="top" constant="8" id="UWn-tC-Sez"/>
                                                 <constraint firstItem="4bc-eB-x99" firstAttribute="leading" secondItem="XSb-WX-ztZ" secondAttribute="leading" constant="8" id="UZT-WC-70d"/>
@@ -285,7 +281,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hnG-ky-AaA"/>
                     </view>
-                    <navigationItem key="navigationItem" id="wAy-yp-eP6"/>
+                    <navigationItem key="navigationItem" title="Dictionary" id="wAy-yp-eP6"/>
                     <connections>
                         <outlet property="tableView" destination="Omo-3C-L6F" id="O6Z-OV-yFp"/>
                     </connections>
@@ -320,7 +316,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idk-sX-0Jw">
                                 <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="w8V-ly-Wd6" appends="YES" id="owe-Vq-xGj"/>
@@ -581,7 +577,6 @@
                     <connections>
                         <segue destination="xgp-gQ-ybj" kind="relationship" relationship="viewControllers" id="87v-du-vWy"/>
                         <segue destination="jWF-vD-0RI" kind="relationship" relationship="viewControllers" id="4wO-xe-eSa"/>
-                        <segue destination="BUI-Ze-cqH" kind="relationship" relationship="viewControllers" id="pHq-cb-NH6"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iOZ-4w-lCb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -610,7 +605,7 @@
         <!--Dictionary-->
         <scene sceneID="lYA-Ob-fQg">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jWF-vD-0RI" sceneMemberID="viewController">
+                <navigationController title="Dictionary" automaticallyAdjustsScrollViewInsets="NO" id="jWF-vD-0RI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Dictionary" image="book" catalog="system" id="bvJ-Su-0Zq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Wd5-LI-HJL">

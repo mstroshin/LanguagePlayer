@@ -122,16 +122,19 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressClose() {
         self.playerController.pause()
+        store.dispatch(AppStateActions.ClearCurrentTranslation())
         self.dismiss(animated: true, completion: nil)
     }
     
     func didPressBackwardFifteen() {
         self.hideTranslation()
+        store.dispatch(AppStateActions.ClearCurrentTranslation())
         self.playerController.seek(to: self.playerController.currentTime - 15 * 1000)
     }
     
     func didPressForwardFifteen() {
         self.hideTranslation()
+        store.dispatch(AppStateActions.ClearCurrentTranslation())
         self.playerController.seek(to: self.playerController.currentTime + 15 * 1000)
     }
     
@@ -150,6 +153,7 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func seekValueChangedSeekSlider(time: Milliseconds) {
         self.hideTranslation()
+        store.dispatch(AppStateActions.ClearCurrentTranslation())
         self.playerController.seek(to: time)
     }
     
@@ -199,6 +203,8 @@ extension VideoPlayerViewController: StoreSubscriber {
     func newState(state: VideoPlayerViewState) {
         if let translation = state.tranlsation {
             self.subtitlesView.showTranslated(translation)
+        } else {
+            self.subtitlesView.hideTranslationView()
         }
         
         if let navigationData = state.navigationData {
