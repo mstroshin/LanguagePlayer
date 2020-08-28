@@ -6,6 +6,7 @@ class CardsViewController: BaseViewController {
     
     var items = [CardItemState]()
     var cardsSides = [Bool]()
+    let colorNumbers = Array(1...6).shuffled()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,41 +27,57 @@ class CardsViewController: BaseViewController {
     private func setupViews() {
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
-        self.collectionView.collectionViewLayout = self.createLayout()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.collectionView.collectionViewLayout = self.createLayoutIPad()
+        } else {
+            self.collectionView.collectionViewLayout = self.createLayoutIPhone()
+        }
     }
     
-    private func createLayout() -> UICollectionViewLayout {
+    private func createLayoutIPad() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(480),
-            heightDimension: .estimated(280)
+            widthDimension: .fractionalWidth(1/3.2),
+            heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: .fixed(8),
-            top: .fixed(8),
-            trailing: .fixed(8),
-            bottom: .fixed(8)
-        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(1)
+            heightDimension: .estimated(280)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: .fixed(8),
-            top: .fixed(8),
-            trailing: nil,
-            bottom: nil
-        )
+        group.interItemSpacing = .flexible(8)
 
         let section = NSCollectionLayoutSection(group: group)
-//        section.interGroupSpacing = 10
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
+    private func createLayoutIPhone() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/2.2),
+            heightDimension: .fractionalHeight(1)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(160)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .flexible(8)
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
+
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
     
 }
 
@@ -78,7 +95,7 @@ extension CardsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         cell.delegate = self
         cell.configure(with: item)
         
-        let colorNumber = abs(item.id.hashValue) % 6 + 1
+        let colorNumber = self.colorNumbers[indexPath.row % 6]
         cell.set(bgColor: UIColor(named: "cardColor\(colorNumber)"), playButtonColor: UIColor(named: "playColor\(colorNumber)"))
         
         return cell
