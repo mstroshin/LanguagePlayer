@@ -58,7 +58,7 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
             }
             //Remove last \n
             text.removeLast(1)
-            text = self.removeHTMLTags(from: text)
+            text = self.removeFormatting(from: text)
             
             result.append(
                 SubtitlePart(number: number, fromTime: fromTime, toTime: toTime, text: text)
@@ -68,9 +68,10 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
         return result
     }
     
-    private func removeHTMLTags(from text: String) -> String {
+    private func removeFormatting(from text: String) -> String {
         text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
             .replacingOccurrences(of: "&[^;]+;", with: "", options: .regularExpression, range: nil)
+            .replacingOccurrences(of: "{[^>]+}", with: "", options: .regularExpression, range: nil)
     }
     
     private func parse(timeString: String) -> Milliseconds {
