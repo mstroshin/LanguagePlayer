@@ -21,6 +21,7 @@ struct AppState: StateType {
     var translationsHistory = [TranslationState]()
     
     var currentTranslation: TranslationState?
+    var translating: Bool = false
 }
 
 extension AppState: Codable {

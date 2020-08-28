@@ -214,6 +214,9 @@
                                     <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iPk-xt-gAm" customClass="TranslationView" customModule="LanguagePlayer" customModuleProvider="target">
                                         <rect key="frame" x="424" y="-60" width="314" height="60"/>
                                         <subviews>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="uK8-SP-nyn">
+                                                <rect key="frame" x="147" y="20" width="20" height="20"/>
+                                            </activityIndicatorView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mf8-Gm-Hdf">
                                                 <rect key="frame" x="270" y="8" width="44" height="44"/>
                                                 <constraints>
@@ -239,14 +242,17 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="mf8-Gm-Hdf" secondAttribute="trailing" id="4DD-3r-51c"/>
                                             <constraint firstItem="9qH-Xg-LfR" firstAttribute="leading" secondItem="7Ym-Rc-bd0" secondAttribute="leading" constant="8" id="A36-52-y4P"/>
+                                            <constraint firstItem="uK8-SP-nyn" firstAttribute="centerX" secondItem="iPk-xt-gAm" secondAttribute="centerX" id="Kl7-Kk-oyV"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="mf8-Gm-Hdf" secondAttribute="bottom" constant="8" id="Nbd-f9-LAL"/>
                                             <constraint firstItem="9qH-Xg-LfR" firstAttribute="top" secondItem="iPk-xt-gAm" secondAttribute="top" constant="8" id="Sjf-Cq-jfA"/>
+                                            <constraint firstItem="uK8-SP-nyn" firstAttribute="centerY" secondItem="iPk-xt-gAm" secondAttribute="centerY" id="l0r-J1-9gY"/>
                                             <constraint firstItem="mf8-Gm-Hdf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iPk-xt-gAm" secondAttribute="top" constant="8" id="mR2-j6-Xmv"/>
                                             <constraint firstAttribute="bottom" secondItem="9qH-Xg-LfR" secondAttribute="bottom" constant="8" id="oMX-4b-7S9"/>
                                             <constraint firstItem="mf8-Gm-Hdf" firstAttribute="leading" secondItem="9qH-Xg-LfR" secondAttribute="trailing" constant="8" id="pDa-l8-DbR"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="7Ym-Rc-bd0"/>
                                         <connections>
+                                            <outlet property="activityIndicator" destination="uK8-SP-nyn" id="Qnd-Pc-wSX"/>
                                             <outlet property="dictionaryButton" destination="mf8-Gm-Hdf" id="Kj1-2Q-qhf"/>
                                             <outlet property="translationLabel" destination="9qH-Xg-LfR" id="avr-RW-JRq"/>
                                         </connections>

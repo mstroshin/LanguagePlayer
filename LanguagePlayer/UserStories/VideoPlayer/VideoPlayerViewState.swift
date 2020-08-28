@@ -1,20 +1,15 @@
 import Foundation
 
 struct VideoPlayerViewState: Equatable {
-    let tranlsation: TranslationViewState?
+    let tranlsation: TranslationViewState
     let navigationData: VideoPlayerNavigationData?
     
     init(appState: AppState) {
-        if let translation = appState.currentTranslation {
-            let isAddedInDictionary = appState.translations.contains { $0.source == translation.source }
-            self.tranlsation = TranslationViewState(
-                translation: translation.target,
-                isAddedInDictionary: isAddedInDictionary
-            )
-        } else {
-            self.tranlsation = nil
-        }
-        
+        self.tranlsation = TranslationViewState(
+            translation: appState.currentTranslation?.target,
+            isAddedInDictionary: appState.translations.contains { $0.source == appState.currentTranslation?.source },
+            translating: appState.translating
+        )
         self.navigationData = appState.navigation.isNavigating ? VideoPlayerNavigationData(appState) : nil
     }
 }

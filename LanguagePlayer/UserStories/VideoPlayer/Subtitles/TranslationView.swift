@@ -16,6 +16,7 @@ protocol TranslationViewDelegate: class {
 class TranslationView: UIView {
     @IBOutlet private var translationLabel: UILabel!
     @IBOutlet private var dictionaryButton: UIButton!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     weak var delegate: TranslationViewDelegate?
     
     override func awakeFromNib() {
@@ -24,9 +25,15 @@ class TranslationView: UIView {
     }
         
     func set(state: TranslationViewState) {
+        self.activityIndicator.isHidden = !state.translating
+        self.translationLabel.isHidden = state.translating
+        self.dictionaryButton.isHidden = state.translating
+        
         self.translationLabel.text = state.translation
+        
+        let isAddedInDictionary = state.isAddedInDictionary ?? false
         self.dictionaryButton.setImage(
-            state.isAddedInDictionary ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"),
+            isAddedInDictionary ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"),
             for: .normal
         )
     }

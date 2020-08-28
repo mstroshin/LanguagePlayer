@@ -223,10 +223,10 @@ extension VideoPlayerViewController: StoreSubscriber {
     typealias StoreSubscriberStateType = VideoPlayerViewState
     
     func newState(state: VideoPlayerViewState) {
-        if let translation = state.tranlsation {
-            self.subtitlesView.showTranslated(translation)
-        } else {
+        if state.tranlsation.translating == false && state.tranlsation.translation == nil {
             self.subtitlesView.hideTranslationView()
+        } else {
+            self.subtitlesView.showTranslated(state.tranlsation)
         }
         
         if let navigationData = state.navigationData {

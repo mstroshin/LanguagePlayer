@@ -3,6 +3,7 @@ import ReSwift
 
 struct AppStateActions {
     
+    //MARK: - App State Persistence
     struct LoadAppState: Action {}
     
     struct LoadedAppState: Action {
@@ -11,6 +12,7 @@ struct AppStateActions {
     
     struct SaveAppState: Action {}
     
+    //MARK: - Video
     struct AddedVideo: Action {
         let videoFileName: String
         let sourceSubtitleFileName: String?
@@ -24,16 +26,18 @@ struct AppStateActions {
         let targetSubtitle: UploadedFile?
     }
     
+    struct RemoveVideo: Action {
+        let id: ID
+    }
+    
+    //MARK: - Translation Favorites
     struct ToogleCurrentTranslationFavorite: Action {}
     
     struct AddTranslationToHistory: Action {
         let data: TranslationModel
     }
     
-    struct RemoveVideo: Action {
-        let id: ID
-    }
-    
+    //MARK: - Subtitle translation
     struct Translate: Action {
         let source: String
         let videoID: ID
@@ -41,12 +45,16 @@ struct AppStateActions {
         let toTime: Milliseconds
     }
     
-    struct AddTranslation: Action {
-        let data: TranslationModel
+    struct Translating: Action {}
+    
+    struct TranslationResult: Action {
+        let data: TranslationModel?
+        let error: Error?
     }
     
     struct ClearCurrentTranslation: Action {}
     
+    //MARK: - Server
     struct ServerStarted: Action {
         var webServerIPAddress: String?
         var webServerAddress: String?

@@ -97,9 +97,11 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                             fromTime: translation.fromTime,
                             toTime: translation.toTime
                         )
-                        next(AppStateActions.AddTranslation(data: data))
+                        next(AppStateActions.TranslationResult(data: data, error: nil))
                         return
                     }
+                    
+                    next(AppStateActions.Translating())
                     
                     let text = action.source.replacingOccurrences(of: "\n", with: " ")
                     cancellable = translationService.translate(
@@ -111,6 +113,7 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                         switch completion {
                         case .failure(let error):
                             print("translation error " + error.localizedDescription)
+                            next(AppStateActions.TranslationResult(data: nil, error: error))
                         case .finished:
                             print("translation finished")
                         }
@@ -122,7 +125,7 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                             fromTime: action.fromTime,
                             toTime: action.toTime
                         )
-                        next(AppStateActions.AddTranslation(data: data))
+                        next(AppStateActions.TranslationResult(data: data, error: nil))
                         next(AppStateActions.AddTranslationToHistory(data: data))
                         next(AppStateActions.SaveAppState())
                     }
