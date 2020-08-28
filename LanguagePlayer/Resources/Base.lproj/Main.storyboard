@@ -490,7 +490,7 @@
             </objects>
             <point key="canvasLocation" x="-554.8828125" y="137.5"/>
         </scene>
-        <!--Cards View Controller-->
+        <!--Cards-->
         <scene sceneID="lUo-1I-V25">
             <objects>
                 <viewController id="ORV-O1-Dxh" customClass="CardsViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
@@ -580,7 +580,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zG0-IS-kIH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pZU-kF-TAN"/>
+                    <navigationItem key="navigationItem" title="Cards" id="pZU-kF-TAN"/>
                     <connections>
                         <outlet property="collectionView" destination="Br7-gS-6rB" id="T5u-sS-AIu"/>
                     </connections>
@@ -608,11 +608,11 @@
             </objects>
             <point key="canvasLocation" x="169.3359375" y="137.5"/>
         </scene>
-        <!--Item-->
+        <!--Cards-->
         <scene sceneID="BUB-Qj-4kj">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Q6J-dJ-93S" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="icB-Zb-194"/>
+                    <tabBarItem key="tabBarItem" title="Cards" image="book" catalog="system" id="icB-Zb-194"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cwl-1c-odJ">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
@@ -631,6 +631,7 @@
     <resources>
         <image name="arrow.down.doc" catalog="system" width="115" height="128"/>
         <image name="backward_sub" width="44" height="44"/>
+        <image name="book" catalog="system" width="128" height="101"/>
         <image name="forward_sub" width="44" height="44"/>
         <image name="gear" catalog="system" width="128" height="119"/>
         <image name="gobackward.15" catalog="system" width="121" height="128"/>
