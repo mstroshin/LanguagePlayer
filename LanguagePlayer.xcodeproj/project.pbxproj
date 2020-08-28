@@ -38,6 +38,10 @@
 		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
 		D28DC02E24ED8A8C00017E8D /* DictionaryRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */; };
 		D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */; };
+		D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */; };
+		D2A516B124F90E2900DDC5EC /* CardsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B024F90E2900DDC5EC /* CardsViewState.swift */; };
+		D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */; };
+		D2A516B524F9136600DDC5EC /* CardsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B424F9136600DDC5EC /* CardsRouter.swift */; };
 		D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -104,6 +108,10 @@
 		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
 		D28DC02D24ED8A8C00017E8D /* DictionaryRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRouter.swift; sourceTree = "<group>"; };
 		D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
+		D2A516B024F90E2900DDC5EC /* CardsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewState.swift; sourceTree = "<group>"; };
+		D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
+		D2A516B424F9136600DDC5EC /* CardsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsRouter.swift; sourceTree = "<group>"; };
 		D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewState.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -176,18 +184,13 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				D2A516AB24F90D1C00DDC5EC /* App */,
 				D2E616AE24D7F43900D80F26 /* html */,
 				D28749B624D6C27700687095 /* Redux */,
 				D2D292F324C78ED9004660EE /* Misc */,
 				D2154EB024C0875600F52815 /* Services */,
 				D2154EAF24C0852A00F52815 /* UserStories */,
-				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
-				D28749BF24D6C59500687095 /* AppEnvironment.swift */,
-				D2154E9724C0803C00F52815 /* SceneDelegate.swift */,
-				D2154E9B24C0803C00F52815 /* Main.storyboard */,
-				D2154E9E24C0803E00F52815 /* Assets.xcassets */,
-				D2154EA024C0803E00F52815 /* LaunchScreen.storyboard */,
-				D2154EA324C0803E00F52815 /* Info.plist */,
+				D2A516AC24F90D3100DDC5EC /* Resources */,
 			);
 			path = LanguagePlayer;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 			children = (
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
+				D2A516AD24F90DAB00DDC5EC /* Cards */,
 				D2420ACD24DD45B7009C41F8 /* Dictionary */,
 			);
 			path = UserStories;
@@ -337,6 +341,38 @@
 				D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		D2A516AB24F90D1C00DDC5EC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
+				D28749BF24D6C59500687095 /* AppEnvironment.swift */,
+				D2154E9724C0803C00F52815 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D2A516AC24F90D3100DDC5EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D2154E9B24C0803C00F52815 /* Main.storyboard */,
+				D2154E9E24C0803E00F52815 /* Assets.xcassets */,
+				D2154EA024C0803E00F52815 /* LaunchScreen.storyboard */,
+				D2154EA324C0803E00F52815 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D2A516AD24F90DAB00DDC5EC /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */,
+				D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */,
+				D2A516B024F90E2900DDC5EC /* CardsViewState.swift */,
+				D2A516B424F9136600DDC5EC /* CardsRouter.swift */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		D2B29E8C24F6737000AF06A9 /* UploadTutorial */ = {
@@ -570,6 +606,7 @@
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
+				D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */,
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
 				D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */,
 				D28DC02424EC593C00017E8D /* Router.swift in Sources */,
@@ -598,12 +635,15 @@
 				D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */,
+				D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */,
+				D2A516B124F90E2900DDC5EC /* CardsViewState.swift in Sources */,
 				D2420AD124DD46AC009C41F8 /* DictionaryViewState.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */,
+				D2A516B524F9136600DDC5EC /* CardsRouter.swift in Sources */,
 				D26131E024EBC66000381945 /* TranslationViewState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -752,7 +792,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = LanguagePlayer/Info.plist;
+				INFOPLIST_FILE = LanguagePlayer/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -774,7 +814,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				ENABLE_BITCODE = NO;
-				INFOPLIST_FILE = LanguagePlayer/Info.plist;
+				INFOPLIST_FILE = LanguagePlayer/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_GENERATE_MAP_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (

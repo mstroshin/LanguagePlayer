@@ -6,9 +6,10 @@ enum Screen: String, Codable {
     case dictionary
     case settings
     case player
+    case cards
     
     var isTab: Bool {
-        [.videos, .dictionary, .settings].contains(self)
+        [.videos, .dictionary, .settings, .cards].contains(self)
     }
 }
 
