@@ -101,8 +101,9 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                         return
                     }
                     
+                    let text = action.source.replacingOccurrences(of: "\n", with: " ")
                     cancellable = translationService.translate(
-                        text: action.source,
+                        text: text,
                         sourceLanguage: state.sourceLanguageCode,
                         targetLanguage: state.targetLanguageCode
                     )

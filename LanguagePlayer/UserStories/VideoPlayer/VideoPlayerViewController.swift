@@ -13,6 +13,7 @@ class VideoPlayerViewController: UIViewController {
     var subtitlesExtractor: SubtitlesExtractor!
     
     private var currentSubtitle: SubtitlePart?
+    private var isSubtitlesEnable = true
     
     override func viewDidLoad() {
         self.setupViews()        
@@ -43,7 +44,6 @@ class VideoPlayerViewController: UIViewController {
     }
     
     private func setupViews() {
-        self.subtitlesView.isHidden = true
         self.subtitlesView.delegate = self
         self.controlsView.delegate = self
         
@@ -111,7 +111,6 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
         self.playerController.pause()
         self.stopPlaying()
         
-        let text = text.replacingOccurrences(of: "\n", with: " ")
         store.dispatch(AppStateActions.Translate(
             source: text,
             videoID: self.playerController.videoId,
@@ -168,23 +167,30 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressBackwardSub() {
         if let subtitle = self.subtitlesExtractor?.getPreviousSubtitle(current: self.playerController.currentTime) {
-            self.currentSubtitle = subtitle
-            self.show(subtitles: subtitle.text)
             self.playerController.seek(to: subtitle.fromTime)
+            
+            if self.isSubtitlesEnable {
+                self.currentSubtitle = subtitle
+                self.show(subtitles: subtitle.text)
+            }
         }
     }
     
     func didPressForwardSub() {
         if let subtitle = self.subtitlesExtractor?.getNextSubtitle(current: self.playerController.currentTime) {
-            self.currentSubtitle = subtitle
-            self.show(subtitles: subtitle.text)
             self.playerController.seek(to: subtitle.fromTime)
+            
+            if self.isSubtitlesEnable {
+                self.currentSubtitle = subtitle
+                self.show(subtitles: subtitle.text)
+            }
         }
     }
     
     func didPressToogleSubVisibility() {
         self.subtitlesView.isHidden.toggle()
         self.controlsView.subtitles(isVisible: !self.subtitlesView.isHidden)
+        self.isSubtitlesEnable.toggle()
     }
     
 }
@@ -194,7 +200,7 @@ extension VideoPlayerViewController: PlayerControllerDelegate {
     func playerController(_ player: PlayerController, changed time: Milliseconds) {
         self.updateTime(time)
         
-        if self.subtitlesView.isHidden == false {
+        if self.isSubtitlesEnable {
             if let subtitle = self.subtitlesExtractor?.getSubtitle(for: time) {
                 if self.currentSubtitle?.number != subtitle.number {
                     self.currentSubtitle = subtitle

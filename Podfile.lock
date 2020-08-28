@@ -9,18 +9,12 @@ PODS:
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
   - MobileVLCKit (3.3.13)
-  - Realm (5.3.4):
-    - Realm/Headers (= 5.3.4)
-  - Realm/Headers (5.3.4)
-  - RealmSwift (5.3.4):
-    - Realm (= 5.3.4)
   - ReSwift (5.0.0)
 
 DEPENDENCIES:
   - DifferenceKit (~> 1.1.5)
   - GCDWebServer (~> 3.0)
   - MobileVLCKit (~> 3.3.0)
-  - RealmSwift (~> 5.3.4)
   - ReSwift (~> 5.0.0)
 
 SPEC REPOS:
@@ -28,18 +22,14 @@ SPEC REPOS:
     - DifferenceKit
     - GCDWebServer
     - MobileVLCKit
-    - Realm
-    - RealmSwift
     - ReSwift
 
 SPEC CHECKSUMS:
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   MobileVLCKit: 92e1ea43124259417f481c890821efb2399d25e3
-  Realm: 4dd457b6ed025041cf7efe05dae78c027ba842e0
-  RealmSwift: 233af88fffe05ed7f9305eecef100d477c0c2c42
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
 
-PODFILE CHECKSUM: 2aa63fe4cb69014ffdbd8915320f1ab29b8d9fe1
+PODFILE CHECKSUM: 87e88c57864243feead146ce0ef8474a9dd64252
 
 COCOAPODS: 1.9.3
