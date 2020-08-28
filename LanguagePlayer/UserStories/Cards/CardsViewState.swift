@@ -40,6 +40,6 @@ extension CardItemState: Differentiable {
     }
     
     func isContentEqual(to source: CardItemState) -> Bool {
-        self.id == source.id
+        self.id == source.id && self.videoId == source.videoId
     }
 }
