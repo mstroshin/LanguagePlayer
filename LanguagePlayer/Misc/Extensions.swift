@@ -31,6 +31,19 @@ extension UICollectionView {
     }
 }
 
+extension UIView {
+
+    @IBInspectable var cornerRadius: CGFloat {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    
+}
+
 precedencegroup AssignmentPrecedence {}
 infix operator ?=
 func ?= <T: Any> (left: inout T, right: T?) {

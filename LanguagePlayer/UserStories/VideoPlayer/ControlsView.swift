@@ -11,6 +11,7 @@ protocol ControlsViewDelegate: class {
     func seekValueChangedSeekSlider(time: Milliseconds)
     func didPressBackwardSub()
     func didPressForwardSub()
+    func didPressToogleSubVisibility()
 }
 
 class ControlsView: UIView {
@@ -32,6 +33,7 @@ class ControlsView: UIView {
     @IBOutlet private weak var seekSlider: UISlider!
     @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var screenTurnButton: UIButton!
+    @IBOutlet private weak var toogleSubVisibilityButton: UIButton!
     
     private var isValueChanging = false
     
@@ -77,6 +79,15 @@ class ControlsView: UIView {
     
     @IBAction private func didPressForwardSubButton(_ sender: UIButton) {
         self.delegate?.didPressForwardSub()
+    }
+    
+    @IBAction func didPressSubVisibilityButton(_ sender: UIButton) {
+        self.delegate?.didPressToogleSubVisibility()
+    }
+    
+    func subtitles(isVisible: Bool) {
+        let image = isVisible ? UIImage(named: "sub_shown") : UIImage(named: "sub_hidden")
+        self.toogleSubVisibilityButton.setImage(image, for: .normal)
     }
     
     func set(duration: Milliseconds) {

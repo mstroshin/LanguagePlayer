@@ -7,6 +7,7 @@ class VideoPlayerViewController: UIViewController {
     @IBOutlet private var subtitlesView: SubtitlesView!
     @IBOutlet private var controlsView: ControlsView!
     @IBOutlet private var videoViewport: UIView!
+    @IBOutlet private weak var subtitlesViewBottomConstraint: NSLayoutConstraint!
     
     let playerController = PlayerController()
     var subtitlesExtractor: SubtitlesExtractor!
@@ -37,6 +38,10 @@ class VideoPlayerViewController: UIViewController {
         true
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        .landscape
+    }
+    
     private func setupViews() {
         self.subtitlesView.isHidden = true
         self.subtitlesView.delegate = self
@@ -44,6 +49,10 @@ class VideoPlayerViewController: UIViewController {
         
         self.playerController.delegate = self
         self.playerController.set(viewport: self.videoViewport)
+        
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.subtitlesViewBottomConstraint.constant = 0
+        }
     }
     
     func set(duration: Milliseconds) {
@@ -173,6 +182,11 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         }
     }
     
+    func didPressToogleSubVisibility() {
+        self.subtitlesView.isHidden.toggle()
+        self.controlsView.subtitles(isVisible: !self.subtitlesView.isHidden)
+    }
+    
 }
 
 extension VideoPlayerViewController: PlayerControllerDelegate {
@@ -180,14 +194,16 @@ extension VideoPlayerViewController: PlayerControllerDelegate {
     func playerController(_ player: PlayerController, changed time: Milliseconds) {
         self.updateTime(time)
         
-        if let subtitle = self.subtitlesExtractor?.getSubtitle(for: time) {
-            if self.currentSubtitle?.number != subtitle.number {
-                self.currentSubtitle = subtitle
-                self.show(subtitles: subtitle.text)
+        if self.subtitlesView.isHidden == false {
+            if let subtitle = self.subtitlesExtractor?.getSubtitle(for: time) {
+                if self.currentSubtitle?.number != subtitle.number {
+                    self.currentSubtitle = subtitle
+                    self.show(subtitles: subtitle.text)
+                }
+            } else if self.currentSubtitle != nil {
+                self.currentSubtitle = nil
+                self.hideSubtitles()
             }
-        } else if self.currentSubtitle != nil {
-            self.currentSubtitle = nil
-            self.hideSubtitles()
         }
     }
     

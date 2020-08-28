@@ -323,7 +323,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKL-NB-tt7" customClass="SubtitlesView" customModule="LanguagePlayer" customModuleProvider="target">
-                                <rect key="frame" x="16" y="608" width="992" height="140"/>
+                                <rect key="frame" x="16" y="648" width="992" height="100"/>
                                 <subviews>
                                     <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iPk-xt-gAm" customClass="TranslationView" customModule="LanguagePlayer" customModuleProvider="target">
                                         <rect key="frame" x="339" y="-60" width="314" height="60"/>
@@ -370,13 +370,13 @@
                                 <constraints>
                                     <constraint firstItem="iPk-xt-gAm" firstAttribute="centerX" secondItem="dKL-NB-tt7" secondAttribute="centerX" id="5sS-3u-XwE"/>
                                     <constraint firstItem="iPk-xt-gAm" firstAttribute="bottom" secondItem="dKL-NB-tt7" secondAttribute="top" id="CWt-Xb-akz"/>
-                                    <constraint firstAttribute="height" constant="140" id="t0d-r3-WSc"/>
+                                    <constraint firstAttribute="height" constant="100" id="t0d-r3-WSc"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="translationView" destination="iPk-xt-gAm" id="Aoa-X8-AdZ"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-pE-Lpt" userLabel="ControlsView" customClass="ControlsView" customModule="LanguagePlayer" customModuleProvider="target">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-pE-Lpt" userLabel="ControlsView" customClass="ControlsView" customModule="LanguagePlayer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="16" width="992" height="88"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OLO-yw-MqC" userLabel="Top Line">
@@ -423,7 +423,7 @@
                                                 </connections>
                                             </button>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="IQQ-gm-0Im">
-                                                <rect key="frame" x="198" y="7" width="670" height="31"/>
+                                                <rect key="frame" x="198" y="7" width="666" height="31"/>
                                                 <color key="maximumTrackTintColor" white="1" alpha="0.69883362676056338" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <action selector="startChangingValue:" destination="PTl-pE-Lpt" eventType="touchDown" id="PBj-uy-Gan"/>
@@ -433,9 +433,9 @@
                                                 </connections>
                                             </slider>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8m-aA-kLO">
-                                                <rect key="frame" x="874" y="11.5" width="74" height="21"/>
+                                                <rect key="frame" x="870" y="11.5" width="78" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="74" id="omh-Lk-Xmi"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="78" id="omh-Lk-Xmi"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -500,11 +500,25 @@
                                                     <action selector="didPressForwardSubButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="WUJ-IF-pXh"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqo-NG-80c">
+                                                <rect key="frame" x="948" y="0.0" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="2c6-cO-vTS"/>
+                                                    <constraint firstAttribute="height" constant="44" id="5qm-RX-667"/>
+                                                </constraints>
+                                                <state key="normal" image="sub_shown"/>
+                                                <connections>
+                                                    <action selector="didPressSubVisibilityButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="U49-HP-kaj"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="fl8-LW-iYj" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="69X-nK-m9f"/>
+                                            <constraint firstItem="mqo-NG-80c" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="6bl-tk-2gi"/>
+                                            <constraint firstAttribute="bottom" secondItem="mqo-NG-80c" secondAttribute="bottom" id="9Qz-is-X7m"/>
                                             <constraint firstAttribute="bottom" secondItem="fl8-LW-iYj" secondAttribute="bottom" id="9Tm-FT-t3h"/>
+                                            <constraint firstAttribute="trailing" secondItem="mqo-NG-80c" secondAttribute="trailing" id="OnI-Rv-inQ"/>
                                             <constraint firstItem="fl8-LW-iYj" firstAttribute="leading" secondItem="9pb-Jt-q1z" secondAttribute="trailing" id="Wiu-CO-UR2"/>
                                             <constraint firstItem="9pb-Jt-q1z" firstAttribute="leading" secondItem="v8k-fI-uwF" secondAttribute="leading" constant="60" id="YJq-ga-O0V"/>
                                             <constraint firstItem="9pb-Jt-q1z" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="fZu-NA-ndA"/>
@@ -513,7 +527,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="v8k-fI-uwF" secondAttribute="bottom" id="5hu-kA-vj9"/>
                                     <constraint firstItem="OLO-yw-MqC" firstAttribute="leading" secondItem="PTl-pE-Lpt" secondAttribute="leading" id="Dzl-lD-2XF"/>
@@ -523,6 +537,11 @@
                                     <constraint firstAttribute="trailing" secondItem="v8k-fI-uwF" secondAttribute="trailing" id="pih-UN-TQx"/>
                                     <constraint firstItem="v8k-fI-uwF" firstAttribute="leading" secondItem="PTl-pE-Lpt" secondAttribute="leading" id="zzU-i1-H5T"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="backwardFifteenButton" destination="KmS-0B-eLZ" id="kwl-pi-Ahm"/>
                                     <outlet property="closeButton" destination="W8e-v7-wwi" id="nPX-vT-ba8"/>
@@ -531,6 +550,7 @@
                                     <outlet property="screenTurnButton" destination="zzC-m0-G9s" id="eAp-Ry-GcR"/>
                                     <outlet property="seekSlider" destination="IQQ-gm-0Im" id="NCs-yy-8rM"/>
                                     <outlet property="timeLabel" destination="H8m-aA-kLO" id="2IU-0U-aAs"/>
+                                    <outlet property="toogleSubVisibilityButton" destination="mqo-NG-80c" id="FvU-Qe-Haf"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -552,6 +572,7 @@
                     <connections>
                         <outlet property="controlsView" destination="PTl-pE-Lpt" id="rkR-x0-dAQ"/>
                         <outlet property="subtitlesView" destination="dKL-NB-tt7" id="QE8-pl-Btj"/>
+                        <outlet property="subtitlesViewBottomConstraint" destination="VZy-iK-jdb" id="bcp-jH-pUz"/>
                         <outlet property="videoViewport" destination="Idk-sX-0Jw" id="iW6-Z0-jKP"/>
                     </connections>
                 </viewController>
@@ -635,6 +656,7 @@
         <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="rotate.left" catalog="system" width="128" height="128"/>
         <image name="star" catalog="system" width="128" height="116"/>
+        <image name="sub_shown" width="44" height="44"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>
