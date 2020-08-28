@@ -3,6 +3,7 @@ import ReSwift
 
 class CardsViewController: BaseViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
+    
     var items = [CardItemState]()
     var cardsSides = [Bool]()
     
@@ -30,8 +31,8 @@ class CardsViewController: BaseViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(480),
-            heightDimension: .absolute(280)
+            widthDimension: .estimated(480),
+            heightDimension: .estimated(280)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
@@ -42,19 +43,19 @@ class CardsViewController: BaseViewController {
         )
 
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(60)
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(1)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.edgeSpacing = NSCollectionLayoutEdgeSpacing(
             leading: .fixed(8),
             top: .fixed(8),
-            trailing: .fixed(8),
-            bottom: .fixed(8)
+            trailing: nil,
+            bottom: nil
         )
 
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
+//        section.interGroupSpacing = 10
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
@@ -63,7 +64,7 @@ class CardsViewController: BaseViewController {
     
 }
 
-extension CardsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension CardsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         self.items.count
@@ -76,6 +77,9 @@ extension CardsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let item = self.items[indexPath.row]
         cell.delegate = self
         cell.configure(with: item)
+        
+        let colorNumber = abs(item.id.hashValue) % 6 + 1
+        cell.set(bgColor: UIColor(named: "cardColor\(colorNumber)"), playButtonColor: UIColor(named: "playColor\(colorNumber)"))
         
         return cell
     }
@@ -90,6 +94,23 @@ extension CardsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         
         self.cardsSides[indexPath.row] = !isBackSide
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionViewCell.identifier, for: indexPath) as? CardCollectionViewCell else {
+//            fatalError("Cell must be CardCollectionViewCell subclass")
+//        }
+//
+//        let item = self.items[indexPath.row]
+//        cell.configure(with: item)
+//        cell.setNeedsLayout()
+//        cell.layoutIfNeeded()
+//
+//        let size = cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+//        print(size)
+//
+//        return size
+//    }
+    
 }
 
 extension CardsViewController: CardCollectionViewCellDelegate {

@@ -13,10 +13,25 @@ class CardCollectionViewCell: UICollectionViewCell {
     
     weak var delegate: CardCollectionViewCellDelegate?
     
+    override func updateConstraints() {
+        self.textLabel.preferredMaxLayoutWidth = self.textLabel.bounds.width
+        super.updateConstraints()
+    }
+    
     func configure(with data: CardItemState) {
         self.textLabel.text = data.source
         self.videoTitleLabel.text = data.videoTitle
         self.playButton.isHidden = data.videoId == nil
+    }
+    
+    func set(bgColor: UIColor?, playButtonColor: UIColor?) {
+        self.contentView.backgroundColor = bgColor
+        self.playButton.tintColor = playButtonColor
+        
+        self.contentView.layer.shadowColor = bgColor?.cgColor
+        self.contentView.layer.shadowOpacity = 1
+        self.contentView.layer.shadowOffset = CGSize.zero
+        self.contentView.layer.shadowRadius = 5
     }
     
     func flip(with text: String) {
