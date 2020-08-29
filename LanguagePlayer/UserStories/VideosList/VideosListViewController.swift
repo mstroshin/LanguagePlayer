@@ -30,31 +30,21 @@ class VideosListViewController: BaseViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .absolute(240),
-            heightDimension: .absolute(180)
+            widthDimension: .fractionalWidth(1/4.2),
+            heightDimension: .fractionalHeight(1)
         )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: .fixed(8),
-            top: .fixed(8),
-            trailing: .fixed(8),
-            bottom: .fixed(8)
-        )
-
+        
         let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1.0),
-            heightDimension: .absolute(60)
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(180)
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.edgeSpacing = NSCollectionLayoutEdgeSpacing(
-            leading: .fixed(8),
-            top: .fixed(8),
-            trailing: .fixed(8),
-            bottom: .fixed(8)
-        )
+        group.interItemSpacing = .flexible(8)
 
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 10
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
 
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
