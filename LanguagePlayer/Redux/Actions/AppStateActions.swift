@@ -28,6 +28,7 @@ struct AppStateActions {
     
     struct RemoveVideo: Action {
         let id: ID
+        let removeAllCards: Bool
     }
     
     //MARK: - Translation Favorites
@@ -53,6 +54,10 @@ struct AppStateActions {
     }
     
     struct ClearCurrentTranslation: Action {}
+    
+    struct RemoveTranslation: Action {
+        let id: ID
+    }
     
     //MARK: - Server
     struct ServerStarted: Action {

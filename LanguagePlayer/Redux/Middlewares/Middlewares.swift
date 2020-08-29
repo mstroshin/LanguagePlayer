@@ -14,9 +14,7 @@ func filestoreMiddleware(filestore: LocalDiskStore) -> Middleware<AppState> {
                     print("Removed \(successRemoved)")
                     if successRemoved {
                         next(action)
-                        next(AppStateActions.SaveAppState())
                     }
-                    
                 case let action as AppStateActions.SaveVideo:
                     let directoryName = UUID().uuidString
                     

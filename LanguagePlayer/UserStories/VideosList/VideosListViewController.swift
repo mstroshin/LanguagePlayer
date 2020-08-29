@@ -111,11 +111,38 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
             identifier: nil,
             previewProvider: nil
         ) { actions -> UIMenu? in
-            let remove = UIAction(title: "Удалить", image: UIImage(systemName: "trash"), identifier: nil, discoverabilityTitle: nil, attributes: .destructive, state: .off) { _ in
+            let remove = UIAction(
+                title: "Удалить",
+                image: UIImage(systemName: "trash"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: .destructive,
+                state: .off
+            ) { _ in
                 let video = self.videosList[indexPath.row]
-                store.dispatch(AppStateActions.RemoveVideo(id: video.id))
+                store.dispatch(AppStateActions.RemoveVideo(id: video.id, removeAllCards: false))
+                store.dispatch(AppStateActions.SaveAppState());
             }
-            return UIMenu(title: "Выберите действие:", image: nil, identifier: nil, options: .destructive, children: [remove])
+            let removeWithCards = UIAction(
+                title: "Удалить со всеми карточками",
+                image: UIImage(systemName: "trash"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: .destructive,
+                state: .off
+            ) { _ in
+                let video = self.videosList[indexPath.row]
+                store.dispatch(AppStateActions.RemoveVideo(id: video.id, removeAllCards: true))
+                store.dispatch(AppStateActions.SaveAppState());
+            }
+            
+            return UIMenu(
+                title: "Выберите действие:",
+                image: nil,
+                identifier: nil,
+                options: .destructive,
+                children: [remove, removeWithCards]
+            )
         }
         
         return configuration

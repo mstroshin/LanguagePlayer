@@ -112,21 +112,35 @@ extension CardsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         self.cardsSides[indexPath.row] = !isBackSide
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionViewCell.identifier, for: indexPath) as? CardCollectionViewCell else {
-//            fatalError("Cell must be CardCollectionViewCell subclass")
-//        }
-//
-//        let item = self.items[indexPath.row]
-//        cell.configure(with: item)
-//        cell.setNeedsLayout()
-//        cell.layoutIfNeeded()
-//
-//        let size = cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-//        print(size)
-//
-//        return size
-//    }
+func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    let configuration = UIContextMenuConfiguration(
+        identifier: nil,
+        previewProvider: nil
+    ) { actions -> UIMenu? in
+        let remove = UIAction(
+            title: "Удалить",
+            image: UIImage(systemName: "trash"),
+            identifier: nil,
+            discoverabilityTitle: nil,
+            attributes: .destructive,
+            state: .off
+        ) { _ in
+            let item = self.items[indexPath.row]
+            store.dispatch(AppStateActions.RemoveTranslation(id: item.id))
+            store.dispatch(AppStateActions.SaveAppState());
+        }
+        
+        return UIMenu(
+            title: "Выберите действие:",
+            image: nil,
+            identifier: nil,
+            options: .destructive,
+            children: [remove]
+        )
+    }
+    
+    return configuration
+}
     
 }
 

@@ -29,6 +29,9 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
         state.translationsHistory.append(translation)
     case let action as AppStateActions.RemoveVideo:
         state.videos.removeAll(where: { $0.id == action.id })
+        if action.removeAllCards {
+            state.translations.removeAll(where: { $0.videoId == action.id })
+        }
     case _ as AppStateActions.Translating:
         state.translating = true
     case let action as AppStateActions.TranslationResult:
@@ -39,6 +42,8 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
         } else if let _ = action.error {
             state.currentTranslation = nil
         }
+    case let action as AppStateActions.RemoveTranslation:
+        state.translations.removeAll(where: { $0.id == action.id })
     case let action as AppStateActions.ServerStarted:
         state.webServerAddress = action.webServerAddress
         state.webServerIPAddress = action.webServerIPAddress
