@@ -50,6 +50,15 @@ function localizePage() {
 $(document).ready(documentReady);
 
 function documentReady() {
+    //Close tab event
+    $(window).bind('beforeunload', function (e) {
+        if (isUploading) {
+            var confirmationMessage = 'There are transfers in progress, navigating away will abort them.';
+            (e || window.event).returnValue = confirmationMessage;     // Gecko + IE
+            return confirmationMessage;                                // Webkit, Safari, Chrome etc.
+        }
+    });
+
     configureDropzone();
     configureUploadForm();
     localizePage();
@@ -77,6 +86,9 @@ function configureUploadForm() {
         cancelButton.hidden = true;
         progressBarContainer.hidden = true;
         progressBar.style.width = "0%";
+
+        resetDropzones();
+        updateUploadButton();
     }
 
     uploadForm.addEventListener("submit", (e) => {
@@ -179,9 +191,7 @@ function updateThumbnail(dropZoneElement, file) {
     let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
     let promt = dropZoneElement.querySelector(".drop-zone__prompt");
-    if (promt) {
-        promt.remove();
-    }
+    promt.hidden = true;
 
     if (!thumbnailElement) {
         thumbnailElement = document.createElement("div");
@@ -204,6 +214,18 @@ function updateThumbnail(dropZoneElement, file) {
             thumbnailElement.appendChild(movieIcon);
         }
     }
+}
+
+function resetDropzones() {
+    document.querySelectorAll(".drop-zone__thumb").forEach(element => {
+        element.remove();
+    });
+    document.querySelectorAll(".drop-zone__prompt").forEach(element => {
+        element.hidden = false;
+    });
+
+    document.getElementById("videoInput").value = '';
+    document.getElementById("sourceSubtitleInput").value = '';
 }
 
 
