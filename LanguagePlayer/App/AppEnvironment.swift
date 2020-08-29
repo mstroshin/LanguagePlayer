@@ -14,11 +14,12 @@ extension AppEnvironment {
         let filestore = filestoreMiddleware(filestore: LocalDiskStore())
         let userDefaults = userDefaultsMiddleware(userDefaults: UserDefaultsDataStore())
         let translation = translationMiddleware(translationService: YandexTranslationService())
+        let analytics = analyticsMiddleware()
         
         let store = Store(
             reducer: appStateReducer,
             state: appState,
-            middleware: [translation, filestore, userDefaults],
+            middleware: [translation, filestore, userDefaults, analytics],
             automaticallySkipsRepeats: true
         )
                 
