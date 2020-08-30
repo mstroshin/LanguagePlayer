@@ -12,6 +12,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         store = environment.store
         
         store.dispatch(AppStateActions.LoadAppState())
+        store.dispatch(AppStateActions.GetAvailableLanguages())
         localWebServer.run()
         
         return true

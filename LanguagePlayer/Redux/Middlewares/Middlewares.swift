@@ -80,12 +80,21 @@ func userDefaultsMiddleware(userDefaults: UserDefaultsDataStore) -> Middleware<A
 }
 
 func translationMiddleware(translationService: TranslationService) -> Middleware<AppState> {
-    var cancellable: AnyCancellable?
-    
     return { dispatch, getState in
         return { next in
             return { action in
                 switch action {
+                case _ as AppStateActions.GetAvailableLanguages:
+                    translationService.availableLanguageCodes { result in
+                        switch result {
+                        case .failure(_):
+                            next(AppStateActions.SaveAvailableLanguages(languages: []))
+                        case .success(let languages):
+                            next(AppStateActions.SaveAvailableLanguages(languages: languages))
+                        }
+                        next(AppStateActions.SaveAppState())
+                    }
+                    
                 case let action as AppStateActions.Translate:
                     guard let state = getState() else { return }
                     if let translation = state.translationsHistory.first(where: { $0.source == action.source }) {
@@ -103,30 +112,26 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                     next(AppStateActions.Translating())
                     
                     let text = action.source.replacingOccurrences(of: "\n", with: " ")
-                    cancellable = translationService.translate(
+                    translationService.translate(
                         text: text,
-                        sourceLanguage: state.sourceLanguageCode,
-                        targetLanguage: state.targetLanguageCode
-                    )
-                    .sink(receiveCompletion: { completion in
-                        switch completion {
+                        sourceLanguage: state.settings.selectedSourceLanguage.code,
+                        targetLanguage: state.settings.selectedTargetLanguage.code
+                    ) { result in
+                        switch result {
                         case .failure(let error):
-                            print("translation error " + error.localizedDescription)
                             next(AppStateActions.TranslationResult(data: nil, error: error))
-                        case .finished:
-                            print("translation finished")
+                        case .success(let translatedText):
+                            let data = TranslationModel(
+                                source: action.source,
+                                target: translatedText,
+                                videoID: action.videoID,
+                                fromTime: action.fromTime,
+                                toTime: action.toTime
+                            )
+                            next(AppStateActions.TranslationResult(data: data, error: nil))
+                            next(AppStateActions.AddTranslationToHistory(data: data))
+                            next(AppStateActions.SaveAppState())
                         }
-                    }) { translatedText in
-                        let data = TranslationModel(
-                            source: action.source,
-                            target: translatedText,
-                            videoID: action.videoID,
-                            fromTime: action.fromTime,
-                            toTime: action.toTime
-                        )
-                        next(AppStateActions.TranslationResult(data: data, error: nil))
-                        next(AppStateActions.AddTranslationToHistory(data: data))
-                        next(AppStateActions.SaveAppState())
                     }
                 default:
                     next(action)

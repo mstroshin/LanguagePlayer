@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
 		D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */; };
+		D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */; };
+		D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */; };
+		D203D2FE24FBC3930026E9D4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FD24FBC3930026E9D4 /* SettingsState.swift */; };
+		D203D30024FBD3B80026E9D4 /* LanguageSelectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */; };
 		D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
 		D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9724C0803C00F52815 /* SceneDelegate.swift */; };
@@ -74,6 +78,10 @@
 		655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
+		D203D2FD24FBC3930026E9D4 /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
+		D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewState.swift; sourceTree = "<group>"; };
 		D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewState.swift; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +165,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		D203D2F724FBB8D10026E9D4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */,
+				D203D2FA24FBC2B30026E9D4 /* Languages */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		D203D2FA24FBC2B30026E9D4 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */,
+				D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		D2154E8924C0803C00F52815 = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +233,7 @@
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
 				D2A516AD24F90DAB00DDC5EC /* Cards */,
+				D203D2F724FBB8D10026E9D4 /* Settings */,
 			);
 			path = UserStories;
 			sourceTree = "<group>";
@@ -266,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
+				D203D2FD24FBC3930026E9D4 /* SettingsState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -596,6 +624,7 @@
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
 				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
+				D203D30024FBD3B80026E9D4 /* LanguageSelectionViewState.swift in Sources */,
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
 				D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
@@ -609,6 +638,7 @@
 				D28749AD24D675B900687095 /* AppStateActions.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
+				D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */,
 				D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */,
 				D26131E224EBC94300381945 /* VideoPlayerViewState.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
@@ -620,6 +650,8 @@
 				D2A516B124F90E2900DDC5EC /* CardsViewState.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
+				D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */,
+				D203D2FE24FBC3930026E9D4 /* SettingsState.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 				D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */,

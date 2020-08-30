@@ -5,9 +5,7 @@ typealias ID = String
 
 struct AppState: StateType {
     var navigation = NavigationState()
-    
-    var sourceLanguageCode = "en"
-    var targetLanguageCode = "ru"
+    var settings = SettingsState()
     
     var webServerIPAddress: String?
     var webServerAddress: String?
@@ -26,8 +24,7 @@ struct AppState: StateType {
 
 extension AppState: Codable {
     enum CodingKeys: String, CodingKey {
-        case sourceLanguageCode
-        case targetLanguageCode
+        case settings
         case videos
         case translations
         case translationsHistory
@@ -35,8 +32,7 @@ extension AppState: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sourceLanguageCode = try container.decode(String.self, forKey: .sourceLanguageCode)
-        self.targetLanguageCode = try container.decode(String.self, forKey: .targetLanguageCode)
+        self.settings = try container.decode(SettingsState.self, forKey: .settings)
         self.videos = try container.decode([VideoState].self, forKey: .videos)
         self.translations = try container.decode([TranslationState].self, forKey: .translations)
         self.translationsHistory = try container.decode([TranslationState].self, forKey: .translationsHistory)
@@ -44,8 +40,7 @@ extension AppState: Codable {
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(sourceLanguageCode, forKey: .sourceLanguageCode)
-        try container.encode(targetLanguageCode, forKey: .targetLanguageCode)
+        try container.encode(self.settings, forKey: .settings)
         try container.encode(videos, forKey: .videos)
         try container.encode(translations, forKey: .translations)
         try container.encode(translationsHistory, forKey: .translationsHistory)

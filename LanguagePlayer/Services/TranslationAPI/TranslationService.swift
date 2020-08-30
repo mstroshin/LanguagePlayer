@@ -7,8 +7,13 @@
 //
 
 import Foundation
-import Combine
+
+struct LanguageAPIDTO: Decodable {
+    let code: String
+    let name: String?
+}
 
 protocol TranslationService {
-    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error>
+    func availableLanguageCodes(callback: @escaping (Result<[LanguageAPIDTO], Error>) -> Void)
+    func translate(text: String, sourceLanguage: String, targetLanguage: String, callback: @escaping (Result<String, Error>) -> Void)
 }

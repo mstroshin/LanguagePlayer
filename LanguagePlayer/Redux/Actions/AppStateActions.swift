@@ -39,6 +39,20 @@ struct AppStateActions {
     }
     
     //MARK: - Subtitle translation
+    struct GetAvailableLanguages: Action {}
+    
+    struct SaveAvailableLanguages: Action {
+        let languages: [LanguageAPIDTO]
+    }
+    
+    struct SelectSourceLanguage: Action  {
+        let language: Language
+    }
+    
+    struct SelectTargetLanguage: Action  {
+        let language: Language
+    }
+    
     struct Translate: Action {
         let source: String
         let videoID: ID

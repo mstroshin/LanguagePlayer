@@ -49,6 +49,18 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
         state.webServerIPAddress = action.webServerIPAddress
     case _ as AppStateActions.ClearCurrentTranslation:
         state.currentTranslation = nil
+    case let action as AppStateActions.SaveAvailableLanguages:
+        state.settings.availableLanguages = action.languages.compactMap({
+            if let name = $0.name {
+                return Language(code: $0.code, name: name)
+            } else {
+                return nil
+            }
+        })
+    case let action as AppStateActions.SelectSourceLanguage:
+        state.settings.selectedSourceLanguage = action.language
+    case let action as AppStateActions.SelectTargetLanguage:
+        state.settings.selectedTargetLanguage = action.language
     default:
         break
     }

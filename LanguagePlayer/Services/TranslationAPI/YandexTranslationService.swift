@@ -13,6 +13,7 @@ class YandexTranslationService {
     @UserDefault("iamTokenDate", defaultValue: nil)
     private var iamTokenDate: Date?
     private var iamToken: IAMToken?
+    private var cancellables = [AnyCancellable]()
     
     private let session = URLSession(configuration: .default)
     private let oAuthToken = "AgAAAAAP9CkdAATuwbxz8FBRcEyQil310C7DMqg"
@@ -61,17 +62,69 @@ class YandexTranslationService {
             .map { $0.translations.first!.text }
             .eraseToAnyPublisher()
     }
+    
+    private func getLanguages(iamToken: IAMToken) -> AnyPublisher<[LanguageAPIDTO], Error> {
+        var request = URLRequest(url: URL(string: "https://translate.api.cloud.yandex.net/translate/v2/languages")!)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(iamToken.iamToken)", forHTTPHeaderField: "Authorization")
+        let bodyObject: [String : Any] = [
+            "folder_id": self.folderId,
+        ]
+        request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
+        
+        return self.session.dataTaskPublisher(for: request)
+            .map { $0.data }
+            .decode(type: Languages.self, decoder: JSONDecoder())
+            .map { $0.languages }
+            .eraseToAnyPublisher()
+    }
 }
 
 extension YandexTranslationService: TranslationService {
     
-    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error> {
-        return self.getIAMToken()
+    func availableLanguageCodes(callback: @escaping (Result<[LanguageAPIDTO], Error>) -> Void) {
+        let cancellable = self.getIAMToken()
+            .flatMap {
+                self.getLanguages(iamToken: $0)
+            }
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("get availableLanguageCodes error " + error.localizedDescription)
+                    callback(.failure(error))
+                case .finished:
+                    print("get availableLanguageCodes finished")
+                }
+            }) { languages in
+                print("success get availableLanguageCodes")
+                callback(.success(languages))
+            }
+        
+        self.cancellables.append(cancellable)
+    }
+    
+    func translate(text: String, sourceLanguage: String, targetLanguage: String, callback: @escaping (Result<String, Error>) -> Void) {
+        let cancellable = self.getIAMToken()
             .flatMap {
                 self.getTranslation(for: text, sourceLanguage: sourceLanguage, targetLanguage: targetLanguage, iamToken: $0)
             }
             .receive(on: RunLoop.main)
-            .eraseToAnyPublisher()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("translate error " + error.localizedDescription)
+                    callback(.failure(error))
+                case .finished:
+                    print("translate finished")
+                }
+            }) { translatedText in
+                print("success translate")
+                callback(.success(translatedText))
+            }
+        
+        self.cancellables.append(cancellable)
     }
     
 }
@@ -88,3 +141,8 @@ private struct Translations: Decodable {
     
     let translations: [TranslationText]
 }
+
+private struct Languages: Decodable {
+    let languages: [LanguageAPIDTO]
+}
+
