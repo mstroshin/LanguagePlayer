@@ -126,8 +126,8 @@ func collectionView(_ collectionView: UICollectionView, contextMenuConfiguration
             state: .off
         ) { _ in
             let item = self.items[indexPath.row]
-            store.dispatch(AppStateActions.RemoveTranslation(id: item.id))
-            store.dispatch(AppStateActions.SaveAppState());
+            store.dispatch(RemoveTranslation(id: item.id))
+            store.dispatch(SaveAppState());
         }
         
         return UIMenu(

@@ -111,7 +111,7 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
         self.playerController.pause()
         self.stopPlaying()
         
-        store.dispatch(AppStateActions.Translate(
+        store.dispatch(Translate(
             source: text,
             videoID: self.playerController.videoId,
             fromTime: subtitle.fromTime,
@@ -120,8 +120,8 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
     }
     
     func addToDictionaryPressed() {
-        store.dispatch(AppStateActions.ToogleCurrentTranslationFavorite())
-        store.dispatch(AppStateActions.SaveAppState())
+        store.dispatch(ToogleCurrentTranslationFavorite())
+        store.dispatch(SaveAppState())
     }
     
 }
@@ -130,19 +130,19 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressClose() {
         self.playerController.pause()
-        store.dispatch(AppStateActions.ClearCurrentTranslation())
+        store.dispatch(ClearCurrentTranslation())
         self.dismiss(animated: true, completion: nil)
     }
     
     func didPressBackwardFifteen() {
         self.hideTranslation()
-        store.dispatch(AppStateActions.ClearCurrentTranslation())
+        store.dispatch(ClearCurrentTranslation())
         self.playerController.seek(to: self.playerController.currentTime - 15 * 1000)
     }
     
     func didPressForwardFifteen() {
         self.hideTranslation()
-        store.dispatch(AppStateActions.ClearCurrentTranslation())
+        store.dispatch(ClearCurrentTranslation())
         self.playerController.seek(to: self.playerController.currentTime + 15 * 1000)
     }
     
@@ -161,7 +161,7 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func seekValueChangedSeekSlider(time: Milliseconds) {
         self.hideTranslation()
-        store.dispatch(AppStateActions.ClearCurrentTranslation())
+        store.dispatch(ClearCurrentTranslation())
         self.playerController.seek(to: time)
     }
     

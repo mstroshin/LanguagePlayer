@@ -48,11 +48,11 @@ class LanguageSelectionViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if self.isSourceLanguage {
-            store.dispatch(AppStateActions.SelectSourceLanguage(language: self.languages[indexPath.row]))
+            store.dispatch(SelectSourceLanguage(language: self.languages[indexPath.row]))
         } else {
-            store.dispatch(AppStateActions.SelectTargetLanguage(language: self.languages[indexPath.row]))
+            store.dispatch(SelectTargetLanguage(language: self.languages[indexPath.row]))
         }
-        store.dispatch(AppStateActions.SaveAppState())
+        store.dispatch(SaveAppState())
     }
     
 }

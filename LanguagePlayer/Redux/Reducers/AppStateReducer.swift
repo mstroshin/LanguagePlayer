@@ -6,63 +6,41 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
     state.navigation = navigationStateReducer(action: action, state: state.navigation)
     
     switch action {
-    case let action as AppStateActions.LoadedAppState:
-        return action.state
-    case let action as AppStateActions.AddedVideo:
-        let video = VideoState(
-            id: UUID().uuidString,
-            savedInDirectoryName: action.savedInDirectoryName,
-            fileName: action.videoFileName,
-            sourceSubtitleFileName: action.sourceSubtitleFileName,
-            targetSubtitleFileName: action.targetSubtitleFileName
-        )
-        state.videos.append(video)
-    case _ as AppStateActions.ToogleCurrentTranslationFavorite:
-        guard let currentTranslation = state.currentTranslation else { break }
-        if let index = state.translations.firstIndex(where: { $0.source == currentTranslation.source }) {
-            state.translations.remove(at: index)
-        } else {
-            state.translations.append(currentTranslation)
-        }
-    case let action as AppStateActions.AddTranslationToHistory:
-        let translation = TranslationState(from: action.data)
-        state.translationsHistory.append(translation)
-    case let action as AppStateActions.RemoveVideo:
-        state.videos.removeAll(where: { $0.id == action.id })
-        if action.removeAllCards {
-            state.translations.removeAll(where: { $0.videoId == action.id })
-        }
-    case _ as AppStateActions.Translating:
-        state.translating = true
-    case let action as AppStateActions.TranslationResult:
-        state.translating = false
-        if let data = action.data {
-            let translation = TranslationState(from: data)
-            state.currentTranslation = translation
-        } else if let _ = action.error {
-            state.currentTranslation = nil
-        }
-    case let action as AppStateActions.RemoveTranslation:
-        state.translations.removeAll(where: { $0.id == action.id })
-    case let action as AppStateActions.ServerStarted:
-        state.webServerAddress = action.webServerAddress
-        state.webServerIPAddress = action.webServerIPAddress
-    case _ as AppStateActions.ClearCurrentTranslation:
-        state.currentTranslation = nil
-    case let action as AppStateActions.SaveAvailableLanguages:
-        state.settings.availableLanguages = action.languages.compactMap({
-            if let name = $0.name {
-                return Language(code: $0.code, name: name)
-            } else {
-                return nil
-            }
-        })
-    case let action as AppStateActions.SelectSourceLanguage:
-        state.settings.selectedSourceLanguage = action.language
-    case let action as AppStateActions.SelectTargetLanguage:
-        state.settings.selectedTargetLanguage = action.language
-    default:
-        break
+        case let action as VideosListActions:
+            return videosListReducer(action: action, state: state)
+            
+        case let action as VideoPlayerActions:
+            return videoPlayerReducer(action: action, state: state)
+            
+        case let action as CardsActions:
+            return cardsReducer(action: action, state: state)
+            
+        case let action as SettingsActions:
+            return settingsReducer(action: action, state: state)
+            
+        default:
+            break
+    }
+    
+    switch action {
+        case let action as LoadedAppState:
+            return action.state
+        
+        case let action as ServerStarted:
+            state.webServerAddress = action.webServerAddress
+            state.webServerIPAddress = action.webServerIPAddress
+        
+        case let action as SaveAvailableLanguages:
+            state.settings.availableLanguages = action.languages.compactMap({
+                if let name = $0.name {
+                    return Language(code: $0.code, name: name)
+                } else {
+                    return nil
+                }
+            })
+        
+        default:
+            break
     }
     
     return state

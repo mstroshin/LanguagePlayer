@@ -36,7 +36,7 @@ class LocalWebServer: NSObject {
                 )
             }
             
-            let action = AppStateActions.SaveVideo(
+            let action = SaveVideo(
                 video: videoFile,
                 sourceSubtitle: sourceSubtitleFile,
                 targetSubtitle: targetSubtitleFile
@@ -55,7 +55,7 @@ class LocalWebServer: NSObject {
 extension LocalWebServer: GCDWebServerDelegate {
     
     func webServerDidCompleteBonjourRegistration(_ server: GCDWebServer) {
-        store.dispatch(AppStateActions.ServerStarted(
+        store.dispatch(ServerStarted(
             webServerIPAddress: server.serverURL?.absoluteString,
             webServerAddress: server.bonjourServerURL?.absoluteString
         ))

@@ -11,8 +11,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let environment = AppEnvironment.bootstrap()
         store = environment.store
         
-        store.dispatch(AppStateActions.LoadAppState())
-        store.dispatch(AppStateActions.GetAvailableLanguages())
+        store.dispatch(LoadAppState())
+        store.dispatch(GetAvailableLanguages())
         localWebServer.run()
         
         return true

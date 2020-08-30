@@ -110,8 +110,8 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
                 state: .off
             ) { _ in
                 let video = self.videosList[indexPath.row]
-                store.dispatch(AppStateActions.RemoveVideo(id: video.id, removeAllCards: false))
-                store.dispatch(AppStateActions.SaveAppState());
+                store.dispatch(RemoveVideo(id: video.id, removeAllCards: false))
+                store.dispatch(SaveAppState());
             }
             let removeWithCards = UIAction(
                 title: "Удалить со всеми карточками",
@@ -122,8 +122,8 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
                 state: .off
             ) { _ in
                 let video = self.videosList[indexPath.row]
-                store.dispatch(AppStateActions.RemoveVideo(id: video.id, removeAllCards: true))
-                store.dispatch(AppStateActions.SaveAppState());
+                store.dispatch(RemoveVideo(id: video.id, removeAllCards: true))
+                store.dispatch(SaveAppState());
             }
             
             return UIMenu(
