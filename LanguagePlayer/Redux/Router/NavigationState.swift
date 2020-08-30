@@ -3,13 +3,12 @@ import ReSwift
 
 enum Screen: String, Codable {
     case videos
-    case dictionary
     case settings
     case player
     case cards
     
     var isTab: Bool {
-        [.videos, .dictionary, .settings, .cards].contains(self)
+        [.videos, .settings, .cards].contains(self)
     }
 }
 
@@ -34,18 +33,20 @@ func navigationStateReducer(action: Action, state: NavigationState?) -> Navigati
     var state = state ?? NavigationState()
     
     switch action {
-    case let action as NavigationActions.Navigate:
-        state.isNavigating = true
-        state.transiotionData = action.data
-        state.transitionType = action.transitionType
-        state.newScreen = action.screen
-    case _ as NavigationActions.NavigationCompleted:
-        state.isNavigating = false
-        state.transiotionData = nil
-        state.transitionType = nil
-        state.newScreen = nil
-    default:
-        break
+        case let action as NavigationActions.Navigate:
+            state.isNavigating = true
+            state.transiotionData = action.data
+            state.transitionType = action.transitionType
+            state.newScreen = action.screen
+            
+        case _ as NavigationActions.NavigationCompleted:
+            state.isNavigating = false
+            state.transiotionData = nil
+            state.transitionType = nil
+            state.newScreen = nil
+            
+        default:
+            break
     }
     
     return state
