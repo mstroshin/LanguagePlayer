@@ -73,6 +73,7 @@ PODS:
   - nanopb/encode (1.30905.0)
   - PromisesObjC (1.2.10)
   - ReSwift (5.0.0)
+  - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
   - DifferenceKit (~> 1.1.5)
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - GCDWebServer (~> 3.0)
   - MobileVLCKit (~> 3.3.0)
   - ReSwift (~> 5.0.0)
+  - SwiftyStoreKit
 
 SPEC REPOS:
   trunk:
@@ -97,6 +99,7 @@ SPEC REPOS:
     - nanopb
     - PromisesObjC
     - ReSwift
+    - SwiftyStoreKit
 
 SPEC CHECKSUMS:
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
@@ -113,7 +116,8 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   PromisesObjC: b14b1c6b68e306650688599de8a45e49fae81151
   ReSwift: 628f1a9b3ee52e3b3ca2a644435472fd77afafe1
+  SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 415e2bc908da033f66c4f6dc84f2017d5885e38f
+PODFILE CHECKSUM: 3d981321f313c82215f1acb95be188c84c9ef5bd
 
 COCOAPODS: 1.9.3

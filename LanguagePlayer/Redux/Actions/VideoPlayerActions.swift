@@ -20,10 +20,6 @@ struct AddTranslationToHistory: VideoPlayerActions {
 //MARK: - Subtitle translation
 struct GetAvailableLanguages: VideoPlayerActions {}
 
-struct SaveAvailableLanguages: VideoPlayerActions {
-    let languages: [LanguageAPIDTO]
-}
-
 struct Translate: VideoPlayerActions {
     let source: String
     let videoID: ID

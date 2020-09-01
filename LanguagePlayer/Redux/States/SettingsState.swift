@@ -1,7 +1,7 @@
 struct SettingsState: Codable {
     //MARK: - Languages
-    var selectedSourceLanguage = Language(code: "en", name: "english")
-    var selectedTargetLanguage = Language(code: "ru", name: "русский")
+    var selectedSourceLanguage = Language(code: "en", name: "English")
+    var selectedTargetLanguage = Language(code: "ru", name: "Русский")
     
     var availableLanguages = [Language]()
     

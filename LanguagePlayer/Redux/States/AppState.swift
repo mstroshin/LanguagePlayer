@@ -6,6 +6,7 @@ typealias ID = String
 struct AppState: StateType {
     var navigation = NavigationState()
     var settings = SettingsState()
+    var purchasingState = PurchasingState()
     
     var webServerIPAddress: String?
     var webServerAddress: String?
