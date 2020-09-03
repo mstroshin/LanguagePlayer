@@ -5,11 +5,13 @@ func videoPlayerReducer(action: VideoPlayerActions, state: AppState) -> AppState
     
     switch action {
         case _ as ToogleCurrentTranslationFavorite:
-            guard let currentTranslation = state.currentTranslation else { break }
-            if let index = state.translations.firstIndex(where: { $0.source == currentTranslation.source }) {
-                state.translations.remove(at: index)
-            } else {
-                state.translations.append(currentTranslation)
+            if case .success(let data) = state.translationStatus.result,
+                let currentTranslation = data as? TranslationState {
+                if let index = state.translations.firstIndex(where: { $0.source == currentTranslation.source }) {
+                    state.translations.remove(at: index)
+                } else {
+                    state.translations.append(currentTranslation)
+                }
             }
         
         case let action as AddTranslationToHistory:
@@ -17,19 +19,19 @@ func videoPlayerReducer(action: VideoPlayerActions, state: AppState) -> AppState
             state.translationsHistory.append(translation)
         
         case _ as Translating:
-            state.translating = true
+            state.translationStatus.isLoading = true
         
         case let action as TranslationResult:
-            state.translating = false
+            state.translationStatus.isLoading = false
             if let data = action.data {
                 let translation = TranslationState(from: data)
-                state.currentTranslation = translation
-            } else if let _ = action.error {
-                state.currentTranslation = nil
+                state.translationStatus.result = .success(translation)
+            } else if let error = action.error {
+                state.translationStatus.result = .failure(error)
             }
         
         case _ as ClearCurrentTranslation:
-            state.currentTranslation = nil
+            state.translationStatus.result = nil
         
         default:
             break

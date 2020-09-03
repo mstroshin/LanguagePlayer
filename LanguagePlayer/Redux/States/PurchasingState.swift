@@ -4,6 +4,7 @@ struct PurchasingState: Codable {
 }
 
 struct StoreProduct: Codable {
+    let id: ID
     let localizedTitle: String
     let localizedDescription: String
     let localizedPrice: String

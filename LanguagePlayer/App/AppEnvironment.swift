@@ -15,11 +15,15 @@ extension AppEnvironment {
         let userDefaults = userDefaultsMiddleware(userDefaults: UserDefaultsDataStore())
         let translation = translationMiddleware(translationService: YandexTranslationService())
         let analytics = analyticsMiddleware()
+//        let transactions = transactionsMiddleware()
+        let transactions = transactionsMiddleware(
+            purchaseService: PurchaseService(productIds: PurchaseIds.all)
+        )
         
         let store = Store(
             reducer: appStateReducer,
             state: appState,
-            middleware: [translation, filestore, userDefaults, analytics],
+            middleware: [translation, filestore, userDefaults, transactions, analytics],
             automaticallySkipsRepeats: true
         )
                 

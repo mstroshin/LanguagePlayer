@@ -1,6 +1,5 @@
 import UIKit
 import Firebase
-import SwiftyStoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,23 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         store.dispatch(LoadAppState())
         store.dispatch(GetAvailableLanguages())
         localWebServer.run()
-        
-        SwiftyStoreKit.completeTransactions { purchases in
-            for purchase in purchases {
-                switch purchase.transaction.transactionState {
-                case .purchased, .restored:
-                    if purchase.needsFinishTransaction {
-                        // Deliver content from server, then:
-                        SwiftyStoreKit.finishTransaction(purchase.transaction)
-                    }
-                    // Unlock content
-                case .failed, .purchasing, .deferred:
-                    break // do nothing
-                @unknown default:
-                    break
-                }
-            }
-        }
         
         return true
     }

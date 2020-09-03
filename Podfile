@@ -9,5 +9,5 @@ target 'LanguagePlayer' do
 #  pod 'RealmSwift', '~> 5.3.4'
   pod 'MobileVLCKit', '~> 3.3.0'
   pod 'Firebase/Analytics'
-  pod 'SwiftyStoreKit'
+  pod 'Toast-Swift', '~> 5.0.1'
 end

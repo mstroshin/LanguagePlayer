@@ -7,7 +7,7 @@ struct AppState: StateType {
     var navigation = NavigationState()
     var settings = SettingsState()
     var purchasingState = PurchasingState()
-    
+        
     var webServerIPAddress: String?
     var webServerAddress: String?
     
@@ -19,8 +19,9 @@ struct AppState: StateType {
     //Keeps every translated word
     var translationsHistory = [TranslationState]()
     
-    var currentTranslation: TranslationState?
-    var translating: Bool = false
+    //Loading statuses
+    var translationStatus = LoadingStatus(isLoading: false, result: nil)
+    var purchaseStatus = LoadingStatus(isLoading: false, result: nil)
 }
 
 extension AppState: Codable {
@@ -46,6 +47,11 @@ extension AppState: Codable {
         try container.encode(translations, forKey: .translations)
         try container.encode(translationsHistory, forKey: .translationsHistory)
     }
+}
+
+struct LoadingStatus {
+    var isLoading: Bool
+    var result: Result<Any, Error>?
 }
 
 struct VideoState: Codable {

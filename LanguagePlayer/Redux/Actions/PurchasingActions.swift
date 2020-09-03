@@ -17,5 +17,5 @@ struct PurchaseCompleted: PurchasingActions {
 struct RetrieveProductsInfo: PurchasingActions {}
 
 struct SaveProductsInfo: PurchasingActions {
-    let products: Set<SKProduct>
+    let products: [SKProduct]
 }

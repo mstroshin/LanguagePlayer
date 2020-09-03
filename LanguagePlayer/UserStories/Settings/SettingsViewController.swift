@@ -34,7 +34,8 @@ class SettingsViewController: UITableViewController {
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         
         if selectedCell == self.premiumCell {
-            print("qwasde")
+            let vc: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
+            self.present(vc, animated: true, completion: nil)
         }
         if selectedCell == self.sourceLanguageCell {
             let vc = LanguageSelectionViewController(isSourceLanguage: true)

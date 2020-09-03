@@ -5,10 +5,20 @@ struct VideoPlayerViewState: Equatable {
     let navigationData: VideoPlayerNavigationData?
     
     init(appState: AppState) {
+        let isLoading = appState.translationStatus.isLoading
+        
+        var source: String? = nil
+        var target: String? = nil
+        if case .success(let data) = appState.translationStatus.result,
+            let t = data as? TranslationState {
+            source = t.source
+            target = t.target
+        }
+        
         self.tranlsation = TranslationViewState(
-            translation: appState.currentTranslation?.target,
-            isAddedInDictionary: appState.translations.contains { $0.source == appState.currentTranslation?.source },
-            translating: appState.translating
+            translation: target,
+            isAddedInDictionary: appState.translations.contains { $0.source == source },
+            translating: isLoading
         )
         self.navigationData = appState.navigation.isNavigating ? VideoPlayerNavigationData(appState) : nil
     }
