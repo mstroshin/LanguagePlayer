@@ -785,11 +785,11 @@
             </objects>
             <point key="canvasLocation" x="-555" y="866"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="IGa-36-P4v">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ac6-9f-HaO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="sIY-od-Coi"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gear" catalog="system" id="sIY-od-Coi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="wb8-LQ-MSm">
                         <rect key="frame" x="0.0" y="0.0" width="834" height="50"/>
@@ -810,6 +810,7 @@
         <image name="backward_sub" width="44" height="44"/>
         <image name="book" catalog="system" width="128" height="101"/>
         <image name="forward_sub" width="44" height="44"/>
+        <image name="gear" catalog="system" width="128" height="119"/>
         <image name="gobackward.15" catalog="system" width="121" height="128"/>
         <image name="goforward.15" catalog="system" width="121" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>

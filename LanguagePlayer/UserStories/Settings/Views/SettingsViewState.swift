@@ -4,7 +4,7 @@ struct SettingsViewState: Equatable {
     let selectedTargetLanguageName: String
     
     init(appState: AppState) {
-        self.isPremium = appState.purchasingState.isPremium
+        self.isPremium = appState.purchasing.isPremium
         self.selectedSourceLanguageName = appState.settings.selectedSourceLanguage.name
         self.selectedTargetLanguageName = appState.settings.selectedTargetLanguage.name
     }

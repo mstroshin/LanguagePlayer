@@ -1,5 +1,6 @@
 import UIKit
 import ReSwift
+import Toast_Swift
 
 class PurchasesViewController: UIViewController {
     @IBOutlet private weak var productsStackView: UIStackView!
@@ -73,6 +74,16 @@ extension PurchasesViewController: StoreSubscriber {
     func newState(state: PurchasesViewState) {
         DispatchQueue.main.async {
             self.updateViews(with: state.products)
+            
+            if state.isLoading {
+                self.view.makeToastActivity(.center)
+            } else {
+                self.view.hideToastActivity()
+            }
+            
+            if let error = state.loadingError {
+                self.view.makeToast(error.localizedDescription)
+            }
         }
     }
     

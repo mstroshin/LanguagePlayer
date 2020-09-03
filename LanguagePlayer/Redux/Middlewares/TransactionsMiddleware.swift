@@ -6,6 +6,8 @@ func transactionsMiddleware(purchaseService: PurchaseService) -> Middleware<AppS
             return { action in
                 switch action {
                 case let action as Purchase:
+                    next(LoadingPurchase())
+                    
                     purchaseService.buyProduct(id: action.id) { result in
                         switch result {
                             case .success(let id):
@@ -29,6 +31,8 @@ func transactionsMiddleware(purchaseService: PurchaseService) -> Middleware<AppS
                     }
                     
                 case _ as RetrieveProductsInfo:
+                    next(LoadingProductsInfo())
+                    
                     purchaseService.requestProducts { result in
                         switch result {
                             case .success(let products):
@@ -37,6 +41,7 @@ func transactionsMiddleware(purchaseService: PurchaseService) -> Middleware<AppS
                                 
                             case .failure(let error):
                                 print((error as NSError).localizedDescription)
+                                next(LoadingProductsInfoError(error: error))
                         }
                     }
                     

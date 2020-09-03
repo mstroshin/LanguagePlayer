@@ -19,7 +19,7 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
             return settingsReducer(action: action, state: state)
         
         case let action as PurchasingActions:
-            state.purchasingState = purchasingReducer(action: action, state: state.purchasingState)
+            state.purchasing = purchasingReducer(action: action, state: state.purchasing)
             
         default:
             break
