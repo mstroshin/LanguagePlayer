@@ -211,9 +211,10 @@
 		D203D2F724FBB8D10026E9D4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */,
-				D2E8361C24FE825F009952A7 /* SettingsViewState.swift */,
-				D203D2FA24FBC2B30026E9D4 /* Languages */,
+				D203D2FD24FBC3930026E9D4 /* SettingsState.swift */,
+				D203D31524FC08870026E9D4 /* SettingsReducer.swift */,
+				D203D31724FC08C60026E9D4 /* SettingsActions.swift */,
+				D2A9822A2501089500304522 /* Views */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -230,8 +231,10 @@
 		D203D31924FE74E30026E9D4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */,
-				D2AABA4D24FFC57000029E08 /* PurchasesViewState.swift */,
+				D203D31E24FE78BB0026E9D4 /* PurchasingState.swift */,
+				D203D32224FE7E3F0026E9D4 /* PurchasingReducer.swift */,
+				D203D31C24FE782D0026E9D4 /* PurchasingActions.swift */,
+				D2A9822C250108F000304522 /* Views */,
 			);
 			path = Purchases;
 			sourceTree = "<group>";
@@ -272,10 +275,9 @@
 		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				D26131DE24EBC64100381945 /* Subtitles */,
-				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
-				D2C0568724C7E28000810915 /* ControlsView.swift */,
-				D26131E124EBC94300381945 /* VideoPlayerViewState.swift */,
+				D203D31124FC060B0026E9D4 /* VideoPlayerReducer.swift */,
+				D203D30D24FC037F0026E9D4 /* VideoPlayerActions.swift */,
+				D2A9822E2501093C00304522 /* Views */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -335,11 +337,10 @@
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
-				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
-				D287497F24D5A17000687095 /* VideosListViewController.swift */,
-				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
-				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
+				D203D30324FBFEEA0026E9D4 /* VideosListReducer.swift */,
+				D203D30124FBFDF50026E9D4 /* VideosListActions.swift */,
 				D28DC02924ED619A00017E8D /* VideosListRouter.swift */,
+				D2A9822F2501095C00304522 /* Views */,
 			);
 			path = VideosList;
 			sourceTree = "<group>";
@@ -348,8 +349,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749A424D6674900687095 /* AppState.swift */,
-				D203D2FD24FBC3930026E9D4 /* SettingsState.swift */,
-				D203D31E24FE78BB0026E9D4 /* PurchasingState.swift */,
 			);
 			path = States;
 			sourceTree = "<group>";
@@ -367,11 +366,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749AC24D675B900687095 /* AppStateActions.swift */,
-				D203D30124FBFDF50026E9D4 /* VideosListActions.swift */,
-				D203D30D24FC037F0026E9D4 /* VideoPlayerActions.swift */,
-				D203D30F24FC04110026E9D4 /* CardsActions.swift */,
-				D203D31724FC08C60026E9D4 /* SettingsActions.swift */,
-				D203D31C24FE782D0026E9D4 /* PurchasingActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -404,11 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				D28749C324D6CA8100687095 /* AppStateReducer.swift */,
-				D203D30324FBFEEA0026E9D4 /* VideosListReducer.swift */,
-				D203D31124FC060B0026E9D4 /* VideoPlayerReducer.swift */,
-				D203D31324FC07E20026E9D4 /* CardsReducer.swift */,
-				D203D31524FC08870026E9D4 /* SettingsReducer.swift */,
-				D203D32224FE7E3F0026E9D4 /* PurchasingReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -449,12 +438,63 @@
 		D2A516AD24F90DAB00DDC5EC /* Cards */ = {
 			isa = PBXGroup;
 			children = (
+				D203D30F24FC04110026E9D4 /* CardsActions.swift */,
+				D203D31324FC07E20026E9D4 /* CardsReducer.swift */,
+				D2A516B424F9136600DDC5EC /* CardsRouter.swift */,
+				D2A9822D2501090E00304522 /* Views */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		D2A9822A2501089500304522 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D203D2FA24FBC2B30026E9D4 /* Languages */,
+				D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */,
+				D2E8361C24FE825F009952A7 /* SettingsViewState.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D2A9822C250108F000304522 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */,
+				D2AABA4D24FFC57000029E08 /* PurchasesViewState.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D2A9822D2501090E00304522 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */,
 				D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */,
 				D2A516B024F90E2900DDC5EC /* CardsViewState.swift */,
-				D2A516B424F9136600DDC5EC /* CardsRouter.swift */,
 			);
-			path = Cards;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D2A9822E2501093C00304522 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
+				D26131E124EBC94300381945 /* VideoPlayerViewState.swift */,
+				D2C0568724C7E28000810915 /* ControlsView.swift */,
+				D26131DE24EBC64100381945 /* Subtitles */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D2A9822F2501095C00304522 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
+				D287497F24D5A17000687095 /* VideosListViewController.swift */,
+				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
+				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D2B29E8C24F6737000AF06A9 /* UploadTutorial */ = {
