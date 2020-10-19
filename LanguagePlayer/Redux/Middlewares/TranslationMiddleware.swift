@@ -1,18 +1,18 @@
 import ReSwift
+import Combine
 
 func translationMiddleware(translationService: TranslationService) -> Middleware<AppState> {
+    var cancellable: AnyCancellable?
+    
     return { dispatch, getState in
         return { next in
             return { action in
                 switch action {
                 case _ as GetAvailableLanguages:
-                    translationService.availableLanguageCodes { result in
-                        switch result {
-                        case .failure(_):
-                            next(SaveAvailableLanguages(languages: []))
-                        case .success(let languages):
-                            next(SaveAvailableLanguages(languages: languages))
-                        }
+                    cancellable = translationService.availableLanguages()
+                        .replaceError(with: [])
+                        .sink(receiveCompletion: { _ in}) { languages in
+                        next(SaveAvailableLanguages(languages: languages))
                         next(SaveAppState())
                     }
                     
@@ -33,27 +33,28 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                     next(Translating())
                     
                     let text = action.source.replacingOccurrences(of: "\n", with: " ")
-                    translationService.translate(
+                    cancellable = translationService.translate(
                         text: text,
                         sourceLanguage: state.settings.selectedSourceLanguage.code,
                         targetLanguage: state.settings.selectedTargetLanguage.code
-                    ) { result in
-                        switch result {
-                        case .failure(let error):
+                    )
+                    .sink { completion in
+                        if case .failure(let error) = completion {
                             next(TranslationResult(data: nil, error: error))
-                        case .success(let translatedText):
-                            let data = TranslationModel(
-                                source: action.source,
-                                target: translatedText,
-                                videoID: action.videoID,
-                                fromTime: action.fromTime,
-                                toTime: action.toTime
-                            )
-                            next(TranslationResult(data: data, error: nil))
-                            next(AddTranslationToHistory(data: data))
-                            next(SaveAppState())
                         }
+                    } receiveValue: { translatedText in
+                        let data = TranslationModel(
+                            source: action.source,
+                            target: translatedText,
+                            videoID: action.videoID,
+                            fromTime: action.fromTime,
+                            toTime: action.toTime
+                        )
+                        next(TranslationResult(data: data, error: nil))
+                        next(AddTranslationToHistory(data: data))
+                        next(SaveAppState())
                     }
+                    
                 default:
                     next(action)
                 }

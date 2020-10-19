@@ -117,6 +117,15 @@ extension VideoPlayerViewController: SubtitlesViewDelegate {
             fromTime: subtitle.fromTime,
             toTime: subtitle.toTime
         ))
+        
+//        let data = TranslationModel(
+//            source: text,
+//            target: text,
+//            videoID: self.playerController.videoId,
+//            fromTime: subtitle.fromTime,
+//            toTime: subtitle.toTime
+//        )
+//        store.dispatch(TranslationResult(data: data, error: nil))
     }
     
     func addToDictionaryPressed() {
@@ -223,22 +232,24 @@ extension VideoPlayerViewController: StoreSubscriber {
     typealias StoreSubscriberStateType = VideoPlayerViewState
     
     func newState(state: VideoPlayerViewState) {
-        if state.tranlsation.translating == false && state.tranlsation.translation == nil {
-            self.subtitlesView.hideTranslationView()
-        } else {
-            self.subtitlesView.showTranslated(state.tranlsation)
-        }
-        
-        if let navigationData = state.navigationData {
-            self.playerController.set(videoUrl: navigationData.videoUrl)
-            self.playerController.videoId = navigationData.videoId
-            
-            if let sourceSubtitleUrl = navigationData.sourceSubtitleUrl {
-                self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
+        DispatchQueue.main.async {
+            if state.tranlsation.translating == false && state.tranlsation.translation == nil {
+                self.subtitlesView.hideTranslationView()
+            } else {
+                self.subtitlesView.showTranslated(state.tranlsation)
             }
             
-            self.startPlaying()
-            self.playerController.seek(to: navigationData.fromTime)
+            if let navigationData = state.navigationData {
+                self.playerController.set(videoUrl: navigationData.videoUrl)
+                self.playerController.videoId = navigationData.videoId
+                
+                if let sourceSubtitleUrl = navigationData.sourceSubtitleUrl {
+                    self.subtitlesExtractor = SubtitlesExtractorSrt(with: sourceSubtitleUrl)
+                }
+                
+                self.startPlaying()
+                self.playerController.seek(to: navigationData.fromTime)
+            }
         }
     }
 }

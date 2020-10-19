@@ -11,13 +11,9 @@ func settingsReducer(action: SettingsActions, state: AppState) -> AppState {
             state.settings.selectedTargetLanguage = action.language
         
         case let action as SaveAvailableLanguages:
-            state.settings.availableLanguages = action.languages.compactMap({
-                if let name = $0.name {
-                    return Language(code: $0.code, name: name.capitalized)
-                } else {
-                    return nil
-                }
-            })
+            state.settings.availableLanguages = action.languages.map {
+                Language(code: $0.code, name: $0.name.capitalized)
+            }
         
         default:
             break

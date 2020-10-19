@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
+		CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */; };
 		D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */; };
 		D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */; };
 		D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */; };
@@ -71,7 +72,6 @@
 		D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435424C625FE00133EBD /* TranslationView.swift */; };
 		D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */; };
 		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
-		D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F124C78E10004660EE /* YandexTranslationService.swift */; };
 		D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F524C78EEF004660EE /* PropertyWrappers.swift */; };
 		D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */; };
 		D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */; };
@@ -98,6 +98,7 @@
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
+		CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftTranslationService.swift; sourceTree = "<group>"; };
 		D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
@@ -511,6 +512,7 @@
 			children = (
 				D2D292EF24C78BB8004660EE /* TranslationService.swift */,
 				D2D292F124C78E10004660EE /* YandexTranslationService.swift */,
+				CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */,
 			);
 			path = TranslationAPI;
 			sourceTree = "<group>";
@@ -737,7 +739,6 @@
 				D28DC02424EC593C00017E8D /* Router.swift in Sources */,
 				D203D31424FC07E20026E9D4 /* CardsReducer.swift in Sources */,
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
-				D2D292F224C78E10004660EE /* YandexTranslationService.swift in Sources */,
 				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
 				D203D30024FBD3B80026E9D4 /* LanguageSelectionViewState.swift in Sources */,
 				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
@@ -780,6 +781,7 @@
 				D203D31224FC060B0026E9D4 /* VideoPlayerReducer.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
+				CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */,
 				D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */,
 				D203D2FE24FBC3930026E9D4 /* SettingsState.swift in Sources */,
 				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,

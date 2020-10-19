@@ -13,7 +13,7 @@ extension AppEnvironment {
         
         let filestore = filestoreMiddleware(filestore: LocalDiskStore())
         let userDefaults = userDefaultsMiddleware(userDefaults: UserDefaultsDataStore())
-        let translation = translationMiddleware(translationService: YandexTranslationService())
+        let translation = translationMiddleware(translationService: MicrosoftTranslationService())
         let analytics = analyticsMiddleware()
 //        let transactions = transactionsMiddleware()
         let transactions = transactionsMiddleware(

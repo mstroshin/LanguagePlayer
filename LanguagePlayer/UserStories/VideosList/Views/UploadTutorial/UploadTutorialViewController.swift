@@ -26,17 +26,15 @@ extension UploadTutorialViewController: StoreSubscriber {
     
     func newState(state: UploadTutorialViewState) {
         DispatchQueue.main.async {
-            if let address = state.webServerAddress {
-                self.addressLabel.text = address
-            }
+            self.ipAddressLabel.text = state.webServerIPAddress
             
-            if let ipAddress = state.webServerIPAddress {
+            if let ipAddress = state.webServerBonjourAddress {
                 self.orLabel.isHidden = false
-                self.ipAddressLabel.isHidden = false
-                self.ipAddressLabel.text = ipAddress
+                self.addressLabel.isHidden = false
+                self.addressLabel.text = ipAddress
             } else {
                 self.orLabel.isHidden = true
-                self.ipAddressLabel.isHidden = true
+                self.addressLabel.isHidden = true
             }
         }
     }

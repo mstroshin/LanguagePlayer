@@ -41,6 +41,8 @@ class SubtitlesExtractorSrt: SubtitlesExtractor {
             if part.isEmpty { continue }
             
             let lines = part.components(separatedBy: "\n")
+            if lines.count != 3 { continue }
+            
             guard let number = Int(lines[0]) else {
                 fatalError("Doesn't parse subtitle file \(self.filePath)")
             }

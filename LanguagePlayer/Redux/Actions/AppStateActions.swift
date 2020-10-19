@@ -15,5 +15,5 @@ struct SaveAppState: AppStateActions {}
 //MARK: - Server
 struct ServerStarted: AppStateActions {
     var webServerIPAddress: String?
-    var webServerAddress: String?
+    var webServerBonjourAddress: String?
 }

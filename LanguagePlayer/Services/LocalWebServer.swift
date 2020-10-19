@@ -46,7 +46,9 @@ class LocalWebServer: NSObject {
             return GCDWebServerResponse(statusCode: 200)
         }
             
-        webServer.start(withPort: 9099, bonjourName: "GCD Web Server")
+        let serverIsRunning = webServer.start(withPort: 9099, bonjourName: "GCD Web Server")
+        print("Local WebServer is successfull running: \(serverIsRunning)")
+        
         webServer.delegate = self
     }
     
@@ -54,10 +56,17 @@ class LocalWebServer: NSObject {
 
 extension LocalWebServer: GCDWebServerDelegate {
     
+    func webServerDidStart(_ server: GCDWebServer) {
+        store.dispatch(ServerStarted(
+            webServerIPAddress: server.serverURL?.absoluteString,
+            webServerBonjourAddress: server.bonjourServerURL?.absoluteString
+        ))
+    }
+    
     func webServerDidCompleteBonjourRegistration(_ server: GCDWebServer) {
         store.dispatch(ServerStarted(
             webServerIPAddress: server.serverURL?.absoluteString,
-            webServerAddress: server.bonjourServerURL?.absoluteString
+            webServerBonjourAddress: server.bonjourServerURL?.absoluteString
         ))
     }
     

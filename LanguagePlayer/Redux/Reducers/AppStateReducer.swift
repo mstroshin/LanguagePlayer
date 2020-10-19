@@ -30,7 +30,7 @@ func appStateReducer(action: Action, state: AppState?) -> AppState {
             return action.state
         
         case let action as ServerStarted:
-            state.webServerAddress = action.webServerAddress
+            state.webServerAddress = action.webServerBonjourAddress
             state.webServerIPAddress = action.webServerIPAddress
         
         default:
