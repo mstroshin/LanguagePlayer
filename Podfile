@@ -10,4 +10,5 @@ target 'LanguagePlayer' do
   pod 'Firebase/Analytics'
   pod 'Toast-Swift'
   pod 'ReSwift'
+  pod 'GoogleMLKit/Translate'
 end

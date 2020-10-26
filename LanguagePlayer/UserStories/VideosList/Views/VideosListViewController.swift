@@ -11,7 +11,7 @@ class VideosListViewController: BaseViewController {
         self.router = VideosListRouter(self, screen: .videos)
         self.title = "Video Library"
         
-        self.collectionView.collectionViewLayout = self.createLayout()
+        self.collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
     }
@@ -26,28 +26,6 @@ class VideosListViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
-    }
-    
-    private func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1/4.2),
-            heightDimension: .fractionalHeight(1)
-        )
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        let groupSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(180)
-        )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        group.interItemSpacing = .flexible(8)
-
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 16
-        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
-
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
     }
     
 }

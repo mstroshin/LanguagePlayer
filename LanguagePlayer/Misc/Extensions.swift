@@ -104,6 +104,62 @@ extension URL {
     }
 }
 
+extension UICollectionViewLayout {
+    
+    static func idiomicCellLayout() -> UICollectionViewLayout {
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            return self.createLayoutIPad()
+        } else {
+            return self.createLayoutIPhone()
+        }
+    }
+    
+    private static func createLayoutIPad() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/3.2),
+            heightDimension: .fractionalHeight(1)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(280)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .flexible(8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    private static func createLayoutIPhone() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1/2.2),
+            heightDimension: .fractionalHeight(1)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(160)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .flexible(8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(top: 16, leading: 16, bottom: 16, trailing: 16)
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+}
+
 precedencegroup AssignmentPrecedence {}
 infix operator ?=
 func ?= <T: Any> (left: inout T, right: T?) {

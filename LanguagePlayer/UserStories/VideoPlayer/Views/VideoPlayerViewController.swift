@@ -78,10 +78,8 @@ class VideoPlayerViewController: UIViewController {
     }
     
     func show(subtitles: String) {
-        if self.subtitlesView.currentText != subtitles {
-            self.subtitlesView.set(text: subtitles)
-            self.subtitlesView.isHidden = false
-        }
+        self.subtitlesView.set(text: subtitles)
+        self.subtitlesView.isHidden = false
     }
     
     func hideSubtitles() {
@@ -176,23 +174,13 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressBackwardSub() {
         if let subtitle = self.subtitlesExtractor?.getPreviousSubtitle(current: self.playerController.currentTime) {
-            self.playerController.seek(to: subtitle.fromTime)
-            
-            if self.isSubtitlesEnable {
-                self.currentSubtitle = subtitle
-                self.show(subtitles: subtitle.text)
-            }
+            self.playerController.seek(to: subtitle.fromTime - 50)
         }
     }
     
     func didPressForwardSub() {
         if let subtitle = self.subtitlesExtractor?.getNextSubtitle(current: self.playerController.currentTime) {
-            self.playerController.seek(to: subtitle.fromTime)
-            
-            if self.isSubtitlesEnable {
-                self.currentSubtitle = subtitle
-                self.show(subtitles: subtitle.text)
-            }
+            self.playerController.seek(to: subtitle.fromTime - 50)
         }
     }
     
