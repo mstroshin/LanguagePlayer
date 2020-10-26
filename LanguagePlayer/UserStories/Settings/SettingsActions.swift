@@ -13,3 +13,5 @@ struct SelectSourceLanguage: SettingsActions  {
 struct SelectTargetLanguage: SettingsActions  {
     let language: Language
 }
+
+struct DownloadOfflineModel: SettingsActions {}

@@ -1,15 +1,24 @@
 import ReSwift
 import Combine
+import MLKitTranslate
 
-func translationMiddleware(translationService: TranslationService) -> Middleware<AppState> {
+func translationMiddleware(onlineService: TranslationService) -> Middleware<AppState> {
     var cancellable: AnyCancellable?
+    var fallbackService: TranslationService?
     
     return { dispatch, getState in
         return { next in
             return { action in
                 switch action {
+                case _ as DownloadOfflineModel:
+                    let state = getState()!
+                    let source = TranslateLanguage(rawValue: state.settings.selectedSourceLanguage.name)
+                    let model = TranslateRemoteModel.translateRemoteModel(language: source)
+                    let conditions = ModelDownloadConditions(allowsCellularAccess: true, allowsBackgroundDownloading: true)
+                    let progress = ModelManager.modelManager().download(model, conditions: conditions)
+                    
                 case _ as GetAvailableLanguages:
-                    cancellable = translationService.availableLanguages()
+                    cancellable = onlineService.availableLanguages()
                         .replaceError(with: [])
                         .sink(receiveCompletion: { _ in}) { languages in
                         next(SaveAvailableLanguages(languages: languages))
@@ -33,7 +42,7 @@ func translationMiddleware(translationService: TranslationService) -> Middleware
                     next(Translating())
                     
                     let text = action.source.replacingOccurrences(of: "\n", with: " ")
-                    cancellable = translationService.translate(
+                    cancellable = onlineService.translate(
                         text: text,
                         sourceLanguage: state.settings.selectedSourceLanguage.code,
                         targetLanguage: state.settings.selectedTargetLanguage.code

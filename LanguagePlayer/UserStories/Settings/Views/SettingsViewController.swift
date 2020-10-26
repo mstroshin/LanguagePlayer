@@ -30,6 +30,10 @@ class SettingsViewController: UITableViewController {
         
     }
     
+    @objc func downloadLanguagesAction() {
+        print("downloadLanguagesAction")
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         
@@ -58,6 +62,41 @@ class SettingsViewController: UITableViewController {
         }
         
         return tableView.rowHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == 1 {
+            return 40
+        }
+        
+        return 0
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        //Language section
+        if section == 1 {
+            let footerView = UIView(
+                frame: CGRect(
+                    x: 0,
+                    y: 0,
+                    width: tableView.bounds.width,
+                    height: self.tableView(tableView, heightForFooterInSection: section)
+                )
+            )
+            let button = UIButton(type: .system)
+            button.setTitle("Download offline languages (~30mb)", for: .normal)
+            button.addTarget(self, action: #selector(downloadLanguagesAction), for: .touchUpInside)
+            footerView.addSubview(button)
+            
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.topAnchor.constraint(equalTo: footerView.topAnchor).isActive = true
+            button.bottomAnchor.constraint(equalTo: footerView.bottomAnchor).isActive = true
+            button.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 8).isActive = true
+            
+            return footerView
+        }
+        
+        return nil
     }
     
 }
