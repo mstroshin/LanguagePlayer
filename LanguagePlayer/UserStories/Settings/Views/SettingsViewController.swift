@@ -1,5 +1,4 @@
 import UIKit
-import ReSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var premiumCell: UITableViewCell!
@@ -12,18 +11,6 @@ class SettingsViewController: UITableViewController {
         self.title = "Settings"
         
         self.setupViews()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        store.subscribe(self, transform: {
-            $0.select(SettingsViewState.init)
-        })
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        store.unsubscribe(self)
     }
     
     private func setupViews() {
@@ -99,18 +86,4 @@ class SettingsViewController: UITableViewController {
         return nil
     }
     
-}
-
-extension SettingsViewController: StoreSubscriber {
-    typealias State = SettingsViewState
-    
-    func newState(state: SettingsViewState) {
-        DispatchQueue.main.async {
-            self.sourceLanguageCell.detailTextLabel?.text = state.selectedSourceLanguageName
-            self.targetLanguageCell.detailTextLabel?.text = state.selectedTargetLanguageName
-            self.isPremium = state.isPremium
-            
-            self.tableView.reloadData()
-        }
-    }
 }

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 
 struct LanguageAPIDTO {
     let code: String
@@ -15,6 +15,6 @@ struct LanguageAPIDTO {
 }
 
 protocol TranslationService {
-    func availableLanguages() -> AnyPublisher<[LanguageAPIDTO], Error>
-    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error>
+    func availableLanguages() -> Observable<[LanguageAPIDTO]>
+    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> Observable<String>
 }

@@ -1,15 +1,18 @@
 import MobileVLCKit
+import RxSwift
 
 typealias Milliseconds = Int
 
-protocol PlayerControllerDelegate: class {
-    func playerController(_ player: PlayerController, changed time: Milliseconds)
-    func playerController(_ player: PlayerController, videoDuration: Milliseconds)
+enum PlayerStatus {
+    case unready
+    case ready(duration: Milliseconds)
+    case pause
+    case play
 }
 
 class PlayerController: NSObject {
-    var videoId: ID = ""
-    var currentTime: Milliseconds = 0
+    let status = BehaviorSubject<PlayerStatus>(value: .unready)
+    let currentTime = BehaviorSubject<Milliseconds>(value: 0)
     var videoDuration: Milliseconds {
         if let value = self.player.media.length.value {
             return value.intValue
@@ -17,41 +20,36 @@ class PlayerController: NSObject {
         
         return 0
     }
-    var isPlaying: Bool {
-        self.player.isPlaying
-    }
-    weak var delegate: PlayerControllerDelegate?
-    private(set) var isPlayerReady = false
     
+    private(set) var isPlayerReady = false
     private let player = VLCMediaPlayer()
     
-    override init() {
+    
+    init(videoUrl: URL) {
         super.init()
         self.player.delegate = self
+        self.player.media = VLCMedia(url: videoUrl)
     }
     
     func set(viewport: UIView) {
         self.player.drawable = viewport
     }
-    
-    func set(videoUrl: URL) {
-        self.player.media = VLCMedia(url: videoUrl)
-    }
         
     func play() {
         self.player.play()
+        status.onNext(.play)
     }
     
     func pause() {
         self.player.pause()
+        status.onNext(.pause)
     }
         
     func seek(to time: Milliseconds) {
-        self.currentTime = time
         self.player.time = VLCTime(number: NSNumber(value: time))
         
-        if self.isPlaying == false {
-            self.delegate?.playerController(self, changed: time)
+        if player.isPlaying == false {
+            self.currentTime.onNext(time)
         }
     }
     
@@ -60,8 +58,9 @@ class PlayerController: NSObject {
 extension PlayerController: VLCMediaPlayerDelegate {
     
     func mediaPlayerTimeChanged(_ aNotification: Notification!) {
-        self.currentTime ?= self.player.time.value?.intValue
-        self.delegate?.playerController(self, changed: self.currentTime)
+        if let time = self.player.time.value?.intValue {
+            self.currentTime.onNext(time)
+        }
     }
     
     func mediaPlayerStateChanged(_ aNotification: Notification!) {
@@ -81,7 +80,7 @@ extension PlayerController: VLCMediaPlayerDelegate {
             }
             
             //Send video duration
-            self.delegate?.playerController(self, videoDuration: duration)
+            status.onNext(.ready(duration: duration))
         }
     }
     

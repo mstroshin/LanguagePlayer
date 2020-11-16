@@ -1,124 +1,127 @@
 import UIKit
-import ReSwift
+import RxSwift
+import RxCocoa
+import DifferenceKit
 
-class CardsViewController: BaseViewController {
+class CardsViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
+    private var viewModel: CardsViewModel!
+    private var disposeBag = DisposeBag()
+    private var translations = [CardViewEntity]()
     
-    var items = [CardItemState]()
-    var cardsSides = [Bool]()
     let colorNumbers = Array(1...6).shuffled()
     
     override func viewDidLoad() {
+        viewModel = CardsViewModel(viewController: self)
+        setupViews()
         super.viewDidLoad()
-        self.router = CardsRouter(self, screen: .cards)
-        self.setupViews()
+        
+        setupBindings()
+        viewModel.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        store.subscribe(self, transform: { $0.select(CardsViewState.init).skipRepeats() })
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        store.unsubscribe(self)
+    private func setupBindings() {
+        viewModel.translations
+            .map { $0.map(CardViewEntity.init(translation:)) }
+            .subscribe(onNext: { [self] translations in
+                collectionView.diffUpdate(source: self.translations, target: translations) { data in
+                    self.translations = data
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func setupViews() {
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
-        self.collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
     }
     
 }
 
-extension CardsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension CardsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.items.count
+        translations.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionViewCell.identifier, for: indexPath) as? CardCollectionViewCell else {
             fatalError("Cell must be CardCollectionViewCell subclass")
         }
-        let item = self.items[indexPath.row]
+        let item = translations[indexPath.row]
         cell.delegate = self
         cell.configure(with: item)
-        
+
         let colorNumber = self.colorNumbers[indexPath.row % 6]
         cell.set(bgColor: UIColor(named: "cardColor\(colorNumber)"), playButtonColor: UIColor(named: "playColor\(colorNumber)"))
-        
+
         return cell
     }
+    
+}
+
+extension CardsViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell else {
             return
         }
-        let item = self.items[indexPath.row]
-        let isBackSide = self.cardsSides[indexPath.row]
-        cell.flip(with: isBackSide ? item.source : item.target)
-        
-        self.cardsSides[indexPath.row] = !isBackSide
+        cell.flip()
     }
-    
-func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-    let configuration = UIContextMenuConfiguration(
-        identifier: nil,
-        previewProvider: nil
-    ) { actions -> UIMenu? in
-        let remove = UIAction(
-            title: "Удалить",
-            image: UIImage(systemName: "trash"),
+
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let configuration = UIContextMenuConfiguration(
             identifier: nil,
-            discoverabilityTitle: nil,
-            attributes: .destructive,
-            state: .off
-        ) { _ in
-            let item = self.items[indexPath.row]
-            store.dispatch(RemoveTranslation(id: item.id))
-            store.dispatch(SaveAppState());
+            previewProvider: nil
+        ) { actions -> UIMenu? in
+            let remove = UIAction(
+                title: "Удалить",
+                image: UIImage(systemName: "trash"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: .destructive,
+                state: .off
+            ) { [self] _ in
+                //Fix fucking Apple removing animation bug
+                guard let cell = collectionView.cellForItem(at: indexPath) as? CardCollectionViewCell else {
+                    return
+                }
+                cell.isUserInteractionEnabled = false
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800)) {
+                    viewModel.removeTranslation(index: indexPath.row)
+                }
+                //
+            }
+            
+            return UIMenu(
+                title: "Выберите действие:",
+                image: nil,
+                identifier: nil,
+                options: .destructive,
+                children: [remove]
+            )
         }
         
-        return UIMenu(
-            title: "Выберите действие:",
-            image: nil,
-            identifier: nil,
-            options: .destructive,
-            children: [remove]
-        )
+        return configuration
     }
-    
-    return configuration
-}
-    
+
 }
 
 extension CardsViewController: CardCollectionViewCellDelegate {
-    
+
     func didPressPlayButton(in cell: CardCollectionViewCell) {
         guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
-        let item = self.items[indexPath.row]
-        
-        store.dispatch(NavigationActions.Navigate(
-            screen: .player,
-            transitionType: .present(.fullScreen),
-            data: ["videoId": item.videoId!,
-                   "from": item.fromTime,
-                   "to": item.toTime]
-        ))
-    }
-    
-}
+//        let item = self.items[indexPath.row]
 
-extension CardsViewController: StoreSubscriber {
-    typealias StoreSubscriberStateType = CardsViewState
-    
-    func newState(state: CardsViewState) {
-        self.collectionView.diffUpdate(source: self.items, target: state.cards) {
-            self.items = $0
-            self.cardsSides = Array(repeating: false, count: $0.count)
-        }
+//        store.dispatch(NavigationActions.Navigate(
+//            screen: .player,
+//            transitionType: .present(.fullScreen),
+//            data: ["videoId": item.videoId!,
+//                   "from": item.fromTime,
+//                   "to": item.toTime]
+//        ))
     }
+
 }

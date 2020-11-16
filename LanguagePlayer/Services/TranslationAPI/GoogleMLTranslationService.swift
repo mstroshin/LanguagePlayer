@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 import MLKitTranslate
 
 class GoogleMLTranslationService: TranslationService {
@@ -17,7 +17,7 @@ class GoogleMLTranslationService: TranslationService {
         self.translator = translator
     }
     
-    func availableLanguages() -> AnyPublisher<[LanguageAPIDTO], Error> {
+    func availableLanguages() -> Observable<[LanguageAPIDTO]> {
         let availableLanguages = [
             LanguageAPIDTO(code: "af", name: "Afrikaans"),
             LanguageAPIDTO(code: "ar", name: "Arabic"),
@@ -78,25 +78,27 @@ class GoogleMLTranslationService: TranslationService {
             LanguageAPIDTO(code: "vi", name: "Vietnamese"),
             LanguageAPIDTO(code: "zh", name: "Chinese"),
         ]
-        return Result.Publisher(availableLanguages).eraseToAnyPublisher()
+        
+        return Observable.just(availableLanguages)
     }
     
-    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error> {
-        let subject = PassthroughSubject<String, Error>()
-        
-        translator.translate(text) { translatedText, error in
-            if let translatedText = translatedText {
-                subject.send(translatedText)
+    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> Observable<String> {
+        Observable.create { [weak self] observer -> Disposable in
+            self?.translator.translate(text) { translatedText, error in
+                if let translatedText = translatedText {
+                    observer.onNext(translatedText)
+                    observer.onCompleted()
+                }
+                else if let error = error {
+                    observer.onError(error)
+                } else {
+                    let error = NSError(domain: "Unknown error", code: 1, userInfo: nil)
+                    observer.onError(error)
+                }
             }
-            else if let error = error {
-                subject.send(completion: .failure(error))
-            } else {
-                let error = NSError(domain: "Unknown error", code: 1, userInfo: nil)
-                subject.send(completion: .failure(error))
-            }
+            
+            return Disposables.create()
         }
-        
-        return subject.eraseToAnyPublisher()
     }
     
 }

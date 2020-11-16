@@ -119,7 +119,12 @@ PODS:
   - Realm/Headers (5.5.0)
   - RealmSwift (5.5.0):
     - Realm (= 5.5.0)
-  - ReSwift (6.0.0)
+  - RxCocoa (6.0.0-rc.1):
+    - RxRelay (= 6.0.0-rc.1)
+    - RxSwift (= 6.0.0-rc.1)
+  - RxRelay (6.0.0-rc.1):
+    - RxSwift (= 6.0.0-rc.1)
+  - RxSwift (6.0.0-rc.1)
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
@@ -129,7 +134,8 @@ DEPENDENCIES:
   - GoogleMLKit/Translate
   - MobileVLCKit
   - RealmSwift
-  - ReSwift
+  - RxCocoa (= 6.0.0-rc.1)
+  - RxSwift (= 6.0.0-rc.1)
   - Toast-Swift
 
 SPEC REPOS:
@@ -157,7 +163,9 @@ SPEC REPOS:
     - Protobuf
     - Realm
     - RealmSwift
-    - ReSwift
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - Toast-Swift
 
 SPEC CHECKSUMS:
@@ -184,9 +192,11 @@ SPEC CHECKSUMS:
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
   RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
-  ReSwift: 14e6f9409fe6bdc635e588208296a01f43b959c9
+  RxCocoa: a28d75145c07b7547b85faf1e1ad8b25af88a752
+  RxRelay: 56abad6d32f73567858506d08735fdb341935b9a
+  RxSwift: dae1a32c48148897494b9e2a6b00a68b40694236
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 9fd9ffd64acc33382be7bcce159bd70c78deb3ab
+PODFILE CHECKSUM: 6882b61becbe2d5369e5136f6d0aa7dd926e10e7
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.0

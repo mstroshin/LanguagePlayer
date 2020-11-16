@@ -8,31 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
+		94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */; };
+		94867ED32561FA60002DE68D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ED22561FA60002DE68D /* Protocols.swift */; };
 		CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */; };
+		CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */; };
+		CB8C06F7255B2F88006C0499 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */; };
+		CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */; };
+		CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB946582255B6B4C0075700B /* CardsViewModel.swift */; };
+		CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465E2255B7D9F0075700B /* CardViewEntity.swift */; };
+		CB9465E7255CC5290075700B /* LocalWebServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */; };
+		CB9465EB255CC7690075700B /* LocalWebServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */; };
+		CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */; };
+		CBE5588F254705080075D45A /* VideoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5588E254705080075D45A /* VideoEntity.swift */; };
+		CBE55893254705560075D45A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE55892254705560075D45A /* Typealiases.swift */; };
+		CBE558A92547213F0075D45A /* VideoUploaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE558A82547213F0075D45A /* VideoUploaderManager.swift */; };
 		CBF6E0E82546E1F900443A16 /* GoogleMLTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6E0E72546E1F900443A16 /* GoogleMLTranslationService.swift */; };
 		D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */; };
 		D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */; };
 		D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */; };
-		D203D2FE24FBC3930026E9D4 /* SettingsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FD24FBC3930026E9D4 /* SettingsState.swift */; };
-		D203D30024FBD3B80026E9D4 /* LanguageSelectionViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */; };
-		D203D30224FBFDF50026E9D4 /* VideosListActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30124FBFDF50026E9D4 /* VideosListActions.swift */; };
-		D203D30424FBFEEA0026E9D4 /* VideosListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30324FBFEEA0026E9D4 /* VideosListReducer.swift */; };
-		D203D30624FC021C0026E9D4 /* FilestoreMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30524FC021C0026E9D4 /* FilestoreMiddleware.swift */; };
-		D203D30824FC02A60026E9D4 /* UserDefaultsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30724FC02A60026E9D4 /* UserDefaultsMiddleware.swift */; };
-		D203D30A24FC02D70026E9D4 /* TranslationMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30924FC02D70026E9D4 /* TranslationMiddleware.swift */; };
-		D203D30C24FC030D0026E9D4 /* AnalyticsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30B24FC030D0026E9D4 /* AnalyticsMiddleware.swift */; };
-		D203D30E24FC037F0026E9D4 /* VideoPlayerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30D24FC037F0026E9D4 /* VideoPlayerActions.swift */; };
-		D203D31024FC04110026E9D4 /* CardsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D30F24FC04110026E9D4 /* CardsActions.swift */; };
-		D203D31224FC060B0026E9D4 /* VideoPlayerReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31124FC060B0026E9D4 /* VideoPlayerReducer.swift */; };
-		D203D31424FC07E20026E9D4 /* CardsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31324FC07E20026E9D4 /* CardsReducer.swift */; };
-		D203D31624FC08870026E9D4 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31524FC08870026E9D4 /* SettingsReducer.swift */; };
-		D203D31824FC08C60026E9D4 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31724FC08C60026E9D4 /* SettingsActions.swift */; };
-		D203D31B24FE77A90026E9D4 /* TransactionsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31A24FE77A90026E9D4 /* TransactionsMiddleware.swift */; };
-		D203D31D24FE782D0026E9D4 /* PurchasingActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31C24FE782D0026E9D4 /* PurchasingActions.swift */; };
-		D203D31F24FE78BB0026E9D4 /* PurchasingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D31E24FE78BB0026E9D4 /* PurchasingState.swift */; };
 		D203D32124FE7CC30026E9D4 /* PurchaseIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D32024FE7CC30026E9D4 /* PurchaseIds.swift */; };
-		D203D32324FE7E3F0026E9D4 /* PurchasingReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D32224FE7E3F0026E9D4 /* PurchasingReducer.swift */; };
-		D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
 		D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9724C0803C00F52815 /* SceneDelegate.swift */; };
 		D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2154E9B24C0803C00F52815 /* Main.storyboard */; };
@@ -41,31 +35,15 @@
 		D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */; };
 		D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */; };
 		D2154EB824C0946400F52815 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154EB724C0946400F52815 /* PlayerController.swift */; };
-		D26131E024EBC66000381945 /* TranslationViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26131DF24EBC66000381945 /* TranslationViewState.swift */; };
-		D26131E224EBC94300381945 /* VideoPlayerViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26131E124EBC94300381945 /* VideoPlayerViewState.swift */; };
 		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
-		D28749A524D6674900687095 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A424D6674900687095 /* AppState.swift */; };
-		D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749A924D6758600687095 /* UserDefaultsDataStore.swift */; };
-		D28749AD24D675B900687095 /* AppStateActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AC24D675B900687095 /* AppStateActions.swift */; };
 		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
 		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
-		D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749BF24D6C59500687095 /* AppEnvironment.swift */; };
-		D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749C324D6CA8100687095 /* AppStateReducer.swift */; };
-		D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC01F24EC342F00017E8D /* NavigationState.swift */; };
-		D28DC02424EC593C00017E8D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02324EC593C00017E8D /* Router.swift */; };
-		D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02724EC5C4500017E8D /* NavigationActions.swift */; };
-		D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02924ED619A00017E8D /* VideosListRouter.swift */; };
-		D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */; };
 		D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */; };
-		D2A516B124F90E2900DDC5EC /* CardsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B024F90E2900DDC5EC /* CardsViewState.swift */; };
 		D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */; };
-		D2A516B524F9136600DDC5EC /* CardsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B424F9136600DDC5EC /* CardsRouter.swift */; };
 		D2A9822724FFE2E900304522 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A9822624FFE2E900304522 /* StoreKit.framework */; };
 		D2A982292500F88C00304522 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A982282500F88C00304522 /* PurchaseService.swift */; };
 		D2AABA4C24FFC04100029E08 /* PurchasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */; };
-		D2AABA4E24FFC57000029E08 /* PurchasesViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AABA4D24FFC57000029E08 /* PurchasesViewState.swift */; };
-		D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
 		D2C0568824C7E28000810915 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568724C7E28000810915 /* ControlsView.swift */; };
@@ -89,7 +67,6 @@
 		D2E616CC24D7F45B00D80F26 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BE24D7F45B00D80F26 /* index.css */; };
 		D2E616D024D7FBE300D80F26 /* bootstrap.min.js.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */; };
 		D2E616D124D7FC8000D80F26 /* bootstrap.min.css.map in Resources */ = {isa = PBXBuildFile; fileRef = D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */; };
-		D2E8361D24FE825F009952A7 /* SettingsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E8361C24FE825F009952A7 /* SettingsViewState.swift */; };
 		D2F7CADF24F3FB730069659F /* file-video-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CADE24F3FB730069659F /* file-video-solid.svg */; };
 		D2F7CAE124F3FF940069659F /* file-invoice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */; };
 		D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */; };
@@ -99,31 +76,27 @@
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
+		94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewModel.swift; sourceTree = "<group>"; };
+		94867ED22561FA60002DE68D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftTranslationService.swift; sourceTree = "<group>"; };
+		CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
+		CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
+		CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewModel.swift; sourceTree = "<group>"; };
+		CB946582255B6B4C0075700B /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
+		CB9465E2255B7D9F0075700B /* CardViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewEntity.swift; sourceTree = "<group>"; };
+		CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServerViewController.swift; sourceTree = "<group>"; };
+		CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServerViewModel.swift; sourceTree = "<group>"; };
+		CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewModel.swift; sourceTree = "<group>"; };
+		CBE5588E254705080075D45A /* VideoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEntity.swift; sourceTree = "<group>"; };
+		CBE55892254705560075D45A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
+		CBE558A82547213F0075D45A /* VideoUploaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploaderManager.swift; sourceTree = "<group>"; };
 		CBF6E0E72546E1F900443A16 /* GoogleMLTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMLTranslationService.swift; sourceTree = "<group>"; };
 		D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
-		D203D2FD24FBC3930026E9D4 /* SettingsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsState.swift; sourceTree = "<group>"; };
-		D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewState.swift; sourceTree = "<group>"; };
-		D203D30124FBFDF50026E9D4 /* VideosListActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListActions.swift; sourceTree = "<group>"; };
-		D203D30324FBFEEA0026E9D4 /* VideosListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListReducer.swift; sourceTree = "<group>"; };
-		D203D30524FC021C0026E9D4 /* FilestoreMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilestoreMiddleware.swift; sourceTree = "<group>"; };
-		D203D30724FC02A60026E9D4 /* UserDefaultsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMiddleware.swift; sourceTree = "<group>"; };
-		D203D30924FC02D70026E9D4 /* TranslationMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationMiddleware.swift; sourceTree = "<group>"; };
 		D203D30B24FC030D0026E9D4 /* AnalyticsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsMiddleware.swift; sourceTree = "<group>"; };
-		D203D30D24FC037F0026E9D4 /* VideoPlayerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerActions.swift; sourceTree = "<group>"; };
-		D203D30F24FC04110026E9D4 /* CardsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsActions.swift; sourceTree = "<group>"; };
-		D203D31124FC060B0026E9D4 /* VideoPlayerReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerReducer.swift; sourceTree = "<group>"; };
-		D203D31324FC07E20026E9D4 /* CardsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsReducer.swift; sourceTree = "<group>"; };
-		D203D31524FC08870026E9D4 /* SettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
-		D203D31724FC08C60026E9D4 /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
 		D203D31A24FE77A90026E9D4 /* TransactionsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsMiddleware.swift; sourceTree = "<group>"; };
-		D203D31C24FE782D0026E9D4 /* PurchasingActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasingActions.swift; sourceTree = "<group>"; };
-		D203D31E24FE78BB0026E9D4 /* PurchasingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasingState.swift; sourceTree = "<group>"; };
 		D203D32024FE7CC30026E9D4 /* PurchaseIds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseIds.swift; sourceTree = "<group>"; };
-		D203D32224FE7E3F0026E9D4 /* PurchasingReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasingReducer.swift; sourceTree = "<group>"; };
-		D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListViewState.swift; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2154E9524C0803C00F52815 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2154E9724C0803C00F52815 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -134,31 +107,15 @@
 		D2154EB224C0878E00F52815 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
 		D2154EB424C087F400F52815 /* SubtitlesExtractorSrt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractorSrt.swift; sourceTree = "<group>"; };
 		D2154EB724C0946400F52815 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
-		D26131DF24EBC66000381945 /* TranslationViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewState.swift; sourceTree = "<group>"; };
-		D26131E124EBC94300381945 /* VideoPlayerViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewState.swift; sourceTree = "<group>"; };
 		D287497F24D5A17000687095 /* VideosListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewController.swift; sourceTree = "<group>"; };
 		D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCollectionViewItem.swift; sourceTree = "<group>"; };
-		D28749A424D6674900687095 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		D28749A924D6758600687095 /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
-		D28749AC24D675B900687095 /* AppStateActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateActions.swift; sourceTree = "<group>"; };
 		D28749AE24D6B4ED00687095 /* LocalWebServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServer.swift; sourceTree = "<group>"; };
 		D28749B224D6BA1300687095 /* LocalDiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDiskStore.swift; sourceTree = "<group>"; };
-		D28749BF24D6C59500687095 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		D28749C324D6CA8100687095 /* AppStateReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateReducer.swift; sourceTree = "<group>"; };
-		D28DC01F24EC342F00017E8D /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
-		D28DC02324EC593C00017E8D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
-		D28DC02724EC5C4500017E8D /* NavigationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
-		D28DC02924ED619A00017E8D /* VideosListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListRouter.swift; sourceTree = "<group>"; };
-		D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
-		D2A516B024F90E2900DDC5EC /* CardsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewState.swift; sourceTree = "<group>"; };
 		D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
-		D2A516B424F9136600DDC5EC /* CardsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsRouter.swift; sourceTree = "<group>"; };
 		D2A9822624FFE2E900304522 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D2A982282500F88C00304522 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewController.swift; sourceTree = "<group>"; };
-		D2AABA4D24FFC57000029E08 /* PurchasesViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewState.swift; sourceTree = "<group>"; };
-		D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewState.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
 		D2C0568724C7E28000810915 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
@@ -183,7 +140,6 @@
 		D2E616BE24D7F45B00D80F26 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
 		D2E616BF24D7F45B00D80F26 /* bootstrap.min.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.css.map; sourceTree = "<group>"; };
 		D2E616CE24D7FB3E00D80F26 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
-		D2E8361C24FE825F009952A7 /* SettingsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewState.swift; sourceTree = "<group>"; };
 		D2F7CADE24F3FB730069659F /* file-video-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-video-solid.svg"; sourceTree = "<group>"; };
 		D2F7CAE024F3FF940069659F /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
 		D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewController.swift; sourceTree = "<group>"; };
@@ -211,12 +167,18 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		CB9465E5255CC4EF0075700B /* LocalWebServer */ = {
+			isa = PBXGroup;
+			children = (
+				CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */,
+				CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */,
+			);
+			path = LocalWebServer;
+			sourceTree = "<group>";
+		};
 		D203D2F724FBB8D10026E9D4 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				D203D2FD24FBC3930026E9D4 /* SettingsState.swift */,
-				D203D31524FC08870026E9D4 /* SettingsReducer.swift */,
-				D203D31724FC08C60026E9D4 /* SettingsActions.swift */,
 				D2A9822A2501089500304522 /* Views */,
 			);
 			path = Settings;
@@ -226,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */,
-				D203D2FF24FBD3B80026E9D4 /* LanguageSelectionViewState.swift */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -234,9 +195,6 @@
 		D203D31924FE74E30026E9D4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
-				D203D31E24FE78BB0026E9D4 /* PurchasingState.swift */,
-				D203D32224FE7E3F0026E9D4 /* PurchasingReducer.swift */,
-				D203D31C24FE782D0026E9D4 /* PurchasingActions.swift */,
 				D2A9822C250108F000304522 /* Views */,
 			);
 			path = Purchases;
@@ -278,9 +236,10 @@
 		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				D203D31124FC060B0026E9D4 /* VideoPlayerReducer.swift */,
-				D203D30D24FC037F0026E9D4 /* VideoPlayerActions.swift */,
+				CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */,
+				CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */,
 				D2A9822E2501093C00304522 /* Views */,
+				CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */,
 			);
 			path = VideoPlayer;
 			sourceTree = "<group>";
@@ -288,6 +247,7 @@
 		D2154EAF24C0852A00F52815 /* UserStories */ = {
 			isa = PBXGroup;
 			children = (
+				CB9465E5255CC4EF0075700B /* LocalWebServer */,
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
 				D2A516AD24F90DAB00DDC5EC /* Cards */,
@@ -306,6 +266,7 @@
 				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
 				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
 				D2A982282500F88C00304522 /* PurchaseService.swift */,
+				CBE558A82547213F0075D45A /* VideoUploaderManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -332,7 +293,6 @@
 			children = (
 				D2C3435224C614DE00133EBD /* SubtitlesView.swift */,
 				D2C3435424C625FE00133EBD /* TranslationView.swift */,
-				D26131DF24EBC66000381945 /* TranslationViewState.swift */,
 			);
 			path = Subtitles;
 			sourceTree = "<group>";
@@ -340,46 +300,25 @@
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
-				D203D30324FBFEEA0026E9D4 /* VideosListReducer.swift */,
-				D203D30124FBFDF50026E9D4 /* VideosListActions.swift */,
-				D28DC02924ED619A00017E8D /* VideosListRouter.swift */,
+				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
+				CBE5588E254705080075D45A /* VideoEntity.swift */,
+				CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */,
 				D2A9822F2501095C00304522 /* Views */,
 			);
 			path = VideosList;
 			sourceTree = "<group>";
 		};
-		D28749A324D6621400687095 /* States */ = {
-			isa = PBXGroup;
-			children = (
-				D28749A424D6674900687095 /* AppState.swift */,
-			);
-			path = States;
-			sourceTree = "<group>";
-		};
 		D28749A824D6756D00687095 /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
-				D28749A924D6758600687095 /* UserDefaultsDataStore.swift */,
 				D28749B224D6BA1300687095 /* LocalDiskStore.swift */,
 			);
 			path = DataStore;
 			sourceTree = "<group>";
 		};
-		D28749AB24D675AA00687095 /* Actions */ = {
-			isa = PBXGroup;
-			children = (
-				D28749AC24D675B900687095 /* AppStateActions.swift */,
-			);
-			path = Actions;
-			sourceTree = "<group>";
-		};
 		D28749B624D6C27700687095 /* Redux */ = {
 			isa = PBXGroup;
 			children = (
-				D28DC01C24EC2D3D00017E8D /* Router */,
-				D28749C224D6CA6500687095 /* Reducers */,
-				D28749A324D6621400687095 /* States */,
-				D28749AB24D675AA00687095 /* Actions */,
 				D28749C124D6C66D00687095 /* Middlewares */,
 			);
 			path = Redux;
@@ -388,39 +327,16 @@
 		D28749C124D6C66D00687095 /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
-				D203D30524FC021C0026E9D4 /* FilestoreMiddleware.swift */,
-				D203D30724FC02A60026E9D4 /* UserDefaultsMiddleware.swift */,
-				D203D30924FC02D70026E9D4 /* TranslationMiddleware.swift */,
 				D203D30B24FC030D0026E9D4 /* AnalyticsMiddleware.swift */,
 				D203D31A24FE77A90026E9D4 /* TransactionsMiddleware.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
 		};
-		D28749C224D6CA6500687095 /* Reducers */ = {
-			isa = PBXGroup;
-			children = (
-				D28749C324D6CA8100687095 /* AppStateReducer.swift */,
-			);
-			path = Reducers;
-			sourceTree = "<group>";
-		};
-		D28DC01C24EC2D3D00017E8D /* Router */ = {
-			isa = PBXGroup;
-			children = (
-				D28DC01F24EC342F00017E8D /* NavigationState.swift */,
-				D28DC02324EC593C00017E8D /* Router.swift */,
-				D28DC02724EC5C4500017E8D /* NavigationActions.swift */,
-				D28DC02F24EDAFCC00017E8D /* BaseViewController.swift */,
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
 		D2A516AB24F90D1C00DDC5EC /* App */ = {
 			isa = PBXGroup;
 			children = (
 				D2154E9524C0803C00F52815 /* AppDelegate.swift */,
-				D28749BF24D6C59500687095 /* AppEnvironment.swift */,
 				D2154E9724C0803C00F52815 /* SceneDelegate.swift */,
 				D203D32024FE7CC30026E9D4 /* PurchaseIds.swift */,
 			);
@@ -441,10 +357,9 @@
 		D2A516AD24F90DAB00DDC5EC /* Cards */ = {
 			isa = PBXGroup;
 			children = (
-				D203D30F24FC04110026E9D4 /* CardsActions.swift */,
-				D203D31324FC07E20026E9D4 /* CardsReducer.swift */,
-				D2A516B424F9136600DDC5EC /* CardsRouter.swift */,
+				CB946582255B6B4C0075700B /* CardsViewModel.swift */,
 				D2A9822D2501090E00304522 /* Views */,
+				CB9465E2255B7D9F0075700B /* CardViewEntity.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -454,7 +369,6 @@
 			children = (
 				D203D2FA24FBC2B30026E9D4 /* Languages */,
 				D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */,
-				D2E8361C24FE825F009952A7 /* SettingsViewState.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -463,7 +377,6 @@
 			isa = PBXGroup;
 			children = (
 				D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */,
-				D2AABA4D24FFC57000029E08 /* PurchasesViewState.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -473,7 +386,6 @@
 			children = (
 				D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */,
 				D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */,
-				D2A516B024F90E2900DDC5EC /* CardsViewState.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -482,7 +394,6 @@
 			isa = PBXGroup;
 			children = (
 				D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */,
-				D26131E124EBC94300381945 /* VideoPlayerViewState.swift */,
 				D2C0568724C7E28000810915 /* ControlsView.swift */,
 				D26131DE24EBC64100381945 /* Subtitles */,
 			);
@@ -492,10 +403,8 @@
 		D2A9822F2501095C00304522 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 				D287497F24D5A17000687095 /* VideosListViewController.swift */,
 				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
-				D204D7AB24DB2389002AAD60 /* VideoListViewState.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -504,7 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
-				D2B29E8D24F6738C00AF06A9 /* UploadTutorialViewState.swift */,
+				94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */,
 			);
 			path = UploadTutorial;
 			sourceTree = "<group>";
@@ -527,6 +436,8 @@
 				D2C0568324C7A62100810915 /* Extensions.swift */,
 				D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */,
 				D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */,
+				CBE55892254705560075D45A /* Typealiases.swift */,
+				94867ED22561FA60002DE68D /* Protocols.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -745,70 +656,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D203D31824FC08C60026E9D4 /* SettingsActions.swift in Sources */,
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
-				D28DC02824EC5C4500017E8D /* NavigationActions.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
+				CB9465E7255CC5290075700B /* LocalWebServerViewController.swift in Sources */,
 				D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */,
+				CBE558A92547213F0075D45A /* VideoUploaderManager.swift in Sources */,
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
-				D203D31D24FE782D0026E9D4 /* PurchasingActions.swift in Sources */,
 				D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */,
-				D28DC02424EC593C00017E8D /* Router.swift in Sources */,
-				D203D31424FC07E20026E9D4 /* CardsReducer.swift in Sources */,
 				D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */,
-				D28749C424D6CA8100687095 /* AppStateReducer.swift in Sources */,
-				D203D30024FBD3B80026E9D4 /* LanguageSelectionViewState.swift in Sources */,
-				D28749C024D6C59500687095 /* AppEnvironment.swift in Sources */,
-				D28DC03024EDAFCC00017E8D /* BaseViewController.swift in Sources */,
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
-				D203D30E24FC037F0026E9D4 /* VideoPlayerActions.swift in Sources */,
-				D28DC02A24ED619A00017E8D /* VideosListRouter.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
+				CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
-				D203D30A24FC02D70026E9D4 /* TranslationMiddleware.swift in Sources */,
-				D203D30824FC02A60026E9D4 /* UserDefaultsMiddleware.swift in Sources */,
-				D203D31624FC08870026E9D4 /* SettingsReducer.swift in Sources */,
-				D203D31024FC04110026E9D4 /* CardsActions.swift in Sources */,
-				D28749A524D6674900687095 /* AppState.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
-				D28749AD24D675B900687095 /* AppStateActions.swift in Sources */,
-				D203D31F24FE78BB0026E9D4 /* PurchasingState.swift in Sources */,
+				CB9465EB255CC7690075700B /* LocalWebServerViewModel.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
+				CBE5588F254705080075D45A /* VideoEntity.swift in Sources */,
 				D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */,
-				D204D7AC24DB2389002AAD60 /* VideoListViewState.swift in Sources */,
-				D26131E224EBC94300381945 /* VideoPlayerViewState.swift in Sources */,
+				CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */,
 				CBF6E0E82546E1F900443A16 /* GoogleMLTranslationService.swift in Sources */,
+				CBE55893254705560075D45A /* Typealiases.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
-				D2AABA4E24FFC57000029E08 /* PurchasesViewState.swift in Sources */,
 				D2A982292500F88C00304522 /* PurchaseService.swift in Sources */,
 				D203D32124FE7CC30026E9D4 /* PurchaseIds.swift in Sources */,
-				D203D31B24FE77A90026E9D4 /* TransactionsMiddleware.swift in Sources */,
-				D2E8361D24FE825F009952A7 /* SettingsViewState.swift in Sources */,
-				D203D30624FC021C0026E9D4 /* FilestoreMiddleware.swift in Sources */,
-				D28DC02024EC342F00017E8D /* NavigationState.swift in Sources */,
-				D203D32324FE7E3F0026E9D4 /* PurchasingReducer.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
+				CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */,
+				94867ED32561FA60002DE68D /* Protocols.swift in Sources */,
 				D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */,
-				D203D30424FBFEEA0026E9D4 /* VideosListReducer.swift in Sources */,
+				94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */,
 				D2AABA4C24FFC04100029E08 /* PurchasesViewController.swift in Sources */,
+				CB8C06F7255B2F88006C0499 /* TranslationEntity.swift in Sources */,
 				D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */,
-				D2A516B124F90E2900DDC5EC /* CardsViewState.swift in Sources */,
-				D203D31224FC060B0026E9D4 /* VideoPlayerReducer.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
+				CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */,
+				CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */,
 				CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */,
 				D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */,
-				D203D2FE24FBC3930026E9D4 /* SettingsState.swift in Sources */,
-				D28749AA24D6758600687095 /* UserDefaultsDataStore.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
-				D2B29E8E24F6738C00AF06A9 /* UploadTutorialViewState.swift in Sources */,
-				D203D30224FBFDF50026E9D4 /* VideosListActions.swift in Sources */,
-				D2A516B524F9136600DDC5EC /* CardsRouter.swift in Sources */,
-				D203D30C24FC030D0026E9D4 /* AnalyticsMiddleware.swift in Sources */,
-				D26131E024EBC66000381945 /* TranslationViewState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

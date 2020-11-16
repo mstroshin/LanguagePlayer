@@ -26,12 +26,12 @@ class ControlsView: UIView {
         }
     }
     
+    @IBOutlet weak var seekSlider: UISlider!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var backwardFifteenButton: UIButton!
     @IBOutlet private weak var forwardFifteenButton: UIButton!
     @IBOutlet private weak var playPauseButton: UIButton!
-    @IBOutlet private weak var seekSlider: UISlider!
-    @IBOutlet private weak var timeLabel: UILabel!
     @IBOutlet private weak var screenTurnButton: UIButton!
     @IBOutlet private weak var toogleSubVisibilityButton: UIButton!
     
@@ -93,20 +93,6 @@ class ControlsView: UIView {
     func set(duration: Milliseconds) {
         self.seekSlider.minimumValue = 0
         self.seekSlider.maximumValue = Float(duration)
-    }
-    
-    func set(time: Milliseconds) {
-        let formatter = DateComponentsFormatter()
-        formatter.zeroFormattingBehavior = .pad
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-
-        let formattedString = formatter.string(from: TimeInterval(time / 1000))!
-        self.timeLabel.text = formattedString
-        
-        if self.isValueChanging == false {
-            self.seekSlider.value = Float(time)
-        }
     }
     
     @objc func hideAnimated() {

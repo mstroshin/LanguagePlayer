@@ -24,16 +24,19 @@ class TranslationView: UIView {
         self.layer.cornerRadius = 8
     }
         
-    func set(state: TranslationViewState) {
-        self.activityIndicator.isHidden = !state.translating
-        self.translationLabel.isHidden = state.translating
-        self.dictionaryButton.isHidden = state.translating
-        
-        self.translationLabel.text = state.translation
-        
-        let isAddedInDictionary = state.isAddedInDictionary ?? false
+    func set(text: String) {
+        self.translationLabel.text = text
+    }
+    
+    func set(isTranslating: Bool) {
+        self.activityIndicator.isHidden = !isTranslating
+        self.translationLabel.isHidden = isTranslating
+        self.dictionaryButton.isHidden = isTranslating
+    }
+    
+    func set(isAddedToDictionary: Bool) {
         self.dictionaryButton.setImage(
-            isAddedInDictionary ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"),
+            isAddedToDictionary ? UIImage(systemName: "star.fill") : UIImage(systemName: "star"),
             for: .normal
         )
     }

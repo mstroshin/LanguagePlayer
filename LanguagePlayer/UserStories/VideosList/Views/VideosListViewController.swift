@@ -1,31 +1,48 @@
 import UIKit
 import MobileVLCKit
-import ReSwift
+import RxCocoa
+import RxSwift
+import DifferenceKit
 
-class VideosListViewController: BaseViewController {
+class VideosListViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    var videosList: [VideoViewState] = []
+    private var viewModel: VideosListViewModel!
+    private var videos = [VideoViewEntity]()
+    private var disposeBag = DisposeBag()
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.viewModel = VideosListViewModel(vc: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.router = VideosListRouter(self, screen: .videos)
-        self.title = "Video Library"
+        title = "Video Library"
         
-        self.collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
-        self.collectionView.dataSource = self
-        self.collectionView.delegate = self
+        collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        viewModel.viewDidLoad()
+                
+        viewModel.videos
+            .map { $0.map(VideoViewEntity.init(video:)) }
+            .do(onNext: nil, afterNext: makeThumbneils(for:))
+            .subscribe(onNext: { [self] newVideos in
+                collectionView.diffUpdate(source: videos, target: newVideos) { data in
+                    videos = data
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        store.subscribe(self, transform: {
-            $0.select(VideoListViewState.init)
-        })
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        store.unsubscribe(self)
+    private func makeThumbneils(for videos: [VideoViewEntity]) {
+        for (index, video) in videos.enumerated() {
+            let media = VLCMedia(url: video.videoUrl)
+            let thumbnailer = VLCMediaThumbnailer(media: media, andDelegate: self)
+            thumbnailer?.accessibilityLabel = "\(index)"
+            thumbnailer?.fetchThumbnail()
+        }
     }
     
 }
@@ -47,34 +64,44 @@ extension VideosListViewController: UIPopoverPresentationControllerDelegate {
     
 }
 
-extension VideosListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+extension VideosListViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        self.videosList.count
+        //+1 cuz adding cell
+        videos.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: VideoCollectionViewItem.identifier,
-            for: indexPath
-        ) as! VideoCollectionViewItem
-        cell.titleLabel.text = self.videosList[indexPath.row].videoTitle
-        cell.contentView.layer.cornerRadius = 12
+        if indexPath.row == videos.count {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AddingVideoCollectionViewCell", for: indexPath)
+            return cell
+        }
+        
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewItem.identifier, for: indexPath) as? VideoCollectionViewItem else {
+            fatalError("Cell must be VideoCollectionViewItem")
+        }
+        cell.titleLabel.text = videos[indexPath.row].fileName
         
         return cell
     }
     
+}
+
+extension VideosListViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let video = self.videosList[indexPath.row]
-        
-        store.dispatch(NavigationActions.Navigate(
-            screen: .player,
-            transitionType: .present(.fullScreen),
-            data: ["videoId": video.id]
-        ))
+        if indexPath.row == videos.count {
+            viewModel.addVideoPressed()
+        } else {
+            viewModel.itemSelected(indexPath: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        if indexPath.row == videos.count {
+            return nil
+        }
+        
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil
@@ -87,9 +114,7 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                let video = self.videosList[indexPath.row]
-                store.dispatch(RemoveVideo(id: video.id, removeAllCards: false))
-                store.dispatch(SaveAppState());
+                self.viewModel.removeVideo(indexPath: indexPath, removeAllCards: false)
             }
             let removeWithCards = UIAction(
                 title: "Удалить со всеми карточками",
@@ -99,11 +124,9 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                let video = self.videosList[indexPath.row]
-                store.dispatch(RemoveVideo(id: video.id, removeAllCards: true))
-                store.dispatch(SaveAppState());
+                self.viewModel.removeVideo(indexPath: indexPath, removeAllCards: true)
             }
-            
+
             return UIMenu(
                 title: "Выберите действие:",
                 image: nil,
@@ -112,10 +135,10 @@ extension VideosListViewController: UICollectionViewDataSource, UICollectionView
                 children: [remove, removeWithCards]
             )
         }
-        
+
         return configuration
     }
-    
+
 }
 
 extension VideosListViewController: VLCMediaThumbnailerDelegate {
@@ -125,32 +148,13 @@ extension VideosListViewController: VLCMediaThumbnailerDelegate {
     }
     
     func mediaThumbnailer(_ mediaThumbnailer: VLCMediaThumbnailer!, didFinishThumbnail thumbnail: CGImage!) {
-        if let label = mediaThumbnailer.accessibilityLabel, let row = Int(label),
-            let cell = self.collectionView.cellForItem(at: IndexPath(item: row, section: 0)) as? VideoCollectionViewItem {
-            cell.image.image = UIImage(cgImage: thumbnail)
-        }
-    }
-    
-}
-
-extension VideosListViewController: StoreSubscriber {
-    typealias State = VideoListViewState
-    
-    func newState(state: VideoListViewState) {
-        DispatchQueue.main.async {
-            self.collectionView.diffUpdate(source: self.videosList, target: state.videos) {
-                self.videosList = $0
-                self.makeThumbneils(for: $0)
+        if let label = mediaThumbnailer.accessibilityLabel, let row = Int(label), row < videos.count {
+            let thumbnail = UIImage(cgImage: thumbnail)
+            videos[row].thumbnail = thumbnail
+            
+            if let cell = self.collectionView.cellForItem(at: IndexPath(item: row, section: 0)) as? VideoCollectionViewItem {
+                cell.image.image = thumbnail
             }
-        }
-    }
-    
-    private func makeThumbneils(for videos: [VideoViewState]) {
-        for (index, video) in videos.enumerated() {
-            let media = VLCMedia(url: video.videoUrl)
-            let thumbnailer = VLCMediaThumbnailer(media: media, andDelegate: self)
-            thumbnailer?.accessibilityLabel = "\(index)"
-            thumbnailer?.fetchThumbnail()
         }
     }
     

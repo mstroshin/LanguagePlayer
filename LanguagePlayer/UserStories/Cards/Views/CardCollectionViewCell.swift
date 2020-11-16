@@ -10,6 +10,8 @@ class CardCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var videoTitleLabel: UILabel!
     @IBOutlet private weak var playButton: UIButton!
+    private var data: CardViewEntity?
+    private var sourceShown = true
     
     weak var delegate: CardCollectionViewCellDelegate?
     
@@ -18,10 +20,13 @@ class CardCollectionViewCell: UICollectionViewCell {
         super.updateConstraints()
     }
     
-    func configure(with data: CardItemState) {
+    func configure(with data: CardViewEntity) {
+        self.isUserInteractionEnabled = true
+        self.data = data
+        
         self.textLabel.text = data.source
         self.videoTitleLabel.text = data.videoTitle
-        self.playButton.isHidden = data.videoId == nil
+        self.playButton.isHidden = data.videoTitle == nil
     }
     
     func set(bgColor: UIColor?, playButtonColor: UIColor?) {
@@ -34,13 +39,15 @@ class CardCollectionViewCell: UICollectionViewCell {
         self.contentView.layer.shadowRadius = 5
     }
     
-    func flip(with text: String) {
+    func flip() {
+        sourceShown.toggle()
+        
         UIView.transition(
             with: self.contentView,
             duration: 0.3,
             options: .transitionFlipFromLeft,
-            animations: { () -> Void in
-                self.textLabel.text = text
+            animations: { [self] () -> Void in
+                self.textLabel.text = sourceShown ? data?.source : data?.target
             },
             completion: nil
         )

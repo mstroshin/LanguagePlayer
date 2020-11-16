@@ -1,19 +1,14 @@
 import UIKit
 import Firebase
+import Realm
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    let localWebServer = LocalWebServer()
+    
+    let videoUploadedManager = VideoUploaderManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        
-        let environment = AppEnvironment.bootstrap()
-        store = environment.store
-        
-        store.dispatch(LoadAppState())
-        store.dispatch(GetAvailableLanguages())
-        localWebServer.run()
         
         return true
     }
@@ -33,4 +28,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-

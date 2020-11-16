@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+import RxSwift
 
 class MicrosoftTranslationService: TranslationService {
     private let session = URLSession(configuration: .default)
@@ -15,7 +15,7 @@ class MicrosoftTranslationService: TranslationService {
     private let apiVersion = "3.0"
     private let region = "westeurope"
     
-    func availableLanguages() -> AnyPublisher<[LanguageAPIDTO], Error> {
+    func availableLanguages() -> Observable<[LanguageAPIDTO]> {
         var url = URL(string: "https://api.cognitive.microsofttranslator.com/languages")!
         let urlParams = [
             "api-version": apiVersion,
@@ -28,17 +28,16 @@ class MicrosoftTranslationService: TranslationService {
         request.addValue(key, forHTTPHeaderField: "Ocp-Apim-Subscription-Key")
         request.addValue(region, forHTTPHeaderField: "Ocp-Apim-Subscription-Region")
         
-        return self.session.dataTaskPublisher(for: request)
-            .map { $0.data }
+        return self.session.rx.data(request: request)
+            .map { $0.base64EncodedData() }
             .decode(type: Languages.self, decoder: JSONDecoder())
-            .map { $0.translation }
+            .map(\.translation)
             .map { dict in
                 dict.keys.map { LanguageAPIDTO(code: $0, name: dict[$0]!.nativeName) }
             }
-            .eraseToAnyPublisher()
     }
     
-    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> AnyPublisher<String, Error> {
+    func translate(text: String, sourceLanguage: String, targetLanguage: String) -> Observable<String> {
         var url = URL(string: "https://api.cognitive.microsofttranslator.com/translate")!
         let urlParams = [
             "api-version": apiVersion,
@@ -58,11 +57,9 @@ class MicrosoftTranslationService: TranslationService {
         ]]
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
-        return self.session.dataTaskPublisher(for: request)
-            .map { $0.data }
+        return self.session.rx.data(request: request)
             .decode(type: [Translations].self, decoder: JSONDecoder())
             .map { $0.first!.translations.first!.text }
-            .eraseToAnyPublisher()
     }
     
     //Entities

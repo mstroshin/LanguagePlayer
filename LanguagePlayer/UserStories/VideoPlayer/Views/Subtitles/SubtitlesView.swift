@@ -181,6 +181,15 @@ extension SubtitlesView {
     func set(text: String) {
         self.textView.text = text
     }
+        
+    func set(isTranslating: Bool) {
+        self.translationView.set(isTranslating: isTranslating)
+    }
+    
+    func update(translation: TranslationEntity) {
+        self.translationView.set(text: translation.target)
+        self.translationView.set(isAddedToDictionary: translation.isAddedToDictionary)
+    }
     
     func deselectAll() {
         let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
@@ -192,13 +201,8 @@ extension SubtitlesView {
         self.textView.attributedText = mutableText
     }
     
-    func showTranslated(_ state: TranslationViewState) {
-        self.translationView.set(state: state)
-        self.translationView.isHidden = false
-    }
-    
-    func hideTranslationView() {
-        self.translationView.isHidden = true
+    func translationView(isHidden: Bool) {
+        self.translationView.isHidden = isHidden
     }
     
 }
