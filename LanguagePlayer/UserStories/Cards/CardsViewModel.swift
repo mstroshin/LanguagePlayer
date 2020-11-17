@@ -4,13 +4,12 @@ import RxSwift
 
 class CardsViewModel {
     private let realm = try! Realm()
-    private weak var viewController: UIViewController?
     private var translationResultChangeToken: NotificationToken?
     
     let translations = BehaviorSubject<[TranslationEntity]>(value: [])
     
-    init(viewController: UIViewController) {
-        self.viewController = viewController
+    init() {
+        
     }
     
     func viewDidLoad() {

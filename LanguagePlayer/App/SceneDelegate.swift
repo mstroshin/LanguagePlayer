@@ -1,32 +1,19 @@
-//
-//  SceneDelegate.swift
-//  LanguagePlayer
-//
-//  Created by Maxim Troshin on 16.07.2020.
-//  Copyright © 2020 Maxim Troshin. All rights reserved.
-//
-
 import UIKit
+import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    var window: UIWindow?
+    var appCoordinator: AppCoordinator?
+    private let disposeBag = DisposeBag()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-//        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-//
-//            let videosList = VideosListViewController()
-//            videosList.tabBarItem = .init(title: "List", image: UIImage(systemName: "list.dash"), selectedImage: nil)
-//            
-//            let tabBarViewController = UITabBarController()
-//            tabBarViewController.viewControllers = [videosList]
-//
-//            window.rootViewController = tabBarViewController
-//            window.makeKeyAndVisible()
-//            self.window = window
-//        }
-        if #available(iOS 13.0, *) {
-            window?.overrideUserInterfaceStyle = .light
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            window.overrideUserInterfaceStyle = .light
+            
+            self.appCoordinator = AppCoordinator(window: window)
+            self.appCoordinator?.start()
+                .subscribe()
+                .disposed(by: disposeBag)
         }
         
         guard let _ = (scene as? UIWindowScene) else { return }

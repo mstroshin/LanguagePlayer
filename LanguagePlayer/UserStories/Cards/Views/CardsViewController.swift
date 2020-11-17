@@ -4,20 +4,19 @@ import RxCocoa
 import DifferenceKit
 
 class CardsViewController: UIViewController {
+    var viewModel: CardsViewModel!
+
     @IBOutlet private weak var collectionView: UICollectionView!
-    private var viewModel: CardsViewModel!
     private var disposeBag = DisposeBag()
     private var translations = [CardViewEntity]()
     
     let colorNumbers = Array(1...6).shuffled()
     
     override func viewDidLoad() {
-        viewModel = CardsViewModel(viewController: self)
         setupViews()
         super.viewDidLoad()
         
         setupBindings()
-        viewModel.viewDidLoad()
     }
     
     private func setupBindings() {

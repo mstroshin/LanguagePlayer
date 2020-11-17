@@ -5,15 +5,11 @@ import RxSwift
 import DifferenceKit
 
 class VideosListViewController: UIViewController {
-    @IBOutlet weak var collectionView: UICollectionView!
-    private var viewModel: VideosListViewModel!
+    var viewModel: VideosListViewModel!
+    
+    @IBOutlet private weak var collectionView: UICollectionView!
     private var videos = [VideoViewEntity]()
     private var disposeBag = DisposeBag()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.viewModel = VideosListViewModel(vc: self)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

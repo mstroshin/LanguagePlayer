@@ -4,13 +4,12 @@ import RealmSwift
 
 class VideosListViewModel {
     private let realm = try! Realm()
-    private weak var viewController: UIViewController?
     private var videosResultChangeToken: NotificationToken?
     
     let videos = BehaviorSubject<[VideoEntity]>(value: [])
     
-    init(vc: UIViewController) {
-        self.viewController = vc
+    init() {
+        
     }
     
     func viewDidLoad() {
@@ -36,12 +35,12 @@ class VideosListViewModel {
         videoPlayerVC.viewModel = viewModel
         
         videoPlayerVC.modalPresentationStyle = .fullScreen
-        viewController?.present(videoPlayerVC, animated: true, completion: nil)
+//        viewController?.present(videoPlayerVC, animated: true, completion: nil)
     }
     
     func addVideoPressed() {
         let vc: UploadTutorialViewController = UploadTutorialViewController.createFromMainStoryboard()
-        viewController?.present(vc, animated: true, completion: nil)
+//        viewController?.present(vc, animated: true, completion: nil)
     }
     
     func removeVideo(indexPath: IndexPath, removeAllCards: Bool) {

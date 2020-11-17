@@ -1,9 +1,11 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    @IBOutlet weak var premiumCell: UITableViewCell!
-    @IBOutlet weak var sourceLanguageCell: UITableViewCell!
-    @IBOutlet weak var targetLanguageCell: UITableViewCell!
+    var viewModel: SettingsViewModel!
+    
+    @IBOutlet private weak var premiumCell: UITableViewCell!
+    @IBOutlet private weak var sourceLanguageCell: UITableViewCell!
+    @IBOutlet private weak var targetLanguageCell: UITableViewCell!
     private var isPremium = false
     
     override func viewDidLoad() {
