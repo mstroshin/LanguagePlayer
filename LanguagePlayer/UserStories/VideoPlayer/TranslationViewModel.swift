@@ -31,7 +31,7 @@ class TranslationViewModel {
                 }
                 
                 return webTranslationService.translate(text: source, sourceLanguage: "en", targetLanguage: "ru")
-                    .observe(on: MainScheduler())
+                    .observeOn(MainScheduler())
                     .map { target in
                         let translationEntity = TranslationEntity()
                         translationEntity.source = source

@@ -92,7 +92,7 @@ class VideoPlayerViewController: UIViewController {
         }
         
         disposeBag.insert(viewModel.translation
-            .observe(on: MainScheduler())
+            .observeOn(MainScheduler())
             .subscribe(onNext: { translation in
                 if let translation = translation {
                     self.subtitlesView.update(translation: translation)
@@ -100,7 +100,7 @@ class VideoPlayerViewController: UIViewController {
             }))
         
         disposeBag.insert(viewModel.translationLoading
-            .observe(on: MainScheduler())
+            .observeOn(MainScheduler())
             .subscribe(onNext: { isLoading in
                 self.subtitlesView.translationView(isHidden: false)
                 self.subtitlesView.set(isTranslating: isLoading)

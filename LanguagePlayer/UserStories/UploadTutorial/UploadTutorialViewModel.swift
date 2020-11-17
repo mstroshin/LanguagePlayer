@@ -14,7 +14,7 @@ class UploadTutorialViewModel {
         self.output = Output(addresses: webServer.address)
         
         webServer.run()
-            .observe(on: MainScheduler())
+            .observeOn(MainScheduler())
             .subscribe(onNext: { [self] uploaded in
                 let directoryName = UUID().uuidString
                                     

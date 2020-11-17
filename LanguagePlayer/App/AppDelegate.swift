@@ -1,6 +1,6 @@
 import UIKit
 import Firebase
-import Realm
+import Purchases
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,6 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        Purchases.debugLogsEnabled = true
+        Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX")
         
         return true
     }

@@ -24,10 +24,10 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let selectedCell = tableView.cellForRow(at: indexPath) else { return }
         
-//        if selectedCell == self.premiumCell {
-//            let vc: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
-//            self.present(vc, animated: true, completion: nil)
-//        }
+        if selectedCell == self.premiumCell {
+            let vc: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
+            self.present(vc, animated: true, completion: nil)
+        }
         if selectedCell == self.sourceLanguageCell {
             let vc = LanguageSelectionViewController(isSourceLanguage: true)
             self.navigationController?.pushViewController(vc, animated: true)

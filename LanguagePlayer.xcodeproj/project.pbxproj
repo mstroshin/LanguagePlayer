@@ -10,6 +10,9 @@
 		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
 		94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */; };
 		94867ED32561FA60002DE68D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ED22561FA60002DE68D /* Protocols.swift */; };
+		94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */; };
+		94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */; };
+		94B9BD3E25632CE000A5E740 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3D25632CE000A5E740 /* PurchaseService.swift */; };
 		CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */; };
 		CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */; };
 		CB8C06F7255B2F88006C0499 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */; };
@@ -42,7 +45,6 @@
 		D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */; };
 		D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */; };
 		D2A9822724FFE2E900304522 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A9822624FFE2E900304522 /* StoreKit.framework */; };
-		D2A982292500F88C00304522 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A982282500F88C00304522 /* PurchaseService.swift */; };
 		D2AABA4C24FFC04100029E08 /* PurchasesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */; };
 		D2C0568424C7A62100810915 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568324C7A62100810915 /* Extensions.swift */; };
 		D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */; };
@@ -78,6 +80,10 @@
 		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewModel.swift; sourceTree = "<group>"; };
 		94867ED22561FA60002DE68D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewModel.swift; sourceTree = "<group>"; };
+		94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		94B9BD3D25632CE000A5E740 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
+		94B9BDA425635F2100A5E740 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftTranslationService.swift; sourceTree = "<group>"; };
 		CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
@@ -114,7 +120,6 @@
 		D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
 		D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCollectionViewCell.swift; sourceTree = "<group>"; };
 		D2A9822624FFE2E900304522 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		D2A982282500F88C00304522 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
 		D2AABA4B24FFC04100029E08 /* PurchasesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewController.swift; sourceTree = "<group>"; };
 		D2C0568324C7A62100810915 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D2C0568524C7CADD00810915 /* SelectionGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionGestureRecognizer.swift; sourceTree = "<group>"; };
@@ -167,6 +172,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		94B9BD3825620D6200A5E740 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
+				D2154EB724C0946400F52815 /* PlayerController.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		CB9465E5255CC4EF0075700B /* LocalWebServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +209,8 @@
 		D203D31924FE74E30026E9D4 /* Purchases */ = {
 			isa = PBXGroup;
 			children = (
+				94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */,
+				94B9BD3D25632CE000A5E740 /* PurchaseService.swift */,
 				D2A9822C250108F000304522 /* Views */,
 			);
 			path = Purchases;
@@ -221,6 +237,7 @@
 		D2154E9424C0803C00F52815 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				94B9BDA425635F2100A5E740 /* Configuration.storekit */,
 				D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */,
 				D2A516AB24F90D1C00DDC5EC /* App */,
 				D2E616AE24D7F43900D80F26 /* html */,
@@ -236,6 +253,7 @@
 		D2154EAE24C0852100F52815 /* VideoPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				94B9BD3825620D6200A5E740 /* Services */,
 				CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */,
 				CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */,
 				D2A9822E2501093C00304522 /* Views */,
@@ -248,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				CB9465E5255CC4EF0075700B /* LocalWebServer */,
+				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
 				D2A516AD24F90DAB00DDC5EC /* Cards */,
@@ -262,10 +281,7 @@
 			children = (
 				D28749A824D6756D00687095 /* DataStore */,
 				D2D292EE24C78BA0004660EE /* TranslationAPI */,
-				D2154EB624C0944900F52815 /* PlayerController */,
-				D2154EB124C0876200F52815 /* SubtitlesExtractor */,
 				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
-				D2A982282500F88C00304522 /* PurchaseService.swift */,
 				CBE558A82547213F0075D45A /* VideoUploaderManager.swift */,
 			);
 			path = Services;
@@ -280,14 +296,6 @@
 			path = SubtitlesExtractor;
 			sourceTree = "<group>";
 		};
-		D2154EB624C0944900F52815 /* PlayerController */ = {
-			isa = PBXGroup;
-			children = (
-				D2154EB724C0946400F52815 /* PlayerController.swift */,
-			);
-			path = PlayerController;
-			sourceTree = "<group>";
-		};
 		D26131DE24EBC64100381945 /* Subtitles */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,7 +308,6 @@
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
-				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 				CBE5588E254705080075D45A /* VideoEntity.swift */,
 				CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */,
 				D2A9822F2501095C00304522 /* Views */,
@@ -438,6 +445,7 @@
 				D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */,
 				CBE55892254705560075D45A /* Typealiases.swift */,
 				94867ED22561FA60002DE68D /* Protocols.swift */,
+				94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -659,6 +667,9 @@
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				CB9465E7255CC5290075700B /* LocalWebServerViewController.swift in Sources */,
+				94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */,
+				94B9BD3E25632CE000A5E740 /* PurchaseService.swift in Sources */,
+				94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */,
 				D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */,
 				CBE558A92547213F0075D45A /* VideoUploaderManager.swift in Sources */,
 				D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */,
@@ -680,7 +691,6 @@
 				CBE55893254705560075D45A /* Typealiases.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesExtractorSrt.swift in Sources */,
 				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
-				D2A982292500F88C00304522 /* PurchaseService.swift in Sources */,
 				D203D32124FE7CC30026E9D4 /* PurchaseIds.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */,

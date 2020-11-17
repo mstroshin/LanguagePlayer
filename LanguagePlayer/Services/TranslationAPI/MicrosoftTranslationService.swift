@@ -30,7 +30,9 @@ class MicrosoftTranslationService: TranslationService {
         
         return self.session.rx.data(request: request)
             .map { $0.base64EncodedData() }
-            .decode(type: Languages.self, decoder: JSONDecoder())
+            .map({ data -> Languages in
+                try JSONDecoder().decode(Languages.self, from: data)
+            })
             .map(\.translation)
             .map { dict in
                 dict.keys.map { LanguageAPIDTO(code: $0, name: dict[$0]!.nativeName) }
@@ -58,7 +60,9 @@ class MicrosoftTranslationService: TranslationService {
         request.httpBody = try! JSONSerialization.data(withJSONObject: bodyObject, options: [])
         
         return self.session.rx.data(request: request)
-            .decode(type: [Translations].self, decoder: JSONDecoder())
+            .map({ data -> [Translations] in
+                try JSONDecoder().decode([Translations].self, from: data)
+            })
             .map { $0.first!.translations.first!.text }
     }
     

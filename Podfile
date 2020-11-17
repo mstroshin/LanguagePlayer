@@ -3,8 +3,10 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'LanguagePlayer' do
-  pod 'RxSwift', '6.0.0-rc.1'
-  pod 'RxCocoa', '6.0.0-rc.1'
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
+  pod 'RxSwiftExt', '~> 5'
+  #pod 'RxTimelane', '~> 2.0'
 #  pod 'RxRealm'
   pod 'RealmSwift'
   pod 'GCDWebServer'
@@ -13,4 +15,5 @@ target 'LanguagePlayer' do
   pod 'Firebase/Analytics'
   pod 'Toast-Swift'
   pod 'GoogleMLKit/Translate'
+  pod 'Purchases', '3.7.3'
 end
