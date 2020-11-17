@@ -27,8 +27,6 @@
 		CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */; };
 		CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB946582255B6B4C0075700B /* CardsViewModel.swift */; };
 		CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465E2255B7D9F0075700B /* CardViewEntity.swift */; };
-		CB9465E7255CC5290075700B /* LocalWebServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */; };
-		CB9465EB255CC7690075700B /* LocalWebServerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */; };
 		CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */; };
 		CBE5588F254705080075D45A /* VideoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5588E254705080075D45A /* VideoEntity.swift */; };
 		CBE55893254705560075D45A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE55892254705560075D45A /* Typealiases.swift */; };
@@ -105,8 +103,6 @@
 		CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationViewModel.swift; sourceTree = "<group>"; };
 		CB946582255B6B4C0075700B /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
 		CB9465E2255B7D9F0075700B /* CardViewEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewEntity.swift; sourceTree = "<group>"; };
-		CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServerViewController.swift; sourceTree = "<group>"; };
-		CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWebServerViewModel.swift; sourceTree = "<group>"; };
 		CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosListViewModel.swift; sourceTree = "<group>"; };
 		CBE5588E254705080075D45A /* VideoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEntity.swift; sourceTree = "<group>"; };
 		CBE55892254705560075D45A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
@@ -199,17 +195,9 @@
 				94B9BDBC2564812600A5E740 /* VideoCoordinator.swift */,
 				D287497E24D5A15800687095 /* VideosList */,
 				D2154EAE24C0852100F52815 /* VideoPlayer */,
+				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 			);
 			path = Video;
-			sourceTree = "<group>";
-		};
-		CB9465E5255CC4EF0075700B /* LocalWebServer */ = {
-			isa = PBXGroup;
-			children = (
-				CB9465E6255CC5290075700B /* LocalWebServerViewController.swift */,
-				CB9465EA255CC7690075700B /* LocalWebServerViewModel.swift */,
-			);
-			path = LocalWebServer;
 			sourceTree = "<group>";
 		};
 		D203D2F724FBB8D10026E9D4 /* Settings */ = {
@@ -292,8 +280,6 @@
 				94B9BDBA2564810200A5E740 /* Video */,
 				D2A516AD24F90DAB00DDC5EC /* Cards */,
 				D203D2F724FBB8D10026E9D4 /* Settings */,
-				CB9465E5255CC4EF0075700B /* LocalWebServer */,
-				D2B29E8C24F6737000AF06A9 /* UploadTutorial */,
 				D203D31924FE74E30026E9D4 /* Purchases */,
 			);
 			path = UserStories;
@@ -676,7 +662,6 @@
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				94B9BDB82564801300A5E740 /* TabBarCoordinator.swift in Sources */,
-				CB9465E7255CC5290075700B /* LocalWebServerViewController.swift in Sources */,
 				94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */,
 				94B9BD3E25632CE000A5E740 /* PurchaseService.swift in Sources */,
 				94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */,
@@ -693,7 +678,6 @@
 				CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
 				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
-				CB9465EB255CC7690075700B /* LocalWebServerViewModel.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesExtractor.swift in Sources */,
 				CBE5588F254705080075D45A /* VideoEntity.swift in Sources */,

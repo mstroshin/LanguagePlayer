@@ -9,59 +9,37 @@ class TabBarCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
-        let videoListVC = makeVideoListViewController()
-        let videoListCoordinator = VideoCoordinator(videoListViewController: videoListVC)
+        let videoListNavigationController = UINavigationController()
+        videoListNavigationController.tabBarItem = .init(title: "Video Library", image: UIImage(systemName: "list.and.film"), tag: 0)
         
-        let cardsVC = makeCardsViewController()
-        let cardsCoordinator = CardsCoordinator(cardsViewController: cardsVC)
+        let cardsNavigationController = UINavigationController()
+        cardsNavigationController.tabBarItem = .init(title: "Cards", image: UIImage(systemName: "note.text"), tag: 1)
         
-        let settingsVC = makeSettingsViewController()
-        let settingsCoordinator = SettingsCoordinator(settingsViewController: settingsVC)
+        let settingsNavigationController = UINavigationController()
+        settingsNavigationController.tabBarItem = .init(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
         
         tabBar.viewControllers = [
-            videoListVC,
-            cardsVC,
-            settingsVC,
+            videoListNavigationController,
+            cardsNavigationController,
+            settingsNavigationController,
         ]
         
-        return .merge([
-            videoListCoordinator.start(),
-            cardsCoordinator.start(),
-            settingsCoordinator.start(),
-        ])
-    }
-    
-    private func makeVideoListViewController() -> UIViewController {
-        let viewModel = VideosListViewModel()
+        let videoListCoordinator = VideoCoordinator(navigationController: videoListNavigationController)
+        coordinate(to: videoListCoordinator)
+            .subscribe()
+            .disposed(by: disposeBag)
         
-        let videoListViewController: VideosListViewController = VideosListViewController.createFromMainStoryboard()
-        videoListViewController.viewModel = viewModel
-        videoListViewController.tabBarItem = .init(title: "Video Library", image: UIImage(systemName: "list.and.film"), tag: 0)
-        let navigationController = UINavigationController(rootViewController: videoListViewController)
+        let cardsCoordinator = CardsCoordinator(navigationController: cardsNavigationController)
+        coordinate(to: cardsCoordinator)
+            .subscribe()
+            .disposed(by: disposeBag)
         
-        return navigationController
-    }
-    
-    private func makeCardsViewController() -> UIViewController {
-        let viewModel = CardsViewModel()
+        let settingsCoordinator = SettingsCoordinator(navigationController: settingsNavigationController)
+        coordinate(to: settingsCoordinator)
+            .subscribe()
+            .disposed(by: disposeBag)
         
-        let viewController: CardsViewController = CardsViewController.createFromMainStoryboard()
-        viewController.viewModel = viewModel
-        viewController.tabBarItem = .init(title: "Cards", image: UIImage(systemName: "list.and.film"), tag: 1)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        
-        return navigationController
-    }
-    
-    private func makeSettingsViewController() -> UIViewController {
-        let viewModel = SettingsViewModel()
-        
-        let viewController: SettingsViewController = SettingsViewController.createFromMainStoryboard()
-        viewController.viewModel = viewModel
-        viewController.tabBarItem = .init(title: "Settings", image: UIImage(systemName: "list.and.film"), tag: 2)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        
-        return navigationController
+        return .never()
     }
     
 }
