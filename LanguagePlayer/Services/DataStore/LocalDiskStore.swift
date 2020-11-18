@@ -1,9 +1,10 @@
 import Foundation
+import RxSwift
 
 class LocalDiskStore {
     let fileManager = FileManager.default
         
-    func save(temporaryDataPath path: String, fileName: String, directoryName: String) -> Bool {
+    private func save(temporaryDataPath path: String, fileName: String, directoryName: String) -> Bool {
         guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
             return false
         }
@@ -23,6 +24,48 @@ class LocalDiskStore {
         }
         
         return true
+    }
+    
+    func save(uploaded: UploadedVideo) -> Single<VideoEntity> {
+        Single.create { single -> Disposable in
+            let directoryName = UUID().uuidString
+                                
+            var videoSaved = self.save(
+                temporaryDataPath: uploaded.video.temporaryDataPath,
+                fileName: uploaded.video.fileName,
+                directoryName: directoryName
+            )
+            
+            if let sourceSubtitle = uploaded.sourceSubtitle {
+                videoSaved = self.save(
+                    temporaryDataPath: sourceSubtitle.temporaryDataPath,
+                    fileName: sourceSubtitle.fileName,
+                    directoryName: directoryName
+                )
+            }
+            if let targetSubtitle = uploaded.targetSubtitle {
+                videoSaved = self.save(
+                    temporaryDataPath: targetSubtitle.temporaryDataPath,
+                    fileName: targetSubtitle.fileName,
+                    directoryName: directoryName
+                )
+            }
+            
+            if videoSaved {
+                let videoEntity = VideoEntity()
+                videoEntity.savedInDirectoryName = directoryName
+                videoEntity.fileName = uploaded.video.fileName
+                videoEntity.sourceSubtitleFileName = uploaded.sourceSubtitle?.fileName
+                videoEntity.targetSubtitleFileName = uploaded.targetSubtitle?.fileName
+                
+                single(.success(videoEntity))
+            } else {
+                let error = NSError(domain: "Video doesnt save", code: 1, userInfo: nil)
+                single(.error(error))
+            }
+            
+            return Disposables.create()
+        }
     }
     
     func removeDirectory(_ name: String) -> Bool {

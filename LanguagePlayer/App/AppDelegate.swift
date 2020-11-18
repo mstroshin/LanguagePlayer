@@ -4,9 +4,7 @@ import Purchases
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    let videoUploadedManager = VideoUploaderManager()
-    
+        
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         Purchases.debugLogsEnabled = true

@@ -3,18 +3,16 @@ import UIKit
 import RxSwift
 
 class UploadTutorialViewController: UIViewController {
+    var viewModel: UploadTutorialViewModel!
+    
     @IBOutlet private var ipAddressLabel: UILabel!
     @IBOutlet private var addressLabel: UILabel!
     @IBOutlet private var tutorialLabel: UILabel!
     @IBOutlet private var orLabel: UILabel!
-    
-    private var viewModel: UploadTutorialViewModel!
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel = UploadTutorialViewModel()
-        
+        super.viewDidLoad()        
         bind()
     }
     

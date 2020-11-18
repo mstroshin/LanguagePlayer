@@ -52,3 +52,9 @@ class BaseCoordinator<ResultType> {
         fatalError("Start method should be implemented.")
     }
 }
+
+protocol ViewModelCoordinatable where Self: ViewModel {
+    associatedtype Route
+    
+    var route: Route { get }
+}

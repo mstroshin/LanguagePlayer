@@ -2,8 +2,10 @@ import Foundation
 import RxSwift
 import RealmSwift
 
-class UploadTutorialViewModel {
+class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
+    let input: Input
     let output: Output
+    let route: Route
     private let disposeBag = DisposeBag()
     
     init(
@@ -11,56 +13,36 @@ class UploadTutorialViewModel {
         realm: Realm = try! Realm(),
         localStore: LocalDiskStore = LocalDiskStore()
     ) {
+        self.input = Input()
         self.output = Output(addresses: webServer.address)
-        
-        webServer.run()
-            .observeOn(MainScheduler())
-            .subscribe(onNext: { [self] uploaded in
-                let directoryName = UUID().uuidString
-                                    
-                let videoSaved = localStore.save(
-                    temporaryDataPath: uploaded.video.temporaryDataPath,
-                    fileName: uploaded.video.fileName,
-                    directoryName: directoryName
-                )
-                if let sourceSubtitle = uploaded.sourceSubtitle {
-                    let sourceSubtitleSaved = localStore.save(
-                        temporaryDataPath: sourceSubtitle.temporaryDataPath,
-                        fileName: sourceSubtitle.fileName,
-                        directoryName: directoryName
-                    )
-                    print("sourceSubtitleSaved \(sourceSubtitleSaved)")
-                }
-                if let targetSubtitle = uploaded.targetSubtitle {
-                    let targetSubtitleSaved = localStore.save(
-                        temporaryDataPath: targetSubtitle.temporaryDataPath,
-                        fileName: targetSubtitle.fileName,
-                        directoryName: directoryName
-                    )
-                    print("targetSubtitleSaved \(targetSubtitleSaved)")
-                }
                 
-                if videoSaved {
-                    let videoEntity = VideoEntity()
-                    videoEntity.savedInDirectoryName = directoryName
-                    videoEntity.fileName = uploaded.video.fileName
-                    videoEntity.sourceSubtitleFileName = uploaded.sourceSubtitle?.fileName
-                    videoEntity.targetSubtitleFileName = uploaded.targetSubtitle?.fileName
-                    
-                    try! realm.write {
-                        realm.add(videoEntity)
-                    }
-                }
-            },
-            onCompleted: {
-                //dismiss
-            })
+        let videoSaved = webServer.run()
+            .observeOn(MainScheduler())
+            .flatMap(localStore.save(uploaded:))
+            .ignoreErrors()
+            .share()
+    
+        videoSaved
+            .subscribe(realm.rx.add())
             .disposed(by: disposeBag)
+        
+        self.route = Route(
+            videoLoaded: videoSaved
+        )
+            
     }
 }
 
 extension UploadTutorialViewModel {
+    
+    struct Input {}
+    
     struct Output {
         let addresses: Observable<ServerAddresses>
     }
+    
+    struct Route {
+        let videoLoaded: Observable<VideoEntity>
+    }
+    
 }

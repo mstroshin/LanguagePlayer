@@ -4,15 +4,14 @@ import RxSwift
 import RxCocoa
 
 class VideoPlayerViewController: UIViewController {
+    var viewModel: VideoPlayerViewModel!
+
     @IBOutlet private var subtitlesView: SubtitlesView!
     @IBOutlet private var controlsView: ControlsView!
     @IBOutlet private var videoViewport: UIView!
     @IBOutlet private weak var subtitlesViewBottomConstraint: NSLayoutConstraint!
-    
-    var viewModel: VideoPlayerViewModel!
     private var isSubtitlesEnable = true
-    let disposeBag = DisposeBag()
-    
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         setupViews()

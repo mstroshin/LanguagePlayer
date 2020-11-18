@@ -1,16 +1,7 @@
-//
-//  VideoPlayerViewModel.swift
-//  LanguagePlayer
-//
-//  Created by Maxim Troshin on 09.11.2020.
-//  Copyright © 2020 Maxim Troshin. All rights reserved.
-//
-
 import Foundation
 import RxSwift
 
 class VideoPlayerViewModel {
-    private weak var viewController: UIViewController?
     private let subtitlesExtractor: SubtitlesExtractor?
     private let playerController: PlayerController
     private let video: VideoEntity
@@ -25,8 +16,7 @@ class VideoPlayerViewModel {
     let translation: Observable<TranslationEntity?>
     let translationLoading: PublishSubject<Bool>
     
-    init(vc: UIViewController, video: VideoEntity) {
-        self.viewController = vc
+    init(video: VideoEntity) {
         self.video = video
         
         var subtitlesExtractor: SubtitlesExtractor? = nil
@@ -88,7 +78,7 @@ extension VideoPlayerViewModel: ControlsViewDelegate {
     
     func didPressClose() {
         self.playerController.pause()
-        self.viewController?.dismiss(animated: true, completion: nil)
+//        self.viewController?.dismiss(animated: true, completion: nil)
     }
     
     func didPressBackwardFifteen() {

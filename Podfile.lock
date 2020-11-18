@@ -117,14 +117,17 @@ PODS:
   - Purchases (3.7.3):
     - PurchasesCoreSwift (= 3.7.3)
   - PurchasesCoreSwift (3.7.3)
-  - Realm (10.1.3):
-    - Realm/Headers (= 10.1.3)
-  - Realm/Headers (10.1.3)
-  - RealmSwift (10.1.3):
-    - Realm (= 10.1.3)
+  - Realm (5.5.0):
+    - Realm/Headers (= 5.5.0)
+  - Realm/Headers (5.5.0)
+  - RealmSwift (5.5.0):
+    - Realm (= 5.5.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
+  - RxRealm (3.1.0):
+    - RealmSwift (~> 5.2)
+    - RxSwift (~> 5.0)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -147,6 +150,7 @@ DEPENDENCIES:
   - Purchases (= 3.7.3)
   - RealmSwift
   - RxCocoa (~> 5)
+  - RxRealm
   - RxSwift (~> 5)
   - RxSwiftExt (~> 5)
   - Toast-Swift
@@ -179,6 +183,7 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - RxCocoa
+    - RxRealm
     - RxRelay
     - RxSwift
     - RxSwiftExt
@@ -208,14 +213,15 @@ SPEC CHECKSUMS:
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   Purchases: ae790bb695c4d4f1c13f952067d2d2c3f0d0ca5e
   PurchasesCoreSwift: 53956256a1ff84de8f0f212ea4b9b46a53a212dc
-  Realm: 072f4060c99150cb1d35e35ce1dd4dda7d9ddfed
-  RealmSwift: 96f96feafee63186789419235d14857dae9004ae
+  Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
+  RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 62b07217520a7f7ad25aa842a8555b325cb8cc5a
+PODFILE CHECKSUM: 5a864d36006ba7f4398e166999b0fdf453a362b0
 
 COCOAPODS: 1.10.0

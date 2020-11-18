@@ -7,7 +7,7 @@ target 'LanguagePlayer' do
   pod 'RxCocoa', '~> 5'
   pod 'RxSwiftExt', '~> 5'
   #pod 'RxTimelane', '~> 2.0'
-#  pod 'RxRealm'
+  pod 'RxRealm'
   pod 'RealmSwift'
   pod 'GCDWebServer'
   pod 'DifferenceKit'

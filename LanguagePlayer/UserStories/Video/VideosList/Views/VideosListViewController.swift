@@ -19,12 +19,9 @@ class VideosListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        viewModel.viewDidLoad()
-                
-        viewModel.videos
-            .map { $0.map(VideoViewEntity.init(video:)) }
-            .do(onNext: nil, afterNext: makeThumbneils(for:))
-            .subscribe(onNext: { [self] newVideos in
+        viewModel.output.videos
+            .do(afterNext: makeThumbneils(for:))
+            .drive(onNext: { [self] newVideos in
                 collectionView.diffUpdate(source: videos, target: newVideos) { data in
                     videos = data
                 }
@@ -87,9 +84,9 @@ extension VideosListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == videos.count {
-            viewModel.addVideoPressed()
+            viewModel.input.openUploadTutorial.onNext(())
         } else {
-            viewModel.itemSelected(indexPath: indexPath)
+            viewModel.input.openVideo.onNext(indexPath.row)
         }
     }
     
@@ -110,7 +107,7 @@ extension VideosListViewController: UICollectionViewDelegate {
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                self.viewModel.removeVideo(indexPath: indexPath, removeAllCards: false)
+                self.viewModel.input.removeVideo.onNext(indexPath.row)
             }
             let removeWithCards = UIAction(
                 title: "Удалить со всеми карточками",
@@ -120,7 +117,7 @@ extension VideosListViewController: UICollectionViewDelegate {
                 attributes: .destructive,
                 state: .off
             ) { _ in
-                self.viewModel.removeVideo(indexPath: indexPath, removeAllCards: true)
+                self.viewModel.input.removeVideoWithCards.onNext(indexPath.row)
             }
 
             return UIMenu(
