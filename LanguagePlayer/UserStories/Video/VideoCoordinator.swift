@@ -53,6 +53,7 @@ class VideoCoordinator: BaseCoordinator<Void> {
         navigationController.present(viewController, animated: true, completion: nil)
         
         viewModel.route.videoLoaded
+            .observeOn(MainScheduler())
             .subscribe(onCompleted: {
                 viewController.dismiss(animated: true, completion: nil)
             })

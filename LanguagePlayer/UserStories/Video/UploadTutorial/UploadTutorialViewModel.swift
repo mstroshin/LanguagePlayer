@@ -16,18 +16,28 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
         self.input = Input()
         self.output = Output(addresses: webServer.address)
                 
-        let videoSaved = webServer.run()
-            .observeOn(MainScheduler())
+        let videoSavedOnDisk = webServer.run()
             .flatMap(localStore.save(uploaded:))
             .ignoreErrors()
             .share()
-    
-        videoSaved
+        
+        let subtitlesExtracted = videoSavedOnDisk
+            .flatMap { video -> Single<[URL]> in
+                SubtitlesExtractor().extract(filePath: video.videoUrl)
+            }
+                
+        let videoSavedInRealm = Observable.zip(videoSavedOnDisk, subtitlesExtracted) { video, subUrls -> VideoEntity in
+            video.extractedSubPaths.append(objectsIn: subUrls.map(\.absoluteString))
+            return video
+        }.share()
+        
+        videoSavedInRealm
+            .observeOn(MainScheduler())
             .subscribe(realm.rx.add())
             .disposed(by: disposeBag)
         
         self.route = Route(
-            videoLoaded: videoSaved
+            videoLoaded: videoSavedInRealm
         )
             
     }

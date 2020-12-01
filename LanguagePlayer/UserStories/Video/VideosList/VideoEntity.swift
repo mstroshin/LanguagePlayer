@@ -9,6 +9,7 @@ class VideoEntity: Object {
     @objc dynamic var sourceSubtitleFileName: String?
     @objc dynamic var targetSubtitleFileName: String?
     let translations = List<TranslationEntity>()
+    let extractedSubPaths = List<String>()
     
     override class func primaryKey() -> String? { "id" }
     
