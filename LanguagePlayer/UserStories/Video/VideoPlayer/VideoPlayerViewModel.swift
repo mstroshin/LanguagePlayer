@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 
 class VideoPlayerViewModel {
-    private let subtitlesExtractor: SubtitlesExtractor?
+    private let subtitlesExtractor: SubtitlesConvertor?
     private let playerController: PlayerController
     private let video: VideoEntity
     
@@ -19,9 +19,9 @@ class VideoPlayerViewModel {
     init(video: VideoEntity) {
         self.video = video
         
-        var subtitlesExtractor: SubtitlesExtractor? = nil
+        var subtitlesExtractor: SubtitlesConvertor? = nil
         if let subtitleUrl = video.sourceSubtitleUrl {
-            subtitlesExtractor = SubtitlesExtractorSrt(with: subtitleUrl)
+            subtitlesExtractor = SubtitlesConvertorFromSrt(with: subtitleUrl)
         }
         self.subtitlesExtractor = subtitlesExtractor
         

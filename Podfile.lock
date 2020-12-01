@@ -106,6 +106,7 @@ PODS:
     - Protobuf (~> 3.12)
   - MLKitTranslate (0.64.0):
     - MLKitNaturalLanguage (~> 0.64)
+  - mobile-ffmpeg-full (4.4)
   - MobileVLCKit (3.3.14)
   - nanopb (1.30906.0):
     - nanopb/decode (= 1.30906.0)
@@ -146,6 +147,7 @@ DEPENDENCIES:
   - Firebase/Analytics
   - GCDWebServer
   - GoogleMLKit/Translate
+  - mobile-ffmpeg-full (~> 4.4)
   - MobileVLCKit
   - Purchases (= 3.7.3)
   - RealmSwift
@@ -174,6 +176,7 @@ SPEC REPOS:
     - MLKitCommon
     - MLKitNaturalLanguage
     - MLKitTranslate
+    - mobile-ffmpeg-full
     - MobileVLCKit
     - nanopb
     - PromisesObjC
@@ -207,6 +210,7 @@ SPEC CHECKSUMS:
   MLKitCommon: dc2909c96dbf7f5a75b86a3d2fa1b92ff3f6a30b
   MLKitNaturalLanguage: b127a0f557c0f2c375432e3737e6673889ff2bec
   MLKitTranslate: 458b7dfaa8cfb2a0476c7b8b25b02ad3f136538f
+  mobile-ffmpeg-full: 505c583d91ac1c4fb2b015787e69d83f83fb8f29
   MobileVLCKit: 7f5065858eb9c29a91743c3554654d2e81b85db2
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
@@ -222,6 +226,6 @@ SPEC CHECKSUMS:
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 5a864d36006ba7f4398e166999b0fdf453a362b0
+PODFILE CHECKSUM: 1d96dba18c8824fe0ca32eb6beb936515dff93d3
 
 COCOAPODS: 1.10.0

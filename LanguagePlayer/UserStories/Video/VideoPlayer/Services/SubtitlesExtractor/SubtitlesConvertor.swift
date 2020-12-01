@@ -1,5 +1,5 @@
 //
-//  SubtitlesExtractor.swift
+//  SubtitlesConvertor.swift
 //  LanguagePlayer
 //
 //  Created by Maxim Troshin on 16.07.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol SubtitlesExtractor {
+protocol SubtitlesConvertor {
     func getSubtitle(for time: Milliseconds) -> SubtitlePart?
     func getPreviousSubtitle(current time: Milliseconds) -> SubtitlePart?
     func getNextSubtitle(current time: Milliseconds) -> SubtitlePart?

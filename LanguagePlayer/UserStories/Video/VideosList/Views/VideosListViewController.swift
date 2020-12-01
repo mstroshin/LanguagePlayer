@@ -25,6 +25,8 @@ class VideosListViewController: UIViewController {
                 collectionView.diffUpdate(source: videos, target: newVideos) { data in
                     videos = data
                 }
+                let v = newVideos[0]
+                SubtitlesExtractor.extract(filePath: v.videoUrl)
             })
             .disposed(by: disposeBag)
     }

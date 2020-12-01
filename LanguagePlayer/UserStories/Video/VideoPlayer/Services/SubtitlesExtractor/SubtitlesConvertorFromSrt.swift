@@ -1,5 +1,5 @@
 //
-//  SubtitlesExtractorSrt.swift
+//  SubtitlesConvertorFromSrt.swift
 //  LanguagePlayer
 //
 //  Created by Maxim Troshin on 16.07.2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SubtitlesExtractorSrt: SubtitlesExtractor {
+class SubtitlesConvertorFromSrt: SubtitlesConvertor {
     private let filePath: URL
     private var parts = [SubtitlePart]()
     
