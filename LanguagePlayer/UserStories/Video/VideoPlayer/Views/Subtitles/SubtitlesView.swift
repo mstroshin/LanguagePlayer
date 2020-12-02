@@ -16,13 +16,6 @@ protocol SubtitlesViewDelegate: class {
 }
 
 class SubtitlesView: UIView {
-    @IBOutlet private weak var translationView: TranslationView! {
-        didSet {
-            self.translationView.delegate = self
-            self.translationView.isHidden = true
-            self.bringSubviewToFront(self.translationView)
-        }
-    }
     weak var delegate: SubtitlesViewDelegate?
     var textColor = UIColor.white
     
@@ -181,15 +174,6 @@ extension SubtitlesView {
     func set(text: String) {
         self.textView.text = text
     }
-        
-    func set(isTranslating: Bool) {
-        self.translationView.set(isTranslating: isTranslating)
-    }
-    
-    func update(translation: TranslationEntity) {
-        self.translationView.set(text: translation.target)
-        self.translationView.set(isAddedToDictionary: translation.isAddedToDictionary)
-    }
     
     func deselectAll() {
         let mutableText = self.textView.attributedText.mutableCopy() as! NSMutableAttributedString
@@ -199,10 +183,6 @@ extension SubtitlesView {
             range: NSRange(location: 0, length: self.textView.text.count)
         )
         self.textView.attributedText = mutableText
-    }
-    
-    func translationView(isHidden: Bool) {
-        self.translationView.isHidden = isHidden
     }
     
 }
@@ -218,18 +198,6 @@ extension SubtitlesView {
         let length = textView.offset(from: start, to: end)
         
         return NSRange(location: location, length: length)
-    }
-    
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if self.clipsToBounds || self.isHidden || self.alpha == 0 {
-            return nil
-        }
-        
-        if !self.bounds.contains(point) {
-            return self.translationView.hitTest(self.convert(point, to: self.translationView), with: event)
-        }
-        
-        return super.hitTest(point, with: event)
     }
     
 }

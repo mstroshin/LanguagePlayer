@@ -18,7 +18,6 @@ class VideoPlayerViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupBindings()
-        viewModel.viewDidLoad()
     }
     
     override var prefersStatusBarHidden: Bool { true }
@@ -26,8 +25,7 @@ class VideoPlayerViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
     
     private func setupViews() {
-        subtitlesView.delegate = viewModel
-        controlsView.delegate = viewModel
+        controlsView.delegate = self
         
         viewModel.set(viewport: self.videoViewport)
         
@@ -38,29 +36,22 @@ class VideoPlayerViewController: UIViewController {
     
     private func setupBindings() {
         //Time label
-        disposeBag.insert(viewModel.currentTime
+        viewModel.output.currentTime
             .map(millisecondsToTime(_:))
-            .bind(to: controlsView.timeLabel.rx.text))
+            .drive(controlsView.timeLabel.rx.text)
+            .disposed(by: disposeBag)
         
         //Slider
-        disposeBag.insert(viewModel.currentTime
+        viewModel.output.currentTime
             .map { Float($0) }
-            .subscribe(onNext: { time in
+            .drive(onNext: { time in
                 self.controlsView.seekSlider.value = time
-                self.subtitlesView.translationView(isHidden: true)
-            }))
+            })
+            .disposed(by: disposeBag)
         
-        //Subs visibility
-        disposeBag.insert(viewModel.subVisibility
-            .subscribe(onNext: { isVisible in
-                self.subtitlesView.isHidden = !isVisible
-                self.controlsView.subtitles(isVisible: !self.subtitlesView.isHidden)
-                self.isSubtitlesEnable = isVisible
-            }))
-        
-        //Player statuses)
-        disposeBag.insert(viewModel.playerStatus
-            .subscribe(onNext: { status in
+        //Player statuses
+        viewModel.output.playerStatus
+            .drive(onNext: { status in
                 switch status {
                 case .unready:
                     break
@@ -69,41 +60,19 @@ class VideoPlayerViewController: UIViewController {
                 case .pause:
                     self.controlsView.isPlaying = false
                 case .play:
-                    self.subtitlesView.translationView(isHidden: true)
                     self.controlsView.isPlaying = true
                     self.subtitlesView.deselectAll()
-                    
+
                     self.controlsView.perform(#selector(ControlsView.hideAnimated), with: nil, afterDelay: 1)
                 }
-            }))
+            })
+            .disposed(by: disposeBag)
         
-        //Displaying subtitles
-        if let subtitleObservable = viewModel.currentSubtitle {
-            disposeBag.insert(Observable.combineLatest(subtitleObservable, viewModel.subVisibility)
-                .subscribe(onNext: { subtitle, isVisible in
-                    if let subtitle = subtitle, isVisible {
-                        self.subtitlesView.isHidden = false
-                        self.subtitlesView.set(text: subtitle.text)
-                    } else {
-                        self.subtitlesView.isHidden = true
-                    }
-                }))
-        }
-        
-        disposeBag.insert(viewModel.translation
-            .observeOn(MainScheduler())
-            .subscribe(onNext: { translation in
-                if let translation = translation {
-                    self.subtitlesView.update(translation: translation)
-                }
-            }))
-        
-        disposeBag.insert(viewModel.translationLoading
-            .observeOn(MainScheduler())
-            .subscribe(onNext: { isLoading in
-                self.subtitlesView.translationView(isHidden: false)
-                self.subtitlesView.set(isTranslating: isLoading)
-            }))
+        viewModel.output.currentSubtitles?
+            .drive(onNext: { subtitles in
+                //TODO:
+            })
+            .disposed(by: disposeBag)
     }
     
     private func millisecondsToTime(_ milliseconds: Milliseconds) -> String {
@@ -117,6 +86,59 @@ class VideoPlayerViewController: UIViewController {
     
     @IBAction func didTapOnViewport(_ sender: UITapGestureRecognizer) {
         self.controlsView.toogleVisibility()
+    }
+    
+}
+
+
+extension VideoPlayerViewController: ControlsViewDelegate {
+    
+    func didPressClose() {
+        viewModel.input.close.onCompleted()
+    }
+    
+    func didPressBackwardFifteen() {
+//        let time = try! viewModel.output.currentTime - 15 * 1000
+//        playerController.seek(to: time)
+//        viewModel.input.seek.onNext(0)
+    }
+    
+    func didPressForwardFifteen() {
+//        let time = try! playerController.currentTime.value() + 15 * 1000
+//        playerController.seek(to: time)
+    }
+    
+    func didPressPlay() {
+        viewModel.input.isPlaying.onNext(true)
+    }
+    
+    func didPressPause() {
+        viewModel.input.isPlaying.onNext(false)
+    }
+    
+    
+    func didPressScreenTurn() {
+        //TODO:
+    }
+    
+    func seekValueChangedSeekSlider(time: Milliseconds) {
+        viewModel.input.seek.onNext(time)
+    }
+    
+    func didPressBackwardSub() {
+        viewModel.input.backwardSub.onNext(())
+    }
+    
+    func didPressForwardSub() {
+        viewModel.input.forwardSub.onNext(())
+    }
+    
+    func didPressToogleSubVisibility() {
+        let isHidden = self.subtitlesView.isHidden
+        
+        self.subtitlesView.isHidden = !isHidden
+        self.controlsView.subtitles(isVisible: isHidden)
+        self.isSubtitlesEnable = isHidden
     }
     
 }

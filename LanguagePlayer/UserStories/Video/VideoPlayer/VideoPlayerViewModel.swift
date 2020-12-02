@@ -1,128 +1,121 @@
 import Foundation
 import RxSwift
+import RxCocoa
 
-class VideoPlayerViewModel {
-    private let subtitlesExtractor: SubtitlesConvertor?
+class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
+    let input: Input
+    let output: Output
+    let route: Route
+    
+    private let sourceSubtitlesConvertor: SubtitlesConvertor?
+    private let targetSubtitlesConvertor: SubtitlesConvertor?
     private let playerController: PlayerController
     private let video: VideoEntity
+    private let disposeBag = DisposeBag()
     
-    private let translationViewModel: TranslationViewModel
-    
-    //View bindins
-    let currentTime: BehaviorSubject<Milliseconds>
-    let playerStatus: BehaviorSubject<PlayerStatus>
-    let subVisibility = BehaviorSubject<Bool>(value: true)
-    let currentSubtitle: Observable<SubtitlePart?>?
-    let translation: Observable<TranslationEntity?>
-    let translationLoading: PublishSubject<Bool>
-    
-    init(video: VideoEntity) {
+    init(video: VideoEntity, sourceSubUrl: URL?, targetSubUrl: URL?) {
         self.video = video
-        
-        var subtitlesExtractor: SubtitlesConvertor? = nil
-        if let subtitleUrl = video.sourceSubtitleUrl {
-            subtitlesExtractor = SubtitlesConvertorFromSrt(with: subtitleUrl)
-        }
-        self.subtitlesExtractor = subtitlesExtractor
-        
         self.playerController = PlayerController(videoUrl: video.videoUrl)
-        self.currentTime = self.playerController.currentTime
-        self.playerStatus = self.playerController.status
         
-        if let extractor = subtitlesExtractor {
-            self.currentSubtitle = self.currentTime
-                .map(extractor.getSubtitle(for:))
-                .distinctUntilChanged({ lhs, rhs -> Bool in
-                    lhs?.text == rhs?.text
-                })
-        } else {
-            self.currentSubtitle = nil
+        var sourceSubtitlesConvertor: SubtitlesConvertor? = nil
+        if let subtitleUrl = sourceSubUrl {
+            sourceSubtitlesConvertor = SubtitlesConvertorFromSrt(with: subtitleUrl)
+        }
+        self.sourceSubtitlesConvertor = sourceSubtitlesConvertor
+        
+        var targetSubtitlesConvertor: SubtitlesConvertor? = nil
+        if let targetSubUrl = targetSubUrl {
+            targetSubtitlesConvertor = SubtitlesConvertorFromSrt(with: targetSubUrl)
+        }
+        self.targetSubtitlesConvertor = targetSubtitlesConvertor
+        
+        //Inputs
+        let close = PublishSubject<Void>()
+        let backwardSub = PublishSubject<Void>()
+        let forwardSub = PublishSubject<Void>()
+        
+        self.input = Input(
+            close: close.asObserver(),
+            seek: self.playerController.seek,
+            isPlaying: self.playerController.isPlaying,
+            backwardSub: backwardSub.asObserver(),
+            forwardSub: forwardSub.asObserver()
+        )
+        
+        //Outputs
+        var currentSubtitlesDriver: Driver<DoubleSubtitles>? = nil
+        if let sourceConverter = sourceSubtitlesConvertor {
+            currentSubtitlesDriver = self.playerController.currentTime
+                .map { time -> DoubleSubtitles in
+                    let source = sourceConverter.getSubtitle(for: time)
+                    let target = targetSubtitlesConvertor?.getSubtitle(for: time)
+                    return DoubleSubtitles(source: source, target: target)
+                }
+                .distinctUntilChanged()
+                .asDriver(onErrorJustReturn: DoubleSubtitles(source: nil, target: nil))
         }
         
-        self.translationViewModel = TranslationViewModel(video: video)
-        self.translation = translationViewModel.translationSubject.asObservable()
-        self.translationLoading = translationViewModel.translationLoading
-    }
-    
-    func viewDidLoad() {
-        playerController.play()
+        self.output = Output(
+            currentTime: self.playerController.currentTime.asDriver(onErrorJustReturn: 0),
+            currentSubtitles: currentSubtitlesDriver,
+            playerStatus: self.playerController.status.asDriver(onErrorJustReturn: .pause)
+        )
+        
+        //Routes
+        self.route = Route(
+            close: close.asObservable()
+        )
+        
+        //Maps
+        backwardSub
+            .compactMap { () -> Milliseconds? in
+                let time = try! self.playerController.currentTime.value()
+                if let subtitle = self.sourceSubtitlesConvertor?.getPreviousSubtitle(current: time) {
+                    return subtitle.fromTime - 50
+                } else {
+                    return nil
+                }
+            }
+            .bind(to: self.playerController.seek)
+            .disposed(by: disposeBag)
+        
+        forwardSub
+            .compactMap { () -> Milliseconds? in
+                let time = try! self.playerController.currentTime.value()
+                if let subtitle = self.sourceSubtitlesConvertor?.getNextSubtitle(current: time) {
+                    return subtitle.fromTime - 50
+                } else {
+                    return nil
+                }
+            }
+            .bind(to: self.playerController.seek)
+            .disposed(by: disposeBag)
     }
     
     func set(viewport: UIView) {
         playerController.set(viewport: viewport)
     }
     
-    func seek(milliseconds: Milliseconds) {
-        playerController.seek(to: milliseconds)
-    }
-    
 }
 
-extension VideoPlayerViewModel: SubtitlesViewDelegate {
+extension VideoPlayerViewModel {
     
-    func startedSelectingText(in subtitlesView: SubtitlesView) {
-        playerController.pause()
+    struct Input {
+        let close: AnyObserver<Void>
+        let seek: AnyObserver<Milliseconds>
+        let isPlaying: AnyObserver<Bool>
+        let backwardSub: AnyObserver<Void>
+        let forwardSub: AnyObserver<Void>
     }
     
-    func subtitleView(_ subtitlesView: SubtitlesView, didSelect text: String) {
-        translationViewModel.translate(text: text)
+    struct Output {
+        let currentTime: Driver<Milliseconds>
+        let currentSubtitles: Driver<DoubleSubtitles>?
+        let playerStatus: Driver<PlayerStatus>
     }
     
-    func addToDictionaryPressed() {
-        translationViewModel.toogleDictionaryCurrentTranslation()
-    }
-    
-}
-
-extension VideoPlayerViewModel: ControlsViewDelegate {
-    
-    func didPressClose() {
-        self.playerController.pause()
-//        self.viewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    func didPressBackwardFifteen() {
-        let time = try! playerController.currentTime.value() - 15 * 1000
-        playerController.seek(to: time)
-    }
-    
-    func didPressForwardFifteen() {
-        let time = try! playerController.currentTime.value() + 15 * 1000
-        playerController.seek(to: time)
-    }
-    
-    func didPressPlay() {
-        self.playerController.play()
-    }
-    
-    func didPressPause() {
-        self.playerController.pause()
-    }
-    
-    //TODO
-    func didPressScreenTurn() {}
-    
-    func seekValueChangedSeekSlider(time: Milliseconds) {
-        playerController.seek(to: time)
-    }
-    
-    func didPressBackwardSub() {
-        let time = try! playerController.currentTime.value()
-        if let subtitle = subtitlesExtractor?.getPreviousSubtitle(current: time) {
-            self.playerController.seek(to: subtitle.fromTime - 50)
-        }
-    }
-    
-    func didPressForwardSub() {
-        let time = try! playerController.currentTime.value()
-        if let subtitle = self.subtitlesExtractor?.getNextSubtitle(current: time) {
-            self.playerController.seek(to: subtitle.fromTime - 50)
-        }
-    }
-    
-    func didPressToogleSubVisibility() {
-        let isVisible = try! subVisibility.value()
-        subVisibility.onNext(!isVisible)
+    struct Route {
+        let close: Observable<Void>
     }
     
 }

@@ -66,35 +66,6 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         )
     }
     
-//    func itemSelected(indexPath: IndexPath) {
-//        let video = try! videos.value()[indexPath.row]
-//
-//        let videoPlayerVC: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
-//
-//        let viewModel = VideoPlayerViewModel(vc: videoPlayerVC, video: video)
-//        videoPlayerVC.viewModel = viewModel
-//
-//        videoPlayerVC.modalPresentationStyle = .fullScreen
-////        viewController?.present(videoPlayerVC, animated: true, completion: nil)
-//    }
-    
-//    func addVideoPressed() {
-//        let vc: UploadTutorialViewController = UploadTutorialViewController.createFromMainStoryboard()
-////        viewController?.present(vc, animated: true, completion: nil)
-//    }
-//
-//    func removeVideo(indexPath: IndexPath, removeAllCards: Bool) {
-//        let video = try! videos.value()[indexPath.row]
-//
-//        try! realm.write {
-//            if removeAllCards {
-//                realm.delete(video.translations)
-//            }
-//
-//            realm.delete(video)
-//        }
-//    }
-    
 }
 
 extension VideosListViewModel {

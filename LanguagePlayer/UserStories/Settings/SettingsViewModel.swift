@@ -2,7 +2,6 @@ import Foundation
 import RxSwift
 import RxCocoa
 import RxSwiftExt
-import MLKitTranslate
 
 class SettingsViewModel: ViewModel {
     let input: Input

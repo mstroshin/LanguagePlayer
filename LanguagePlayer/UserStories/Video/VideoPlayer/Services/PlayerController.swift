@@ -11,6 +11,11 @@ enum PlayerStatus {
 }
 
 class PlayerController: NSObject {
+    //Inputs
+    let seek: AnyObserver<Milliseconds>
+    let isPlaying: AnyObserver<Bool>
+    
+    //Outputs
     let status = BehaviorSubject<PlayerStatus>(value: .unready)
     let currentTime = BehaviorSubject<Milliseconds>(value: 0)
     var videoDuration: Milliseconds {
@@ -21,36 +26,48 @@ class PlayerController: NSObject {
         return 0
     }
     
+    //Privates
     private(set) var isPlayerReady = false
     private let player = VLCMediaPlayer()
-    
+    private let disposeBag = DisposeBag()
     
     init(videoUrl: URL) {
+        self.player.media = VLCMedia(url: videoUrl)
+        
+        let isPlaying = PublishSubject<Bool>()
+        self.isPlaying = isPlaying.asObserver()
+        
+        let seek = PublishSubject<Milliseconds>()
+        self.seek = seek.asObserver()
+        
         super.init()
         self.player.delegate = self
-        self.player.media = VLCMedia(url: videoUrl)
+        
+        isPlaying
+            .subscribe(onNext: { [weak self] isPlaying in
+                guard let self = self else { return }
+                if isPlaying {
+                    self.player.play()
+                    self.status.onNext(.play)
+                } else {
+                    self.player.pause()
+                    self.status.onNext(.pause)
+                }
+            })
+            .disposed(by: disposeBag)
+        
+        seek.subscribe(onNext: { [weak self] time in
+            guard let self = self else { return }
+            self.player.time = VLCTime(number: NSNumber(value: time))
+            if self.player.isPlaying == false {
+                self.currentTime.onNext(time)
+            }
+        })
+        .disposed(by: disposeBag)
     }
     
     func set(viewport: UIView) {
         self.player.drawable = viewport
-    }
-        
-    func play() {
-        self.player.play()
-        status.onNext(.play)
-    }
-    
-    func pause() {
-        self.player.pause()
-        status.onNext(.pause)
-    }
-        
-    func seek(to time: Milliseconds) {
-        self.player.time = VLCTime(number: NSNumber(value: time))
-        
-        if player.isPlaying == false {
-            self.currentTime.onNext(time)
-        }
     }
     
 }

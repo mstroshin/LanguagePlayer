@@ -55,8 +55,12 @@ class LocalDiskStore {
                 let videoEntity = VideoEntity()
                 videoEntity.savedInDirectoryName = directoryName
                 videoEntity.fileName = uploaded.video.fileName
-                videoEntity.sourceSubtitleFileName = uploaded.sourceSubtitle?.fileName
-                videoEntity.targetSubtitleFileName = uploaded.targetSubtitle?.fileName
+                if let name = uploaded.sourceSubtitle?.fileName {
+                    videoEntity.subtitleNames.append(name)
+                }
+                if let name = uploaded.targetSubtitle?.fileName {
+                    videoEntity.subtitleNames.append(name)
+                }
                 
                 single(.success(videoEntity))
             } else {

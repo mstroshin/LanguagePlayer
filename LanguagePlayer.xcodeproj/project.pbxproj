@@ -22,16 +22,13 @@
 		94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDC2256485F200A5E740 /* CardsCoordinator.swift */; };
 		94B9BDC62564878200A5E740 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDAA2564789000A5E740 /* SettingsViewModel.swift */; };
 		94D874412574B7DA00277245 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D874402574B7DA00277245 /* SubtitlesExtractor.swift */; };
-		CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */; };
 		CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */; };
 		CB8C06F7255B2F88006C0499 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */; };
-		CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F9255B301E006C0499 /* TranslationViewModel.swift */; };
 		CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB946582255B6B4C0075700B /* CardsViewModel.swift */; };
 		CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9465E2255B7D9F0075700B /* CardViewEntity.swift */; };
 		CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */; };
 		CBE5588F254705080075D45A /* VideoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5588E254705080075D45A /* VideoEntity.swift */; };
 		CBE55893254705560075D45A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE55892254705560075D45A /* Typealiases.swift */; };
-		CBF6E0E82546E1F900443A16 /* GoogleMLTranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBF6E0E72546E1F900443A16 /* GoogleMLTranslationService.swift */; };
 		D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */; };
 		D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */; };
 		D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */; };
@@ -57,7 +54,6 @@
 		D2C3435324C614DE00133EBD /* SubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435224C614DE00133EBD /* SubtitlesView.swift */; };
 		D2C3435524C625FE00133EBD /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435424C625FE00133EBD /* TranslationView.swift */; };
 		D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3435824C6654500133EBD /* VideoPlayerViewController.swift */; };
-		D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292EF24C78BB8004660EE /* TranslationService.swift */; };
 		D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D292F524C78EEF004660EE /* PropertyWrappers.swift */; };
 		D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E327B024E29E7D00CB7B16 /* SupportedFormatsEnums.swift */; };
 		D2E616C124D7F45B00D80F26 /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = D2E616B024D7F45B00D80F26 /* fontawesome-webfont.svg */; };
@@ -521,7 +517,6 @@
 				D2154E8F24C0803C00F52815 /* Frameworks */,
 				D2154E9024C0803C00F52815 /* Resources */,
 				91767526DD2BFE473125FC37 /* [CP] Embed Pods Frameworks */,
-				F37DB18533A1A3B5E791D8B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -635,23 +630,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F37DB18533A1A3B5E791D8B7 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -674,15 +652,12 @@
 				D2C3435924C6654500133EBD /* VideoPlayerViewController.swift in Sources */,
 				D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */,
 				D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */,
-				CB8C06FA255B301E006C0499 /* TranslationViewModel.swift in Sources */,
 				D2154EB824C0946400F52815 /* PlayerController.swift in Sources */,
-				D2D292F024C78BB8004660EE /* TranslationService.swift in Sources */,
 				D2C0568424C7A62100810915 /* Extensions.swift in Sources */,
 				D2154EB324C0878E00F52815 /* SubtitlesConvertor.swift in Sources */,
 				CBE5588F254705080075D45A /* VideoEntity.swift in Sources */,
 				D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */,
 				CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */,
-				CBF6E0E82546E1F900443A16 /* GoogleMLTranslationService.swift in Sources */,
 				94B9BDBD2564812600A5E740 /* VideoCoordinator.swift in Sources */,
 				CBE55893254705560075D45A /* Typealiases.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesConvertorFromSrt.swift in Sources */,
@@ -703,7 +678,6 @@
 				CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */,
 				CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */,
 				94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */,
-				CB5990F7253E22B500CE0548 /* MicrosoftTranslationService.swift in Sources */,
 				D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */,
 				94D874412574B7DA00277245 /* SubtitlesExtractor.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
@@ -889,47 +863,15 @@
 					"-framework",
 					"\"DifferenceKit\"",
 					"-framework",
-					"\"FBLPromises\"",
-					"-framework",
-					"\"FIRAnalyticsConnector\"",
-					"-framework",
-					"\"FirebaseAnalytics\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseCoreDiagnostics\"",
-					"-framework",
-					"\"FirebaseInstallations\"",
-					"-framework",
 					"\"Foundation\"",
 					"-framework",
 					"\"GCDWebServer\"",
 					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleAppMeasurement\"",
-					"-framework",
-					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleToolboxForMac\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"GoogleUtilitiesComponents\"",
-					"-framework",
 					"\"LocalAuthentication\"",
-					"-framework",
-					"\"MLKitCommon\"",
-					"-framework",
-					"\"MLKitNaturalLanguage\"",
-					"-framework",
-					"\"MLKitTranslate\"",
 					"-framework",
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"OpenGLES\"",
-					"-framework",
-					"\"Protobuf\"",
 					"-framework",
 					"\"Purchases\"",
 					"-framework",
@@ -1038,8 +980,6 @@
 					"\"libxml2\"",
 					"-framework",
 					"\"mobileffmpeg\"",
-					"-framework",
-					"\"nanopb\"",
 					"-framework",
 					"\"opus\"",
 					"-framework",
@@ -1111,47 +1051,15 @@
 					"-framework",
 					"\"DifferenceKit\"",
 					"-framework",
-					"\"FBLPromises\"",
-					"-framework",
-					"\"FIRAnalyticsConnector\"",
-					"-framework",
-					"\"FirebaseAnalytics\"",
-					"-framework",
-					"\"FirebaseCore\"",
-					"-framework",
-					"\"FirebaseCoreDiagnostics\"",
-					"-framework",
-					"\"FirebaseInstallations\"",
-					"-framework",
 					"\"Foundation\"",
 					"-framework",
 					"\"GCDWebServer\"",
 					"-framework",
-					"\"GTMSessionFetcher\"",
-					"-framework",
-					"\"GoogleAppMeasurement\"",
-					"-framework",
-					"\"GoogleDataTransport\"",
-					"-framework",
-					"\"GoogleToolboxForMac\"",
-					"-framework",
-					"\"GoogleUtilities\"",
-					"-framework",
-					"\"GoogleUtilitiesComponents\"",
-					"-framework",
 					"\"LocalAuthentication\"",
-					"-framework",
-					"\"MLKitCommon\"",
-					"-framework",
-					"\"MLKitNaturalLanguage\"",
-					"-framework",
-					"\"MLKitTranslate\"",
 					"-framework",
 					"\"MobileCoreServices\"",
 					"-framework",
 					"\"OpenGLES\"",
-					"-framework",
-					"\"Protobuf\"",
 					"-framework",
 					"\"Purchases\"",
 					"-framework",
@@ -1260,8 +1168,6 @@
 					"\"libxml2\"",
 					"-framework",
 					"\"mobileffmpeg\"",
-					"-framework",
-					"\"nanopb\"",
 					"-framework",
 					"\"opus\"",
 					"-framework",

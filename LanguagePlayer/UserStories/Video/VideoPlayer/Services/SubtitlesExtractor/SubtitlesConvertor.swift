@@ -20,3 +20,13 @@ struct SubtitlePart {
     let toTime: Milliseconds
     let text: String
 }
+
+struct DoubleSubtitles: Equatable {
+    let source: SubtitlePart?
+    let target: SubtitlePart?
+    
+    static func == (lhs: DoubleSubtitles, rhs: DoubleSubtitles) -> Bool {
+        lhs.source?.number == rhs.source?.number &&
+            lhs.target?.number == rhs.target?.number
+    }
+}

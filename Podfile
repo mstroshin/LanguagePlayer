@@ -13,9 +13,9 @@ target 'LanguagePlayer' do
   pod 'mobile-ffmpeg-full', '~> 4.4'
   pod 'DifferenceKit'
   pod 'MobileVLCKit'
-  pod 'Firebase/Analytics'
+#  pod 'Firebase/Analytics'
   pod 'Toast-Swift'
-  pod 'GoogleMLKit/Translate'
+#  pod 'GoogleMLKit/Translate'
   pod 'Purchases', '3.7.3'
 end
 

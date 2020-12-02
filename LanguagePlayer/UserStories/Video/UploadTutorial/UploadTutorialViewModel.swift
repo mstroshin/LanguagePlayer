@@ -22,12 +22,12 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             .share()
         
         let subtitlesExtracted = videoSavedOnDisk
-            .flatMap { video -> Single<[URL]> in
+            .flatMap { video -> Single<[String]> in
                 SubtitlesExtractor().extract(filePath: video.videoUrl)
             }
                 
-        let videoSavedInRealm = Observable.zip(videoSavedOnDisk, subtitlesExtracted) { video, subUrls -> VideoEntity in
-            video.extractedSubPaths.append(objectsIn: subUrls.map(\.absoluteString))
+        let videoSavedInRealm = Observable.zip(videoSavedOnDisk, subtitlesExtracted) { video, subNames -> VideoEntity in
+            video.subtitleNames.append(objectsIn: subNames)
             return video
         }.share()
         

@@ -6,10 +6,8 @@ class VideoEntity: Object {
     @objc dynamic var id: ID = UUID().uuidString
     @objc dynamic var savedInDirectoryName: String = ""
     @objc dynamic var fileName: String = ""
-    @objc dynamic var sourceSubtitleFileName: String?
-    @objc dynamic var targetSubtitleFileName: String?
     let translations = List<TranslationEntity>()
-    let extractedSubPaths = List<String>()
+    let subtitleNames = List<String>()
     
     override class func primaryKey() -> String? { "id" }
     
@@ -17,8 +15,13 @@ class VideoEntity: Object {
         LocalDiskStore().url(for: savedInDirectoryName, fileName: fileName) ?? URL(fileURLWithPath: "")
     }
     
-    var sourceSubtitleUrl: URL? {
-        LocalDiskStore().url(for: savedInDirectoryName, fileName: sourceSubtitleFileName)
+    func subtitleUrl(for index: Int) -> URL? {
+        if index < 0 || index >= subtitleNames.count {
+            return nil
+        }
+        
+        let fileName = subtitleNames[index].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        return LocalDiskStore().url(for: savedInDirectoryName, fileName: fileName)
     }
 }
 

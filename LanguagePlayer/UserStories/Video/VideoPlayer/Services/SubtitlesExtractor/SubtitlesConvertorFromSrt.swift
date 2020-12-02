@@ -31,7 +31,7 @@ class SubtitlesConvertorFromSrt: SubtitlesConvertor {
                 lhs.fromTime < rhs.fromTime
             })
         } catch {
-            fatalError("Doesn't read subtitle file \(self.filePath)")
+            fatalError("Doesn't read subtitle file \(self.filePath)\n Error: \(error)")
         }
     }
     
