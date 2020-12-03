@@ -10,11 +10,9 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     private let sourceSubtitlesConvertor: SubtitlesConvertor?
     private let targetSubtitlesConvertor: SubtitlesConvertor?
     private let playerController: PlayerController
-    private let video: VideoEntity
     private let disposeBag = DisposeBag()
     
     init(video: VideoEntity, sourceSubUrl: URL?, targetSubUrl: URL?) {
-        self.video = video
         self.playerController = PlayerController(videoUrl: video.videoUrl)
         
         var sourceSubtitlesConvertor: SubtitlesConvertor? = nil
@@ -33,13 +31,17 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let close = PublishSubject<Void>()
         let backwardSub = PublishSubject<Void>()
         let forwardSub = PublishSubject<Void>()
+        let backwardFifteen = PublishSubject<Void>()
+        let forwardFifteen = PublishSubject<Void>()
         
         self.input = Input(
             close: close.asObserver(),
             seek: self.playerController.seek,
             isPlaying: self.playerController.isPlaying,
             backwardSub: backwardSub.asObserver(),
-            forwardSub: forwardSub.asObserver()
+            forwardSub: forwardSub.asObserver(),
+            backwardFifteen: backwardFifteen.asObserver(),
+            forwardFifteen: forwardFifteen.asObserver()
         )
         
         //Outputs
@@ -68,7 +70,8 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         
         //Maps
         backwardSub
-            .compactMap { () -> Milliseconds? in
+            .compactMap { [weak self] () -> Milliseconds? in
+                guard let self = self else { return nil }
                 let time = try! self.playerController.currentTime.value()
                 if let subtitle = self.sourceSubtitlesConvertor?.getPreviousSubtitle(current: time) {
                     return subtitle.fromTime - 50
@@ -80,13 +83,32 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .disposed(by: disposeBag)
         
         forwardSub
-            .compactMap { () -> Milliseconds? in
+            .compactMap { [weak self] () -> Milliseconds? in
+                guard let self = self else { return nil }
                 let time = try! self.playerController.currentTime.value()
                 if let subtitle = self.sourceSubtitlesConvertor?.getNextSubtitle(current: time) {
                     return subtitle.fromTime - 50
                 } else {
                     return nil
                 }
+            }
+            .bind(to: self.playerController.seek)
+            .disposed(by: disposeBag)
+        
+        backwardFifteen
+            .map { [weak self] in
+                guard let self = self else { return 0 }
+                let time = try! self.playerController.currentTime.value()
+                return time - 15 * 1000
+            }
+            .bind(to: self.playerController.seek)
+            .disposed(by: disposeBag)
+        
+        forwardFifteen
+            .map { [weak self] in
+                guard let self = self else { return 0 }
+                let time = try! self.playerController.currentTime.value()
+                return time + 15 * 1000
             }
             .bind(to: self.playerController.seek)
             .disposed(by: disposeBag)
@@ -106,6 +128,8 @@ extension VideoPlayerViewModel {
         let isPlaying: AnyObserver<Bool>
         let backwardSub: AnyObserver<Void>
         let forwardSub: AnyObserver<Void>
+        let backwardFifteen: AnyObserver<Void>
+        let forwardFifteen: AnyObserver<Void>
     }
     
     struct Output {

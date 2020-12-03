@@ -6,20 +6,20 @@ import RxCocoa
 class VideoPlayerViewController: UIViewController {
     var viewModel: VideoPlayerViewModel!
 
-    @IBOutlet private var subtitlesView: SubtitlesView!
-    @IBOutlet private var controlsView: ControlsView!
-    @IBOutlet private var videoViewport: UIView!
+    @IBOutlet private weak var subtitlesView: DoubleSubtitlesView!
+    @IBOutlet private weak var controlsView: ControlsView!
+    @IBOutlet private weak var videoViewport: UIView!
     @IBOutlet private weak var subtitlesViewBottomConstraint: NSLayoutConstraint!
-    private var isSubtitlesEnable = true
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         setupViews()
         super.viewDidLoad()
         
-        self.setupBindings()
+        setupBindings()
+        viewModel.input.isPlaying.onNext(true)
     }
-    
+        
     override var prefersStatusBarHidden: Bool { true }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
@@ -36,52 +36,46 @@ class VideoPlayerViewController: UIViewController {
     
     private func setupBindings() {
         //Time label
+        let formatter = DateComponentsFormatter()
+        formatter.zeroFormattingBehavior = .pad
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        
         viewModel.output.currentTime
-            .map(millisecondsToTime(_:))
+            .map { formatter.string(from: TimeInterval($0 / 1000))! }
             .drive(controlsView.timeLabel.rx.text)
             .disposed(by: disposeBag)
         
         //Slider
         viewModel.output.currentTime
             .map { Float($0) }
-            .drive(onNext: { time in
-                self.controlsView.seekSlider.value = time
+            .drive(onNext: { [weak self] time in
+                self?.controlsView.seekSlider.value = time
             })
             .disposed(by: disposeBag)
         
         //Player statuses
         viewModel.output.playerStatus
-            .drive(onNext: { status in
+            .drive(onNext: { [weak self] status in
                 switch status {
                 case .unready:
                     break
                 case .ready(let duration):
-                    self.controlsView.set(duration: duration)
+                    self?.controlsView.set(duration: duration)
                 case .pause:
-                    self.controlsView.isPlaying = false
+                    self?.controlsView.isPlaying = false
                 case .play:
-                    self.controlsView.isPlaying = true
-                    self.subtitlesView.deselectAll()
-
-                    self.controlsView.perform(#selector(ControlsView.hideAnimated), with: nil, afterDelay: 1)
+                    self?.controlsView.isPlaying = true
+                    self?.controlsView.perform(#selector(ControlsView.hideAnimated), with: nil, afterDelay: 1)
                 }
             })
             .disposed(by: disposeBag)
         
         viewModel.output.currentSubtitles?
-            .drive(onNext: { subtitles in
-                //TODO:
+            .drive(onNext: { [weak self] subtitles in
+                self?.subtitlesView.set(subtitles: subtitles)
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func millisecondsToTime(_ milliseconds: Milliseconds) -> String {
-        let formatter = DateComponentsFormatter()
-        formatter.zeroFormattingBehavior = .pad
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-
-        return formatter.string(from: TimeInterval(milliseconds / 1000))!
     }
     
     @IBAction func didTapOnViewport(_ sender: UITapGestureRecognizer) {
@@ -98,14 +92,11 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     }
     
     func didPressBackwardFifteen() {
-//        let time = try! viewModel.output.currentTime - 15 * 1000
-//        playerController.seek(to: time)
-//        viewModel.input.seek.onNext(0)
+        viewModel.input.backwardFifteen.onNext(())
     }
     
     func didPressForwardFifteen() {
-//        let time = try! playerController.currentTime.value() + 15 * 1000
-//        playerController.seek(to: time)
+        viewModel.input.forwardFifteen.onNext(())
     }
     
     func didPressPlay() {
@@ -138,7 +129,6 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         
         self.subtitlesView.isHidden = !isHidden
         self.controlsView.subtitles(isVisible: isHidden)
-        self.isSubtitlesEnable = isHidden
     }
     
 }

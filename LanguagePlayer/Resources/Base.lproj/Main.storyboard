@@ -200,7 +200,7 @@
                                     <outletCollection property="gestureRecognizers" destination="w8V-ly-Wd6" appends="YES" id="owe-Vq-xGj"/>
                                 </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKL-NB-tt7" customClass="SubtitlesView" customModule="LanguagePlayer" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKL-NB-tt7" customClass="DoubleSubtitlesView" customModule="LanguagePlayer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="1092" width="802" height="62"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyn-tM-Iji">
@@ -236,6 +236,10 @@
                                     <constraint firstAttribute="trailing" secondItem="Nkq-Gn-tnz" secondAttribute="trailing" id="tWM-VV-4XF"/>
                                     <constraint firstItem="F2Q-sP-aDo" firstAttribute="centerY" secondItem="dKL-NB-tt7" secondAttribute="centerY" id="tyU-Xe-d6J"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="sourceSubtitleLabel" destination="qyn-tM-Iji" id="ToH-8t-iTG"/>
+                                    <outlet property="targetSubtitleLabel" destination="Nkq-Gn-tnz" id="EMh-h9-cDQ"/>
+                                </connections>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-pE-Lpt" userLabel="ControlsView" customClass="ControlsView" customModule="LanguagePlayer" customModuleProvider="target">
                                 <rect key="frame" x="16" y="16" width="802" height="92"/>

@@ -46,6 +46,13 @@ class VideoCoordinator: BaseCoordinator<Void> {
         viewController.modalPresentationStyle = .fullScreen
         
         navigationController.present(viewController, animated: true, completion: nil)
+        
+        viewModel.route.close
+            .observeOn(MainScheduler())
+            .subscribe(onCompleted: {
+                viewController.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func openUploadTutorial() {

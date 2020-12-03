@@ -58,6 +58,9 @@ class PlayerController: NSObject {
         
         seek.subscribe(onNext: { [weak self] time in
             guard let self = self else { return }
+            var time = time < 0 ? 0 : time
+            time = time > self.videoDuration ? self.videoDuration : time
+            
             self.player.time = VLCTime(number: NSNumber(value: time))
             if self.player.isPlaying == false {
                 self.currentTime.onNext(time)
