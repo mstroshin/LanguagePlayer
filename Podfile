@@ -3,19 +3,17 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'LanguagePlayer' do
-  pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
-  pod 'RxSwiftExt', '~> 5'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxSwiftExt'
   #pod 'RxTimelane', '~> 2.0'
-  pod 'RxRealm'
+  pod 'RxRealm', :git => 'https://github.com/RxSwiftCommunity/RxRealm.git'
   pod 'RealmSwift'
   pod 'GCDWebServer'
   pod 'mobile-ffmpeg-full', '~> 4.4'
   pod 'DifferenceKit'
   pod 'MobileVLCKit'
-#  pod 'Firebase/Analytics'
   pod 'Toast-Swift'
-#  pod 'GoogleMLKit/Translate'
   pod 'Purchases', '3.7.3'
 end
 

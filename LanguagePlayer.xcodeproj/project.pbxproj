@@ -30,7 +30,6 @@
 		CBE5586B2546FEFD0075D45A /* VideosListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */; };
 		CBE5588F254705080075D45A /* VideoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE5588E254705080075D45A /* VideoEntity.swift */; };
 		CBE55893254705560075D45A /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE55892254705560075D45A /* Typealiases.swift */; };
-		D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */; };
 		D203D2F924FBB9B70026E9D4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */; };
 		D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */; };
 		D2154E9624C0803C00F52815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2154E9524C0803C00F52815 /* AppDelegate.swift */; };
@@ -104,7 +103,6 @@
 		CBE5588E254705080075D45A /* VideoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEntity.swift; sourceTree = "<group>"; };
 		CBE55892254705560075D45A /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
 		CBF6E0E72546E1F900443A16 /* GoogleMLTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleMLTranslationService.swift; sourceTree = "<group>"; };
-		D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D203D2F824FBB9B70026E9D4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D203D2FB24FBC2D20026E9D4 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
 		D2154E9224C0803C00F52815 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,7 +245,6 @@
 			isa = PBXGroup;
 			children = (
 				94B9BDA425635F2100A5E740 /* Configuration.storekit */,
-				D203D2F524FAD4C30026E9D4 /* GoogleService-Info.plist */,
 				D2A516AB24F90D1C00DDC5EC /* App */,
 				D2E616AE24D7F43900D80F26 /* html */,
 				D2D292F324C78ED9004660EE /* Misc */,
@@ -583,7 +580,6 @@
 				D2F7CAE124F3FF940069659F /* file-invoice-solid.svg in Resources */,
 				D2154E9F24C0803E00F52815 /* Assets.xcassets in Resources */,
 				D2E616C624D7F45B00D80F26 /* jquery.fileupload.js in Resources */,
-				D203D2F624FAD4C30026E9D4 /* GoogleService-Info.plist in Resources */,
 				D2E616C824D7F45B00D80F26 /* jquery.min.js in Resources */,
 				D2154E9D24C0803C00F52815 /* Main.storyboard in Resources */,
 			);

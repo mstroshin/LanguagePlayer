@@ -9,20 +9,20 @@ PODS:
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
   - mobile-ffmpeg-full (4.4)
-  - MobileVLCKit (3.3.14)
+  - MobileVLCKit (3.3.15)
   - Purchases (3.7.3):
     - PurchasesCoreSwift (= 3.7.3)
   - PurchasesCoreSwift (3.7.3)
-  - Realm (5.5.0):
-    - Realm/Headers (= 5.5.0)
-  - Realm/Headers (5.5.0)
-  - RealmSwift (5.5.0):
-    - Realm (= 5.5.0)
+  - Realm (10.2.0):
+    - Realm/Headers (= 10.2.0)
+  - Realm/Headers (10.2.0)
+  - RealmSwift (10.2.0):
+    - Realm (= 10.2.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxRealm (3.1.0):
-    - RealmSwift (~> 5.2)
+  - RxRealm (4.0.0):
+    - RealmSwift (~> 10.1)
     - RxSwift (~> 5.0)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
@@ -44,10 +44,10 @@ DEPENDENCIES:
   - MobileVLCKit
   - Purchases (= 3.7.3)
   - RealmSwift
-  - RxCocoa (~> 5)
-  - RxRealm
-  - RxSwift (~> 5)
-  - RxSwiftExt (~> 5)
+  - RxCocoa
+  - RxRealm (from `https://github.com/RxSwiftCommunity/RxRealm.git`)
+  - RxSwift
+  - RxSwiftExt
   - Toast-Swift
 
 SPEC REPOS:
@@ -61,28 +61,36 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - RxCocoa
-    - RxRealm
     - RxRelay
     - RxSwift
     - RxSwiftExt
     - Toast-Swift
 
+EXTERNAL SOURCES:
+  RxRealm:
+    :git: https://github.com/RxSwiftCommunity/RxRealm.git
+
+CHECKOUT OPTIONS:
+  RxRealm:
+    :commit: 1b49bc0a1a2cdf18a514140787f34d724fc3fb0e
+    :git: https://github.com/RxSwiftCommunity/RxRealm.git
+
 SPEC CHECKSUMS:
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   mobile-ffmpeg-full: 505c583d91ac1c4fb2b015787e69d83f83fb8f29
-  MobileVLCKit: 7f5065858eb9c29a91743c3554654d2e81b85db2
+  MobileVLCKit: 9a04c9fa19e35c376ddf59425dd82e397d5899ad
   Purchases: ae790bb695c4d4f1c13f952067d2d2c3f0d0ca5e
   PurchasesCoreSwift: 53956256a1ff84de8f0f212ea4b9b46a53a212dc
-  Realm: fb399d76f44042e5cdfc630f33828fdb4d077345
-  RealmSwift: 3b7e62356207ef16d34de4e55d475163bd2062bb
+  Realm: d7914ebf66bb182469726f997c4c38eff286aab0
+  RealmSwift: aad08b7dc8c732b7b5794286e9df83739bf834f1
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxRealm: 50e5fe5c1f22518205afbb313fbc5580d73bc586
+  RxRealm: 684c1d5e9dc7a075fa925894fc042f1aecc18ac7
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: c2348cf14324c48f251b1b81a6dcc0aff95010d9
+PODFILE CHECKSUM: 3e9bb32e2892d0d29e412983b5093902fe9000fd
 
 COCOAPODS: 1.10.0
