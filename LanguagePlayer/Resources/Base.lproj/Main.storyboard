@@ -366,7 +366,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mqo-NG-80c">
-                                                <rect key="frame" x="758" y="0.0" width="44" height="44"/>
+                                                <rect key="frame" x="706" y="0.0" width="44" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="2c6-cO-vTS"/>
                                                     <constraint firstAttribute="height" constant="44" id="5qm-RX-667"/>
@@ -376,6 +376,20 @@
                                                     <action selector="didPressSubVisibilityButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="U49-HP-kaj"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cw5-sC-6NP">
+                                                <rect key="frame" x="758" y="0.0" width="44" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="44" id="5XV-bi-zXR"/>
+                                                    <constraint firstAttribute="height" constant="44" id="BC6-jc-kRu"/>
+                                                </constraints>
+                                                <state key="normal" image="gearshape" catalog="system"/>
+                                                <connections>
+                                                    <action selector="didPressSettingsButton:" destination="PTl-pE-Lpt" eventType="touchUpInside" id="GU2-Mh-f7J"/>
+                                                    <segue destination="M7e-bk-XRU" kind="popoverPresentation" popoverAnchorView="cw5-sC-6NP" id="UIr-QQ-dJk">
+                                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                    </segue>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -383,11 +397,14 @@
                                             <constraint firstItem="mqo-NG-80c" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="6bl-tk-2gi"/>
                                             <constraint firstAttribute="bottom" secondItem="mqo-NG-80c" secondAttribute="bottom" id="9Qz-is-X7m"/>
                                             <constraint firstAttribute="bottom" secondItem="fl8-LW-iYj" secondAttribute="bottom" id="9Tm-FT-t3h"/>
-                                            <constraint firstAttribute="trailing" secondItem="mqo-NG-80c" secondAttribute="trailing" id="OnI-Rv-inQ"/>
+                                            <constraint firstItem="cw5-sC-6NP" firstAttribute="leading" secondItem="mqo-NG-80c" secondAttribute="trailing" constant="8" id="ACO-bP-4XS"/>
+                                            <constraint firstAttribute="trailing" secondItem="cw5-sC-6NP" secondAttribute="trailing" id="BTW-QZ-WAB"/>
+                                            <constraint firstAttribute="bottom" secondItem="cw5-sC-6NP" secondAttribute="bottom" id="LcM-61-Jfl"/>
                                             <constraint firstItem="fl8-LW-iYj" firstAttribute="leading" secondItem="9pb-Jt-q1z" secondAttribute="trailing" constant="4" id="Wiu-CO-UR2"/>
                                             <constraint firstItem="9pb-Jt-q1z" firstAttribute="leading" secondItem="v8k-fI-uwF" secondAttribute="leading" constant="60" id="YJq-ga-O0V"/>
                                             <constraint firstItem="9pb-Jt-q1z" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="fZu-NA-ndA"/>
                                             <constraint firstAttribute="height" constant="44" id="g5a-ST-8rg"/>
+                                            <constraint firstItem="cw5-sC-6NP" firstAttribute="top" secondItem="v8k-fI-uwF" secondAttribute="top" id="olE-uR-L1e"/>
                                             <constraint firstAttribute="bottom" secondItem="9pb-Jt-q1z" secondAttribute="bottom" id="rx4-Bz-fAJ"/>
                                         </constraints>
                                     </view>
@@ -449,6 +466,43 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1579.3969849246232" y="136.69064748201438"/>
+        </scene>
+        <!--Настройки-->
+        <scene sceneID="ivv-NA-167">
+            <objects>
+                <viewController storyboardIdentifier="VideoSettingsViewController" title="Настройки" id="ckN-Tz-85D" customClass="VideoSettingsViewController" customModule="LanguagePlayer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xas-vw-6iF">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="563"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YzR-WS-yPI">
+                                <rect key="frame" x="0.0" y="63" width="300" height="500"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="ckN-Tz-85D" id="UDq-hO-eyf"/>
+                                    <outlet property="delegate" destination="ckN-Tz-85D" id="TS4-gI-KTV"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="klc-xH-u2g"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="klc-xH-u2g" firstAttribute="bottom" secondItem="YzR-WS-yPI" secondAttribute="bottom" id="M5H-Jt-m7g"/>
+                            <constraint firstItem="YzR-WS-yPI" firstAttribute="leading" secondItem="klc-xH-u2g" secondAttribute="leading" id="e7w-DM-seD"/>
+                            <constraint firstItem="YzR-WS-yPI" firstAttribute="top" secondItem="klc-xH-u2g" secondAttribute="top" id="fQd-3O-rsX"/>
+                            <constraint firstItem="klc-xH-u2g" firstAttribute="trailing" secondItem="YzR-WS-yPI" secondAttribute="trailing" id="gPE-Nz-6gO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Настройки" id="NJh-9y-qjj"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="300" height="500"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="YzR-WS-yPI" id="v2C-IY-3KI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hss-Ws-BJe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2227" y="854"/>
         </scene>
         <!--Cards-->
         <scene sceneID="lUo-1I-V25">
@@ -716,11 +770,30 @@
             </objects>
             <point key="canvasLocation" x="900" y="1611.9718309859154"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="wh9-LT-Qyp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="M7e-bk-XRU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uee-iT-Vyk">
+                        <rect key="frame" x="0.0" y="13" width="320" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ckN-Tz-85D" kind="relationship" relationship="rootViewController" id="3ve-9g-zvy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WJj-PJ-D9P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1579" y="854"/>
+        </scene>
     </scenes>
     <resources>
         <image name="backward_sub" width="44" height="44"/>
         <image name="book" catalog="system" width="128" height="102"/>
         <image name="forward_sub" width="44" height="44"/>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="gobackward.15" catalog="system" width="121" height="128"/>
         <image name="goforward.15" catalog="system" width="121" height="128"/>
         <image name="play" catalog="system" width="120" height="128"/>

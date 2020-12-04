@@ -71,7 +71,7 @@ class VideoPlayerViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.output.currentSubtitles?
+        viewModel.output.currentSubtitles
             .drive(onNext: { [weak self] subtitles in
                 self?.subtitlesView.set(subtitles: subtitles)
             })
@@ -107,7 +107,6 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         viewModel.input.isPlaying.onNext(false)
     }
     
-    
     func didPressScreenTurn() {
         //TODO:
     }
@@ -129,6 +128,35 @@ extension VideoPlayerViewController: ControlsViewDelegate {
         
         self.subtitlesView.isHidden = !isHidden
         self.controlsView.subtitles(isVisible: isHidden)
+    }
+    
+    func didPressSettings() {
+        
+    }
+    
+}
+
+extension VideoPlayerViewController: UIPopoverPresentationControllerDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let currentSettings = try! viewModel.videoSettings.value()
+        let settingsViewModel = VideoSettingsViewModel(video: viewModel.video, currentSettings: currentSettings)
+        settingsViewModel.output.changedSettings
+            .drive(viewModel.input.changedVideoSettings)
+            .disposed(by: disposeBag)
+        
+        let navController = segue.destination as! UINavigationController
+        let settingsViewController = navController.topViewController as! VideoSettingsViewController
+        settingsViewController.viewModel = settingsViewModel
+        
+        settingsViewController.modalPresentationStyle = .popover
+        settingsViewController.popoverPresentationController?.delegate = self
+    }
+    
+    // MARK: - UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        // Force popover style
+        return .none
     }
     
 }

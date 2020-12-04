@@ -9,10 +9,12 @@
 import Foundation
 
 class SubtitlesConvertorFromSrt: SubtitlesConvertor {
-    private let filePath: URL
+    private var filePath: URL!
     private var parts = [SubtitlePart]()
     
-    init(with filePath: URL) {
+    func prepareParts(from filePath: URL) {
+        self.parts.removeAll()
+        
         if filePath.pathExtension != "srt" {
             fatalError("Subtitle file must have srt format")
         }

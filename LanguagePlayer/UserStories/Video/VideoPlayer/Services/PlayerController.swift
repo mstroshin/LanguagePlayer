@@ -14,6 +14,7 @@ class PlayerController: NSObject {
     //Inputs
     let seek: AnyObserver<Milliseconds>
     let isPlaying: AnyObserver<Bool>
+    let audioStream: AnyObserver<Int>
     
     //Outputs
     let status = BehaviorSubject<PlayerStatus>(value: .unready)
@@ -39,6 +40,9 @@ class PlayerController: NSObject {
         
         let seek = PublishSubject<Milliseconds>()
         self.seek = seek.asObserver()
+        
+        let audioStream = PublishSubject<Int>()
+        self.audioStream = audioStream.asObserver()
         
         super.init()
         self.player.delegate = self
@@ -67,6 +71,13 @@ class PlayerController: NSObject {
             }
         })
         .disposed(by: disposeBag)
+        
+        audioStream
+            .subscribe(onNext: { [weak self] index in
+                guard let self = self else { return }
+                self.player.currentAudioTrackIndex = Int32(index + 1) // cuz 1, 2, 3... (-1 is disable audio)
+            })
+            .disposed(by: disposeBag)
     }
     
     func set(viewport: UIView) {

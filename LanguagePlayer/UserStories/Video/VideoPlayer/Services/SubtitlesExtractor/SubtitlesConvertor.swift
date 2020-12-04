@@ -9,6 +9,8 @@
 import Foundation
 
 protocol SubtitlesConvertor {
+    func prepareParts(from filePath: URL)
+    
     func getSubtitle(for time: Milliseconds) -> SubtitlePart?
     func getPreviousSubtitle(current time: Milliseconds) -> SubtitlePart?
     func getNextSubtitle(current time: Milliseconds) -> SubtitlePart?

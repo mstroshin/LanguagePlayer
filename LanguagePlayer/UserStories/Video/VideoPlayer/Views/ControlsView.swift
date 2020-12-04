@@ -12,6 +12,7 @@ protocol ControlsViewDelegate: class {
     func didPressBackwardSub()
     func didPressForwardSub()
     func didPressToogleSubVisibility()
+    func didPressSettings()
 }
 
 class ControlsView: UIView {
@@ -83,6 +84,10 @@ class ControlsView: UIView {
     
     @IBAction func didPressSubVisibilityButton(_ sender: UIButton) {
         self.delegate?.didPressToogleSubVisibility()
+    }
+    
+    @IBAction func didPressSettingsButton(_ sender: UIButton) {
+        self.delegate?.didPressSettings()
     }
     
     func subtitles(isVisible: Bool) {

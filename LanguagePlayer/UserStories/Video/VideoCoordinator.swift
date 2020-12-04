@@ -37,10 +37,7 @@ class VideoCoordinator: BaseCoordinator<Void> {
     }
     
     private func openVideoPlayer(with video: VideoEntity, on navController: UINavigationController) {
-        let source = video.subtitleUrl(for: 1)
-        let target = video.subtitleUrl(for: 2)
-        
-        let viewModel = VideoPlayerViewModel(video: video, sourceSubUrl: source, targetSubUrl: target)
+        let viewModel = VideoPlayerViewModel(video: video)
         let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .fullScreen

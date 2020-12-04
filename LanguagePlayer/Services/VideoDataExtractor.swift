@@ -50,12 +50,12 @@ class VideoDataExtractor: NSObject {
             guard let index = subStream.getIndex()?.intValue else {
                 continue
             }
-            let title = subStream.getTags()["title"] as? String ?? "sub_\(index)"
-            let lang = subStream.getTags()["language"] as? String ?? ""
-            let name = "\(title)_\(lang).srt"
-            subtitleNames.append(name)
+            let name = subStream.getTags()["title"] as? String ?? "subtitle"
+            let language = subStream.getTags()["language"] as? String ?? ""
+            let title = "\(index)_\(name)_\(language).srt"
+            subtitleNames.append(title)
             
-            let subFile = pathToSave.appendingPathComponent(name).absoluteString
+            let subFile = pathToSave.appendingPathComponent(title).absoluteString
             command += " -map 0:\(index) \(subFile)"
         }
         let _ = MobileFFmpeg.executeAsync(command, withCallback: self)
@@ -71,7 +71,7 @@ class VideoDataExtractor: NSObject {
         
         var audioTitles = [String]()
         for (index, stream) in audioStreams.enumerated() {
-            let name = stream.getTags()["title"] as? String ?? ""
+            let name = stream.getTags()["title"] as? String ?? "track"
             let language = stream.getTags()["language"] as? String ?? ""
             let title = "\(index)_\(name)_\(language)"
             audioTitles.append(title)

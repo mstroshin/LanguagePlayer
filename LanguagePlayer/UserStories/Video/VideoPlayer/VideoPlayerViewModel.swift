@@ -7,25 +7,18 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     let output: Output
     let route: Route
     
-    private let sourceSubtitlesConvertor: SubtitlesConvertor?
-    private let targetSubtitlesConvertor: SubtitlesConvertor?
+    let video: VideoEntity
+    let videoSettings = BehaviorSubject<VideoSettings>(value: VideoSettings.zero)
+    
     private let playerController: PlayerController
     private let disposeBag = DisposeBag()
     
-    init(video: VideoEntity, sourceSubUrl: URL?, targetSubUrl: URL?) {
+    init(video: VideoEntity) {
+        self.video = video
         self.playerController = PlayerController(videoUrl: video.videoUrl)
         
-        var sourceSubtitlesConvertor: SubtitlesConvertor? = nil
-        if let subtitleUrl = sourceSubUrl {
-            sourceSubtitlesConvertor = SubtitlesConvertorFromSrt(with: subtitleUrl)
-        }
-        self.sourceSubtitlesConvertor = sourceSubtitlesConvertor
-        
-        var targetSubtitlesConvertor: SubtitlesConvertor? = nil
-        if let targetSubUrl = targetSubUrl {
-            targetSubtitlesConvertor = SubtitlesConvertorFromSrt(with: targetSubUrl)
-        }
-        self.targetSubtitlesConvertor = targetSubtitlesConvertor
+        let firstSubtitlesConvertor: SubtitlesConvertor = SubtitlesConvertorFromSrt()
+        let secondSubtitlesConvertor: SubtitlesConvertor = SubtitlesConvertorFromSrt()
         
         //Inputs
         let close = PublishSubject<Void>()
@@ -33,7 +26,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let forwardSub = PublishSubject<Void>()
         let backwardFifteen = PublishSubject<Void>()
         let forwardFifteen = PublishSubject<Void>()
-        
+                
         self.input = Input(
             close: close.asObserver(),
             seek: self.playerController.seek,
@@ -41,21 +34,19 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             backwardSub: backwardSub.asObserver(),
             forwardSub: forwardSub.asObserver(),
             backwardFifteen: backwardFifteen.asObserver(),
-            forwardFifteen: forwardFifteen.asObserver()
+            forwardFifteen: forwardFifteen.asObserver(),
+            changedVideoSettings: videoSettings.asObserver()
         )
         
         //Outputs
-        var currentSubtitlesDriver: Driver<DoubleSubtitles>? = nil
-        if let sourceConverter = sourceSubtitlesConvertor {
-            currentSubtitlesDriver = self.playerController.currentTime
-                .map { time -> DoubleSubtitles in
-                    let source = sourceConverter.getSubtitle(for: time)
-                    let target = targetSubtitlesConvertor?.getSubtitle(for: time)
-                    return DoubleSubtitles(source: source, target: target)
-                }
-                .distinctUntilChanged()
-                .asDriver(onErrorJustReturn: DoubleSubtitles(source: nil, target: nil))
-        }
+        let currentSubtitlesDriver = self.playerController.currentTime
+            .map { time -> DoubleSubtitles in
+                let source = firstSubtitlesConvertor.getSubtitle(for: time)
+                let target = secondSubtitlesConvertor.getSubtitle(for: time)
+                return DoubleSubtitles(source: source, target: target)
+            }
+            .distinctUntilChanged()
+            .asDriver(onErrorJustReturn: DoubleSubtitles(source: nil, target: nil))
         
         self.output = Output(
             currentTime: self.playerController.currentTime.asDriver(onErrorJustReturn: 0),
@@ -73,7 +64,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .compactMap { [weak self] () -> Milliseconds? in
                 guard let self = self else { return nil }
                 let time = try! self.playerController.currentTime.value()
-                if let subtitle = self.sourceSubtitlesConvertor?.getPreviousSubtitle(current: time) {
+                if let subtitle = firstSubtitlesConvertor.getPreviousSubtitle(current: time) {
                     return subtitle.fromTime - 50
                 } else {
                     return nil
@@ -86,7 +77,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .compactMap { [weak self] () -> Milliseconds? in
                 guard let self = self else { return nil }
                 let time = try! self.playerController.currentTime.value()
-                if let subtitle = self.sourceSubtitlesConvertor?.getNextSubtitle(current: time) {
+                if let subtitle = firstSubtitlesConvertor.getNextSubtitle(current: time) {
                     return subtitle.fromTime - 50
                 } else {
                     return nil
@@ -112,6 +103,12 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             }
             .bind(to: self.playerController.seek)
             .disposed(by: disposeBag)
+        
+        videoSettings
+            .map(\.audioStreamIndex)
+            .distinctUntilChanged()
+            .bind(to: self.playerController.audioStream)
+            .disposed(by: disposeBag)
     }
     
     func set(viewport: UIView) {
@@ -130,11 +127,12 @@ extension VideoPlayerViewModel {
         let forwardSub: AnyObserver<Void>
         let backwardFifteen: AnyObserver<Void>
         let forwardFifteen: AnyObserver<Void>
+        let changedVideoSettings: AnyObserver<VideoSettings>
     }
     
     struct Output {
         let currentTime: Driver<Milliseconds>
-        let currentSubtitles: Driver<DoubleSubtitles>?
+        let currentSubtitles: Driver<DoubleSubtitles>
         let playerStatus: Driver<PlayerStatus>
     }
     
