@@ -15,9 +15,28 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     private let playerController: PlayerController
     private let disposeBag = DisposeBag()
     
-    init(video: VideoEntity, realm: Realm = try! Realm()) {
+    init(video: VideoEntity, startingTime: Milliseconds? = nil, realm: Realm = try! Realm()) {
         self.video = video
         self.playerController = PlayerController(videoUrl: video.videoUrl)
+        
+        if let time = startingTime {
+            self.playerController.status
+                .filter {
+                    if case PlayerStatus.ready(_) = $0 {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+                .take(1)
+                .map { _ in time }
+                .bind(to: self.playerController.seek)
+                .disposed(by: disposeBag)
+        }
+        
+        if let time = startingTime {
+            self.playerController.seek.onNext(time)
+        }
         
         let firstSubtitlesConvertor: SubtitlesConvertor = SubtitlesConvertorFromSrt()
         let secondSubtitlesConvertor: SubtitlesConvertor = SubtitlesConvertorFromSrt()
@@ -62,11 +81,13 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
                     addedToFavorite: !$0.addedToFavorite
                 )
             }
+            .filter { $0.source != nil && $0.target != nil }
             .do(onNext: { subtitles in
                 if subtitles.addedToFavorite {
                     let favorite = FavoriteSubtitle()
                     favorite.first = subtitles.source!.text
                     favorite.second = subtitles.target!.text
+                    favorite.fromTime = subtitles.source!.fromTime
                     
                     try! realm.write {
                         video.favoriteSubtitles.append(favorite)

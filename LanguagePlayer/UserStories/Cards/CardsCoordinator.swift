@@ -10,6 +10,11 @@ class CardsCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         let viewModel = CardsViewModel()
+        viewModel.route.openVideo
+            .subscribe(onNext: { [weak self] (video, time) in
+                self?.open(video: video, from: time)
+            })
+            .disposed(by: disposeBag)
                 
         let viewController: CardsViewController = CardsViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
@@ -17,5 +22,21 @@ class CardsCoordinator: BaseCoordinator<Void> {
         navigationController.pushViewController(viewController, animated: false)
         
         return .never()
+    }
+    
+    private func open(video: VideoEntity, from time: Milliseconds) {
+        let viewModel = VideoPlayerViewModel(video: video, startingTime: time)
+        let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
+        viewController.viewModel = viewModel
+        viewController.modalPresentationStyle = .fullScreen
+        
+        navigationController.present(viewController, animated: true, completion: nil)
+        
+        viewModel.route.close
+            .observeOn(MainScheduler())
+            .subscribe(onCompleted: {
+                viewController.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
 }

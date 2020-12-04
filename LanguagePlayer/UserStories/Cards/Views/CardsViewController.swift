@@ -8,7 +8,7 @@ class CardsViewController: UIViewController {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     private var disposeBag = DisposeBag()
-    private var translations = [CardViewEntity]()
+    private var cards = [CardViewEntity]()
     
     let colorNumbers = Array(1...6).shuffled()
     
@@ -20,11 +20,12 @@ class CardsViewController: UIViewController {
     }
     
     private func setupBindings() {
-        viewModel.translations
+        viewModel.output.cards
             .map { $0.map(CardViewEntity.init(translation:)) }
-            .subscribe(onNext: { [self] translations in
-                collectionView.diffUpdate(source: self.translations, target: translations) { data in
-                    self.translations = data
+            .drive(onNext: { [weak self] cards in
+                guard let self = self else { return }
+                self.collectionView.diffUpdate(source: self.cards, target: cards) { data in
+                    self.cards = data
                 }
             })
             .disposed(by: disposeBag)
@@ -41,14 +42,14 @@ class CardsViewController: UIViewController {
 extension CardsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        translations.count
+        cards.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CardCollectionViewCell.identifier, for: indexPath) as? CardCollectionViewCell else {
             fatalError("Cell must be CardCollectionViewCell subclass")
         }
-        let item = translations[indexPath.row]
+        let item = cards[indexPath.row]
         cell.delegate = self
         cell.configure(with: item)
 
@@ -89,7 +90,7 @@ extension CardsViewController: UICollectionViewDelegate {
                 cell.isUserInteractionEnabled = false
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(800)) {
-                    viewModel.removeTranslation(index: indexPath.row)
+                    viewModel.input.removeCard.onNext(indexPath.row)
                 }
                 //
             }
@@ -112,15 +113,7 @@ extension CardsViewController: CardCollectionViewCellDelegate {
 
     func didPressPlayButton(in cell: CardCollectionViewCell) {
         guard let indexPath = self.collectionView.indexPath(for: cell) else { return }
-//        let item = self.items[indexPath.row]
-
-//        store.dispatch(NavigationActions.Navigate(
-//            screen: .player,
-//            transitionType: .present(.fullScreen),
-//            data: ["videoId": item.videoId!,
-//                   "from": item.fromTime,
-//                   "to": item.toTime]
-//        ))
+        viewModel.input.playVideo.onNext(indexPath.row)
     }
 
 }
