@@ -26,6 +26,13 @@ struct SubtitlePart {
 struct DoubleSubtitles: Equatable {
     let source: SubtitlePart?
     let target: SubtitlePart?
+    let addedToFavorite: Bool
+    
+    init(source: SubtitlePart? = nil, target: SubtitlePart? = nil, addedToFavorite: Bool = false) {
+        self.source = source
+        self.target = target
+        self.addedToFavorite = addedToFavorite
+    }
     
     static func == (lhs: DoubleSubtitles, rhs: DoubleSubtitles) -> Bool {
         lhs.source?.number == rhs.source?.number &&

@@ -6,7 +6,7 @@ class VideoEntity: Object {
     @objc dynamic var id: ID = UUID().uuidString
     @objc dynamic var savedInDirectoryName: String = ""
     @objc dynamic var fileName: String = ""
-    let translations = List<TranslationEntity>()
+    let favoriteSubtitles = List<FavoriteSubtitle>()
     let subtitleNames = List<String>()
     let audioStreamNames = List<String>()
     

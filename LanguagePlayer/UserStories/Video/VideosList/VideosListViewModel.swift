@@ -50,7 +50,7 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
             .withLatestFrom(realmVideoEntities, resultSelector: { index, videos -> VideoEntity in
                 videos[index]
             })
-            .map(\.translations)
+            .map(\.favoriteSubtitles)
             .subscribe(realm.rx.delete())
             .disposed(by: disposeBag)
         

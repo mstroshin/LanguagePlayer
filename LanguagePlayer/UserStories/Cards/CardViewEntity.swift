@@ -5,14 +5,12 @@ struct CardViewEntity {
     let id: ID
     let source: String
     let target: String
-    let isAddedToDictionary: Bool
     let videoTitle: String?
     
-    init(translation: TranslationEntity) {
+    init(translation: FavoriteSubtitle) {
         self.id = translation.id
-        self.source = translation.source
-        self.target = translation.target
-        self.isAddedToDictionary = translation.isAddedToDictionary
+        self.source = translation.first
+        self.target = translation.second
         self.videoTitle = translation.owners.last?.fileName
     }
 }

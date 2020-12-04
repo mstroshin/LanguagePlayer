@@ -6,19 +6,19 @@ class CardsViewModel {
     private let realm = try! Realm()
     private var translationResultChangeToken: NotificationToken?
     
-    let translations = BehaviorSubject<[TranslationEntity]>(value: [])
+    let translations = BehaviorSubject<[FavoriteSubtitle]>(value: [])
     
     init() {
         
     }
     
     func viewDidLoad() {
-        translationResultChangeToken = realm.objects(TranslationEntity.self).observe { [weak self] change in
+        translationResultChangeToken = realm.objects(FavoriteSubtitle.self).observe { [weak self] change in
             switch change {
             case .initial(let translationEntities):
-                self?.translations.onNext(Array(translationEntities.filter { $0.isAddedToDictionary }))
+                self?.translations.onNext(Array(translationEntities))
             case .update(let translationEntities, _, _, _):
-                self?.translations.onNext(Array(translationEntities.filter { $0.isAddedToDictionary }))
+                self?.translations.onNext(Array(translationEntities))
             case .error(let error):
                 self?.translations.onError(error)
             }

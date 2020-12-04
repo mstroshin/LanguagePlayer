@@ -1,6 +1,8 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RealmSwift
+import RxRealm
 
 class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     let input: Input
@@ -13,7 +15,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     private let playerController: PlayerController
     private let disposeBag = DisposeBag()
     
-    init(video: VideoEntity) {
+    init(video: VideoEntity, realm: Realm = try! Realm()) {
         self.video = video
         self.playerController = PlayerController(videoUrl: video.videoUrl)
         
@@ -26,6 +28,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let forwardSub = PublishSubject<Void>()
         let backwardFifteen = PublishSubject<Void>()
         let forwardFifteen = PublishSubject<Void>()
+        let addToFavorite = PublishSubject<Void>()
                 
         self.input = Input(
             close: close.asObserver(),
@@ -35,18 +38,48 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             forwardSub: forwardSub.asObserver(),
             backwardFifteen: backwardFifteen.asObserver(),
             forwardFifteen: forwardFifteen.asObserver(),
-            changedVideoSettings: videoSettings.asObserver()
+            changedVideoSettings: videoSettings.asObserver(),
+            addToFavorite: addToFavorite.asObserver()
         )
         
         //Outputs
-        let currentSubtitlesDriver = self.playerController.currentTime
+        let currentTimeSubtitles = self.playerController.currentTime
             .map { time -> DoubleSubtitles in
-                let source = firstSubtitlesConvertor.getSubtitle(for: time)
-                let target = secondSubtitlesConvertor.getSubtitle(for: time)
-                return DoubleSubtitles(source: source, target: target)
+                let first = firstSubtitlesConvertor.getSubtitle(for: time)
+                let second = secondSubtitlesConvertor.getSubtitle(for: time)
+                let isFavorite = video.favoriteSubtitles.filter({ $0.first == first?.text }).first != nil
+                
+                return DoubleSubtitles(source: first, target: second, addedToFavorite: isFavorite)
             }
             .distinctUntilChanged()
-            .asDriver(onErrorJustReturn: DoubleSubtitles(source: nil, target: nil))
+        
+        let favoriteChanged = addToFavorite
+            .withLatestFrom(currentTimeSubtitles)
+            .map {
+                return DoubleSubtitles(
+                    source: $0.source,
+                    target: $0.target,
+                    addedToFavorite: !$0.addedToFavorite
+                )
+            }
+            .do(onNext: { subtitles in
+                if subtitles.addedToFavorite {
+                    let favorite = FavoriteSubtitle()
+                    favorite.first = subtitles.source!.text
+                    favorite.second = subtitles.target!.text
+                    
+                    try! realm.write {
+                        video.favoriteSubtitles.append(favorite)
+                    }
+                } else if let index = video.favoriteSubtitles.firstIndex(where: { $0.first == subtitles.source?.text }) {
+                    try! realm.write {
+                        realm.delete(video.favoriteSubtitles[index])
+                    }
+                }
+            })
+        
+        let currentSubtitlesDriver = Observable.merge([currentTimeSubtitles, favoriteChanged])
+            .asDriver(onErrorJustReturn: DoubleSubtitles())
         
         self.output = Output(
             currentTime: self.playerController.currentTime.asDriver(onErrorJustReturn: 0),
@@ -148,6 +181,7 @@ extension VideoPlayerViewModel {
         let backwardFifteen: AnyObserver<Void>
         let forwardFifteen: AnyObserver<Void>
         let changedVideoSettings: AnyObserver<VideoSettings>
+        let addToFavorite: AnyObserver<Void>
     }
     
     struct Output {

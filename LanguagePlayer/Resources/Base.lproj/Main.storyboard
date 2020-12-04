@@ -222,6 +222,9 @@
                                             <constraint firstAttribute="height" constant="44" id="mW4-r2-r5D"/>
                                         </constraints>
                                         <state key="normal" image="book" catalog="system"/>
+                                        <connections>
+                                            <action selector="didPressAddToFavoriteButton:" destination="dKL-NB-tt7" eventType="touchUpInside" id="EPw-hY-4qP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -237,6 +240,7 @@
                                     <constraint firstItem="F2Q-sP-aDo" firstAttribute="centerY" secondItem="dKL-NB-tt7" secondAttribute="centerY" id="tyU-Xe-d6J"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="favoriteButton" destination="F2Q-sP-aDo" id="w6B-x1-cWn"/>
                                     <outlet property="sourceSubtitleLabel" destination="qyn-tM-Iji" id="ToH-8t-iTG"/>
                                     <outlet property="targetSubtitleLabel" destination="Nkq-Gn-tnz" id="EMh-h9-cDQ"/>
                                 </connections>

@@ -26,6 +26,7 @@ class VideoPlayerViewController: UIViewController {
     
     private func setupViews() {
         controlsView.delegate = self
+        subtitlesView.delegate = self
         
         viewModel.set(viewport: self.videoViewport)
         
@@ -84,6 +85,13 @@ class VideoPlayerViewController: UIViewController {
     
 }
 
+extension VideoPlayerViewController: DoubleSubtitlesViewDelegate {
+    
+    func didPressAddToFavorite() {
+        viewModel.input.addToFavorite.onNext(())
+    }
+    
+}
 
 extension VideoPlayerViewController: ControlsViewDelegate {
     
@@ -131,7 +139,7 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     }
     
     func didPressSettings() {
-        
+        //TODO:
     }
     
 }
