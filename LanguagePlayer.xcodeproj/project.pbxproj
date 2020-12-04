@@ -22,7 +22,7 @@
 		94B9BDBD2564812600A5E740 /* VideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDBC2564812600A5E740 /* VideoCoordinator.swift */; };
 		94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDC2256485F200A5E740 /* CardsCoordinator.swift */; };
 		94B9BDC62564878200A5E740 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDAA2564789000A5E740 /* SettingsViewModel.swift */; };
-		94D874412574B7DA00277245 /* SubtitlesExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D874402574B7DA00277245 /* SubtitlesExtractor.swift */; };
+		94D874412574B7DA00277245 /* VideoDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D874402574B7DA00277245 /* VideoDataExtractor.swift */; };
 		CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */; };
 		CB8C06F7255B2F88006C0499 /* TranslationEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */; };
 		CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB946582255B6B4C0075700B /* CardsViewModel.swift */; };
@@ -92,7 +92,7 @@
 		94B9BDB72564801300A5E740 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		94B9BDBC2564812600A5E740 /* VideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCoordinator.swift; sourceTree = "<group>"; };
 		94B9BDC2256485F200A5E740 /* CardsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCoordinator.swift; sourceTree = "<group>"; };
-		94D874402574B7DA00277245 /* SubtitlesExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesExtractor.swift; sourceTree = "<group>"; };
+		94D874402574B7DA00277245 /* VideoDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataExtractor.swift; sourceTree = "<group>"; };
 		CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftTranslationService.swift; sourceTree = "<group>"; };
 		CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		CB8C06F6255B2F88006C0499 /* TranslationEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationEntity.swift; sourceTree = "<group>"; };
@@ -284,7 +284,7 @@
 				D28749A824D6756D00687095 /* DataStore */,
 				D2D292EE24C78BA0004660EE /* TranslationAPI */,
 				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
-				94D874402574B7DA00277245 /* SubtitlesExtractor.swift */,
+				94D874402574B7DA00277245 /* VideoDataExtractor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -675,7 +675,7 @@
 				CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */,
 				94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */,
 				D203D2FC24FBC2D20026E9D4 /* LanguageSelectionViewController.swift in Sources */,
-				94D874412574B7DA00277245 /* SubtitlesExtractor.swift in Sources */,
+				94D874412574B7DA00277245 /* VideoDataExtractor.swift in Sources */,
 				D2D292F624C78EEF004660EE /* PropertyWrappers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,7 @@ class VideoEntity: Object {
     @objc dynamic var fileName: String = ""
     let translations = List<TranslationEntity>()
     let subtitleNames = List<String>()
+    let audioStreamNames = List<String>()
     
     override class func primaryKey() -> String? { "id" }
     
