@@ -109,6 +109,38 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .distinctUntilChanged()
             .bind(to: self.playerController.audioStream)
             .disposed(by: disposeBag)
+        
+        videoSettings
+            .map(\.firstSubIndex)
+            .map { subIndex in
+                if subIndex <= 0 {
+                    return -1
+                } else {
+                    return subIndex - 1
+                }
+            }
+            .distinctUntilChanged()
+            .compactMap(video.subtitleUrl(for:))
+            .subscribe(onNext: { subUrl in
+                firstSubtitlesConvertor.prepareParts(from: subUrl)
+            })
+            .disposed(by: disposeBag)
+        
+        videoSettings
+            .map(\.secondsSubIndex)
+            .map { subIndex in
+                if subIndex <= 0 {
+                    return -1
+                } else {
+                    return subIndex - 1
+                }
+            }
+            .distinctUntilChanged()
+            .compactMap(video.subtitleUrl(for:))
+            .subscribe(onNext: { subUrl in
+                secondSubtitlesConvertor.prepareParts(from: subUrl)
+            })
+            .disposed(by: disposeBag)
     }
     
     func set(viewport: UIView) {
