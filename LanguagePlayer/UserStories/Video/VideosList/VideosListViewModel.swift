@@ -15,6 +15,7 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         //View inputs
         let openVideo = PublishSubject<Int>()
         let openUploadTutorial = PublishSubject<Void>()
+        let openPremium = PublishSubject<Void>()
         let removeVideo = PublishSubject<Int>()
         let removeVideoWithCards = PublishSubject<Int>()
         
@@ -22,7 +23,8 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
             openUploadTutorial: openUploadTutorial.asObserver(),
             openVideo: openVideo.asObserver(),
             removeVideo: removeVideo.asObserver(),
-            removeVideoWithCards: removeVideoWithCards.asObserver()
+            removeVideoWithCards: removeVideoWithCards.asObserver(),
+            openPremium: openPremium.asObserver()
         )
         
         //View outputs
@@ -39,6 +41,9 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         removeVideo
             .withLatestFrom(realmVideoEntities, resultSelector: { index, videos -> VideoEntity in
                 videos[index]
+            })
+            .do(onNext: { video in
+                let _ = LocalDiskStore().removeDirectory(video.savedInDirectoryName)
             })
             .subscribe(realm.rx.delete())
             .disposed(by: disposeBag)
@@ -62,7 +67,8 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         
         self.route = Route(
             openVideo: openVideoRoute,
-            openUploadTutorial: openUploadTutorial.asObservable()
+            openUploadTutorial: openUploadTutorial.asObservable(),
+            openPremium: openPremium.asObservable()
         )
     }
     
@@ -75,6 +81,7 @@ extension VideosListViewModel {
         let openVideo: AnyObserver<Int>
         let removeVideo: AnyObserver<Int>
         let removeVideoWithCards: AnyObserver<Int>
+        let openPremium: AnyObserver<Void>
     }
     
     struct Output {
@@ -84,6 +91,7 @@ extension VideosListViewModel {
     struct Route {
         let openVideo: Observable<VideoEntity>
         let openUploadTutorial: Observable<Void>
+        let openPremium: Observable<Void>
     }
     
 }

@@ -15,6 +15,14 @@ class VideosListViewController: UIViewController {
         super.viewDidLoad()
         title = "Video Library"
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "purchased.circle.fill"),
+            landscapeImagePhone: nil,
+            style: .plain,
+            target: self,
+            action: #selector(premiumButtonPressed)
+        )
+        
         collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -38,21 +46,8 @@ class VideosListViewController: UIViewController {
         }
     }
     
-}
-
-//To iPad and iPhone popover looks same
-extension VideosListViewController: UIPopoverPresentationControllerDelegate {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "popoverSegue" {
-            let popoverViewController = segue.destination
-            popoverViewController.modalPresentationStyle = .popover
-            popoverViewController.popoverPresentationController!.delegate = self
-        }
-    }
-    
-    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
-        .none
+    @objc private func premiumButtonPressed() {
+        viewModel.input.openPremium.onNext(())
     }
     
 }

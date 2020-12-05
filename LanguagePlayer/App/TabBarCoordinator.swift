@@ -15,13 +15,9 @@ class TabBarCoordinator: BaseCoordinator<Void> {
         let cardsNavigationController = UINavigationController()
         cardsNavigationController.tabBarItem = .init(title: "Cards", image: UIImage(systemName: "note.text"), tag: 1)
         
-        let settingsNavigationController = UINavigationController()
-        settingsNavigationController.tabBarItem = .init(title: "Settings", image: UIImage(systemName: "gear"), tag: 2)
-        
         tabBar.viewControllers = [
             videoListNavigationController,
             cardsNavigationController,
-            settingsNavigationController,
         ]
         
         let videoListCoordinator = VideoCoordinator(navigationController: videoListNavigationController)
@@ -31,11 +27,6 @@ class TabBarCoordinator: BaseCoordinator<Void> {
         
         let cardsCoordinator = CardsCoordinator(navigationController: cardsNavigationController)
         coordinate(to: cardsCoordinator)
-            .subscribe()
-            .disposed(by: disposeBag)
-        
-        let settingsCoordinator = SettingsCoordinator(navigationController: settingsNavigationController)
-        coordinate(to: settingsCoordinator)
             .subscribe()
             .disposed(by: disposeBag)
         

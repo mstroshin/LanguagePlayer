@@ -30,8 +30,13 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.openUploadTutorial
             .subscribe(onNext: { [weak self] video in
-                guard let self = self else { return }
-                self.openUploadTutorial()
+                self?.openUploadTutorial()
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.route.openPremium
+            .subscribe(onNext: { [weak self] in
+                self?.openPremium()
             })
             .disposed(by: disposeBag)
     }
@@ -65,5 +70,13 @@ class VideoCoordinator: BaseCoordinator<Void> {
                 viewController.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func openPremium() {
+        let viewModel = PurchasesViewModel()
+        let viewController: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
+        viewController.viewModel = viewModel
+        
+        navigationController.present(viewController, animated: true, completion: nil)
     }
 }

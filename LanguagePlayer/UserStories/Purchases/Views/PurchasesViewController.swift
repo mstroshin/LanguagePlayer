@@ -5,9 +5,11 @@ import RxCocoa
 import Purchases
 
 class PurchasesViewController: UIViewController {
+    var viewModel: PurchasesViewModel!
+    
     @IBOutlet private weak var productsStackView: UIStackView!
-    private let viewModel = PurchasesViewModel()
     private let disposeBag = DisposeBag()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
