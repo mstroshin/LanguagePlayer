@@ -26,11 +26,10 @@ body {
   height: 300px;
   padding: 25px;
   margin: 20px;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
+/*  display: inline-block;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
   text-align: center;
-  font-family: 'Quicksand', sans-serif;
   font-size: 500;
   font-size: 20px;
   cursor: pointer;

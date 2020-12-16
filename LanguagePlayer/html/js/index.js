@@ -26,9 +26,13 @@ function localizePage() {
             'en': `Drop video here or click to upload (supported formats ${supportedVideoFormats})`,
             'ru': `Перетащите сюда видео файл или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedVideoFormats})`,
         },
-        sourceSubtitleDropzoneDescription: {
-            'en': `Drop source subtitle here or click to upload (supported formats ${supportedSubtitlesFormats})`,
-            'ru': `Перетащите сюда оригинальные субтитры или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedSubtitlesFormats})`,
+        firstSubtitleDropzoneDescription: {
+            'en': `Drop first subtitle here or click to upload (supported formats ${supportedSubtitlesFormats})`,
+            'ru': `Перетащите сюда первые субтитры или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedSubtitlesFormats})`,
+        },
+        secondSubtitleDropzoneDescription: {
+            'en': `Drop second subtitle here or click to upload (supported formats ${supportedSubtitlesFormats})`,
+            'ru': `Перетащите сюда вторые субтитры или нажмите, чтобы выбрать (поддерживаемые форматы ${supportedSubtitlesFormats})`,
         },
         uploadButton: {
             'en': 'Upload',
@@ -42,7 +46,8 @@ function localizePage() {
 
     document.getElementById("pageTitle").textContent = l10n["pageTitle"][locale];
     document.getElementById("videoDropzoneDescription").textContent = l10n["videoDropzoneDescription"][locale];
-    document.getElementById("sourceSubtitleDropzoneDescription").textContent = l10n["sourceSubtitleDropzoneDescription"][locale];
+    document.getElementById("firstSubtitleDropzoneDescription").textContent = l10n["firstSubtitleDropzoneDescription"][locale];
+    document.getElementById("secondSubtitleDropzoneDescription").textContent = l10n["secondSubtitleDropzoneDescription"][locale];
     document.getElementById("uploadButton").setAttribute("value", l10n["uploadButton"][locale]);
     document.getElementById("cancelButton").setAttribute("value", l10n["cancelButton"][locale]);
 }
@@ -121,7 +126,8 @@ function configureUploadForm() {
 
 function configureDropzone() {
     document.getElementById("videoInput").setAttribute("accept", supportedVideoFormats);
-    document.getElementById("sourceSubtitleInput").setAttribute("accept", supportedSubtitlesFormats);
+    document.getElementById("firstSubtitleInput").setAttribute("accept", supportedSubtitlesFormats);
+    document.getElementById("secondSubtitleInput").setAttribute("accept", supportedSubtitlesFormats);
 
     document.querySelectorAll(".drop-zone__input").forEach(inputElement => {
         const dropZoneElement = inputElement.closest(".drop-zone");
@@ -225,7 +231,8 @@ function resetDropzones() {
     });
 
     document.getElementById("videoInput").value = '';
-    document.getElementById("sourceSubtitleInput").value = '';
+    document.getElementById("firstSubtitleInput").value = '';
+    document.getElementById("secondSubtitleInput").value = '';
 }
 
 

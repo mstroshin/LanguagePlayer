@@ -6,13 +6,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bootstrap.min.css">
-    <link rel="stylesheet" href="index.css">
-    <script type="text/javascript" src="jquery.min.js"></script>
-    <script type="text/javascript" src="jquery.ui.widget.js"></script>
-    <script type="text/javascript" src="jquery.fileupload.js"></script>
-    <script type="text/javascript" src="bootstrap.min.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+<!--    <link rel="stylesheet" href="bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="index.css">-->
+<!--    <script type="text/javascript" src="jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="jquery.ui.widget.js"></script>-->
+<!--    <script type="text/javascript" src="jquery.fileupload.js"></script>-->
+<!--    <script type="text/javascript" src="bootstrap.min.js"></script>-->
+<!--    <script type="text/javascript" src="index.js"></script>-->
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="js/jquery.fileupload.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
 
 <body>
@@ -24,10 +32,17 @@
                     upload</span>
                 <input id="videoInput" type="file" class="drop-zone__input" name="video">
             </div>
+        </div>
+        <div class="row justify-content-sm-center drop-zone-container">
             <div class="drop-zone">
-                <span id="sourceSubtitleDropzoneDescription" class="drop-zone__prompt">Drop source subtitle (srt) here
+                <span id="firstSubtitleDropzoneDescription" class="drop-zone__prompt">Drop source subtitle (srt) here
                     or click to upload</span>
-                <input id="sourceSubtitleInput" type="file" class="drop-zone__input" name="sourceSubtitle">
+                <input id="firstSubtitleInput" type="file" class="drop-zone__input" name="sourceSubtitle">
+            </div>
+            <div class="drop-zone">
+                <span id="secondSubtitleDropzoneDescription" class="drop-zone__prompt">Drop source subtitle (srt) here
+                    or click to upload</span>
+                <input id="secondSubtitleInput" type="file" class="drop-zone__input" name="sourceSubtitle">
             </div>
         </div>
         <div class="row justify-content-sm-center">
