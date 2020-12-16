@@ -45,14 +45,14 @@ class LocalWebServer: NSObject {
                 )
                 
                 var sourceSubtitleFile: UploadedFile? = nil
-                if let sourceSubtitlePart = multiPartFormRequest.firstFile(forControlName: "sourceSubtitle") {
+                if let sourceSubtitlePart = multiPartFormRequest.firstFile(forControlName: "firstSubtitle") {
                     sourceSubtitleFile =  UploadedFile(
                         fileName: sourceSubtitlePart.fileName,
                         temporaryDataPath: sourceSubtitlePart.temporaryPath
                     )
                 }
                 var targetSubtitleFile: UploadedFile? = nil
-                if let targetSubtitlePart = multiPartFormRequest.firstFile(forControlName: "targetSubtitle") {
+                if let targetSubtitlePart = multiPartFormRequest.firstFile(forControlName: "secondSubtitle") {
                     targetSubtitleFile =  UploadedFile(
                         fileName: targetSubtitlePart.fileName,
                         temporaryDataPath: targetSubtitlePart.temporaryPath

@@ -21,9 +21,11 @@ PODS:
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
-  - RxRealm (4.0.0):
-    - RealmSwift (~> 10.1)
-    - RxSwift (~> 5.0)
+  - RxRealm (4.0.2):
+    - Realm (~> 10.2)
+    - RealmSwift (~> 10.2)
+    - RxCocoa (~> 5.1)
+    - RxSwift (~> 5.1)
   - RxRelay (5.1.1):
     - RxSwift (~> 5)
   - RxSwift (5.1.1)
@@ -45,7 +47,7 @@ DEPENDENCIES:
   - Purchases (= 3.7.3)
   - RealmSwift
   - RxCocoa
-  - RxRealm (from `https://github.com/RxSwiftCommunity/RxRealm.git`)
+  - RxRealm
   - RxSwift
   - RxSwiftExt
   - Toast-Swift
@@ -61,19 +63,11 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - RxCocoa
+    - RxRealm
     - RxRelay
     - RxSwift
     - RxSwiftExt
     - Toast-Swift
-
-EXTERNAL SOURCES:
-  RxRealm:
-    :git: https://github.com/RxSwiftCommunity/RxRealm.git
-
-CHECKOUT OPTIONS:
-  RxRealm:
-    :commit: 1b49bc0a1a2cdf18a514140787f34d724fc3fb0e
-    :git: https://github.com/RxSwiftCommunity/RxRealm.git
 
 SPEC CHECKSUMS:
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
@@ -85,12 +79,12 @@ SPEC CHECKSUMS:
   Realm: d7914ebf66bb182469726f997c4c38eff286aab0
   RealmSwift: aad08b7dc8c732b7b5794286e9df83739bf834f1
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxRealm: 684c1d5e9dc7a075fa925894fc042f1aecc18ac7
+  RxRealm: cc14831d5527f10fbfe547d0922cae129a07ba9d
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 3e9bb32e2892d0d29e412983b5093902fe9000fd
+PODFILE CHECKSUM: 88531cd2314624019200bf764960dc631fab7531
 
 COCOAPODS: 1.10.0

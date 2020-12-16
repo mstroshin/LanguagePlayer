@@ -7,7 +7,7 @@ target 'LanguagePlayer' do
   pod 'RxCocoa'
   pod 'RxSwiftExt'
   #pod 'RxTimelane', '~> 2.0'
-  pod 'RxRealm', :git => 'https://github.com/RxSwiftCommunity/RxRealm.git'
+  pod 'RxRealm'
   pod 'RealmSwift'
   pod 'GCDWebServer'
   pod 'mobile-ffmpeg-full', '~> 4.4'

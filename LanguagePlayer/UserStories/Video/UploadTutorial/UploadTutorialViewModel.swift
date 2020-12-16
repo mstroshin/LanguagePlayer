@@ -22,8 +22,9 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             .share()
         
         let dataExtracted = videoSavedOnDisk
+            .observeOn(SerialDispatchQueueScheduler(qos: .default))
             .flatMap { video -> Single<VideoDataExtractor.VideoData> in
-                VideoDataExtractor().extractData(from: video.videoUrl)
+                VideoDataExtractor.extractData(from: video.videoUrl)
             }
                 
         let videoSavedInRealm = Observable.zip(videoSavedOnDisk, dataExtracted) { video, data -> VideoEntity in
