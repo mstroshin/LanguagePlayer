@@ -22,30 +22,28 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
         let dataExtracted = videoUploaded
             .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap { video -> Single<VideoDataExtractor.VideoData> in
-                VideoDataExtractor.extractData(from: video.video.temporaryDataPath)
+                VideoDataExtractor.extractData(from: video.videoPath)
             }
             .share()
         
         let temporaryVideo = Observable.zip(videoUploaded, dataExtracted) { video, data -> TemporaryVideo in
             TemporaryVideo(
-                uploadedVideo: video,
-                subtitleNames: data.subtitleNames + video.subtitles.map(\.fileName),
-                audioStreamNames: data.audioStreamNames
+                videoPath: video.videoPath,
+                subtitleFilesPaths: video.subtitlePaths + data.extractedSubtitlesPaths,
+                audioStreamNames: data.audioTracksTitles
             )
         }
         
         let videoSavedOnDisk = temporaryVideo
-            .map(\.uploadedVideo)
-            .flatMap(localStore.save(uploaded:))
+            .flatMap(localStore.save(video:))
             .share()
-                
+        
         let videoSavedInRealm = Observable.zip(videoSavedOnDisk, temporaryVideo) { directoryName, tempVideo -> VideoEntity in
             let videoEntity = VideoEntity()
-            videoEntity.fileName = tempVideo.uploadedVideo.video.fileName
+            videoEntity.fileName = tempVideo.videoPath.lastPathComponent
             videoEntity.savedInDirectoryName = directoryName
             videoEntity.audioStreamNames.append(objectsIn: tempVideo.audioStreamNames)
-            videoEntity.subtitleNames.append(objectsIn: tempVideo.subtitleNames)
-            
+            videoEntity.subtitleNames.append(objectsIn: tempVideo.subtitleFilesPaths.map({ $0.lastPathComponent }))
             return videoEntity
         }
         
@@ -53,6 +51,9 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             .observeOn(MainScheduler())
             .do(onError: { error in
                 print(error)
+            })
+            .do(onDispose: {
+                FileManager.clearTmpDirectory()
             })
             .subscribe(realm.rx.add())
             .disposed(by: disposeBag)

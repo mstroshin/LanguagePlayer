@@ -3,20 +3,34 @@ import RxSwift
 import RxCocoa
 
 struct VideoSettings {
+    let audioTrackTitles: [String]
+    let subtitleTitles: [String]
+    
     let audioStreamIndex: Int
     let firstSubIndex: Int
     let secondsSubIndex: Int
     
-    static var zero: VideoSettings {
-        VideoSettings(audioStreamIndex: 0, firstSubIndex: 0, secondsSubIndex: 0)
+    init(audioTrackTitles: [String] = [],
+         subtitleTitles: [String] = [],
+         audioStreamIndex: Int = 0,
+         firstSubIndex: Int = 0,
+         secondsSubIndex: Int = 0) {
+        self.audioTrackTitles = audioTrackTitles
+        self.subtitleTitles = subtitleTitles
+        self.audioStreamIndex = audioStreamIndex
+        self.firstSubIndex = firstSubIndex
+        self.secondsSubIndex = secondsSubIndex
     }
+    
 }
 
 class VideoSettingsViewModel: ViewModel {
     let input: Input
     let output: Output
+    private let disposeBag = DisposeBag()
     
-    init(video: VideoEntity, currentSettings: VideoSettings) {
+    init(settingsSubject: BehaviorSubject<VideoSettings>) {
+        let currentSettings = try! settingsSubject.value()
         let audioSelected = BehaviorSubject<Int>(value: currentSettings.audioStreamIndex)
         let firstSubtitleSelected = BehaviorSubject<Int>(value: currentSettings.firstSubIndex)
         let secondSubtitleSelected = BehaviorSubject<Int>(value: currentSettings.secondsSubIndex)
@@ -28,17 +42,27 @@ class VideoSettingsViewModel: ViewModel {
         )
         
         var subtitleTitles = ["Нет"]
-        subtitleTitles.append(contentsOf: video.subtitleNames)
+        subtitleTitles.append(contentsOf: currentSettings.subtitleTitles)
         
         let changedSettings = Observable.combineLatest(audioSelected, firstSubtitleSelected, secondSubtitleSelected) {
-            VideoSettings(audioStreamIndex: $0, firstSubIndex: $1, secondsSubIndex: $2)
-        }.asDriver(onErrorJustReturn: VideoSettings.zero)
+            VideoSettings(
+                audioTrackTitles: currentSettings.audioTrackTitles,
+                subtitleTitles: currentSettings.subtitleTitles,
+                audioStreamIndex: $0,
+                firstSubIndex: $1,
+                secondsSubIndex: $2
+            )
+        }.asDriver(onErrorJustReturn: VideoSettings())
         
         self.output = Output(
-            audioTitles: Array(video.audioStreamNames),
+            audioTitles: currentSettings.audioTrackTitles,
             subtitleTitles: subtitleTitles,
             changedSettings: changedSettings
         )
+        
+        changedSettings
+            .drive(settingsSubject)
+            .disposed(by: disposeBag)
     }
     
 }

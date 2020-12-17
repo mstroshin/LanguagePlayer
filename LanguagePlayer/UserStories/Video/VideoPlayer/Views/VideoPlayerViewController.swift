@@ -140,26 +140,27 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     
     func didPressSettings() {
         //TODO:
+        viewModel.input.openVideoSettings.onNext(())
     }
     
 }
 
 extension VideoPlayerViewController: UIPopoverPresentationControllerDelegate {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let currentSettings = try! viewModel.videoSettings.value()
-        let settingsViewModel = VideoSettingsViewModel(video: viewModel.video, currentSettings: currentSettings)
-        settingsViewModel.output.changedSettings
-            .drive(viewModel.input.changedVideoSettings)
-            .disposed(by: disposeBag)
-        
-        let navController = segue.destination as! UINavigationController
-        let settingsViewController = navController.topViewController as! VideoSettingsViewController
-        settingsViewController.viewModel = settingsViewModel
-        
-        settingsViewController.modalPresentationStyle = .popover
-        settingsViewController.popoverPresentationController?.delegate = self
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let currentSettings = try! viewModel.videoSettings.value()
+//        let settingsViewModel = VideoSettingsViewModel(video: viewModel.video, currentSettings: currentSettings)
+//        settingsViewModel.output.changedSettings
+//            .drive(viewModel.input.changedVideoSettings)
+//            .disposed(by: disposeBag)
+//
+//        let navController = segue.destination as! UINavigationController
+//        let settingsViewController = navController.topViewController as! VideoSettingsViewController
+//        settingsViewController.viewModel = settingsViewModel
+//
+//        settingsViewController.modalPresentationStyle = .popover
+//        settingsViewController.popoverPresentationController?.delegate = self
+//    }
     
     // MARK: - UIPopoverPresentationControllerDelegate method
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

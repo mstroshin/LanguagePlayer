@@ -49,6 +49,13 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         navigationController.present(viewController, animated: true, completion: nil)
         
+        viewModel.route.openVideoSettings
+            .observeOn(MainScheduler())
+            .subscribe(onNext: { [weak self] videoSettingsSubject in
+                self?.openVideoSettings(with: videoSettingsSubject, on: viewController)
+            })
+            .disposed(by: disposeBag)
+        
         viewModel.route.close
             .observeOn(MainScheduler())
             .subscribe(onCompleted: {
@@ -66,8 +73,8 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.videoLoaded
             .observeOn(MainScheduler())
-            .subscribe(onCompleted: {
-                viewController.dismiss(animated: true, completion: nil)
+            .subscribe(onCompleted: { [weak viewController] in
+                viewController?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -78,5 +85,13 @@ class VideoCoordinator: BaseCoordinator<Void> {
         viewController.viewModel = viewModel
         
         navigationController.present(viewController, animated: true, completion: nil)
+    }
+    
+    private func openVideoSettings(with settingsSubject: BehaviorSubject<VideoSettings>, on vc: UIViewController) {
+        let viewModel = VideoSettingsViewModel(settingsSubject: settingsSubject)
+        let viewController: VideoSettingsViewController = VideoSettingsViewController.createFromMainStoryboard()
+        viewController.viewModel = viewModel
+        
+        vc.present(viewController, animated: true, completion: nil)
     }
 }

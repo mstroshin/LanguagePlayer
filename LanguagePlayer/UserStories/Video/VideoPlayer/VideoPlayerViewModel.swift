@@ -10,7 +10,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     let route: Route
     
     let video: VideoEntity
-    let videoSettings = BehaviorSubject<VideoSettings>(value: VideoSettings.zero)
+//    let videoSettings: BehaviorSubject<VideoSettings>
     
     private let playerController: PlayerController
     private let disposeBag = DisposeBag()
@@ -18,6 +18,12 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     init(video: VideoEntity, startingTime: Milliseconds? = nil, realm: Realm = try! Realm()) {
         self.video = video
         self.playerController = PlayerController(videoUrl: video.videoUrl)
+        
+        let settings = VideoSettings(
+            audioTrackTitles: Array(video.audioStreamNames),
+            subtitleTitles: Array(video.subtitleNames)
+        )
+        let videoSettings = BehaviorSubject<VideoSettings>(value: settings)
         
         if let time = startingTime {
             self.playerController.status
@@ -44,6 +50,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let backwardFifteen = PublishSubject<Void>()
         let forwardFifteen = PublishSubject<Void>()
         let addToFavorite = PublishSubject<Void>()
+        let openVideoSettings = PublishSubject<Void>()
                 
         self.input = Input(
             close: close.asObserver(),
@@ -54,7 +61,8 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             backwardFifteen: backwardFifteen.asObserver(),
             forwardFifteen: forwardFifteen.asObserver(),
             changedVideoSettings: videoSettings.asObserver(),
-            addToFavorite: addToFavorite.asObserver()
+            addToFavorite: addToFavorite.asObserver(),
+            openVideoSettings: openVideoSettings.asObserver()
         )
         
         //Outputs
@@ -105,8 +113,14 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         )
         
         //Routes
+        let openVideoSettingsRoute = openVideoSettings
+            .flatMap { _ -> Observable<BehaviorSubject<VideoSettings>> in
+                return .just(videoSettings)
+            }
+        
         self.route = Route(
-            close: close.asObservable()
+            close: close.asObservable(),
+            openVideoSettings: openVideoSettingsRoute.asObservable()
         )
         
         //Maps
@@ -199,6 +213,7 @@ extension VideoPlayerViewModel {
         let forwardFifteen: AnyObserver<Void>
         let changedVideoSettings: AnyObserver<VideoSettings>
         let addToFavorite: AnyObserver<Void>
+        let openVideoSettings: AnyObserver<Void>
     }
     
     struct Output {
@@ -209,6 +224,7 @@ extension VideoPlayerViewModel {
     
     struct Route {
         let close: Observable<Void>
+        let openVideoSettings: Observable<BehaviorSubject<VideoSettings>>
     }
     
 }

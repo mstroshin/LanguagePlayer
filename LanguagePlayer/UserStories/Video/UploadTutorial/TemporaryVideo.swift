@@ -1,7 +1,7 @@
 import Foundation
 
 struct TemporaryVideo {
-    let uploadedVideo: UploadedVideo
-    let subtitleNames: [String]
+    let videoPath: URL
+    let subtitleFilesPaths: [URL]
     let audioStreamNames: [String]
 }

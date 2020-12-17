@@ -8,6 +8,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Purchases.debugLogsEnabled = true
         Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX")
         
+        FileManager.clearTmpDirectory()
+        
         return true
     }
 

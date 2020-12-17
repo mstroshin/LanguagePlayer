@@ -3,9 +3,12 @@ import RxSwift
 
 class LocalDiskStore {
     private let fileManager = FileManager.default
+    private var documentsDirectory: URL {
+        fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+    }
         
-    private func save(temporaryDataPath: URL, fileName: String, directoryName: String) -> Result<Void, Error> {
-        if self.fileManager.fileExists(atPath: temporaryDataPath.path) == false {
+    private func save(temporaryDataPath: URL, to directoryName: String) -> Result<Void, Error> {
+        if fileManager.fileExists(atPath: temporaryDataPath.path) == false {
             let error = NSError(
                 domain: "TemporaryDataPath does not exist",
                 code: 1,
@@ -13,21 +16,15 @@ class LocalDiskStore {
             )
             return .failure(error)
         }
-        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            let error = NSError(domain: "documentsUrl does not exist", code: 1, userInfo: nil)
-            return .failure(error)
-        }
         
         do {
-            let directoryPathUrl = documentsUrl.appendingPathComponent(directoryName)
-            if !self.fileManager.fileExists(atPath: directoryPathUrl.path) {
-                try self.fileManager.createDirectory(at: directoryPathUrl, withIntermediateDirectories: false, attributes: nil)
+            let directoryPathUrl = documentsDirectory.appendingPathComponent(directoryName)
+            if !fileManager.fileExists(atPath: directoryPathUrl.path) {
+                try fileManager.createDirectory(at: directoryPathUrl, withIntermediateDirectories: false, attributes: nil)
             }
             
-            
-            let urlToMove = directoryPathUrl.appendingPathComponent(fileName)
-        
-            try fileManager.moveItem(at: temporaryDataPath, to: urlToMove)
+            let persistencePathUrl = directoryPathUrl.appendingPathComponent(temporaryDataPath.lastPathComponent)
+            try fileManager.moveItem(at: temporaryDataPath, to: persistencePathUrl)
         } catch {
             return .failure(error)
         }
@@ -35,14 +32,13 @@ class LocalDiskStore {
         return .success(())
     }
     
-    func save(uploaded: UploadedVideo) -> Single<String> {
+    func save(video: TemporaryVideo) -> Single<String> {
         Single.create { single -> Disposable in
             let directoryName = UUID().uuidString
             
             let videoSavedResult = self.save(
-                temporaryDataPath: uploaded.video.temporaryDataPath,
-                fileName: uploaded.video.fileName,
-                directoryName: directoryName
+                temporaryDataPath: video.videoPath,
+                to: directoryName
             )
             var error: Error? = nil
             if case .failure(let er) = videoSavedResult {
@@ -50,11 +46,10 @@ class LocalDiskStore {
             }
             
             if error == nil {
-                for subtitle in uploaded.subtitles {
+                for subtitleFilePath in video.subtitleFilesPaths {
                     let subtitleSavedResult = self.save(
-                        temporaryDataPath: subtitle.temporaryDataPath,
-                        fileName: subtitle.fileName,
-                        directoryName: directoryName
+                        temporaryDataPath: subtitleFilePath,
+                        to: directoryName
                     )
                     if case .failure(let er) = subtitleSavedResult {
                         error = er
@@ -74,13 +69,10 @@ class LocalDiskStore {
     }
     
     func removeDirectory(_ name: String) -> Bool {
-        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return false
-        }
-        let directoryPathUrl = documentsUrl.appendingPathComponent(name)
+        let directoryPathUrl = documentsDirectory.appendingPathComponent(name)
         
         do {
-            try self.fileManager.removeItem(at: directoryPathUrl)
+            try fileManager.removeItem(at: directoryPathUrl)
             return true
         } catch {
             print(error)
@@ -91,11 +83,10 @@ class LocalDiskStore {
     func url(for directoryName: String, fileName: String?) -> URL? {
         guard let fileName = fileName else { return nil }
         
-        let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let directoryPathUrl = documentsUrl.appendingPathComponent(directoryName)
+        let directoryPathUrl = documentsDirectory.appendingPathComponent(directoryName)
         let videoUrl = directoryPathUrl.appendingPathComponent(fileName)
         
-        if self.fileManager.fileExists(atPath: videoUrl.path) {
+        if fileManager.fileExists(atPath: videoUrl.path) {
             return videoUrl
         } else {
             return nil

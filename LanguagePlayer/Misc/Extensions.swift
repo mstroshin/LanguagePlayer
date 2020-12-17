@@ -160,6 +160,40 @@ extension UICollectionViewLayout {
     
 }
 
+extension FileManager {
+    
+    static func rename(file path: URL, to name: String) -> URL? {
+        let newPath = path.deletingLastPathComponent().appendingPathComponent(name)
+        
+        do {
+            try FileManager.default.moveItem(at: path, to: newPath)
+            return newPath
+        } catch {
+            return nil
+        }
+    }
+    
+    @discardableResult
+    static func clearTmpDirectory() -> Bool {
+        let fm = FileManager.default
+        
+        do {
+            let tmpDirURL = fm.temporaryDirectory
+            let tmpDirectory = try fm.contentsOfDirectory(atPath: tmpDirURL.path)
+            
+            for file in tmpDirectory {
+                let fileUrl = tmpDirURL.appendingPathComponent(file)
+                try fm.removeItem(atPath: fileUrl.path)
+            }
+            
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+}
+
 precedencegroup AssignmentPrecedence {}
 infix operator ?=
 func ?= <T: Any> (left: inout T, right: T?) {

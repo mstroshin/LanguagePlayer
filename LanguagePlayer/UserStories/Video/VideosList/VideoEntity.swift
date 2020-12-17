@@ -21,7 +21,7 @@ class VideoEntity: Object {
             return nil
         }
         
-        let fileName = subtitleNames[index].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        let fileName = subtitleNames[index]
         return LocalDiskStore().url(for: savedInDirectoryName, fileName: fileName)
     }
 }

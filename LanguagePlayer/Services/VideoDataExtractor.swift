@@ -5,23 +5,24 @@ import RxCocoa
 
 class VideoDataExtractor {
     struct VideoData {
-        let subtitleNames: [String]
-        let audioStreamNames: [String]
+        let extractedSubtitlesPaths: [URL]
+        let audioTracksTitles: [String]
     }
     
     static func extractData(from filePath: URL) -> Single<VideoData> {
         Single.create { single -> Disposable in
-            guard let mediaInfo = MobileFFprobe.getMediaInformation(filePath.absoluteString) else {
+            guard let path = filePath.absoluteString.removingPercentEncoding,
+                  let mediaInfo = MobileFFprobe.getMediaInformation(path) else {
                 let error = NSError(domain: "Media info is nil", code: 1, userInfo: nil)
                 single(.error(error))
                 return Disposables.create()
             }
             
-            let subtitleNamesResult = self.extractSubtitles(from: mediaInfo, filePath: filePath)
-            let audioNamesResult = self.extractAudio(from: mediaInfo)
+            let subtitlePathsResult = self.extractSubtitles(from: mediaInfo, filePath: filePath)
+            let audioTracksTitlesResult = self.extractAudio(from: mediaInfo)
             let data = VideoData(
-                subtitleNames: (try? subtitleNamesResult.get()) ?? [],
-                audioStreamNames: (try? audioNamesResult.get()) ?? []
+                extractedSubtitlesPaths: (try? subtitlePathsResult.get()) ?? [],
+                audioTracksTitles: (try? audioTracksTitlesResult.get()) ?? []
             )
             
             single(.success(data))
@@ -30,15 +31,15 @@ class VideoDataExtractor {
         }
     }
     
-    private static func extractSubtitles(from mediaInfo: MediaInformation, filePath: URL) -> Result<[String], Error> {
+    private static func extractSubtitles(from mediaInfo: MediaInformation, filePath: URL) -> Result<[URL], Error> {
         guard let subtitleStreams = (mediaInfo.getStreams() as? [StreamInformation])?.filter({ $0.getType() == "subtitle" }) else {
             let error = NSError(domain: "Subtitle streams is nil", code: 1, userInfo: nil)
             return .failure(error)
         }
+        var subtitlesPaths = [URL]()
         
         let pathToSave = filePath.deletingLastPathComponent()
         
-        var subtitleNames = [String]()
         let path = filePath.absoluteString.removingPercentEncoding!
         var command = "-i \(path)"
         for subStream in subtitleStreams {
@@ -48,15 +49,16 @@ class VideoDataExtractor {
             let name = subStream.getTags()["title"] as? String ?? "subtitle"
             let language = subStream.getTags()["language"] as? String ?? ""
             let title = "\(index)_\(name)_\(language).srt"
-            subtitleNames.append(title)
             
             let subFile = pathToSave.appendingPathComponent(title).absoluteString
             command += " -map 0:\(index) \(subFile)"
+            
+            subtitlesPaths.append(URL(fileURLWithPath: subFile))
         }
         let result = MobileFFmpeg.execute(command)
         
         if result == RETURN_CODE_SUCCESS {
-            return .success(subtitleNames)
+            return .success(subtitlesPaths)
         } else {
             let error = NSError(domain: "Extract subtitles error", code: Int(result), userInfo: nil)
             return .failure(error)

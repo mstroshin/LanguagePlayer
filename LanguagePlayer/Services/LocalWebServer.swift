@@ -2,14 +2,10 @@ import Foundation
 import GCDWebServer
 import RxSwift
 
-struct UploadedFile {
-    let fileName: String
-    let temporaryDataPath: URL
-}
 
 struct UploadedVideo {
-    let video: UploadedFile
-    let subtitles: [UploadedFile]
+    let videoPath: URL
+    let subtitlePaths: [URL]
 }
 
 struct ServerAddresses {
@@ -22,24 +18,6 @@ class LocalWebServer: NSObject {
     var address: Observable<ServerAddresses> {
         addressSubject.asObserver()
     }
-    
-//    private let webServer = GCDWebServer()
-    private var fileParts = [GCDWebServerMultiPartFile]()
-    
-//    override init() {
-//        super.init()
-//
-//        webServer.delegate = self
-//
-//        //Resources
-//        webServer.addGETHandler(
-//            forBasePath: "/",
-//            directoryPath: Bundle.main.bundlePath,
-//            indexFilename: "index.html",
-//            cacheAge: 0,
-//            allowRangeRequests: true
-//        )
-//    }
     
     func run() -> Observable<UploadedVideo> {
         Observable.create { observer -> Disposable in
@@ -66,34 +44,28 @@ class LocalWebServer: NSObject {
                 guard let videoPart = multiPartFormRequest.firstFile(forControlName: "video") else {
                     return GCDWebServerResponse(statusCode: 500)
                 }
-//                self?.fileParts.append(videoPart)
-                
-                let videoFile = UploadedFile(
-                    fileName: videoPart.fileName,
-                    temporaryDataPath: URL(fileURLWithPath: videoPart.temporaryPath)
-                )
-                
-                var firstSubtitleFile: UploadedFile? = nil
+                                
+                var firstSubtitleFilePath: URL? = nil
                 if let firstSubtitlePart = multiPartFormRequest.firstFile(forControlName: "firstSubtitle") {
-                    firstSubtitleFile =  UploadedFile(
-                        fileName: firstSubtitlePart.fileName,
-                        temporaryDataPath: URL(fileURLWithPath: firstSubtitlePart.temporaryPath)
-                    )
-//                    self?.fileParts.append(firstSubtitlePart)
+                    firstSubtitleFilePath = URL(fileURLWithPath: firstSubtitlePart.temporaryPath)
+                    firstSubtitleFilePath = FileManager.rename(file: firstSubtitleFilePath!, to: firstSubtitlePart.fileName)
                 }
-                var secondSubtitleFile: UploadedFile? = nil
+                var secondSubtitleFilePath: URL? = nil
                 if let secondSubtitlePart = multiPartFormRequest.firstFile(forControlName: "secondSubtitle") {
-                    secondSubtitleFile =  UploadedFile(
-                        fileName: secondSubtitlePart.fileName,
-                        temporaryDataPath: URL(fileURLWithPath: secondSubtitlePart.temporaryPath)
-                    )
-//                    self?.fileParts.append(secondSubtitlePart)
+                    secondSubtitleFilePath = URL(fileURLWithPath: secondSubtitlePart.temporaryPath)
+                    secondSubtitleFilePath = FileManager.rename(file: secondSubtitleFilePath!, to: secondSubtitlePart.fileName)
                 }
                 
-                let subtitles = [firstSubtitleFile, secondSubtitleFile].compactMap({$0})
-                let video = UploadedVideo(video: videoFile, subtitles: subtitles)
-                observer.onNext(video)
-                observer.onCompleted()
+                if let newVideoPath = FileManager.rename(file: URL(fileURLWithPath: videoPart.temporaryPath), to: videoPart.fileName) {
+                    let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({$0})
+                    let video = UploadedVideo(videoPath: newVideoPath, subtitlePaths: subtitles)
+                    
+                    observer.onNext(video)
+                    observer.onCompleted()
+                } else {
+                    let error = NSError(domain: "Failed to rename video file", code: 1, userInfo: nil)
+                    observer.onError(error)
+                }
                 
                 return GCDWebServerResponse(statusCode: 200)
             }
@@ -103,6 +75,7 @@ class LocalWebServer: NSObject {
             
             return Disposables.create {
                 webServer.stop()
+                webServer.removeAllHandlers()
             }
         }
     }
