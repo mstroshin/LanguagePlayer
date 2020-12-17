@@ -2,70 +2,71 @@ import Foundation
 import RxSwift
 
 class LocalDiskStore {
-    let fileManager = FileManager.default
+    private let fileManager = FileManager.default
         
-    private func save(temporaryDataPath path: String, fileName: String, directoryName: String) -> Bool {
-        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            return false
+    private func save(temporaryDataPath: URL, fileName: String, directoryName: String) -> Result<Void, Error> {
+        if self.fileManager.fileExists(atPath: temporaryDataPath.path) == false {
+            let error = NSError(
+                domain: "TemporaryDataPath does not exist",
+                code: 1,
+                userInfo: ["temporaryDataPath": temporaryDataPath]
+            )
+            return .failure(error)
         }
+        guard let documentsUrl = self.fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            let error = NSError(domain: "documentsUrl does not exist", code: 1, userInfo: nil)
+            return .failure(error)
+        }
+        
         do {
             let directoryPathUrl = documentsUrl.appendingPathComponent(directoryName)
             if !self.fileManager.fileExists(atPath: directoryPathUrl.path) {
                 try self.fileManager.createDirectory(at: directoryPathUrl, withIntermediateDirectories: false, attributes: nil)
             }
             
-            let temporaryDataUrl = URL(fileURLWithPath: path)
+            
             let urlToMove = directoryPathUrl.appendingPathComponent(fileName)
         
-            try fileManager.moveItem(at: temporaryDataUrl, to: urlToMove)
+            try fileManager.moveItem(at: temporaryDataPath, to: urlToMove)
         } catch {
-            print(error)
-            return false
+            return .failure(error)
         }
         
-        return true
+        return .success(())
     }
     
-    func save(uploaded: UploadedVideo) -> Single<VideoEntity> {
+    func save(uploaded: UploadedVideo) -> Single<String> {
         Single.create { single -> Disposable in
             let directoryName = UUID().uuidString
-                                
-            var videoSaved = self.save(
+            
+            let videoSavedResult = self.save(
                 temporaryDataPath: uploaded.video.temporaryDataPath,
                 fileName: uploaded.video.fileName,
                 directoryName: directoryName
             )
-            
-            if let sourceSubtitle = uploaded.sourceSubtitle {
-                videoSaved = self.save(
-                    temporaryDataPath: sourceSubtitle.temporaryDataPath,
-                    fileName: sourceSubtitle.fileName,
-                    directoryName: directoryName
-                )
-            }
-            if let targetSubtitle = uploaded.targetSubtitle {
-                videoSaved = self.save(
-                    temporaryDataPath: targetSubtitle.temporaryDataPath,
-                    fileName: targetSubtitle.fileName,
-                    directoryName: directoryName
-                )
+            var error: Error? = nil
+            if case .failure(let er) = videoSavedResult {
+                error = er
             }
             
-            if videoSaved {
-                let videoEntity = VideoEntity()
-                videoEntity.savedInDirectoryName = directoryName
-                videoEntity.fileName = uploaded.video.fileName
-                if let name = uploaded.sourceSubtitle?.fileName {
-                    videoEntity.subtitleNames.append(name)
+            if error == nil {
+                for subtitle in uploaded.subtitles {
+                    let subtitleSavedResult = self.save(
+                        temporaryDataPath: subtitle.temporaryDataPath,
+                        fileName: subtitle.fileName,
+                        directoryName: directoryName
+                    )
+                    if case .failure(let er) = subtitleSavedResult {
+                        error = er
+                        break
+                    }
                 }
-                if let name = uploaded.targetSubtitle?.fileName {
-                    videoEntity.subtitleNames.append(name)
-                }
-                
-                single(.success(videoEntity))
-            } else {
-                let error = NSError(domain: "Video doesnt save", code: 1, userInfo: nil)
+            }
+            
+            if let error = error {
                 single(.error(error))
+            } else {
+                single(.success(directoryName))
             }
             
             return Disposables.create()

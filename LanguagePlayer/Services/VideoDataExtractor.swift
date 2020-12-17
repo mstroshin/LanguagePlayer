@@ -11,8 +11,7 @@ class VideoDataExtractor {
     
     static func extractData(from filePath: URL) -> Single<VideoData> {
         Single.create { single -> Disposable in
-            guard let path = filePath.absoluteString.removingPercentEncoding,
-                  let mediaInfo = MobileFFprobe.getMediaInformation(path) else {
+            guard let mediaInfo = MobileFFprobe.getMediaInformation(filePath.absoluteString) else {
                 let error = NSError(domain: "Media info is nil", code: 1, userInfo: nil)
                 single(.error(error))
                 return Disposables.create()
