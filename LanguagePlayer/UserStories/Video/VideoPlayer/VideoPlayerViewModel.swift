@@ -8,16 +8,17 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route
-    
-    let video: VideoEntity
-//    let videoSettings: BehaviorSubject<VideoSettings>
-    
+        
     private let playerController: PlayerController
     private let disposeBag = DisposeBag()
     
-    init(video: VideoEntity, startingTime: Milliseconds? = nil, realm: Realm = try! Realm()) {
-        self.video = video
-        self.playerController = PlayerController(videoUrl: video.videoUrl)
+    init(
+        video: VideoEntity,
+        playerController: PlayerController,
+        startingTime: Milliseconds? = nil,
+        realm: Realm = try! Realm()
+    ) {
+        self.playerController = playerController
         
         let settings = VideoSettings(
             audioTrackTitles: Array(video.audioStreamNames),
@@ -26,7 +27,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let videoSettings = BehaviorSubject<VideoSettings>(value: settings)
         
         if let time = startingTime {
-            self.playerController.status
+            playerController.status
                 .filter {
                     if case PlayerStatus.ready(_) = $0 {
                         return true
@@ -51,19 +52,6 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let forwardFifteen = PublishSubject<Void>()
         let addToFavorite = PublishSubject<Void>()
         let openVideoSettings = PublishSubject<Void>()
-                
-        self.input = Input(
-            close: close.asObserver(),
-            seek: self.playerController.seek,
-            isPlaying: self.playerController.isPlaying,
-            backwardSub: backwardSub.asObserver(),
-            forwardSub: forwardSub.asObserver(),
-            backwardFifteen: backwardFifteen.asObserver(),
-            forwardFifteen: forwardFifteen.asObserver(),
-            changedVideoSettings: videoSettings.asObserver(),
-            addToFavorite: addToFavorite.asObserver(),
-            openVideoSettings: openVideoSettings.asObserver()
-        )
         
         //Outputs
         let currentTimeSubtitles = self.playerController.currentTime
@@ -106,28 +94,16 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         let currentSubtitlesDriver = Observable.merge([currentTimeSubtitles, favoriteChanged])
             .asDriver(onErrorJustReturn: DoubleSubtitles())
         
-        self.output = Output(
-            currentTime: self.playerController.currentTime.asDriver(onErrorJustReturn: 0),
-            currentSubtitles: currentSubtitlesDriver,
-            playerStatus: self.playerController.status.asDriver(onErrorJustReturn: .pause)
-        )
-        
         //Routes
         let openVideoSettingsRoute = openVideoSettings
             .flatMap { _ -> Observable<BehaviorSubject<VideoSettings>> in
                 return .just(videoSettings)
             }
         
-        self.route = Route(
-            close: close.asObservable(),
-            openVideoSettings: openVideoSettingsRoute.asObservable()
-        )
-        
         //Maps
         backwardSub
-            .compactMap { [weak self] () -> Milliseconds? in
-                guard let self = self else { return nil }
-                let time = try! self.playerController.currentTime.value()
+            .compactMap { () -> Milliseconds? in
+                let time = try! playerController.currentTime.value()
                 if let subtitle = firstSubtitlesConvertor.getPreviousSubtitle(current: time) {
                     return subtitle.fromTime - 50
                 } else {
@@ -138,9 +114,8 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .disposed(by: disposeBag)
         
         forwardSub
-            .compactMap { [weak self] () -> Milliseconds? in
-                guard let self = self else { return nil }
-                let time = try! self.playerController.currentTime.value()
+            .compactMap { () -> Milliseconds? in
+                let time = try! playerController.currentTime.value()
                 if let subtitle = firstSubtitlesConvertor.getNextSubtitle(current: time) {
                     return subtitle.fromTime - 50
                 } else {
@@ -151,23 +126,22 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .disposed(by: disposeBag)
         
         backwardFifteen
-            .map { [weak self] in
-                guard let self = self else { return 0 }
-                let time = try! self.playerController.currentTime.value()
+            .map {
+                let time = try! playerController.currentTime.value()
                 return time - 15 * 1000
             }
             .bind(to: self.playerController.seek)
             .disposed(by: disposeBag)
         
         forwardFifteen
-            .map { [weak self] in
-                guard let self = self else { return 0 }
-                let time = try! self.playerController.currentTime.value()
+            .map {
+                let time = try! playerController.currentTime.value()
                 return time + 15 * 1000
             }
             .bind(to: self.playerController.seek)
             .disposed(by: disposeBag)
         
+        //Video Settings
         videoSettings
             .map(\.audioStreamIndex)
             .distinctUntilChanged()
@@ -193,6 +167,31 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
                 secondSubtitlesConvertor.prepareParts(from: subUrl)
             })
             .disposed(by: disposeBag)
+        
+        //ViewModel
+        self.input = Input(
+            close: close.asObserver(),
+            seek: self.playerController.seek,
+            isPlaying: self.playerController.isPlaying,
+            backwardSub: backwardSub.asObserver(),
+            forwardSub: forwardSub.asObserver(),
+            backwardFifteen: backwardFifteen.asObserver(),
+            forwardFifteen: forwardFifteen.asObserver(),
+            changedVideoSettings: videoSettings.asObserver(),
+            addToFavorite: addToFavorite.asObserver(),
+            openVideoSettings: openVideoSettings.asObserver()
+        )
+        
+        self.output = Output(
+            currentTime: self.playerController.currentTime.asDriver(onErrorJustReturn: 0),
+            currentSubtitles: currentSubtitlesDriver,
+            playerStatus: self.playerController.status.asDriver(onErrorJustReturn: .pause)
+        )
+        
+        self.route = Route(
+            close: close.asObservable(),
+            openVideoSettings: openVideoSettingsRoute.asObservable()
+        )
     }
     
     func set(viewport: UIView) {

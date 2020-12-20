@@ -42,7 +42,8 @@ class VideoCoordinator: BaseCoordinator<Void> {
     }
     
     private func openVideoPlayer(with video: VideoEntity, on navController: UINavigationController) {
-        let viewModel = VideoPlayerViewModel(video: video)
+        let player = PlayerController(videoUrl: video.videoUrl)
+        let viewModel = VideoPlayerViewModel(video: video, playerController: player)
         let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .fullScreen
@@ -51,8 +52,9 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.openVideoSettings
             .observeOn(MainScheduler())
-            .subscribe(onNext: { [weak self] videoSettingsSubject in
-                self?.openVideoSettings(with: videoSettingsSubject, on: viewController)
+            .subscribe(onNext: { [weak self, weak viewController] videoSettingsSubject in
+                guard let self = self, let vc = viewController else { return }
+                self.openVideoSettings(with: videoSettingsSubject, on: vc)
             })
             .disposed(by: disposeBag)
         

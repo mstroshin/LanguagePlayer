@@ -80,7 +80,7 @@ class VideoPlayerViewController: UIViewController {
     }
     
     @IBAction func didTapOnViewport(_ sender: UITapGestureRecognizer) {
-        self.controlsView.toogleVisibility()
+        controlsView.toogleVisibility()
     }
     
 }
@@ -134,34 +134,18 @@ extension VideoPlayerViewController: ControlsViewDelegate {
     func didPressToogleSubVisibility() {
         let isHidden = self.subtitlesView.isHidden
         
-        self.subtitlesView.isHidden = !isHidden
-        self.controlsView.subtitles(isVisible: isHidden)
+        subtitlesView.isHidden = !isHidden
+        controlsView.subtitles(isVisible: isHidden)
     }
     
     func didPressSettings() {
-        //TODO:
         viewModel.input.openVideoSettings.onNext(())
     }
     
 }
 
 extension VideoPlayerViewController: UIPopoverPresentationControllerDelegate {
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let currentSettings = try! viewModel.videoSettings.value()
-//        let settingsViewModel = VideoSettingsViewModel(video: viewModel.video, currentSettings: currentSettings)
-//        settingsViewModel.output.changedSettings
-//            .drive(viewModel.input.changedVideoSettings)
-//            .disposed(by: disposeBag)
-//
-//        let navController = segue.destination as! UINavigationController
-//        let settingsViewController = navController.topViewController as! VideoSettingsViewController
-//        settingsViewController.viewModel = settingsViewModel
-//
-//        settingsViewController.modalPresentationStyle = .popover
-//        settingsViewController.popoverPresentationController?.delegate = self
-//    }
-    
+        
     // MARK: - UIPopoverPresentationControllerDelegate method
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
         // Force popover style

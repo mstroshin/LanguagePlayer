@@ -25,7 +25,8 @@ class CardsCoordinator: BaseCoordinator<Void> {
     }
     
     private func open(video: VideoEntity, from time: Milliseconds) {
-        let viewModel = VideoPlayerViewModel(video: video, startingTime: time)
+        let player = PlayerController(videoUrl: video.videoUrl)
+        let viewModel = VideoPlayerViewModel(video: video, playerController: player, startingTime: time)
         let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         viewController.modalPresentationStyle = .fullScreen
