@@ -32,6 +32,17 @@ class LocalWebServer: NSObject {
                 cacheAge: 0,
                 allowRangeRequests: true
             )
+                        
+            webServer.addHandler(
+                forMethod: "GET",
+                path: "/freeSpace",
+                request: GCDWebServerDataRequest.self) { request -> GCDWebServerResponse? in
+                if let freeSpace = FileManager.deviceRemainingFreeSpaceInBytes() {
+                    return GCDWebServerDataResponse(text: "\(freeSpace)")
+                }
+                
+                return GCDWebServerResponse(statusCode: 500)
+            }
             
             webServer.addHandler(
                 forMethod: "POST",

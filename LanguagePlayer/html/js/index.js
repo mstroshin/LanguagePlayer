@@ -140,8 +140,15 @@ function configureDropzone() {
 
         dropZoneElement.addEventListener("change", e => {
             if (inputElement.files.length) {
-                updateThumbnail(dropZoneElement, inputElement.files[0]);
-                updateUploadButton();
+                let file = inputElement.files[0];
+                
+                if (isFreeSpaceEnough(file.size)) {
+                    updateThumbnail(dropZoneElement, file);
+                    updateUploadButton();
+                } else {
+                    alert("Not enough free space");
+                    resetDropzones();
+                }
             }
         });
 
@@ -163,8 +170,15 @@ function configureDropzone() {
         dropZoneElement.addEventListener("drop", e => {
             e.preventDefault();
             if (isUploading == false) {
+                dropZoneElement.classList.remove("drop-zone--over");
+                
                 if (e.dataTransfer.files.length) {
                     let file = e.dataTransfer.files[0];
+                    
+                    if (isFreeSpaceEnough(file.size) == false) {
+                        alert("Not enough free space");
+                        return;
+                    }
 
                     if (isAllowFile(inputElement, file)) {
                         inputElement.files = e.dataTransfer.files;
@@ -174,11 +188,27 @@ function configureDropzone() {
                     }
                     updateUploadButton();
                 }
-
-                dropZoneElement.classList.remove("drop-zone--over");
             }
         });
     });
+}
+
+function isFreeSpaceEnough(fileSize) {
+    let xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "/freeSpace", false); // false for synchronous request
+    xmlHttp.send(null);
+    
+    let response = xmlHttp.responseText;
+    var freeBytes = parseInt(response);
+    if (freeBytes == NaN) {
+        freeBytes = 0;
+    }
+    
+    let accurancy = 10 * 8 * 1024 * 1024; //10 MB
+    console.log("free " + freeBytes);
+    console.log("size " + (fileSize + accurancy));
+    
+    return freeBytes >= fileSize + accurancy;
 }
 
 function isAllowFile(input, file) {

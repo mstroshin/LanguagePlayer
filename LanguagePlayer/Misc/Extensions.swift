@@ -192,6 +192,19 @@ extension FileManager {
         }
     }
     
+    static func deviceRemainingFreeSpaceInBytes() -> UInt64? {
+        let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        guard let path = documentDirectoryPath.first else { return nil }
+        
+        if let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: path) {
+            if let freeSize = systemAttributes[.systemFreeSize] as? NSNumber {
+                return freeSize.uint64Value
+            }
+        }
+        
+        return nil
+    }
+    
 }
 
 precedencegroup AssignmentPrecedence {}
