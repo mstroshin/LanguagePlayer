@@ -140,27 +140,40 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="AddingVideoCollectionViewCell" id="h2u-7I-Eam">
-                                        <rect key="frame" x="185.5" y="16" width="164" height="172"/>
+                                        <rect key="frame" x="185.5" y="32" width="164" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QPa-LX-aAy">
-                                            <rect key="frame" x="0.0" y="0.0" width="164" height="172"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="164" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ofn-bo-dkh">
-                                                    <rect key="frame" x="73" y="78" width="18" height="16"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tt7-hB-gZy">
+                                                    <rect key="frame" x="52" y="40" width="60" height="60"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Ofn-bo-dkh">
+                                                            <rect key="frame" x="20" y="22" width="20" height="16"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="purchaseButtonColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Ofn-bo-dkh" secondAttribute="bottom" constant="20" id="4pQ-2v-jhM"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Ofn-bo-dkh" secondAttribute="trailing" constant="20" id="ABz-sK-yYw"/>
+                                                        <constraint firstItem="Ofn-bo-dkh" firstAttribute="leading" secondItem="tt7-hB-gZy" secondAttribute="leading" constant="20" id="C2M-ag-BEP"/>
+                                                        <constraint firstAttribute="width" secondItem="tt7-hB-gZy" secondAttribute="height" multiplier="1:1" id="LEF-IA-Do0"/>
+                                                        <constraint firstItem="Ofn-bo-dkh" firstAttribute="top" secondItem="tt7-hB-gZy" secondAttribute="top" constant="20" id="TA5-09-gN8"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
-                                            <color key="backgroundColor" name="purchaseButtonColor"/>
                                             <constraints>
-                                                <constraint firstItem="Ofn-bo-dkh" firstAttribute="centerX" secondItem="QPa-LX-aAy" secondAttribute="centerX" id="FaP-hB-3Pt"/>
-                                                <constraint firstItem="Ofn-bo-dkh" firstAttribute="centerY" secondItem="QPa-LX-aAy" secondAttribute="centerY" id="yXH-bD-yim"/>
+                                                <constraint firstAttribute="bottom" secondItem="tt7-hB-gZy" secondAttribute="bottom" constant="40" id="ieB-3a-jCa"/>
+                                                <constraint firstItem="tt7-hB-gZy" firstAttribute="centerX" secondItem="QPa-LX-aAy" secondAttribute="centerX" id="qo6-bh-dXs"/>
+                                                <constraint firstItem="tt7-hB-gZy" firstAttribute="top" secondItem="QPa-LX-aAy" secondAttribute="top" constant="40" id="t4W-IY-7PR"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="10"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                         </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
@@ -182,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOy-SH-Cpg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="845.5078125" y="137.5"/>
+            <point key="canvasLocation" x="845.32374100719426" y="137.1859296482412"/>
         </scene>
         <!--Video Player View Controller-->
         <scene sceneID="tne-QT-ifu">

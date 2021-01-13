@@ -69,7 +69,7 @@ class LocalWebServer: NSObject {
             }
             
             let serverIsRunning = webServer.start(withPort: 8080, bonjourName: "LanguagePlayer Server")
-            print("Local WebServer is successfull running: \(String(describing: serverIsRunning))")
+            print("Local WebServer status: \(String(describing: serverIsRunning))")
             
             return Disposables.create {
                 webServer.stop()
