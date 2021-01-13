@@ -10,11 +10,13 @@ class VideoDataExtractor {
     }
     
     static func extractData(from filePath: URL) -> Single<VideoData> {
-        Single.create { single -> Disposable in
+        MobileFFmpegConfig.setLogLevel(AV_LOG_QUIET)
+        
+        return Single.create { single -> Disposable in
             guard let path = filePath.absoluteString.removingPercentEncoding,
                   let mediaInfo = MobileFFprobe.getMediaInformation(path) else {
                 let error = NSError(domain: "Media info is nil", code: 1, userInfo: nil)
-                single(.error(error))
+                single(.failure(error))
                 return Disposables.create()
             }
             
@@ -25,6 +27,7 @@ class VideoDataExtractor {
                 audioTracksTitles: (try? audioTracksTitlesResult.get()) ?? []
             )
             
+//            fileCrawl(URL(fileURLWithPath: NSHomeDirectory()))
             single(.success(data))
             
             return Disposables.create()
@@ -50,10 +53,11 @@ class VideoDataExtractor {
             let language = subStream.getTags()["language"] as? String ?? ""
             let title = "\(index)_\(name)_\(language).srt"
             
-            let subFile = pathToSave.appendingPathComponent(title).absoluteString
-            command += " -map 0:\(index) \(subFile)"
+            let subFileUrl = pathToSave.appendingPathComponent(title, isDirectory: false)
+            command += " -map 0:\(index) \"\(subFileUrl.path)\""
             
-            subtitlesPaths.append(URL(fileURLWithPath: subFile))
+//            let url = URL(string: subFile)!
+            subtitlesPaths.append(subFileUrl)
         }
         let result = MobileFFmpeg.execute(command)
         

@@ -163,7 +163,7 @@ extension UICollectionViewLayout {
 extension FileManager {
     
     static func rename(file path: URL, to name: String) -> URL? {
-        let newPath = path.deletingLastPathComponent().appendingPathComponent(name)
+        let newPath = path.deletingLastPathComponent().appendingPathComponent(name, isDirectory: false)
         
         do {
             try FileManager.default.moveItem(at: path, to: newPath)
@@ -192,17 +192,18 @@ extension FileManager {
         }
     }
     
-    static func deviceRemainingFreeSpaceInBytes() -> UInt64? {
+    static func deviceRemainingFreeSpaceInBytes() -> Int64? {
         let documentDirectoryPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         guard let path = documentDirectoryPath.first else { return nil }
-        
-        if let systemAttributes = try? FileManager.default.attributesOfFileSystem(forPath: path) {
-            if let freeSize = systemAttributes[.systemFreeSize] as? NSNumber {
-                return freeSize.uint64Value
-            }
+                
+        let fileUrl = URL(fileURLWithPath: path)
+        do {
+            let resourceValues = try fileUrl.resourceValues(forKeys: [.volumeAvailableCapacityForImportantUsageKey])
+            let freeSpace = resourceValues.volumeAvailableCapacityForImportantUsage
+            return freeSpace
+        } catch {
+            return nil
         }
-        
-        return nil
     }
     
 }

@@ -59,7 +59,7 @@ class LocalDiskStore {
             }
             
             if let error = error {
-                single(.error(error))
+                single(.failure(error))
             } else {
                 single(.success(directoryName))
             }

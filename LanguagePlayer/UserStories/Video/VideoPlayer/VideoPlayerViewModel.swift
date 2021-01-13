@@ -150,7 +150,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         
         videoSettings
             .map(\.firstSubIndex)
-            .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 is disable subtitle (-1)
+            .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 disables subtitle (-1)
             .distinctUntilChanged()
             .compactMap(video.subtitleUrl(for:))
             .subscribe(onNext: { subUrl in
@@ -160,7 +160,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         
         videoSettings
             .map(\.secondsSubIndex)
-            .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 is disable subtitle (-1)
+            .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 disables subtitle (-1)
             .distinctUntilChanged()
             .compactMap(video.subtitleUrl(for:))
             .subscribe(onNext: { subUrl in

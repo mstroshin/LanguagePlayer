@@ -38,6 +38,7 @@ class LocalWebServer: NSObject {
                 path: "/freeSpace",
                 request: GCDWebServerDataRequest.self) { request -> GCDWebServerResponse? in
                 if let freeSpace = FileManager.deviceRemainingFreeSpaceInBytes() {
+                    print("Free space \(freeSpace)")
                     return GCDWebServerDataResponse(text: "\(freeSpace)")
                 }
                 
@@ -52,31 +53,19 @@ class LocalWebServer: NSObject {
                 guard let multiPartFormRequest = r as? GCDWebServerMultiPartFormRequest else {
                     return GCDWebServerResponse(statusCode: 500)
                 }
-                guard let videoPart = multiPartFormRequest.firstFile(forControlName: "video") else {
+                guard let videoFilePath = self.getFilePath(for: "video", from: multiPartFormRequest) else {
                     return GCDWebServerResponse(statusCode: 500)
                 }
                                 
-                var firstSubtitleFilePath: URL? = nil
-                if let firstSubtitlePart = multiPartFormRequest.firstFile(forControlName: "firstSubtitle") {
-                    firstSubtitleFilePath = URL(fileURLWithPath: firstSubtitlePart.temporaryPath)
-                    firstSubtitleFilePath = FileManager.rename(file: firstSubtitleFilePath!, to: firstSubtitlePart.fileName)
-                }
-                var secondSubtitleFilePath: URL? = nil
-                if let secondSubtitlePart = multiPartFormRequest.firstFile(forControlName: "secondSubtitle") {
-                    secondSubtitleFilePath = URL(fileURLWithPath: secondSubtitlePart.temporaryPath)
-                    secondSubtitleFilePath = FileManager.rename(file: secondSubtitleFilePath!, to: secondSubtitlePart.fileName)
-                }
+                let firstSubtitleFilePath = self.getFilePath(for: "firstSubtitle", from: multiPartFormRequest)
+                let secondSubtitleFilePath = self.getFilePath(for: "secondSubtitle", from: multiPartFormRequest)
+                let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({$0})
+                let video = UploadedVideo(videoPath: videoFilePath, subtitlePaths: subtitles)
                 
-                if let newVideoPath = FileManager.rename(file: URL(fileURLWithPath: videoPart.temporaryPath), to: videoPart.fileName) {
-                    let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({$0})
-                    let video = UploadedVideo(videoPath: newVideoPath, subtitlePaths: subtitles)
-                    
-                    observer.onNext(video)
-                    observer.onCompleted()
-                } else {
-                    let error = NSError(domain: "Failed to rename video file", code: 1, userInfo: nil)
-                    observer.onError(error)
-                }
+//                    fileCrawl(URL(fileURLWithPath: NSHomeDirectory()))
+                
+                observer.onNext(video)
+                observer.onCompleted()
                 
                 return GCDWebServerResponse(statusCode: 200)
             }
@@ -91,11 +80,25 @@ class LocalWebServer: NSObject {
         }
     }
     
+    private func getFilePath(for name: String, from multiPart: GCDWebServerMultiPartFormRequest) -> URL? {
+        if let part = multiPart.firstFile(forControlName: name) {
+            let filePath = FileManager.rename(file: URL(fileURLWithPath: part.temporaryPath), to: part.fileName)
+            return filePath
+        }
+        
+        return nil
+    }
+    
 }
 
 extension LocalWebServer: GCDWebServerDelegate {
     
     func webServerDidCompleteBonjourRegistration(_ server: GCDWebServer) {
+        let addresses = ServerAddresses(ip: server.serverURL?.absoluteString, bonjour: server.bonjourServerURL?.absoluteString)
+        addressSubject.onNext(addresses)
+    }
+    
+    func webServerDidStart(_ server: GCDWebServer) {
         let addresses = ServerAddresses(ip: server.serverURL?.absoluteString, bonjour: server.bonjourServerURL?.absoluteString)
         addressSubject.onNext(addresses)
     }

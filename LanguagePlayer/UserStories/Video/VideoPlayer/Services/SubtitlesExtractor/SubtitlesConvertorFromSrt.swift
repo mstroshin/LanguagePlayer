@@ -26,17 +26,15 @@ class SubtitlesConvertorFromSrt: SubtitlesConvertor {
     private func prepareSubtitles() {
         do {
             let subtitles = try String(contentsOf: self.filePath)
-//            self.parts = self.parse(subtitles).sorted(by: { lhs, rhs -> Bool in
-//                lhs.fromTime < rhs.fromTime
-//            })
-            self.parts = try! self.parseSRTSub(subtitles).sorted(by: { lhs, rhs -> Bool in
+            self.parts = try self.parseSRTSub(subtitles).sorted(by: { lhs, rhs -> Bool in
                 lhs.fromTime < rhs.fromTime
             })
         } catch {
-            fatalError("Doesn't read subtitle file \(self.filePath)\n Error: \(error)")
+            fatalError("Doesn't read subtitle file \(String(describing: self.filePath))\n Error: \(error)")
         }
     }
     
+    /*
     private func parse(_ subtitles: String) -> [SubtitlePart] {
         var result = [SubtitlePart]()
         let subtitles = subtitles.replacingOccurrences(of: "\r", with: "")
@@ -49,7 +47,7 @@ class SubtitlesConvertorFromSrt: SubtitlesConvertor {
             if lines.count < 3 { continue }
             
             guard let number = Int(lines[0]) else {
-                fatalError("Doesn't parse subtitle file \(self.filePath)")
+                fatalError("Doesn't parse subtitle file \(String(describing: self.filePath))")
             }
             
             let timeRange = lines[1]
@@ -74,6 +72,7 @@ class SubtitlesConvertorFromSrt: SubtitlesConvertor {
         
         return result
     }
+    */
     
     func parseSRTSub(_ rawSub: String) throws -> [SubtitlePart] {
             var allTitles = [SubtitlePart]()

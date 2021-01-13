@@ -20,7 +20,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             .share()
         
         let dataExtracted = videoUploaded
-            .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .background))
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap { video -> Single<VideoDataExtractor.VideoData> in
                 VideoDataExtractor.extractData(from: video.videoPath)
             }
@@ -48,7 +48,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
         }
         
         videoSavedInRealm
-            .observeOn(MainScheduler())
+            .observe(on: MainScheduler())
             .do(onError: { error in
                 print(error)
             })

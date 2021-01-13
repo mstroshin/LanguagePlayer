@@ -34,7 +34,7 @@ class CardsCoordinator: BaseCoordinator<Void> {
         navigationController.present(viewController, animated: true, completion: nil)
         
         viewModel.route.close
-            .observeOn(MainScheduler())
+            .observe(on: MainScheduler())
             .subscribe(onCompleted: {
                 viewController.dismiss(animated: true, completion: nil)
             })

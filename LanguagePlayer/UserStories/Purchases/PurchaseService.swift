@@ -11,10 +11,10 @@ class PurchaseService {
                 if let packages = offerings?.current?.availablePackages {
                     single(.success(packages))
                 } else if let error = error {
-                    single(.error(error))
+                    single(.failure(error))
                 } else {
                     let error = NSError(domain: "Unknow purchasing error", code: 1, userInfo: nil)
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
             
@@ -40,7 +40,7 @@ class PurchaseService {
         Single.create { single -> Disposable in
             Purchases.shared.restoreTransactions { (purchaserInfo, error) in
                 if let error = error {
-                    single(.error(error))
+                    single(.failure(error))
                 } else if let purchaserInfo = purchaserInfo {
                     single(.success(Array(purchaserInfo.activeSubscriptions)))
                 }
@@ -57,10 +57,10 @@ class PurchaseService {
                     PurchaseService.isPremium = !info.entitlements.active.isEmpty
                     single(.success(PurchaseService.isPremium))
                 } else if let error = error {
-                    single(.error(error))
+                    single(.failure(error))
                 } else {
                     let error = NSError(domain: "Unknow purchasing error", code: 1, userInfo: nil)
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
             
