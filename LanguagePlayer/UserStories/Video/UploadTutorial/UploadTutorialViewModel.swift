@@ -6,7 +6,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     init(
         webServer: LocalWebServer = LocalWebServer(),
@@ -18,6 +18,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
                 
         let videoUploaded = webServer.run()
             .share()
+
         
         let dataExtracted = videoUploaded
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -51,9 +52,6 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             .observe(on: MainScheduler())
             .do(onError: { error in
                 print(error)
-            })
-            .do(onDispose: {
-                FileManager.clearTmpDirectory()
             })
             .subscribe(realm.rx.add())
             .disposed(by: disposeBag)

@@ -61,16 +61,14 @@ class LocalWebServer: NSObject {
                 let secondSubtitleFilePath = self.getFilePath(for: "secondSubtitle", from: multiPartFormRequest)
                 let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({$0})
                 let video = UploadedVideo(videoPath: videoFilePath, subtitlePaths: subtitles)
-                
-//                    fileCrawl(URL(fileURLWithPath: NSHomeDirectory()))
-                
+                                
                 observer.onNext(video)
                 observer.onCompleted()
                 
                 return GCDWebServerResponse(statusCode: 200)
             }
             
-            let serverIsRunning = webServer.start(withPort: 9099, bonjourName: "LanguagePlayer Server")
+            let serverIsRunning = webServer.start(withPort: 8080, bonjourName: "LanguagePlayer Server")
             print("Local WebServer is successfull running: \(String(describing: serverIsRunning))")
             
             return Disposables.create {

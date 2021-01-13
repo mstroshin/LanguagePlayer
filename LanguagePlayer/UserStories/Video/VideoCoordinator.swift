@@ -78,7 +78,7 @@ class VideoCoordinator: BaseCoordinator<Void> {
             .subscribe(onCompleted: { [weak viewController] in
                 viewController?.dismiss(animated: true, completion: nil)
             })
-            .disposed(by: disposeBag)
+            .disposed(by: viewModel.disposeBag) //This is bad
     }
     
     private func openPremium() {
