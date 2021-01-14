@@ -73,12 +73,12 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         navigationController.present(viewController, animated: true, completion: nil)
         
-        viewModel.route.videoLoaded
-            .observe(on: MainScheduler())
-            .subscribe(onCompleted: { [weak viewController] in
-                viewController?.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: viewModel.disposeBag) //This is bad
+//        viewModel.route.videoLoaded
+//            .observe(on: MainScheduler())
+//            .subscribe(onCompleted: { [weak viewController] in
+//                viewController?.dismiss(animated: true, completion: nil)
+//            })
+//            .disposed(by: viewModel.disposeBag) //This is bad
     }
     
     private func openPremium() {

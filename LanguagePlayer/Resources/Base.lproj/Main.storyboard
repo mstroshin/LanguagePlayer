@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="DNv-Ua-CHN">
-                                <rect key="frame" x="0.0" y="20" width="704" height="300.5"/>
+                                <rect key="frame" x="0.0" y="20" width="704" height="265.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Чтобы загрузить видео и субтитры, подключите это устройство к Wi-Fi сети и откройте с другого устройства сайт:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fil-hW-2lm">
                                         <rect key="frame" x="0.5" y="0.0" width="703" height="115"/>
@@ -46,12 +46,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Когда видео загрузится, это окно закроется автоматически. Не закрывайте его во время загрузки." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vyb-TS-T8V">
-                                        <rect key="frame" x="27.5" y="185.5" width="649.5" height="115"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="QQy-FM-oe2">
+                                        <rect key="frame" x="312" y="185.5" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="KtI-yG-GzB"/>
+                                            <constraint firstAttribute="height" constant="80" id="Mbl-Y0-haj"/>
+                                        </constraints>
+                                    </activityIndicatorView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -66,6 +67,7 @@
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="QQy-FM-oe2" id="6pR-Un-sxy"/>
                         <outlet property="addressLabel" destination="Pv9-2w-Z8C" id="0u1-xq-CMS"/>
                         <outlet property="ipAddressLabel" destination="Xaq-pt-Rfb" id="rXl-LX-GWl"/>
                         <outlet property="orLabel" destination="NV4-7i-5fe" id="rDa-jR-kkl"/>

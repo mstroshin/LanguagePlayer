@@ -9,6 +9,8 @@ class UploadTutorialViewController: UIViewController {
     @IBOutlet private var addressLabel: UILabel!
     @IBOutlet private var tutorialLabel: UILabel!
     @IBOutlet private var orLabel: UILabel!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -29,6 +31,14 @@ class UploadTutorialViewController: UIViewController {
                     self?.orLabel.isHidden = true
                     self?.addressLabel.isHidden = true
                 }
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.loading
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLoading in
+                print("is loading: \(isLoading)")
+                self?.activityIndicator.isHidden = !isLoading
             })
             .disposed(by: disposeBag)
     }

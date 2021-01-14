@@ -16,7 +16,9 @@ struct ServerAddresses {
 class LocalWebServer: NSObject {
     private let addressSubject = PublishSubject<ServerAddresses>()
     var address: Observable<ServerAddresses> {
-        addressSubject.asObserver()
+        addressSubject
+            .asObserver()
+            .share(replay: 1, scope: .forever)
     }
     
     func run() -> Observable<UploadedVideo> {
@@ -63,13 +65,24 @@ class LocalWebServer: NSObject {
                 let video = UploadedVideo(videoPath: videoFilePath, subtitlePaths: subtitles)
                                 
                 observer.onNext(video)
-                observer.onCompleted()
+//                observer.onCompleted()
                 
                 return GCDWebServerResponse(statusCode: 200)
             }
             
-            let serverIsRunning = webServer.start(withPort: 8080, bonjourName: "LanguagePlayer Server")
-            print("Local WebServer status: \(String(describing: serverIsRunning))")
+            do {
+                let serverIsRunning = try webServer.start(
+                    options: [
+                        GCDWebServerOption_ConnectionClass : LocalWebServerUploadConnection.self,
+                        GCDWebServerOption_Port : 8080,
+                        GCDWebServerOption_BonjourName : "LanguagePlayer Server"
+                    ]
+                )
+    //            let serverIsRunning = webServer.start(withPort: 8080, bonjourName: "LanguagePlayer Server")
+                print("Local WebServer status: \(String(describing: serverIsRunning))")
+            } catch {
+                print("Local WebServer status: false")
+            }
             
             return Disposables.create {
                 webServer.stop()
@@ -99,6 +112,41 @@ extension LocalWebServer: GCDWebServerDelegate {
     func webServerDidStart(_ server: GCDWebServer) {
         let addresses = ServerAddresses(ip: server.serverURL?.absoluteString, bonjour: server.bonjourServerURL?.absoluteString)
         addressSubject.onNext(addresses)
+    }
+    
+}
+
+class LocalWebServerUploadConnection: GCDWebServerConnection {
+    private static let activitySubject = BehaviorSubject<Bool>(value: false)
+    static var activity: Observable<Bool> {
+        activitySubject.asObservable()
+    }
+    
+    //Start
+    override func rewriteRequest(_ url: URL, withMethod method: String, headers: [String : String]) -> URL {
+        if url.lastPathComponent == "upload" {
+            LocalWebServerUploadConnection.activitySubject.onNext(true)
+        }
+        
+        return super.rewriteRequest(url, withMethod: method, headers: headers)
+    }
+    
+    //Success
+    override func processRequest(_ request: GCDWebServerRequest, completion: @escaping GCDWebServerCompletionBlock) {
+        super.processRequest(request, completion: completion)
+        
+        if request.path.hasSuffix("/upload") {
+            LocalWebServerUploadConnection.activitySubject.onNext(false)
+        }
+    }
+    
+    //Cancel
+    override func abortRequest(_ request: GCDWebServerRequest?, withStatusCode statusCode: Int) {
+        super.abortRequest(request, withStatusCode: statusCode)
+        
+        if let request = request, request.path.hasSuffix("/upload") {
+            LocalWebServerUploadConnection.activitySubject.onNext(false)
+        }
     }
     
 }

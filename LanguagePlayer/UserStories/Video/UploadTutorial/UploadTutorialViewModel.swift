@@ -6,60 +6,32 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route
-    let disposeBag = DisposeBag()
+    
+    private let videoUploader: VideoUploader
+    
     
     init(
-        webServer: LocalWebServer = LocalWebServer(),
+        videoUploader: VideoUploader = VideoUploader.shared,
         realm: Realm = try! Realm(),
         localStore: LocalDiskStore = LocalDiskStore()
     ) {
+        self.videoUploader = videoUploader
+        
         self.input = Input()
-        self.output = Output(addresses: webServer.address)
-                
-        let videoUploaded = webServer.run()
-            .share()
-
+        self.output = Output(
+            addresses: videoUploader.webServerAddress,
+            loading: videoUploader.processingActivityIndicator
+        )
         
-        let dataExtracted = videoUploaded
-            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
-            .flatMap { video -> Single<VideoDataExtractor.VideoData> in
-                VideoDataExtractor.extractData(from: video.videoPath)
-            }
-            .share()
-        
-        let temporaryVideo = Observable.zip(videoUploaded, dataExtracted) { video, data -> TemporaryVideo in
-            TemporaryVideo(
-                videoPath: video.videoPath,
-                subtitleFilesPaths: video.subtitlePaths + data.extractedSubtitlesPaths,
-                audioStreamNames: data.audioTracksTitles
-            )
-        }
-        
-        let videoSavedOnDisk = temporaryVideo
-            .flatMap(localStore.save(video:))
-            .share()
-        
-        let videoSavedInRealm = Observable.zip(videoSavedOnDisk, temporaryVideo) { directoryName, tempVideo -> VideoEntity in
-            let videoEntity = VideoEntity()
-            videoEntity.fileName = tempVideo.videoPath.lastPathComponent
-            videoEntity.savedInDirectoryName = directoryName
-            videoEntity.audioStreamNames.append(objectsIn: tempVideo.audioStreamNames)
-            videoEntity.subtitleNames.append(objectsIn: tempVideo.subtitleFilesPaths.map({ $0.lastPathComponent }))
-            return videoEntity
-        }
-        
-        videoSavedInRealm
-            .observe(on: MainScheduler())
-            .do(onError: { error in
-                print(error)
-            })
-            .subscribe(realm.rx.add())
-            .disposed(by: disposeBag)
+        videoUploader.startDownloading()
         
         self.route = Route(
-            videoLoaded: videoSavedInRealm
+            videoLoaded: videoUploader.downloadAndProcessVideo
         )
-            
+    }
+    
+    deinit {
+        videoUploader.closeWebServerIfNotLoading()
     }
 }
 
@@ -69,6 +41,7 @@ extension UploadTutorialViewModel {
     
     struct Output {
         let addresses: Observable<ServerAddresses>
+        let loading: Observable<Bool>
     }
     
     struct Route {

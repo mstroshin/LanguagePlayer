@@ -14,6 +14,7 @@
 		944256862590EF1200FB79F6 /* FilesCrawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944256852590EF1200FB79F6 /* FilesCrawler.swift */; };
 		94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */; };
 		94867ED32561FA60002DE68D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ED22561FA60002DE68D /* Protocols.swift */; };
+		949C860F25B08758002ED79A /* VideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949C860E25B08758002ED79A /* VideoUploader.swift */; };
 		94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */; };
 		94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */; };
 		94B9BD3E25632CE000A5E740 /* PurchaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3D25632CE000A5E740 /* PurchaseService.swift */; };
@@ -82,6 +83,7 @@
 		944256852590EF1200FB79F6 /* FilesCrawler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCrawler.swift; sourceTree = "<group>"; };
 		94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewModel.swift; sourceTree = "<group>"; };
 		94867ED22561FA60002DE68D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		949C860E25B08758002ED79A /* VideoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploader.swift; sourceTree = "<group>"; };
 		94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewModel.swift; sourceTree = "<group>"; };
 		94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		94B9BD3D25632CE000A5E740 /* PurchaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseService.swift; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				D2D292EE24C78BA0004660EE /* TranslationAPI */,
 				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
 				94D874402574B7DA00277245 /* VideoDataExtractor.swift */,
+				949C860E25B08758002ED79A /* VideoUploader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */,
 				944256862590EF1200FB79F6 /* FilesCrawler.swift in Sources */,
+				949C860F25B08758002ED79A /* VideoUploader.swift in Sources */,
 				942B404F25789E16006389E9 /* DoubleSubtitlesView.swift in Sources */,
 				94867ED32561FA60002DE68D /* Protocols.swift in Sources */,
 				D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */,
