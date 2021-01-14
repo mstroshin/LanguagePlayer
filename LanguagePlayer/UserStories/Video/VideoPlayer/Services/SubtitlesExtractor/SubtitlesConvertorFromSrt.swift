@@ -9,118 +9,96 @@
 import Foundation
 
 class SubtitlesConvertorFromSrt: SubtitlesConvertor {
-    private var filePath: URL!
+    private var partsCache = [URL : [SubtitlePart]]()
     private var parts = [SubtitlePart]()
     
     func prepareParts(from filePath: URL) {
-        self.parts.removeAll()
+        parts.removeAll()
         
         if filePath.pathExtension != "srt" {
             fatalError("Subtitle file must have srt format")
         }
         
-        self.filePath = filePath
-        self.prepareSubtitles()
+        parts = self.prepareSubtitles(for: filePath)
     }
     
-    private func prepareSubtitles() {
+    func clearCurrentParts() {
+        parts.removeAll()
+    }
+    
+    private func prepareSubtitles(for filePath: URL) -> [SubtitlePart] {
+        if let partsFromCache = loadFromCache(filePath: filePath) {
+            return partsFromCache
+        }
+        
         do {
-            let subtitles = try String(contentsOf: self.filePath)
-            self.parts = try self.parseSRTSub(subtitles).sorted(by: { lhs, rhs -> Bool in
+            let subtitles = try String(contentsOf: filePath)
+            let parts = self.parseSRTSub(subtitles).sorted(by: { lhs, rhs -> Bool in
                 lhs.fromTime < rhs.fromTime
             })
+            saveToCache(parts, for: filePath)
+            
+            return parts
         } catch {
-            fatalError("Doesn't read subtitle file \(String(describing: self.filePath))\n Error: \(error)")
+            fatalError("Doesn't read subtitle file \(filePath)\nError: \(error)")
         }
     }
     
-    /*
-    private func parse(_ subtitles: String) -> [SubtitlePart] {
-        var result = [SubtitlePart]()
-        let subtitles = subtitles.replacingOccurrences(of: "\r", with: "")
+    private func loadFromCache(filePath: URL) -> [SubtitlePart]? {
+        partsCache[filePath]
+    }
+    
+    private func saveToCache(_ parts: [SubtitlePart], for filePath: URL) {
+        partsCache[filePath] = parts
+    }
+    
+    private func parseSRTSub(_ rawSub: String) -> [SubtitlePart] {
+        var allTitles = [SubtitlePart]()
+        var components = rawSub.components(separatedBy: "\r\n\r\n")
         
-        let parts = subtitles.components(separatedBy: "\n\n")
-        for part in parts {
-            if part.isEmpty { continue }
-            
-            let lines = part.components(separatedBy: "\n").filter { !$0.isEmpty }
-            if lines.count < 3 { continue }
-            
-            guard let number = Int(lines[0]) else {
-                fatalError("Doesn't parse subtitle file \(String(describing: self.filePath))")
+        // Fall back to \n\n separation
+        if components.count == 1 {
+            components = rawSub.components(separatedBy: "\n\n")
+        }
+        
+        for component in components {
+            if component.isEmpty {
+                continue
             }
             
-            let timeRange = lines[1]
-            let times = timeRange.components(separatedBy: " --> ")
+            let scanner = Scanner(string: component)
             
-            let fromTime = self.parse(timeString: times[0])
-            let toTime = self.parse(timeString: times[1])
+            let indexResult = scanner.scanInt()
+            let startResult = scanner.scanUpToCharacters(from: .whitespaces)
             
-            var text = ""
-            for i in 2 ..< lines.count {
-                text.append(lines[i])
-                text.append("\n")
+            let _ = scanner.scanUpToString("> ") != nil
+            scanner.currentIndex = scanner.string.index(scanner.currentIndex, offsetBy: 2, limitedBy: scanner.string.endIndex) ?? scanner.currentIndex
+            
+            let endResult = scanner.scanUpToCharacters(from: .newlines)
+            scanner.currentIndex = scanner.string.index(scanner.currentIndex, offsetBy: 1, limitedBy: scanner.string.endIndex) ?? scanner.currentIndex
+            
+            var textLines = [String]()
+            
+            // Iterate over text lines
+            while scanner.isAtEnd == false {
+                if let textResult = scanner.scanUpToCharacters(from: .newlines) {
+                    textLines.append(removeFormatting(from: textResult))
+                } else {
+                    fatalError("123")
+                }
             }
-            //Remove last \n
-            text.removeLast(1)
-            text = self.removeFormatting(from: text)
+            if textLines.isEmpty { continue }
             
-            result.append(
-                SubtitlePart(number: number, fromTime: fromTime, toTime: toTime, text: text)
+            let startTimeInterval = parse(timeString: startResult!)
+            let endTimeInterval = parse(timeString: endResult!)
+            
+            allTitles.append(
+                SubtitlePart(number: indexResult!, fromTime: startTimeInterval, toTime: endTimeInterval, text: textLines.joined())
             )
         }
         
-        return result
+        return allTitles
     }
-    */
-    
-    func parseSRTSub(_ rawSub: String) throws -> [SubtitlePart] {
-            var allTitles = [SubtitlePart]()
-            var components = rawSub.components(separatedBy: "\r\n\r\n")
-            
-            // Fall back to \n\n separation
-            if components.count == 1 {
-                components = rawSub.components(separatedBy: "\n\n")
-            }
-            
-            for component in components {
-                if component.isEmpty {
-                    continue
-                }
-                
-                let scanner = Scanner(string: component)
-                
-                let indexResult = scanner.scanInt()
-                let startResult = scanner.scanUpToCharacters(from: .whitespaces)
-                
-                let _ = scanner.scanUpToString("> ") != nil
-                scanner.currentIndex = scanner.string.index(scanner.currentIndex, offsetBy: 2, limitedBy: scanner.string.endIndex) ?? scanner.currentIndex
-                
-                let endResult = scanner.scanUpToCharacters(from: .newlines)
-                scanner.currentIndex = scanner.string.index(scanner.currentIndex, offsetBy: 1, limitedBy: scanner.string.endIndex) ?? scanner.currentIndex
-                
-                var textLines = [String]()
-                
-                // Iterate over text lines
-                while scanner.isAtEnd == false {
-                    if let textResult = scanner.scanUpToCharacters(from: .newlines) {
-                        textLines.append(removeFormatting(from: textResult))
-                    } else {
-                        fatalError("123")
-                    }
-                }
-                if textLines.isEmpty { continue }
-                
-                let startTimeInterval = parse(timeString: startResult!)
-                let endTimeInterval = parse(timeString: endResult!)
-                
-                allTitles.append(
-                    SubtitlePart(number: indexResult!, fromTime: startTimeInterval, toTime: endTimeInterval, text: textLines.joined())
-                )
-            }
-            
-            return allTitles
-        }
     
     private func removeFormatting(from text: String) -> String {
         text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)

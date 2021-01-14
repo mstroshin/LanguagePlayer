@@ -152,9 +152,13 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .map(\.firstSubIndex)
             .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 disables subtitle (-1)
             .distinctUntilChanged()
-            .compactMap(video.subtitleUrl(for:))
+            .map(video.subtitleUrl(for:))
             .subscribe(onNext: { subUrl in
-                firstSubtitlesConvertor.prepareParts(from: subUrl)
+                if let url = subUrl {
+                    firstSubtitlesConvertor.prepareParts(from: url)
+                } else {
+                    firstSubtitlesConvertor.clearCurrentParts()
+                }
             })
             .disposed(by: disposeBag)
         
@@ -162,9 +166,13 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .map(\.secondsSubIndex)
             .map { $0 <= 0 ? -1 : $0 - 1 } //cuz 0 disables subtitle (-1)
             .distinctUntilChanged()
-            .compactMap(video.subtitleUrl(for:))
+            .map(video.subtitleUrl(for:))
             .subscribe(onNext: { subUrl in
-                secondSubtitlesConvertor.prepareParts(from: subUrl)
+                if let url = subUrl {
+                    secondSubtitlesConvertor.prepareParts(from: url)
+                } else {
+                    secondSubtitlesConvertor.clearCurrentParts()
+                }
             })
             .disposed(by: disposeBag)
         
