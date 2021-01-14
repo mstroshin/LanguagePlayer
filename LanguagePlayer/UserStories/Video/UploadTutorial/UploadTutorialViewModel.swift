@@ -23,7 +23,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
             loading: videoUploader.processingActivityIndicator
         )
         
-        videoUploader.startDownloading()
+        videoUploader.startWebServer()
         
         self.route = Route(
             videoLoaded: videoUploader.downloadAndProcessVideo
@@ -31,7 +31,7 @@ class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
     }
     
     deinit {
-        videoUploader.closeWebServerIfNotLoading()
+        videoUploader.stopWebServer()
     }
 }
 

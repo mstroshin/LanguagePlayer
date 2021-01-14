@@ -9,7 +9,7 @@ class VideoDataExtractor {
         let audioTracksTitles: [String]
     }
     
-    static func extractData(from filePath: URL) -> Single<VideoData> {
+    func extractData(from filePath: URL) -> Single<VideoData> {
         MobileFFmpegConfig.setLogLevel(AV_LOG_QUIET)
         
         return Single.create { single -> Disposable in
@@ -27,14 +27,13 @@ class VideoDataExtractor {
                 audioTracksTitles: (try? audioTracksTitlesResult.get()) ?? []
             )
             
-//            fileCrawl(URL(fileURLWithPath: NSHomeDirectory()))
             single(.success(data))
             
             return Disposables.create()
         }
     }
     
-    private static func extractSubtitles(from mediaInfo: MediaInformation, filePath: URL) -> Result<[URL], Error> {
+    private func extractSubtitles(from mediaInfo: MediaInformation, filePath: URL) -> Result<[URL], Error> {
         guard let subtitleStreams = (mediaInfo.getStreams() as? [StreamInformation])?.filter({ $0.getType() == "subtitle" }) else {
             let error = NSError(domain: "Subtitle streams is nil", code: 1, userInfo: nil)
             return .failure(error)
@@ -56,7 +55,6 @@ class VideoDataExtractor {
             let subFileUrl = pathToSave.appendingPathComponent(title, isDirectory: false)
             command += " -map 0:\(index) \"\(subFileUrl.path)\""
             
-//            let url = URL(string: subFile)!
             subtitlesPaths.append(subFileUrl)
         }
         let result = MobileFFmpeg.execute(command)
@@ -69,7 +67,7 @@ class VideoDataExtractor {
         }
     }
     
-    private static func extractAudio(from mediaInfo: MediaInformation) -> Result<[String], Error> {
+    private func extractAudio(from mediaInfo: MediaInformation) -> Result<[String], Error> {
         guard let audioStreams = (mediaInfo.getStreams() as? [StreamInformation])?.filter({ $0.getType() == "audio" }) else {
             let error = NSError(domain: "Audio streams is nil", code: 1, userInfo: nil)
             return .failure(error)

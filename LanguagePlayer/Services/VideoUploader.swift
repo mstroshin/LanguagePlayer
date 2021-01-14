@@ -19,6 +19,7 @@ class VideoUploader {
 
     init(
         webServer: LocalWebServer = LocalWebServer(),
+        dataExtractor: VideoDataExtractor = VideoDataExtractor(),
         realm: Realm = try! Realm(),
         localStore: LocalDiskStore = LocalDiskStore()
     ) {
@@ -32,7 +33,7 @@ class VideoUploader {
         let dataExtracted = videoUploaded
             .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .background))
             .flatMap { video -> Single<VideoDataExtractor.VideoData> in
-                VideoDataExtractor.extractData(from: video.videoPath)
+                dataExtractor.extractData(from: video.videoPath)
                     .trackActivity(extractDataIndicator)
                     .asSingle()
             }
@@ -45,6 +46,7 @@ class VideoUploader {
                 audioStreamNames: data.audioTracksTitles
             )
         }
+        .share()
         
         let saveVideoIndicator = ActivityIndicator()
         let videoSavedOnDisk = temporaryVideo
@@ -53,7 +55,6 @@ class VideoUploader {
                     .trackActivity(saveVideoIndicator)
                     .asSingle()
             })
-            .share()
         
         self.downloadAndProcessVideo = Observable.zip(videoSavedOnDisk, temporaryVideo) { directoryName, tempVideo -> VideoEntity in
             let videoEntity = VideoEntity()
@@ -66,40 +67,48 @@ class VideoUploader {
         
         self.processingActivityIndicatorSubject = BehaviorSubject(value: false)
             
-        let _ = Observable.combineLatest(LocalWebServerUploadConnection.activity, extractDataIndicator.asObservable(), saveVideoIndicator.asObservable())
+        let _ = Observable.combineLatest(
+                LocalWebServerUploadConnection.activity,
+                extractDataIndicator.asObservable(),
+                saveVideoIndicator.asObservable()
+            )
             .map { $0 || $1 || $2 }
             .distinctUntilChanged()
             .bind(to: self.processingActivityIndicatorSubject)
     }
     
-    func startDownloading() {
+    func startWebServer() {
         stopServerWhenDownloadingCompleted = false
         if downloadAndProcessVideoDisposable != nil { return }
         
         downloadAndProcessVideoDisposable = downloadAndProcessVideo
             .observe(on: MainScheduler())
-            .do(onError: { error in
+            .do(onError: { [weak self] error in
                 print(error)
+                self?.stopServerIfNotLoading()
             })
             .do(onDispose: {
                 FileManager.clearTmpDirectory()
             })
             .do(afterNext: { [weak self] _ in
-                guard let self = self else { return }
-                if self.stopServerWhenDownloadingCompleted {
-                    self.stopServer()
-                }
+                self?.stopServerIfNotLoading()
             })
             .subscribe(realm.rx.add())
     }
     
-    func closeWebServerIfNotLoading() {
+    func stopWebServer() {
         let isLoading = try! processingActivityIndicatorSubject.value()
         
         if !isLoading {
             stopServer()
         } else {
             stopServerWhenDownloadingCompleted = true
+        }
+    }
+    
+    private func stopServerIfNotLoading() {
+        if stopServerWhenDownloadingCompleted {
+            stopServer()
         }
     }
     

@@ -18,7 +18,7 @@ class LocalWebServer: NSObject {
     var address: Observable<ServerAddresses> {
         addressSubject
             .asObserver()
-            .share(replay: 1, scope: .forever)
+            .share(replay: 1)
     }
     
     func run() -> Observable<UploadedVideo> {
@@ -65,23 +65,21 @@ class LocalWebServer: NSObject {
                 let video = UploadedVideo(videoPath: videoFilePath, subtitlePaths: subtitles)
                                 
                 observer.onNext(video)
-//                observer.onCompleted()
                 
                 return GCDWebServerResponse(statusCode: 200)
             }
             
             do {
-                let serverIsRunning = try webServer.start(
+                try webServer.start(
                     options: [
                         GCDWebServerOption_ConnectionClass : LocalWebServerUploadConnection.self,
                         GCDWebServerOption_Port : 8080,
                         GCDWebServerOption_BonjourName : "LanguagePlayer Server"
                     ]
                 )
-    //            let serverIsRunning = webServer.start(withPort: 8080, bonjourName: "LanguagePlayer Server")
-                print("Local WebServer status: \(String(describing: serverIsRunning))")
             } catch {
-                print("Local WebServer status: false")
+                print("Local WebServer starting error: \(error)")
+                observer.onError(error)
             }
             
             return Disposables.create {
