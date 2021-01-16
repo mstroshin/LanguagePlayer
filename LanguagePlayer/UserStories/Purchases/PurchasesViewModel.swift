@@ -32,8 +32,8 @@ class PurchasesViewModel: ViewModel {
             .flatMap {
                 purchaseService.buy(package: $0)
                     .trackActivity(activityIndicator)
+                    .materialize()
             }
-            .materialize()
             .share()
             .map { event -> Result<Void, Error> in
                 switch event {
@@ -47,8 +47,8 @@ class PurchasesViewModel: ViewModel {
             .flatMap {
                 purchaseService.restorePurchases()
                     .trackActivity(activityIndicator)
+                    .materialize()
             }
-            .materialize()
             .share()
             .map { event -> Result<Bool, Error> in
                 switch event {
@@ -70,14 +70,17 @@ class PurchasesViewModel: ViewModel {
 }
 
 extension PurchasesViewModel {
+    
     struct Input {
         let buy: AnyObserver<Purchases.Package>
         let restore: AnyObserver<Void>
     }
+    
     struct Output {
         let products: Driver<Result<[Purchases.Package], Error>>
         let buyingResult: Driver<Result<Void, Error>>
         let restoringResult: Driver<Result<Bool, Error>>
         let activityIndicator: ActivityIndicator
     }
+    
 }
