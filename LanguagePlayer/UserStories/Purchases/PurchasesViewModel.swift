@@ -42,11 +42,27 @@ class PurchasesViewModel: ViewModel {
                 }
             }
             .asDriver(onErrorJustReturn: .success(()))
-            
         
+        let restoringResult = restoreSubject
+            .flatMap {
+                purchaseService.restorePurchases()
+                    .trackActivity(activityIndicator)
+            }
+            .materialize()
+            .share()
+            .map { event -> Result<Bool, Error> in
+                switch event {
+                case .error(let error): return .failure(error)
+                case .next(let purchases): return .success(!purchases.isEmpty)
+                default: return .success(false)
+                }
+            }
+            .asDriver(onErrorJustReturn: .success(false))
+            
         self.output = Output(
             products: products,
             buyingResult: buyingResult,
+            restoringResult: restoringResult,
             activityIndicator: activityIndicator
         )
     }
@@ -61,6 +77,7 @@ extension PurchasesViewModel {
     struct Output {
         let products: Driver<Result<[Purchases.Package], Error>>
         let buyingResult: Driver<Result<Void, Error>>
+        let restoringResult: Driver<Result<Bool, Error>>
         let activityIndicator: ActivityIndicator
     }
 }

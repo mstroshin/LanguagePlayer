@@ -640,15 +640,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DpB-4B-W06">
-                                <rect key="frame" x="372.5" y="1136" width="89" height="30"/>
-                                <state key="normal" title="Соглашение"/>
-                            </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iEY-Xp-JJz">
-                                <rect key="frame" x="16" y="165" width="802" height="951"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="iEY-Xp-JJz">
+                                <rect key="frame" x="16" y="209" width="802" height="634"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="250" constant="634" id="BTs-mH-fdd"/>
+                                </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="240" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Tz-Zs-AXa">
-                                <rect key="frame" x="16" y="71" width="802" height="86"/>
+                                <rect key="frame" x="16" y="87" width="802" height="86"/>
                                 <string key="text">Без лимита просмотра видео
 Без лимита карточек 
 Поддержка развития приложения</string>
@@ -656,31 +655,36 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5D7-Ds-59W">
+                                <rect key="frame" x="336" y="859" width="162" height="30"/>
+                                <state key="normal" title="Восстановить покупки"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1Jx-oW-BEd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="1Jx-oW-BEd" firstAttribute="bottom" secondItem="DpB-4B-W06" secondAttribute="bottom" constant="8" id="5VD-HN-Z5l"/>
-                            <constraint firstItem="DpB-4B-W06" firstAttribute="top" secondItem="iEY-Xp-JJz" secondAttribute="bottom" constant="20" id="HMg-Qf-FSC"/>
-                            <constraint firstItem="DpB-4B-W06" firstAttribute="centerX" secondItem="G0L-Mm-Tyz" secondAttribute="centerX" id="NLV-z7-f95"/>
+                            <constraint firstItem="5D7-Ds-59W" firstAttribute="centerX" secondItem="G0L-Mm-Tyz" secondAttribute="centerX" id="8ct-J0-Gbw"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="pxz-TN-huw" secondAttribute="trailing" constant="16" id="RFA-yz-FG1"/>
                             <constraint firstItem="2Tz-Zs-AXa" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="RzW-38-Peg"/>
                             <constraint firstItem="pxz-TN-huw" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="Ts6-Jw-zkV"/>
-                            <constraint firstItem="2Tz-Zs-AXa" firstAttribute="top" secondItem="pxz-TN-huw" secondAttribute="bottom" constant="8" id="Whi-vV-eL5"/>
+                            <constraint firstItem="2Tz-Zs-AXa" firstAttribute="top" secondItem="pxz-TN-huw" secondAttribute="bottom" constant="24" id="Whi-vV-eL5"/>
                             <constraint firstItem="iEY-Xp-JJz" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="YHF-9I-05j"/>
+                            <constraint firstItem="5D7-Ds-59W" firstAttribute="top" secondItem="iEY-Xp-JJz" secondAttribute="bottom" constant="16" id="ZOD-lM-KaS"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="2Tz-Zs-AXa" secondAttribute="trailing" constant="16" id="f68-DA-ahp"/>
                             <constraint firstItem="pxz-TN-huw" firstAttribute="top" secondItem="1Jx-oW-BEd" secondAttribute="top" constant="20" id="iAI-KL-9zE"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="iEY-Xp-JJz" secondAttribute="trailing" constant="16" id="q1u-YB-jk9"/>
-                            <constraint firstItem="iEY-Xp-JJz" firstAttribute="top" secondItem="2Tz-Zs-AXa" secondAttribute="bottom" constant="8" id="zLm-RC-FFZ"/>
+                            <constraint firstItem="iEY-Xp-JJz" firstAttribute="top" secondItem="2Tz-Zs-AXa" secondAttribute="bottom" constant="36" id="zLm-RC-FFZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="benefitsLabel" destination="2Tz-Zs-AXa" id="T1T-jc-Ded"/>
                         <outlet property="productsStackView" destination="iEY-Xp-JJz" id="awU-1q-8ui"/>
+                        <outlet property="restoreButton" destination="5D7-Ds-59W" id="uzU-Ar-hrg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="myM-6P-OX7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-527" y="1524"/>
+            <point key="canvasLocation" x="-527.33812949640287" y="1523.6180904522614"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wh9-LT-Qyp">
