@@ -4,7 +4,7 @@ import RealmSwift
 import RxCocoa
 import RxRealm
 
-class VideosListViewModel: ViewModel, ViewModelCoordinatable {
+class VideosListViewModel: ViewModelOld, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route
@@ -30,21 +30,23 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         //View outputs
         let realmVideoEntities = Observable.array(from: realm.objects(VideoEntity.self))
         
-        let videoViewEntities = realmVideoEntities
-            .map { $0.map(VideoViewEntity.init) }
+        let videoViewModels = realmVideoEntities
+            .map { $0.map( { videoEntity in
+                VideoItemViewModel(title: videoEntity.name, thumbnailImagePath: videoEntity.thumbneilImagePath)
+            } ) }
             .asDriver(onErrorJustReturn: [])
         
         self.output = Output(
-            videos: videoViewEntities
+            videos: videoViewModels
         )
         
         removeVideo
             .withLatestFrom(realmVideoEntities, resultSelector: { index, videos -> VideoEntity in
                 videos[index]
             })
-            .do(onNext: { video in
-                let _ = LocalDiskStore().removeDirectory(video.savedInDirectoryName)
-            })
+//            .do(onNext: { video in
+//                let _ = LocalDiskStore().removeDirectory(video.savedInDirectoryName)
+//            })
             .subscribe(realm.rx.delete())
             .disposed(by: disposeBag)
         
@@ -55,7 +57,7 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
             .withLatestFrom(realmVideoEntities, resultSelector: { index, videos -> VideoEntity in
                 videos[index]
             })
-            .map(\.favoriteSubtitles)
+            .map(\.favoriteCards)
             .subscribe(realm.rx.delete())
             .disposed(by: disposeBag)
         
@@ -85,7 +87,7 @@ extension VideosListViewModel {
     }
     
     struct Output {
-        let videos: Driver<[VideoViewEntity]>
+        let videos: Driver<[VideoItemViewModel]>
     }
     
     struct Route {

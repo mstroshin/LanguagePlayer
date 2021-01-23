@@ -1,5 +1,4 @@
 import UIKit
-import MobileVLCKit
 import RxCocoa
 import RxSwift
 import DifferenceKit
@@ -8,7 +7,7 @@ class VideosListViewController: UIViewController {
     var viewModel: VideosListViewModel!
     
     @IBOutlet private weak var collectionView: UICollectionView!
-    private var videos = [VideoViewEntity]()
+    private var videos = [VideoItemViewModel]()
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -27,8 +26,9 @@ class VideosListViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        bind()
+        
         viewModel.output.videos
-            .do(afterNext: makeThumbneils(for:))
             .drive(onNext: { [self] newVideos in
                 collectionView.diffUpdate(source: videos, target: newVideos) { data in
                     videos = data
@@ -37,13 +37,8 @@ class VideosListViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func makeThumbneils(for videos: [VideoViewEntity]) {
-        for (index, video) in videos.enumerated() {
-            let media = VLCMedia(url: video.videoUrl)
-            let thumbnailer = VLCMediaThumbnailer(media: media, andDelegate: self)
-            thumbnailer?.accessibilityLabel = "\(index)"
-            thumbnailer?.fetchThumbnail()
-        }
+    func bind() {
+        
     }
     
     @objc private func premiumButtonPressed() {

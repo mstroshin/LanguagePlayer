@@ -4,7 +4,15 @@ import RxCocoa
 import Purchases
 import RxSwiftExt
 
-class PurchasesViewModel: ViewModel {
+protocol ViewModelOld {
+    associatedtype Input
+    associatedtype Output
+    
+    var input: Input { get }
+    var output: Output { get }
+}
+
+class PurchasesViewModel: ViewModelOld {
     let input: Input
     let output: Output
     

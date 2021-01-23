@@ -19,8 +19,10 @@ class UploadTutorialViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.output.addresses
-            .subscribe(onNext: { [weak self] addresses in
+        let output = viewModel.transform(input: UploadTutorialViewModel.Input())
+        
+        output.addresses
+            .drive(onNext: { [weak self] addresses in
                 self?.ipAddressLabel.text = addresses.ip
                 
                 if let bonjourAddress = addresses.bonjour {
@@ -34,9 +36,8 @@ class UploadTutorialViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.output.loading
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] isLoading in
+        output.loading
+            .drive(onNext: { [weak self] isLoading in
                 print("is loading: \(isLoading)")
                 self?.activityIndicator.isHidden = !isLoading
             })

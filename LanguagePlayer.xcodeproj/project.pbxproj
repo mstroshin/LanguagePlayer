@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		868CD54A32F12DFE4E43A95E /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */; };
+		9420A90C25B86267008A96C8 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9420A90B25B86267008A96C8 /* RealmRepository.swift */; };
+		9420A92F25B86E0A008A96C8 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
 		942B404F25789E16006389E9 /* DoubleSubtitlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942B404E25789E16006389E9 /* DoubleSubtitlesView.swift */; };
 		942B40D5257A0137006389E9 /* VideoSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942B40D4257A0137006389E9 /* VideoSettingsViewController.swift */; };
 		942B40D9257A0155006389E9 /* VideoSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 942B40D8257A0155006389E9 /* VideoSettingsViewModel.swift */; };
 		944256862590EF1200FB79F6 /* FilesCrawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944256852590EF1200FB79F6 /* FilesCrawler.swift */; };
+		9466DCC625B9FE3A009BBDB6 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9466DCC525B9FE3A009BBDB6 /* Video.swift */; };
+		9466DCCA25B9FEBB009BBDB6 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9466DCC925B9FEBB009BBDB6 /* Card.swift */; };
+		9466DCCD25BA00AB009BBDB6 /* CardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9466DCCC25BA00AB009BBDB6 /* CardEntity.swift */; };
 		94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */; };
 		94867ED32561FA60002DE68D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ED22561FA60002DE68D /* Protocols.swift */; };
-		949C860F25B08758002ED79A /* VideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949C860E25B08758002ED79A /* VideoUploader.swift */; };
+		949C860F25B08758002ED79A /* VideoDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949C860E25B08758002ED79A /* VideoDownloader.swift */; };
 		949C862125B1DCCC002ED79A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 949C862325B1DCCC002ED79A /* Localizable.strings */; };
 		94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */; };
 		94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */; };
@@ -25,7 +30,8 @@
 		94B9BDBD2564812600A5E740 /* VideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDBC2564812600A5E740 /* VideoCoordinator.swift */; };
 		94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BDC2256485F200A5E740 /* CardsCoordinator.swift */; };
 		94D874412574B7DA00277245 /* VideoDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D874402574B7DA00277245 /* VideoDataExtractor.swift */; };
-		94F6945E258B9C3D0004B4C5 /* TemporaryVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F6945D258B9C3D0004B4C5 /* TemporaryVideo.swift */; };
+		94F4C19325BC709100713043 /* VideoBackgroundSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F4C19225BC709100713043 /* VideoBackgroundSaver.swift */; };
+		94F4C19925BC81E700713043 /* VideoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F4C19825BC81E700713043 /* VideoItemViewModel.swift */; };
 		CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */; };
 		CB8C06F7255B2F88006C0499 /* FavoriteSubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8C06F6255B2F88006C0499 /* FavoriteSubtitle.swift */; };
 		CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB946582255B6B4C0075700B /* CardsViewModel.swift */; };
@@ -44,7 +50,6 @@
 		D287498024D5A17000687095 /* VideosListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287497F24D5A17000687095 /* VideosListViewController.swift */; };
 		D287498224D5A2BE00687095 /* VideoCollectionViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */; };
 		D28749AF24D6B4ED00687095 /* LocalWebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749AE24D6B4ED00687095 /* LocalWebServer.swift */; };
-		D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28749B224D6BA1300687095 /* LocalDiskStore.swift */; };
 		D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516AE24F90DBD00DDC5EC /* CardsViewController.swift */; };
 		D2A516B324F911C700DDC5EC /* CardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A516B224F911C700DDC5EC /* CardCollectionViewCell.swift */; };
 		D2A9822724FFE2E900304522 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2A9822624FFE2E900304522 /* StoreKit.framework */; };
@@ -78,13 +83,17 @@
 		0DB8DADDF543D22A7DF56B92 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		655D7114C45C11E29194E2EC /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		66D68F96205B113B042FBD1C /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
+		9420A90B25B86267008A96C8 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RealmRepository.swift; path = ../Repository/Realm/RealmRepository.swift; sourceTree = "<group>"; };
 		942B404E25789E16006389E9 /* DoubleSubtitlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleSubtitlesView.swift; sourceTree = "<group>"; };
 		942B40D4257A0137006389E9 /* VideoSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSettingsViewController.swift; sourceTree = "<group>"; };
 		942B40D8257A0155006389E9 /* VideoSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoSettingsViewModel.swift; sourceTree = "<group>"; };
 		944256852590EF1200FB79F6 /* FilesCrawler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCrawler.swift; sourceTree = "<group>"; };
+		9466DCC525B9FE3A009BBDB6 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		9466DCC925B9FEBB009BBDB6 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		9466DCCC25BA00AB009BBDB6 /* CardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardEntity.swift; sourceTree = "<group>"; };
 		94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewModel.swift; sourceTree = "<group>"; };
 		94867ED22561FA60002DE68D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		949C860E25B08758002ED79A /* VideoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploader.swift; sourceTree = "<group>"; };
+		949C860E25B08758002ED79A /* VideoDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloader.swift; sourceTree = "<group>"; };
 		949C862225B1DCCC002ED79A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		949C862525B1DD78002ED79A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesViewModel.swift; sourceTree = "<group>"; };
@@ -97,7 +106,8 @@
 		94B9BDBC2564812600A5E740 /* VideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCoordinator.swift; sourceTree = "<group>"; };
 		94B9BDC2256485F200A5E740 /* CardsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsCoordinator.swift; sourceTree = "<group>"; };
 		94D874402574B7DA00277245 /* VideoDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDataExtractor.swift; sourceTree = "<group>"; };
-		94F6945D258B9C3D0004B4C5 /* TemporaryVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemporaryVideo.swift; sourceTree = "<group>"; };
+		94F4C19225BC709100713043 /* VideoBackgroundSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoBackgroundSaver.swift; sourceTree = "<group>"; };
+		94F4C19825BC81E700713043 /* VideoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoItemViewModel.swift; sourceTree = "<group>"; };
 		CB5990F6253E22B500CE0548 /* MicrosoftTranslationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftTranslationService.swift; sourceTree = "<group>"; };
 		CB8C06F025596C8A006C0499 /* VideoPlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerViewModel.swift; sourceTree = "<group>"; };
 		CB8C06F6255B2F88006C0499 /* FavoriteSubtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSubtitle.swift; sourceTree = "<group>"; };
@@ -177,6 +187,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9420A92025B866CD008A96C8 /* LocalDiskStore */ = {
+			isa = PBXGroup;
+			children = (
+				D28749B224D6BA1300687095 /* LocalDiskStore.swift */,
+			);
+			path = LocalDiskStore;
+			sourceTree = "<group>";
+		};
+		9420A93425B9E33B008A96C8 /* VideoDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				949C860E25B08758002ED79A /* VideoDownloader.swift */,
+				94F4C19225BC709100713043 /* VideoBackgroundSaver.swift */,
+			);
+			path = VideoDownloader;
+			sourceTree = "<group>";
+		};
+		9420A93B25B9EF84008A96C8 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				9420A90B25B86267008A96C8 /* RealmRepository.swift */,
+				CBE5588E254705080075D45A /* VideoEntity.swift */,
+				9466DCCC25BA00AB009BBDB6 /* CardEntity.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		942B40D32579F990006389E9 /* VideoSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +221,23 @@
 				942B40D8257A0155006389E9 /* VideoSettingsViewModel.swift */,
 			);
 			path = VideoSettings;
+			sourceTree = "<group>";
+		};
+		9466DCC325B9FE04009BBDB6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				9466DCC425B9FE29009BBDB6 /* Entities */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9466DCC425B9FE29009BBDB6 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				9466DCC525B9FE3A009BBDB6 /* Video.swift */,
+				9466DCC925B9FEBB009BBDB6 /* Card.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		94B9BD3825620D6200A5E740 /* Services */ = {
@@ -242,6 +296,7 @@
 				D2A516AB24F90D1C00DDC5EC /* App */,
 				D2E616AE24D7F43900D80F26 /* html */,
 				D2D292F324C78ED9004660EE /* Misc */,
+				9466DCC325B9FE04009BBDB6 /* Domain */,
 				D2154EB024C0875600F52815 /* Services */,
 				D2154EAF24C0852A00F52815 /* UserStories */,
 				D2A516AC24F90D3100DDC5EC /* Resources */,
@@ -274,11 +329,12 @@
 		D2154EB024C0875600F52815 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D28749A824D6756D00687095 /* DataStore */,
+				9420A93B25B9EF84008A96C8 /* Realm */,
+				9420A93425B9E33B008A96C8 /* VideoDownloader */,
+				9420A92025B866CD008A96C8 /* LocalDiskStore */,
 				D2D292EE24C78BA0004660EE /* TranslationAPI */,
 				D28749AE24D6B4ED00687095 /* LocalWebServer.swift */,
 				94D874402574B7DA00277245 /* VideoDataExtractor.swift */,
-				949C860E25B08758002ED79A /* VideoUploader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -305,19 +361,11 @@
 		D287497E24D5A15800687095 /* VideosList */ = {
 			isa = PBXGroup;
 			children = (
-				CBE5588E254705080075D45A /* VideoEntity.swift */,
 				CBE5586A2546FEFD0075D45A /* VideosListViewModel.swift */,
+				D287497F24D5A17000687095 /* VideosListViewController.swift */,
 				D2A9822F2501095C00304522 /* Views */,
 			);
 			path = VideosList;
-			sourceTree = "<group>";
-		};
-		D28749A824D6756D00687095 /* DataStore */ = {
-			isa = PBXGroup;
-			children = (
-				D28749B224D6BA1300687095 /* LocalDiskStore.swift */,
-			);
-			path = DataStore;
 			sourceTree = "<group>";
 		};
 		D2A516AB24F90D1C00DDC5EC /* App */ = {
@@ -384,8 +432,8 @@
 		D2A9822F2501095C00304522 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D287497F24D5A17000687095 /* VideosListViewController.swift */,
 				D287498124D5A2BE00687095 /* VideoCollectionViewItem.swift */,
+				94F4C19825BC81E700713043 /* VideoItemViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -395,7 +443,6 @@
 			children = (
 				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
 				94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */,
-				94F6945D258B9C3D0004B4C5 /* TemporaryVideo.swift */,
 			);
 			path = UploadTutorial;
 			sourceTree = "<group>";
@@ -628,6 +675,8 @@
 				942B40D5257A0137006389E9 /* VideoSettingsViewController.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				94B9BDB82564801300A5E740 /* TabBarCoordinator.swift in Sources */,
+				9466DCC625B9FE3A009BBDB6 /* Video.swift in Sources */,
+				94F4C19925BC81E700713043 /* VideoItemViewModel.swift in Sources */,
 				94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */,
 				94B9BD3E25632CE000A5E740 /* PurchaseService.swift in Sources */,
 				94B9BD3B256210FF00A5E740 /* ActivityIndicator.swift in Sources */,
@@ -644,12 +693,13 @@
 				94B9BDBD2564812600A5E740 /* VideoCoordinator.swift in Sources */,
 				CBE55893254705560075D45A /* Typealiases.swift in Sources */,
 				D2154EB524C087F400F52815 /* SubtitlesConvertorFromSrt.swift in Sources */,
-				D28749B324D6BA1300687095 /* LocalDiskStore.swift in Sources */,
 				942B40D9257A0155006389E9 /* VideoSettingsViewModel.swift in Sources */,
 				D2154E9824C0803C00F52815 /* SceneDelegate.swift in Sources */,
 				CB8C06F125596C8A006C0499 /* VideoPlayerViewModel.swift in Sources */,
+				9466DCCD25BA00AB009BBDB6 /* CardEntity.swift in Sources */,
 				944256862590EF1200FB79F6 /* FilesCrawler.swift in Sources */,
-				949C860F25B08758002ED79A /* VideoUploader.swift in Sources */,
+				949C860F25B08758002ED79A /* VideoDownloader.swift in Sources */,
+				9420A92F25B86E0A008A96C8 /* LocalDiskStore.swift in Sources */,
 				942B404F25789E16006389E9 /* DoubleSubtitlesView.swift in Sources */,
 				94867ED32561FA60002DE68D /* Protocols.swift in Sources */,
 				D2F7CAE324F460990069659F /* UploadTutorialViewController.swift in Sources */,
@@ -658,11 +708,13 @@
 				94B9BDB425647DDE00A5E740 /* AppCoordinator.swift in Sources */,
 				D2AABA4C24FFC04100029E08 /* PurchasesViewController.swift in Sources */,
 				CB8C06F7255B2F88006C0499 /* FavoriteSubtitle.swift in Sources */,
+				9420A90C25B86267008A96C8 /* RealmRepository.swift in Sources */,
 				D2A516AF24F90DBD00DDC5EC /* CardsViewController.swift in Sources */,
-				94F6945E258B9C3D0004B4C5 /* TemporaryVideo.swift in Sources */,
 				D2C0568824C7E28000810915 /* ControlsView.swift in Sources */,
 				D287498024D5A17000687095 /* VideosListViewController.swift in Sources */,
 				CB9465E3255B7D9F0075700B /* CardViewEntity.swift in Sources */,
+				9466DCCA25B9FEBB009BBDB6 /* Card.swift in Sources */,
+				94F4C19325BC709100713043 /* VideoBackgroundSaver.swift in Sources */,
 				CB946583255B6B4C0075700B /* CardsViewModel.swift in Sources */,
 				94B9BDC3256485F200A5E740 /* CardsCoordinator.swift in Sources */,
 				94D874412574B7DA00277245 /* VideoDataExtractor.swift in Sources */,

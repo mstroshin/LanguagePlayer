@@ -3,25 +3,29 @@ import GCDWebServer
 import RxSwift
 
 
-struct UploadedVideo {
-    let videoPath: URL
-    let subtitlePaths: [URL]
+struct DownloadedVideoData {
+    let videoPath: String
+    let subtitlePaths: [String]
 }
 
 struct ServerAddresses {
     let ip: String?
     let bonjour: String?
+    
+    static var empty: ServerAddresses {
+        ServerAddresses(ip: nil, bonjour: nil)
+    }
 }
 
-class LocalWebServer: NSObject {
+protocol LocalWebServer {
+    func downloadVideo() -> Observable<DownloadedVideoData>
+    func addresses() -> Observable<ServerAddresses>
+}
+
+class DefaultLocalWebServer: NSObject, LocalWebServer {
     private let addressSubject = PublishSubject<ServerAddresses>()
-    var address: Observable<ServerAddresses> {
-        addressSubject
-            .asObserver()
-            .share(replay: 1)
-    }
     
-    func run() -> Observable<UploadedVideo> {
+    func downloadVideo() -> Observable<DownloadedVideoData> {
         Observable.create { observer -> Disposable in
             let webServer = GCDWebServer()
             webServer.delegate = self
@@ -61,8 +65,8 @@ class LocalWebServer: NSObject {
                                 
                 let firstSubtitleFilePath = self.getFilePath(for: "firstSubtitle", from: multiPartFormRequest)
                 let secondSubtitleFilePath = self.getFilePath(for: "secondSubtitle", from: multiPartFormRequest)
-                let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({$0})
-                let video = UploadedVideo(videoPath: videoFilePath, subtitlePaths: subtitles)
+                let subtitles = [firstSubtitleFilePath, secondSubtitleFilePath].compactMap({ $0?.path })
+                let video = DownloadedVideoData(videoPath: videoFilePath.path, subtitlePaths: subtitles)
                                 
                 observer.onNext(video)
                 
@@ -72,7 +76,7 @@ class LocalWebServer: NSObject {
             do {
                 try webServer.start(
                     options: [
-                        GCDWebServerOption_ConnectionClass : LocalWebServerUploadConnection.self,
+                        GCDWebServerOption_ConnectionClass : DefaultLocalWebServerDownloadConnection.self,
                         GCDWebServerOption_Port : 8080,
                         GCDWebServerOption_BonjourName : "LanguagePlayer Server"
                     ]
@@ -89,6 +93,12 @@ class LocalWebServer: NSObject {
         }
     }
     
+    func addresses() -> Observable<ServerAddresses> {
+        addressSubject
+            .asObserver()
+            .share(replay: 1)
+    }
+    
     private func getFilePath(for name: String, from multiPart: GCDWebServerMultiPartFormRequest) -> URL? {
         if let part = multiPart.firstFile(forControlName: name) {
             let filePath = FileManager.rename(file: URL(fileURLWithPath: part.temporaryPath), to: part.fileName)
@@ -100,7 +110,7 @@ class LocalWebServer: NSObject {
     
 }
 
-extension LocalWebServer: GCDWebServerDelegate {
+extension DefaultLocalWebServer: GCDWebServerDelegate {
     
     func webServerDidCompleteBonjourRegistration(_ server: GCDWebServer) {
         let addresses = ServerAddresses(ip: server.serverURL?.absoluteString, bonjour: server.bonjourServerURL?.absoluteString)
@@ -114,7 +124,7 @@ extension LocalWebServer: GCDWebServerDelegate {
     
 }
 
-class LocalWebServerUploadConnection: GCDWebServerConnection {
+class DefaultLocalWebServerDownloadConnection: GCDWebServerConnection {
     private static let activitySubject = BehaviorSubject<Bool>(value: false)
     static var activity: Observable<Bool> {
         activitySubject.asObservable()
@@ -123,7 +133,7 @@ class LocalWebServerUploadConnection: GCDWebServerConnection {
     //Start
     override func rewriteRequest(_ url: URL, withMethod method: String, headers: [String : String]) -> URL {
         if url.lastPathComponent == "upload" {
-            LocalWebServerUploadConnection.activitySubject.onNext(true)
+            DefaultLocalWebServerDownloadConnection.activitySubject.onNext(true)
         }
         
         return super.rewriteRequest(url, withMethod: method, headers: headers)
@@ -134,7 +144,7 @@ class LocalWebServerUploadConnection: GCDWebServerConnection {
         super.processRequest(request, completion: completion)
         
         if request.path.hasSuffix("/upload") {
-            LocalWebServerUploadConnection.activitySubject.onNext(false)
+            DefaultLocalWebServerDownloadConnection.activitySubject.onNext(false)
         }
     }
     
@@ -143,7 +153,7 @@ class LocalWebServerUploadConnection: GCDWebServerConnection {
         super.abortRequest(request, withStatusCode: statusCode)
         
         if let request = request, request.path.hasSuffix("/upload") {
-            LocalWebServerUploadConnection.activitySubject.onNext(false)
+            DefaultLocalWebServerDownloadConnection.activitySubject.onNext(false)
         }
     }
     

@@ -3,7 +3,7 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-class CardsViewModel: ViewModel, ViewModelCoordinatable {
+class CardsViewModel: ViewModelOld, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route

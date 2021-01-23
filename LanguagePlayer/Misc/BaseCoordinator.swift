@@ -53,7 +53,7 @@ class BaseCoordinator<ResultType> {
     }
 }
 
-protocol ViewModelCoordinatable where Self: ViewModel {
+protocol ViewModelCoordinatable where Self: ViewModelOld {
     associatedtype Route
     
     var route: Route { get }

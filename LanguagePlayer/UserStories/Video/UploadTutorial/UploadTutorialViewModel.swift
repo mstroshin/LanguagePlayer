@@ -1,37 +1,26 @@
 import Foundation
 import RxSwift
-import RealmSwift
+import RxCocoa
 
-class UploadTutorialViewModel: ViewModel, ViewModelCoordinatable {
-    let input: Input
-    let output: Output
-    let route: Route
-    
-    private let videoUploader: VideoUploader
-    
+class UploadTutorialViewModel: ViewModel {
+    private let videoBackgroundSaver: VideoBackgroundSaver
     
     init(
-        videoUploader: VideoUploader = VideoUploader.shared,
-        realm: Realm = try! Realm(),
-        localStore: LocalDiskStore = LocalDiskStore()
+        videoBackgroundSaver: VideoBackgroundSaver = VideoBackgroundSaver.shared
     ) {
-        self.videoUploader = videoUploader
-        
-        self.input = Input()
-        self.output = Output(
-            addresses: videoUploader.webServerAddress,
-            loading: videoUploader.processingActivityIndicator
-        )
-        
-        videoUploader.startWebServer()
-        
-        self.route = Route(
-            videoLoaded: videoUploader.downloadAndProcessVideo
+        self.videoBackgroundSaver = videoBackgroundSaver
+        videoBackgroundSaver.disposeIfInactive = false
+    }
+    
+    func transform(input: Input) -> Output {
+        Output(
+            addresses: videoBackgroundSaver.addresses.asDriver(onErrorJustReturn: ServerAddresses.empty),
+            loading: videoBackgroundSaver.activityIndicator.asSharedSequence()
         )
     }
     
     deinit {
-        videoUploader.stopWebServer()
+        videoBackgroundSaver.disposeIfInactive = true
     }
 }
 
@@ -40,12 +29,8 @@ extension UploadTutorialViewModel {
     struct Input {}
     
     struct Output {
-        let addresses: Observable<ServerAddresses>
-        let loading: Observable<Bool>
-    }
-    
-    struct Route {
-        let videoLoaded: Observable<VideoEntity>
+        let addresses: Driver<ServerAddresses>
+        let loading: Driver<Bool>
     }
     
 }

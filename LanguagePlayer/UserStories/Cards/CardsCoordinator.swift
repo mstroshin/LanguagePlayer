@@ -25,7 +25,7 @@ class CardsCoordinator: BaseCoordinator<Void> {
     }
     
     private func open(video: VideoEntity, from time: Milliseconds) {
-        let player = PlayerController(videoUrl: video.videoUrl)
+        let player = PlayerController(videoUrl: URL(fileURLWithPath: video.filePath))
         let viewModel = VideoPlayerViewModel(video: video, playerController: player, startingTime: time)
         let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel

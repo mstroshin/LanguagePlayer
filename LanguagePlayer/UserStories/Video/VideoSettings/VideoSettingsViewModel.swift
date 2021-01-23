@@ -24,7 +24,7 @@ struct VideoSettings {
     
 }
 
-class VideoSettingsViewModel: ViewModel {
+class VideoSettingsViewModel: ViewModelOld {
     let input: Input
     let output: Output
     private let disposeBag = DisposeBag()
