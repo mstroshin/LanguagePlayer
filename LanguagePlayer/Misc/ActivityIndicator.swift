@@ -42,8 +42,10 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     private let _lock = NSRecursiveLock()
     private let _relay = BehaviorRelay(value: 0)
     private let _loading: SharedSequence<SharingStrategy, Bool>
+    private let debug: Bool
 
-    public init() {
+    public init(debug: Bool = false) {
+        self.debug = debug
         _loading = _relay.asDriver()
             .map { $0 > 0 }
             .distinctUntilChanged()
@@ -61,12 +63,14 @@ public class ActivityIndicator : SharedSequenceConvertibleType {
     private func increment() {
         _lock.lock()
         _relay.accept(_relay.value + 1)
+        if debug { print("ActivityIndicator +1 (\(_relay.value))") }
         _lock.unlock()
     }
 
     private func decrement() {
         _lock.lock()
         _relay.accept(_relay.value - 1)
+        if debug { print("ActivityIndicator -1 (\(_relay.value))") }
         _lock.unlock()
     }
 

@@ -634,6 +634,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1194"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsk-k4-vGP" userLabel="HasPremiumView">
+                                <rect key="frame" x="16" y="540" width="802" height="114.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Поздравляем! У вас уже есть премиум!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="91K-uJ-s0m">
+                                        <rect key="frame" x="0.0" y="0.0" width="802" height="39.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="33"/>
+                                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oBr-iO-62m">
+                                        <rect key="frame" x="363" y="55.5" width="76" height="59"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                        <state key="normal" title="Ура!"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="oBr-iO-62m" firstAttribute="top" secondItem="91K-uJ-s0m" secondAttribute="bottom" constant="16" id="Jc2-pF-elj"/>
+                                    <constraint firstItem="91K-uJ-s0m" firstAttribute="top" secondItem="nsk-k4-vGP" secondAttribute="top" id="MEs-Nk-6pJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="oBr-iO-62m" secondAttribute="bottom" id="Z98-o7-TVR"/>
+                                    <constraint firstItem="oBr-iO-62m" firstAttribute="centerX" secondItem="nsk-k4-vGP" secondAttribute="centerX" id="gaV-to-jJ7"/>
+                                    <constraint firstItem="91K-uJ-s0m" firstAttribute="leading" secondItem="nsk-k4-vGP" secondAttribute="leading" id="iYW-Lh-awg"/>
+                                    <constraint firstAttribute="trailing" secondItem="91K-uJ-s0m" secondAttribute="trailing" id="wWQ-F4-5L3"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pxz-TN-huw">
                                 <rect key="frame" x="16" y="20" width="802" height="43"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="36"/>
@@ -655,6 +680,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="6gF-gz-h5o">
+                                <rect key="frame" x="377" y="557" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="X9x-6G-HLc"/>
+                                    <constraint firstAttribute="width" constant="80" id="x9N-bR-I4p"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5D7-Ds-59W">
                                 <rect key="frame" x="336" y="859" width="162" height="30"/>
                                 <state key="normal" title="Восстановить покупки"/>
@@ -663,21 +695,31 @@
                         <viewLayoutGuide key="safeArea" id="1Jx-oW-BEd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6gF-gz-h5o" firstAttribute="centerY" secondItem="G0L-Mm-Tyz" secondAttribute="centerY" id="7c6-QJ-Ptt"/>
                             <constraint firstItem="5D7-Ds-59W" firstAttribute="centerX" secondItem="G0L-Mm-Tyz" secondAttribute="centerX" id="8ct-J0-Gbw"/>
+                            <constraint firstItem="6gF-gz-h5o" firstAttribute="centerX" secondItem="G0L-Mm-Tyz" secondAttribute="centerX" id="Qhb-DW-d5P"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="pxz-TN-huw" secondAttribute="trailing" constant="16" id="RFA-yz-FG1"/>
                             <constraint firstItem="2Tz-Zs-AXa" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="RzW-38-Peg"/>
                             <constraint firstItem="pxz-TN-huw" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="Ts6-Jw-zkV"/>
                             <constraint firstItem="2Tz-Zs-AXa" firstAttribute="top" secondItem="pxz-TN-huw" secondAttribute="bottom" constant="24" id="Whi-vV-eL5"/>
                             <constraint firstItem="iEY-Xp-JJz" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="YHF-9I-05j"/>
                             <constraint firstItem="5D7-Ds-59W" firstAttribute="top" secondItem="iEY-Xp-JJz" secondAttribute="bottom" constant="16" id="ZOD-lM-KaS"/>
+                            <constraint firstItem="nsk-k4-vGP" firstAttribute="centerY" secondItem="G0L-Mm-Tyz" secondAttribute="centerY" id="Zb4-4p-ByM"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="2Tz-Zs-AXa" secondAttribute="trailing" constant="16" id="f68-DA-ahp"/>
+                            <constraint firstItem="nsk-k4-vGP" firstAttribute="leading" secondItem="1Jx-oW-BEd" secondAttribute="leading" constant="16" id="hBe-tQ-Bck"/>
                             <constraint firstItem="pxz-TN-huw" firstAttribute="top" secondItem="1Jx-oW-BEd" secondAttribute="top" constant="20" id="iAI-KL-9zE"/>
+                            <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="nsk-k4-vGP" secondAttribute="trailing" constant="16" id="l93-rZ-qh7"/>
                             <constraint firstItem="1Jx-oW-BEd" firstAttribute="trailing" secondItem="iEY-Xp-JJz" secondAttribute="trailing" constant="16" id="q1u-YB-jk9"/>
+                            <constraint firstItem="nsk-k4-vGP" firstAttribute="centerX" secondItem="G0L-Mm-Tyz" secondAttribute="centerX" id="uUq-nZ-Ray"/>
                             <constraint firstItem="iEY-Xp-JJz" firstAttribute="top" secondItem="2Tz-Zs-AXa" secondAttribute="bottom" constant="36" id="zLm-RC-FFZ"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="alreadyHasPremiumButton" destination="oBr-iO-62m" id="gZr-Mv-BMq"/>
+                        <outlet property="alreadyHasPremiumLabel" destination="91K-uJ-s0m" id="q49-8v-RPt"/>
+                        <outlet property="alreadyHasPremiumView" destination="nsk-k4-vGP" id="tYt-mh-Ddn"/>
                         <outlet property="benefitsLabel" destination="2Tz-Zs-AXa" id="T1T-jc-Ded"/>
+                        <outlet property="loadingIndicator" destination="6gF-gz-h5o" id="9M8-sc-cWZ"/>
                         <outlet property="productsStackView" destination="iEY-Xp-JJz" id="awU-1q-8ui"/>
                         <outlet property="restoreButton" destination="5D7-Ds-59W" id="uzU-Ar-hrg"/>
                     </connections>

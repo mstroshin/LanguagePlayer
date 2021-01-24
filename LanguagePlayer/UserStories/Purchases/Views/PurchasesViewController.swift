@@ -10,7 +10,11 @@ class PurchasesViewController: UIViewController {
     @IBOutlet private weak var benefitsLabel: UILabel!
     @IBOutlet private weak var productsStackView: UIStackView!
     @IBOutlet private weak var restoreButton: UIButton!
-    @IBOutlet private weak var termsAndPrivacyLabel: UILabel!
+//    @IBOutlet private weak var termsAndPrivacyLabel: UILabel!
+    @IBOutlet private weak var alreadyHasPremiumView: UIView!
+    @IBOutlet private weak var alreadyHasPremiumLabel: UILabel!
+    @IBOutlet private weak var alreadyHasPremiumButton: UIButton!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -28,15 +32,36 @@ class PurchasesViewController: UIViewController {
         restoreButton.setTitle(NSLocalizedString("restorePurchase", comment: ""), for: .normal)
         restoreButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
         restoreButton.setTitleColor(UIColor(named: "purchaseButtonColor"), for: .normal)
+        
+        alreadyHasPremiumLabel.text = NSLocalizedString("alreadyHasPremium", comment: "")
+        alreadyHasPremiumButton.setTitle(NSLocalizedString("yippee", comment: ""), for: .normal)
     }
     
     private func bind(viewModel: PurchasesViewModel) {
+        alreadyHasPremiumButton.rx.tap
+            .bind(to: viewModel.input.close)
+            .disposed(by: disposeBag)
+        
         restoreButton.rx.tap
             .bind(to: viewModel.input.restore)
             .disposed(by: disposeBag)
         
         viewModel.output.activityIndicator
             .drive(UIApplication.shared.rx.isNetworkActivityIndicatorVisible)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.activityIndicator
+            .drive(loadingIndicator.rx.isAnimating)
+            .disposed(by: disposeBag)
+        
+        viewModel.output.activityIndicator
+            .filter { $0 == true }
+            .drive(onNext: { [weak self] _ in
+                self?.alreadyHasPremiumView.isHidden = true
+                self?.benefitsLabel.isHidden = true
+                self?.productsStackView.isHidden = true
+                self?.restoreButton.isHidden = true
+            })
             .disposed(by: disposeBag)
         
         viewModel.output.products
@@ -59,6 +84,7 @@ class PurchasesViewController: UIViewController {
             .drive(onNext: { [weak self] result in
                 switch result {
                 case .success():
+                    self?.showAlreadyHasPremuim(true)
                     self?.view.makeToast(
                         "Success",
                         duration: 3,
@@ -66,6 +92,7 @@ class PurchasesViewController: UIViewController {
                         title: "Success"
                     )
                 case .failure(let error):
+                    self?.showAlreadyHasPremuim(false)
                     self?.view.makeToast(
                         error.localizedDescription,
                         duration: 3,
@@ -105,6 +132,19 @@ class PurchasesViewController: UIViewController {
                 }
             })
             .disposed(by: disposeBag)
+        
+        viewModel.output.hasPremium
+            .drive(onNext: { [weak self] hasPremium in
+                self?.showAlreadyHasPremuim(hasPremium)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func showAlreadyHasPremuim(_ shown: Bool) {
+        self.alreadyHasPremiumView.isHidden = !shown
+        self.benefitsLabel.isHidden = shown
+        self.productsStackView.isHidden = shown
+        self.restoreButton.isHidden = shown
     }
     
     private func makeButtons(for packages: [Purchases.Package], bindTo viewModel: PurchasesViewModel) {

@@ -30,6 +30,9 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.openUploadTutorial
             .subscribe(onNext: { [weak self] video in
+                if PurchaseService.isPremium {
+                    
+                }
                 self?.openUploadTutorial()
             })
             .disposed(by: disposeBag)
@@ -60,8 +63,8 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.close
             .observe(on: MainScheduler())
-            .subscribe(onCompleted: {
-                viewController.dismiss(animated: true, completion: nil)
+            .subscribe(onCompleted: { [weak viewController] in
+                viewController?.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -81,6 +84,12 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewController.modalPresentationStyle = .formSheet
         navigationController.present(viewController, animated: true, completion: nil)
+        
+        viewModel.route.close
+            .drive(onNext: { [weak viewController] in
+                viewController?.dismiss(animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
     }
     
     private func openVideoSettings(with settingsSubject: BehaviorSubject<VideoSettings>, on vc: UIViewController) {

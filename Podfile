@@ -14,7 +14,7 @@ target 'LanguagePlayer' do
   pod 'DifferenceKit'
   pod 'MobileVLCKit'
   pod 'Toast-Swift'
-  pod 'Purchases', '3.7.3'
+  pod 'Purchases'
 end
 
 post_install do |installer|

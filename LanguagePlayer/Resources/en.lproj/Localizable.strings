@@ -10,3 +10,14 @@
 "month" = "Month";
 "year" = "Year";
 "lifetime" = "Lifetime";
+"alreadyHasPremium" = "Congratulations! You already have a premium! 😊";
+"yippee" = "Yippee!";
+//Video Library
+"videoLibrary" = "Video Library";
+//Cards
+"cards" = "Cards";
+//Video Settings
+"audioTrack" = "Audio Track";
+"firstSubtitle" = "Fist subtitle";
+"secondSubtitle" = "Second subtitle";
+"none" = "None";

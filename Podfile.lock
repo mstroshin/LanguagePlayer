@@ -10,18 +10,18 @@ PODS:
   - GCDWebServer/Core (3.5.4)
   - mobile-ffmpeg-full (4.4)
   - MobileVLCKit (3.3.15)
-  - Purchases (3.7.3):
-    - PurchasesCoreSwift (= 3.7.3)
-  - PurchasesCoreSwift (3.7.3)
-  - Realm (10.5.0):
-    - Realm/Headers (= 10.5.0)
-  - Realm/Headers (10.5.0)
-  - RealmSwift (10.5.0):
-    - Realm (= 10.5.0)
+  - Purchases (3.10.2):
+    - PurchasesCoreSwift (= 3.10.2)
+  - PurchasesCoreSwift (3.10.2)
+  - Realm (10.5.1):
+    - Realm/Headers (= 10.5.1)
+  - Realm/Headers (10.5.1)
+  - RealmSwift (10.5.1):
+    - Realm (= 10.5.1)
   - RxCocoa (6.0.0):
     - RxRelay (= 6.0.0)
     - RxSwift (= 6.0.0)
-  - RxRealm (5.0.0):
+  - RxRealm (5.0.1):
     - Realm (~> 10.5)
     - RealmSwift (~> 10.5)
     - RxCocoa (~> 6.0)
@@ -44,7 +44,7 @@ DEPENDENCIES:
   - GCDWebServer
   - mobile-ffmpeg-full (~> 4.4)
   - MobileVLCKit
-  - Purchases (= 3.7.3)
+  - Purchases
   - RealmSwift
   - RxCocoa
   - RxRealm
@@ -74,17 +74,17 @@ SPEC CHECKSUMS:
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
   mobile-ffmpeg-full: 505c583d91ac1c4fb2b015787e69d83f83fb8f29
   MobileVLCKit: 9a04c9fa19e35c376ddf59425dd82e397d5899ad
-  Purchases: ae790bb695c4d4f1c13f952067d2d2c3f0d0ca5e
-  PurchasesCoreSwift: 53956256a1ff84de8f0f212ea4b9b46a53a212dc
-  Realm: e1c22c3d83b229afb70ebc10e1771c91e9542d12
-  RealmSwift: 6fc078d9d3fd7e58c71bfdbb694e252462f112a5
+  Purchases: 21017feccb2bd2f50c65f690be2ceddf40bf09ce
+  PurchasesCoreSwift: db1370f94aab8c9bc64fcf0bafd767d3504a5f95
+  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
+  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
   RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
-  RxRealm: 0a55945acd046cab26ea8a9d37097edde548cf59
+  RxRealm: bd7c601e78cfebe48c24d4550db83c31e1ab2c33
   RxRelay: 8d593be109c06ea850df027351beba614b012ffb
   RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
   RxSwiftExt: 6637802b67dd4b60c00c661cc640316b693c0387
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 88531cd2314624019200bf764960dc631fab7531
+PODFILE CHECKSUM: 95945616a87bfdaac215460adb335afd385f5cc8
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

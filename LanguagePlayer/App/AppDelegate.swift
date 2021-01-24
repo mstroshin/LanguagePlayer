@@ -1,16 +1,25 @@
 import UIKit
 import Purchases
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-        
+    
+    private var checkPremiumDisposable: Disposable?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Purchases.debugLogsEnabled = false
-        Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX")
+        Purchases.debugLogsEnabled = true
+        Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX", appUserID: "Sandbox27")
         
         FileManager.clearTmpDirectory()
         
+        checkPremium()
+        
         return true
+    }
+    
+    private func checkPremium() {
+        checkPremiumDisposable = PurchaseService().checkPremium().subscribe()
     }
 
     // MARK: UISceneSession Lifecycle
