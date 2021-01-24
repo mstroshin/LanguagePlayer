@@ -42,7 +42,7 @@ class VideoCoordinator: BaseCoordinator<Void> {
     }
     
     private func openVideoPlayer(with video: VideoEntity, on navController: UINavigationController) {
-        let player = PlayerController(videoUrl: video.videoUrl)
+        let player = PlayerController(videoUrl: URL(fileURLWithPath: video.filePath))
         let viewModel = VideoPlayerViewModel(video: video, playerController: player)
         let viewController: VideoPlayerViewController = VideoPlayerViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel

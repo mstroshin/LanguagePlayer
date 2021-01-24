@@ -4,7 +4,7 @@ import RxCocoa
 import RealmSwift
 import RxRealm
 
-class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
+class VideoPlayerViewModel: ViewModelOld, ViewModelCoordinatable {
     let input: Input
     let output: Output
     let route: Route
@@ -21,8 +21,8 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
         self.playerController = playerController
         
         let settings = VideoSettings(
-            audioTrackTitles: Array(video.audioStreamNames),
-            subtitleTitles: Array(video.subtitleNames)
+            audioTrackTitles: Array(video.audioTrackNames),
+            subtitleTitles: Array(video.subtitleFilePaths)
         )
         let videoSettings = BehaviorSubject<VideoSettings>(value: settings)
         
@@ -58,7 +58,7 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
             .map { time -> DoubleSubtitles in
                 let first = firstSubtitlesConvertor.getSubtitle(for: time)
                 let second = secondSubtitlesConvertor.getSubtitle(for: time)
-                let isFavorite = video.favoriteSubtitles.filter({ $0.first == first?.text }).first != nil
+                let isFavorite = video.favoriteCards.filter({ $0.firstSubtitleText == first?.text }).first != nil
                 
                 return DoubleSubtitles(source: first, target: second, addedToFavorite: isFavorite)
             }
@@ -74,22 +74,22 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
                 )
             }
             .filter { $0.source != nil && $0.target != nil }
-            .do(onNext: { subtitles in
-                if subtitles.addedToFavorite {
-                    let favorite = FavoriteSubtitle()
-                    favorite.first = subtitles.source!.text
-                    favorite.second = subtitles.target!.text
-                    favorite.fromTime = subtitles.source!.fromTime
-                    
-                    try! realm.write {
-                        video.favoriteSubtitles.append(favorite)
-                    }
-                } else if let index = video.favoriteSubtitles.firstIndex(where: { $0.first == subtitles.source?.text }) {
-                    try! realm.write {
-                        realm.delete(video.favoriteSubtitles[index])
-                    }
-                }
-            })
+//            .do(onNext: { subtitles in
+//                if subtitles.addedToFavorite {
+//                    let favorite = FavoriteSubtitle()
+//                    favorite.first = subtitles.source!.text
+//                    favorite.second = subtitles.target!.text
+//                    favorite.fromTime = subtitles.source!.fromTime
+//                    
+//                    try! realm.write {
+//                        video.favoriteCards.append(favorite)
+//                    }
+//                } else if let index = video.favoriteSubtitles.firstIndex(where: { $0.first == subtitles.source?.text }) {
+//                    try! realm.write {
+//                        realm.delete(video.favoriteSubtitles[index])
+//                    }
+//                }
+//            })
         
         let currentSubtitlesDriver = Observable.merge([currentTimeSubtitles, favoriteChanged])
             .asDriver(onErrorJustReturn: DoubleSubtitles())

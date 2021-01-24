@@ -1,6 +1,5 @@
 import Foundation
 import RealmSwift
-import DifferenceKit
 
 class FavoriteSubtitle: Object {
     @objc dynamic var id: ID = UUID().uuidString
@@ -10,8 +9,4 @@ class FavoriteSubtitle: Object {
     let owners = LinkingObjects(fromType: VideoEntity.self, property: "favoriteSubtitles")
     
     override class func primaryKey() -> String? { "id" }
-}
-
-extension FavoriteSubtitle: Differentiable {
-    
 }

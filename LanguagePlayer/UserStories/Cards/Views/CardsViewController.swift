@@ -1,7 +1,6 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import DifferenceKit
 
 class CardsViewController: UIViewController {
     var viewModel: CardsViewModel!

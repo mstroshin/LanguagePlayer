@@ -1,7 +1,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import DifferenceKit
 
 class VideosListViewController: UIViewController {
     var viewModel: VideosListViewModel!
@@ -63,7 +62,7 @@ extension VideosListViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: VideoCollectionViewItem.identifier, for: indexPath) as? VideoCollectionViewItem else {
             fatalError("Cell must be VideoCollectionViewItem")
         }
-        cell.titleLabel.text = videos[indexPath.row].fileName
+        cell.bind(viewModel: videos[indexPath.row])
         
         return cell
     }
@@ -122,23 +121,4 @@ extension VideosListViewController: UICollectionViewDelegate {
         return configuration
     }
 
-}
-
-extension VideosListViewController: VLCMediaThumbnailerDelegate {
-    
-    func mediaThumbnailerDidTimeOut(_ mediaThumbnailer: VLCMediaThumbnailer!) {
-        print("mediaThumbnailerDidTimeOut")
-    }
-    
-    func mediaThumbnailer(_ mediaThumbnailer: VLCMediaThumbnailer!, didFinishThumbnail thumbnail: CGImage!) {
-        if let label = mediaThumbnailer.accessibilityLabel, let row = Int(label), row < videos.count {
-            let thumbnail = UIImage(cgImage: thumbnail)
-            videos[row].thumbnail = thumbnail
-            
-            if let cell = self.collectionView.cellForItem(at: IndexPath(item: row, section: 0)) as? VideoCollectionViewItem {
-                cell.image.image = thumbnail
-            }
-        }
-    }
-    
 }
