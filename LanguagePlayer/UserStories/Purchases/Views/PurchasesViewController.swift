@@ -84,53 +84,33 @@ class PurchasesViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.output.buyingResult
-            .drive(onNext: { [weak self] result in
-                switch result {
-                case .success():
-                    self?.showAlreadyHasPremuim(true)
+            .drive(onNext: { [weak self] in
+                self?.showAlreadyHasPremuim(true)
+                self?.view.makeToast(
+                    "Success",
+                    duration: 3,
+                    position: .bottom,
+                    title: "Success"
+                )
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.restoringResult
+            .drive(onNext: { [weak self] hasPremium in
+                self?.showAlreadyHasPremuim(hasPremium)
+                if hasPremium {
                     self?.view.makeToast(
                         "Success",
                         duration: 3,
                         position: .bottom,
                         title: "Success"
                     )
-                case .failure(let error):
-                    self?.showAlreadyHasPremuim(false)
+                } else {
                     self?.view.makeToast(
-                        error.localizedDescription,
+                        "You have no premium",
                         duration: 3,
                         position: .bottom,
-                        title: "Some error"
-                    )
-                }
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.output.restoringResult
-            .drive(onNext: { [weak self] result in
-                switch result {
-                case .success(let hasPremium):
-                    if hasPremium {
-                        self?.view.makeToast(
-                            "Success",
-                            duration: 3,
-                            position: .bottom,
-                            title: "Success"
-                        )
-                    } else {
-                        self?.view.makeToast(
-                            "You have no premium",
-                            duration: 3,
-                            position: .bottom,
-                            title: "Error"
-                        )
-                    }
-                case .failure(let error):
-                    self?.view.makeToast(
-                        error.localizedDescription,
-                        duration: 3,
-                        position: .bottom,
-                        title: "Some error"
+                        title: "Error"
                     )
                 }
             })
@@ -139,6 +119,17 @@ class PurchasesViewController: UIViewController {
         viewModel.output.hasPremium
             .drive(onNext: { [weak self] hasPremium in
                 self?.showAlreadyHasPremuim(hasPremium)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.output.error
+            .drive(onNext: { [weak self] errorText in
+                self?.view.makeToast(
+                    errorText,
+                    duration: 3,
+                    position: .bottom,
+                    title: "Error"
+                )
             })
             .disposed(by: disposeBag)
     }

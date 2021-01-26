@@ -2,7 +2,6 @@ import Foundation
 import GCDWebServer
 import RxSwift
 
-
 struct UploadedVideo {
     let videoPath: URL
     let subtitlePaths: [URL]
@@ -14,11 +13,10 @@ struct ServerAddresses {
 }
 
 class LocalWebServer: NSObject {
-    private let addressSubject = PublishSubject<ServerAddresses>()
+    private let addressSubject = ReplaySubject<ServerAddresses>.create(bufferSize: 1)
     var address: Observable<ServerAddresses> {
         addressSubject
-            .asObserver()
-            .share(replay: 1)
+            .asObservable()
     }
     
     func run() -> Observable<UploadedVideo> {

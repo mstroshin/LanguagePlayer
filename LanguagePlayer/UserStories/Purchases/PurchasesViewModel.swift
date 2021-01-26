@@ -38,13 +38,8 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
                     .materialize()
             }
             .share()
-            .map { event -> Result<Void, Error> in
-                switch event {
-                case .error(let error): return .failure(error)
-                default: return .success(())
-                }
-            }
-            .asDriver(onErrorJustReturn: .success(()))
+            .asDriver(onErrorJustReturn: .next(()))
+        let buyingError = buyingResult.compactMap { $0.error?.localizedDescription }
         
         let restoringResult = restoreSubject
             .flatMap {
@@ -53,31 +48,33 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
                     .materialize()
             }
             .share()
-            .map { event -> Result<Bool, Error> in
-                switch event {
-                case .error(let error): return .failure(error)
-                case .next(let isSuccess): return .success(isSuccess)
-                default: return .success(true)
-                }
-            }
-            .asDriver(onErrorJustReturn: .success(false))
+            .asDriver(onErrorJustReturn: .next(false))
+        let restoringError = restoringResult.compactMap { $0.error?.localizedDescription }
         
-        let restoringResultErased = restoringResult.map { _ -> Result<Void, Error> in
-            Result.success(())
-        }
+//        let restoringResultErased = restoringResult
+//            .compactMap { $0.element }
+//            .map { _ -> Result<Void, Error> in
+//                Result.success(())
+//            }
         
-        let hasPremium = Driver.merge(buyingResult, restoringResultErased)
+        let hasPremium = Driver.zip(buyingResult, restoringResult)
             .flatMap { _ -> Driver<Bool> in
                 purchaseService.checkPremium()
                     .asDriver(onErrorJustReturn: false)
             }
+//        let hasPremium = Driver.merge(buyingResult, restoringResultErased)
+//            .flatMap { _ -> Driver<Bool> in
+//                purchaseService.checkPremium()
+//                    .asDriver(onErrorJustReturn: false)
+//            }
             
         self.output = Output(
             products: products,
-            buyingResult: buyingResult,
-            restoringResult: restoringResult,
+            buyingResult: buyingResult.compactMap { $0.element },
+            restoringResult: restoringResult.compactMap { $0.element },
             activityIndicator: activityIndicator,
-            hasPremium: Driver.merge(hasPremium, purchaseService.checkPremium().asDriver(onErrorJustReturn: false))
+            hasPremium: Driver.merge(hasPremium, purchaseService.checkPremium().asDriver(onErrorJustReturn: false)),
+            error: Driver.merge(restoringError, buyingError)
         )
         
         self.route = Route(
@@ -97,10 +94,11 @@ extension PurchasesViewModel {
     
     struct Output {
         let products: Driver<Result<[Purchases.Package], Error>>
-        let buyingResult: Driver<Result<Void, Error>>
-        let restoringResult: Driver<Result<Bool, Error>>
+        let buyingResult: Driver<Void>
+        let restoringResult: Driver<Bool>
         let activityIndicator: ActivityIndicator
         let hasPremium: Driver<Bool>
+        let error: Driver<String>
     }
     
     struct Route {
