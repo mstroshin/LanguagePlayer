@@ -20,7 +20,7 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
             close: closeSubject.asObserver()
         )
         
-        let activityIndicator = ActivityIndicator(debug: true)
+        let activityIndicator = ActivityIndicator()
         
         let products = purchaseService.retrieveProductsInfo()
             .trackActivity(activityIndicator)

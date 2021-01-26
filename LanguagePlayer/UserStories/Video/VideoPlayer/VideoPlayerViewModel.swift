@@ -37,7 +37,9 @@ class VideoPlayerViewModel: ViewModel, ViewModelCoordinatable {
                 }
                 .take(1)
                 .map { _ in time }
-                .bind(to: self.playerController.seek)
+                .subscribe(onNext: { time in
+                    playerController.seek.onNext(time)
+                })
                 .disposed(by: disposeBag)
         }
         

@@ -30,8 +30,8 @@ class VideoPlayerViewController: UIViewController {
         
         viewModel.set(viewport: self.videoViewport)
         
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            subtitlesViewBottomConstraint.constant = 0
+        if UIDevice.iphone {
+            subtitlesViewBottomConstraint.constant = 8
         }
     }
     

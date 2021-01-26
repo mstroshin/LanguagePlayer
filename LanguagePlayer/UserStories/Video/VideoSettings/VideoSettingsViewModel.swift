@@ -41,7 +41,7 @@ class VideoSettingsViewModel: ViewModel {
             secondSubtitleSelected: secondSubtitleSelected.asObserver()
         )
         
-        var subtitleTitles = ["Нет"]
+        var subtitleTitles = [NSLocalizedString("none", comment: "")]
         subtitleTitles.append(contentsOf: currentSettings.subtitleTitles)
         
         let changedSettings = Observable.combineLatest(audioSelected, firstSubtitleSelected, secondSubtitleSelected) {

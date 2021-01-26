@@ -14,8 +14,23 @@ class UploadTutorialViewController: UIViewController {
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonAction))
+        localization()
         bind()
+    }
+    
+    private func localization() {
+        if UIDevice.iphone {
+            tutorialLabel.font = .systemFont(ofSize: 18, weight: .regular)
+            orLabel.font = .systemFont(ofSize: 18, weight: .regular)
+            ipAddressLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+            addressLabel.font = .systemFont(ofSize: 18, weight: .semibold)
+        }
+        
+        tutorialLabel.text = NSLocalizedString("downloaderInstruction", comment: "")
+        orLabel.text = NSLocalizedString("or", comment: "")
+        title = NSLocalizedString("videoDownload", comment: "")
     }
     
     private func bind() {
@@ -42,4 +57,9 @@ class UploadTutorialViewController: UIViewController {
             })
             .disposed(by: disposeBag)
     }
+    
+    @objc private func closeButtonAction() {
+        dismiss(animated: true, completion: nil)
+    }
+    
 }

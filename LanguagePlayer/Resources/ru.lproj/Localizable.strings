@@ -14,6 +14,9 @@
 "yippee" = "Ура!";
 //Video Library
 "videoLibrary" = "Видеозаписи";
+"choose" = "Выберите действие:";
+"remove" = "Удалить";
+"removeWithCards" = "Удалить со всеми карточками";
 //Cards
 "cards" = "Карточки";
 //Video Settings
@@ -21,3 +24,8 @@
 "firstSubtitle" = "Первые субтитры";
 "secondSubtitle" = "Вторые субтитры";
 "none" = "Нет";
+//Video downloader
+"downloaderInstruction" = "Чтобы загрузить видео и субтитры, подключите это устройство к Wi-Fi сети и откройте с другого устройства сайт:";
+"or" = "или";
+//Video downloader
+"videoDownload" = "Загрузить видео";

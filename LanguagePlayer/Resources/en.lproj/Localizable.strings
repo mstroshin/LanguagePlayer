@@ -14,6 +14,9 @@
 "yippee" = "Yippee!";
 //Video Library
 "videoLibrary" = "Video Library";
+"choose" = "Choose:";
+"remove" = "Remove";
+"removeWithCards" = "Remove with cards";
 //Cards
 "cards" = "Cards";
 //Video Settings
@@ -21,3 +24,8 @@
 "firstSubtitle" = "Fist subtitle";
 "secondSubtitle" = "Second subtitle";
 "none" = "None";
+//Video downloader
+"downloaderInstruction" = "To download video and subtitles, connect this device to a Wi-Fi network and open the site from another device:";
+"or" = "or";
+//Video downloader
+"videoDownload" = "Download video";

@@ -35,6 +35,8 @@ class CardsViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
+        
+        title = NSLocalizedString("cards", comment: "")
     }
     
 }
@@ -76,7 +78,7 @@ extension CardsViewController: UICollectionViewDelegate {
             previewProvider: nil
         ) { actions -> UIMenu? in
             let remove = UIAction(
-                title: "Удалить",
+                title: NSLocalizedString("remove", comment: ""),
                 image: UIImage(systemName: "trash"),
                 identifier: nil,
                 discoverabilityTitle: nil,
@@ -96,7 +98,7 @@ extension CardsViewController: UICollectionViewDelegate {
             }
             
             return UIMenu(
-                title: "Выберите действие:",
+                title: NSLocalizedString("choose", comment: ""),
                 image: nil,
                 identifier: nil,
                 options: .destructive,

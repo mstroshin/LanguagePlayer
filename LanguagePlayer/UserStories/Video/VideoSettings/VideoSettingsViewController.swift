@@ -12,6 +12,8 @@ class VideoSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonAction))
+        
         bind()
     }
     
@@ -22,6 +24,10 @@ class VideoSettingsViewController: UIViewController {
                 self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func closeButtonAction() {
+        dismiss(animated: true, completion: nil)
     }
     
 }
@@ -65,11 +71,11 @@ extension VideoSettingsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Аудио дорожка"
+            return NSLocalizedString("audioTrack", comment: "")
         } else if section == 1 {
-            return "Первые субтитры"
+            return NSLocalizedString("firstSubtitle", comment: "")
         } else if section == 2 {
-            return "Вторые субтитры"
+            return NSLocalizedString("secondSubtitle", comment: "")
         }
         
         return nil

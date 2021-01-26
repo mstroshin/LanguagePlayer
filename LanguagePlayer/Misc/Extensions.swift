@@ -208,6 +208,15 @@ extension FileManager {
     
 }
 
+extension UIDevice {
+    static var ipad: Bool {
+        current.userInterfaceIdiom == .pad
+    }
+    static var iphone: Bool {
+        current.userInterfaceIdiom == .phone
+    }
+}
+
 precedencegroup AssignmentPrecedence {}
 infix operator ?=
 func ?= <T: Any> (left: inout T, right: T?) {

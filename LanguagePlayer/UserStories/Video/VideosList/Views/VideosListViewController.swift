@@ -13,7 +13,7 @@ class VideosListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Video Library"
+        title = NSLocalizedString("videoLibrary", comment: "")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "purchased.circle.fill"),
@@ -95,7 +95,7 @@ extension VideosListViewController: UICollectionViewDelegate {
             previewProvider: nil
         ) { actions -> UIMenu? in
             let remove = UIAction(
-                title: "Удалить",
+                title: NSLocalizedString("remove", comment: ""),
                 image: UIImage(systemName: "trash"),
                 identifier: nil,
                 discoverabilityTitle: nil,
@@ -105,7 +105,7 @@ extension VideosListViewController: UICollectionViewDelegate {
                 self.viewModel.input.removeVideo.onNext(indexPath.row)
             }
             let removeWithCards = UIAction(
-                title: "Удалить со всеми карточками",
+                title: NSLocalizedString("removeWithCards", comment: ""),
                 image: UIImage(systemName: "trash"),
                 identifier: nil,
                 discoverabilityTitle: nil,
@@ -116,7 +116,7 @@ extension VideosListViewController: UICollectionViewDelegate {
             }
 
             return UIMenu(
-                title: "Выберите действие:",
+                title: NSLocalizedString("choose", comment: ""),
                 image: nil,
                 identifier: nil,
                 options: .destructive,

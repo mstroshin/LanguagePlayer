@@ -19,12 +19,15 @@ class PurchasesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonAction))
         
         localizeLabelsAndButtons()
         bind(viewModel: viewModel)
     }
     
     private func localizeLabelsAndButtons() {
+        title = "Premium"
+        
         benefitsLabel.text = NSLocalizedString("withoutLimit", comment: "") + "\n"
             + NSLocalizedString("supportDeveloper", comment: "")
         benefitsLabel.font = .systemFont(ofSize: 32, weight: .semibold)
@@ -201,6 +204,10 @@ class PurchasesViewController: UIViewController {
         attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .semibold), range: benefitsRange)
         
         return attributedString
+    }
+    
+    @objc private func closeButtonAction() {
+        dismiss(animated: true, completion: nil)
     }
     
 }

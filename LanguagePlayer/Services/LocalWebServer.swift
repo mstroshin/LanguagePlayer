@@ -73,7 +73,7 @@ class LocalWebServer: NSObject {
                 try webServer.start(
                     options: [
                         GCDWebServerOption_ConnectionClass : LocalWebServerUploadConnection.self,
-                        GCDWebServerOption_Port : 8080,
+                        GCDWebServerOption_Port : 55511,
                         GCDWebServerOption_BonjourName : "LanguagePlayer Server"
                     ]
                 )

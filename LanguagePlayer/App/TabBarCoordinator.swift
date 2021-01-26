@@ -10,10 +10,10 @@ class TabBarCoordinator: BaseCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         let videoListNavigationController = UINavigationController()
-        videoListNavigationController.tabBarItem = .init(title: "Video Library", image: UIImage(systemName: "list.and.film"), tag: 0)
+        videoListNavigationController.tabBarItem = .init(title: NSLocalizedString("videoLibrary", comment: ""), image: UIImage(systemName: "list.and.film"), tag: 0)
         
         let cardsNavigationController = UINavigationController()
-        cardsNavigationController.tabBarItem = .init(title: "Cards", image: UIImage(systemName: "note.text"), tag: 1)
+        cardsNavigationController.tabBarItem = .init(title: NSLocalizedString("cards", comment: ""), image: UIImage(systemName: "note.text"), tag: 1)
         
         tabBar.viewControllers = [
             videoListNavigationController,

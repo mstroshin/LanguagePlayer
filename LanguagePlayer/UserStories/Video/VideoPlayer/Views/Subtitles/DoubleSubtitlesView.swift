@@ -11,10 +11,22 @@ class DoubleSubtitlesView: UIView {
     @IBOutlet private weak var targetSubtitleLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        if UIDevice.iphone {
+            sourceSubtitleLabel.font = .systemFont(ofSize: 24, weight: .regular)
+            targetSubtitleLabel.font = .systemFont(ofSize: 14, weight: .regular)
+        }
+    }
+    
     func set(subtitles: DoubleSubtitles) {
-        self.sourceSubtitleLabel.text = subtitles.source?.text
-        self.targetSubtitleLabel.text = subtitles.target?.text
-        self.favoriteButton.setImage(UIImage(systemName: subtitles.addedToFavorite ? "book.fill" : "book"), for: .normal)
+        sourceSubtitleLabel.text = subtitles.source?.text
+        targetSubtitleLabel.text = subtitles.target?.text
+        
+        favoriteButton.setImage(UIImage(systemName: subtitles.addedToFavorite ? "book.fill" : "book"), for: .normal)
+        favoriteButton.isHidden = subtitles.source == nil && subtitles.target == nil
+        
     }
     
     @IBAction private func didPressAddToFavoriteButton(_ sender: UIButton) {

@@ -74,7 +74,9 @@ class VideoCoordinator: BaseCoordinator<Void> {
         let viewController: UploadTutorialViewController = UploadTutorialViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         
-        navigationController.present(viewController, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .formSheet
+        navigationController.present(navController, animated: true, completion: nil)
     }
     
     private func openPremium() {
@@ -82,8 +84,9 @@ class VideoCoordinator: BaseCoordinator<Void> {
         let viewController: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         
-        viewController.modalPresentationStyle = .formSheet
-        navigationController.present(viewController, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: viewController)
+        navController.modalPresentationStyle = .formSheet
+        navigationController.present(navController, animated: true, completion: nil)
         
         viewModel.route.close
             .drive(onNext: { [weak viewController] in
@@ -94,9 +97,11 @@ class VideoCoordinator: BaseCoordinator<Void> {
     
     private func openVideoSettings(with settingsSubject: BehaviorSubject<VideoSettings>, on vc: UIViewController) {
         let viewModel = VideoSettingsViewModel(settingsSubject: settingsSubject)
+        
         let viewController: VideoSettingsViewController = VideoSettingsViewController.createFromMainStoryboard()
         viewController.viewModel = viewModel
         
-        vc.present(viewController, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: viewController)
+        vc.present(navController, animated: true, completion: nil)
     }
 }

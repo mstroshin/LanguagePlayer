@@ -39,5 +39,23 @@ class CardsCoordinator: BaseCoordinator<Void> {
                 viewController.dismiss(animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
+        
+        viewModel.route.openVideoSettings
+            .observe(on: MainScheduler())
+            .subscribe(onNext: { [weak self, weak viewController] videoSettingsSubject in
+                guard let self = self, let vc = viewController else { return }
+                self.openVideoSettings(with: videoSettingsSubject, on: vc)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func openVideoSettings(with settingsSubject: BehaviorSubject<VideoSettings>, on vc: UIViewController) {
+        let viewModel = VideoSettingsViewModel(settingsSubject: settingsSubject)
+        
+        let viewController: VideoSettingsViewController = VideoSettingsViewController.createFromMainStoryboard()
+        viewController.viewModel = viewModel
+        
+        let navController = UINavigationController(rootViewController: viewController)
+        vc.present(navController, animated: true, completion: nil)
     }
 }
