@@ -10,26 +10,31 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
     let route: Route
         
     init(purchaseService: PurchaseService = PurchaseService()) {
+        let retrieveProducts = PublishSubject<Void>()
         let buySubject = PublishSubject<Purchases.Package>()
         let restoreSubject = PublishSubject<Void>()
         let closeSubject = PublishSubject<Void>()
+        let activityIndicator = ActivityIndicator()
         
         self.input = Input(
+            retrieveProducts: retrieveProducts.asObserver(),
             buy: buySubject.asObserver(),
             restore: restoreSubject.asObserver(),
             close: closeSubject.asObserver()
         )
         
-        let activityIndicator = ActivityIndicator()
-        
-        let products = purchaseService.retrieveProductsInfo()
-            .trackActivity(activityIndicator)
-            .map({ packages -> Result<[Purchases.Package], Error> in
-                .success(packages)
-            })
-            .asDriver { error -> Driver<Result<[Purchases.Package], Error>> in
-                .just(.failure(error))
+        let retrieveProductsInfo = retrieveProducts
+            .skip(while: { PurchaseService.isPremium })
+            .flatMap {
+                purchaseService.retrieveProductsInfo()
+                    .trackActivity(activityIndicator)
+                    .materialize()
             }
+            .share()
+            .debug("retrieveProductsInfo", trimOutput: false)
+        let retrieveProductsError = retrieveProductsInfo
+            .compactMap { $0.error }
+            .asDriver(onErrorJustReturn: NSError())
         
         let buyingResult = buySubject
             .flatMap {
@@ -39,7 +44,7 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
             }
             .share()
             .asDriver(onErrorJustReturn: .next(()))
-        let buyingError = buyingResult.compactMap { $0.error?.localizedDescription }
+        let buyingError = buyingResult.compactMap { $0.error }
         
         let restoringResult = restoreSubject
             .flatMap {
@@ -49,32 +54,41 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
             }
             .share()
             .asDriver(onErrorJustReturn: .next(false))
-        let restoringError = restoringResult.compactMap { $0.error?.localizedDescription }
-        
-//        let restoringResultErased = restoringResult
-//            .compactMap { $0.element }
-//            .map { _ -> Result<Void, Error> in
-//                Result.success(())
-//            }
+        let restoringError = restoringResult.compactMap { $0.error }
         
         let hasPremium = Driver.zip(buyingResult, restoringResult)
             .flatMap { _ -> Driver<Bool> in
                 purchaseService.checkPremium()
                     .asDriver(onErrorJustReturn: false)
             }
-//        let hasPremium = Driver.merge(buyingResult, restoringResultErased)
-//            .flatMap { _ -> Driver<Bool> in
-//                purchaseService.checkPremium()
-//                    .asDriver(onErrorJustReturn: false)
-//            }
-            
+        
+        let allErrors = Driver.merge(restoringError, buyingError, retrieveProductsError)
+            .map { error -> PurchasesError in
+                let error = error as NSError
+                if let underlyingError = error.userInfo[NSUnderlyingErrorKey] as? NSError {
+                    switch underlyingError.code {
+                        case NSURLErrorNotConnectedToInternet:
+                            return .noInternet
+                        default: break
+                    }
+                }
+                switch Purchases.ErrorCode(_nsError: error).code {
+                    case .networkError:
+                        return .noInternet
+                    case .purchaseCancelledError:
+                        return .cancel
+                    default:
+                        return .other
+                }
+            }
+        
         self.output = Output(
-            products: products,
+            products: retrieveProductsInfo.compactMap { $0.element }.asDriver(onErrorJustReturn: []),
             buyingResult: buyingResult.compactMap { $0.element },
             restoringResult: restoringResult.compactMap { $0.element },
             activityIndicator: activityIndicator,
             hasPremium: Driver.merge(hasPremium, purchaseService.checkPremium().asDriver(onErrorJustReturn: false)),
-            error: Driver.merge(restoringError, buyingError)
+            error: allErrors
         )
         
         self.route = Route(
@@ -86,19 +100,26 @@ class PurchasesViewModel: ViewModel, ViewModelCoordinatable {
 
 extension PurchasesViewModel {
     
+    enum PurchasesError: Error {
+        case noInternet
+        case cancel
+        case other
+    }
+    
     struct Input {
+        let retrieveProducts: AnyObserver<Void>
         let buy: AnyObserver<Purchases.Package>
         let restore: AnyObserver<Void>
         let close: AnyObserver<Void>
     }
     
     struct Output {
-        let products: Driver<Result<[Purchases.Package], Error>>
+        let products: Driver<[Purchases.Package]>
         let buyingResult: Driver<Void>
         let restoringResult: Driver<Bool>
         let activityIndicator: ActivityIndicator
         let hasPremium: Driver<Bool>
-        let error: Driver<String>
+        let error: Driver<PurchasesError>
     }
     
     struct Route {

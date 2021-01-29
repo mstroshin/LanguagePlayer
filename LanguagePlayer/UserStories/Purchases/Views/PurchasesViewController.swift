@@ -7,22 +7,23 @@ import Purchases
 class PurchasesViewController: UIViewController {
     var viewModel: PurchasesViewModel!
     
-    @IBOutlet private weak var benefitsLabel: UILabel!
-    @IBOutlet private weak var productsStackView: UIStackView!
-    @IBOutlet private weak var restoreButton: UIButton!
-//    @IBOutlet private weak var termsAndPrivacyLabel: UILabel!
+    @IBOutlet private weak var productsView: ProductsView!
     @IBOutlet private weak var alreadyHasPremiumView: UIView!
     @IBOutlet private weak var alreadyHasPremiumLabel: UILabel!
     @IBOutlet private weak var alreadyHasPremiumButton: UIButton!
     @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var noConnectionErrorView: NoConnectionErrorView!
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonAction))
         
+        hideAllViews()
         localizeLabelsAndButtons()
         bind(viewModel: viewModel)
+        
+        viewModel.input.retrieveProducts.onNext(())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,19 +39,6 @@ class PurchasesViewController: UIViewController {
     private func localizeLabelsAndButtons() {
         title = "Premium"
         
-        benefitsLabel.text = NSLocalizedString("withoutLimit", comment: "") + "\n"
-            + NSLocalizedString("supportDeveloper", comment: "")
-        
-        if UIDevice.iphone {
-            benefitsLabel.font = .systemFont(ofSize: 24, weight: .semibold)
-        } else {
-            benefitsLabel.font = .systemFont(ofSize: 32, weight: .semibold)
-        }
-        
-        restoreButton.setTitle(NSLocalizedString("restorePurchase", comment: ""), for: .normal)
-        restoreButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
-        restoreButton.setTitleColor(UIColor(named: "purchaseButtonColor"), for: .normal)
-        
         alreadyHasPremiumLabel.text = NSLocalizedString("alreadyHasPremium", comment: "")
         alreadyHasPremiumButton.setTitle(NSLocalizedString("yippee", comment: ""), for: .normal)
     }
@@ -60,7 +48,7 @@ class PurchasesViewController: UIViewController {
             .bind(to: viewModel.input.close)
             .disposed(by: disposeBag)
         
-        restoreButton.rx.tap
+        productsView.restoreButtonAction
             .bind(to: viewModel.input.restore)
             .disposed(by: disposeBag)
         
@@ -76,31 +64,22 @@ class PurchasesViewController: UIViewController {
             .filter { $0 == true }
             .drive(onNext: { [weak self] _ in
                 self?.alreadyHasPremiumView.isHidden = true
-                self?.benefitsLabel.isHidden = true
-                self?.productsStackView.isHidden = true
-                self?.restoreButton.isHidden = true
+                self?.productsView.isHidden = true
             })
             .disposed(by: disposeBag)
         
         viewModel.output.products
-            .drive(onNext: { [weak self] result in
-                switch result {
-                case .success(let packages):
-                    self?.makeButtons(for: packages, bindTo: viewModel)
-                case .failure(let error):
-                    self?.view.makeToast(
-                        error.localizedDescription,
-                        duration: 3,
-                        position: .bottom,
-                        title: "Some error"
-                    )
-                }
+            .drive(onNext: { [weak self] packages in
+                self?.hideAllViews()
+                self?.productsView.makeButtons(for: packages, bindTo: viewModel.input.buy)
+                self?.productsView.isHidden = false
             })
             .disposed(by: disposeBag)
         
         viewModel.output.buyingResult
             .drive(onNext: { [weak self] in
-                self?.showAlreadyHasPremuim(true)
+                self?.hideAllViews()
+                self?.alreadyHasPremiumView.isHidden = false
                 self?.view.makeToast(
                     "Success",
                     duration: 3,
@@ -112,7 +91,8 @@ class PurchasesViewController: UIViewController {
         
         viewModel.output.restoringResult
             .drive(onNext: { [weak self] hasPremium in
-                self?.showAlreadyHasPremuim(hasPremium)
+                self?.hideAllViews()
+                self?.alreadyHasPremiumView.isHidden = !hasPremium
                 if hasPremium {
                     self?.view.makeToast(
                         "Success",
@@ -133,84 +113,48 @@ class PurchasesViewController: UIViewController {
         
         viewModel.output.hasPremium
             .drive(onNext: { [weak self] hasPremium in
-                self?.showAlreadyHasPremuim(hasPremium)
+                self?.hideAllViews()
+                self?.alreadyHasPremiumView.isHidden = !hasPremium
             })
             .disposed(by: disposeBag)
         
         viewModel.output.error
-            .drive(onNext: { [weak self] errorText in
-                self?.showAlreadyHasPremuim(false)
-                self?.view.makeToast(
-                    errorText,
-                    duration: 3,
-                    position: .bottom,
-                    title: "Error"
-                )
+            .drive(onNext: { [weak self] purchasesError in
+                self?.hideAllViews()
+
+                switch purchasesError {
+                case .noInternet:
+                    self?.noConnectionErrorView.isHidden = false
+                case .cancel:
+                    self?.productsView.isHidden = false
+                    self?.view.makeToast(
+                        "Purchase canceled by user",
+                        duration: 3,
+                        position: .bottom,
+                        title: "Error"
+                    )
+                case .other:
+                    self?.productsView.isHidden = false
+                    self?.view.makeToast(
+                        "Some error occured",
+                        duration: 3,
+                        position: .bottom,
+                        title: "Error"
+                    )
+                }
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func showAlreadyHasPremuim(_ shown: Bool) {
-        self.alreadyHasPremiumView.isHidden = !shown
-        self.benefitsLabel.isHidden = shown
-        self.productsStackView.isHidden = shown
-        self.restoreButton.isHidden = shown
-    }
-    
-    private func makeButtons(for packages: [Purchases.Package], bindTo viewModel: PurchasesViewModel) {
-        for package in packages {
-            let button = UIButton()
-            button.addConstraint(button.heightAnchor.constraint(equalToConstant: 64))
-            button.cornerRadius = 32
-            button.backgroundColor = UIColor(named: "purchaseButtonColor")
-            button.titleLabel?.font = .systemFont(ofSize: 24, weight: .semibold)
-            
-            switch package.packageType {
-            case .monthly:
-                button.setTitle("\(package.localizedPriceString) / " + NSLocalizedString("month", comment: ""), for: .normal)
-            case .annual:
-                button.titleLabel?.lineBreakMode = .byWordWrapping
-                button.titleLabel?.textAlignment = .center
-                
-                let title = annualButtonTitle(annualPackage: package, monthPackage: packages.first(where: { $0.packageType == .monthly }))
-                button.setAttributedTitle(title, for: .normal)
-            case .lifetime:
-                button.setTitle("\(package.localizedPriceString) / " + NSLocalizedString("lifetime", comment: ""), for: .normal)
-            default:
-                button.setTitle(package.localizedPriceString, for: .normal)
-            }
-            
-            button.rx.tap.bind { _ in
-                viewModel.input.buy.onNext(package)
-            }.disposed(by: disposeBag)
-            
-            productsStackView.addArrangedSubview(button)
+        
+        noConnectionErrorView.buttonAction = { [weak self] in
+            self?.viewModel.input.retrieveProducts.onNext(())
         }
     }
     
-    private func annualButtonTitle(annualPackage: Purchases.Package, monthPackage: Purchases.Package?) -> NSAttributedString {
-        let price = "\(annualPackage.localizedPriceString) / " + NSLocalizedString("year", comment: "")
-        
-        var benefits = ""
-        if annualPackage.product.introductoryPrice != nil {
-            benefits += String.localizedStringWithFormat(NSLocalizedString("trial", comment: ""), 7)
-        }
-        
-        if let monthPrice = monthPackage?.product.price {
-            let savePercent = Int(ceil(monthPrice.dividing(by: annualPackage.product.price.dividing(by: 12)).multiplying(by: 100).subtracting(100).floatValue))
-            benefits += " " + NSLocalizedString("and", comment: "") + " " + String.localizedStringWithFormat(NSLocalizedString("savePercent", comment: ""), savePercent)
-        }
-                
-        let attributedString = NSMutableAttributedString(string: price + "\n" + benefits)
-        attributedString.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange(location: 0, length: attributedString.string.count))
-        
-        let priceRange = NSRange(attributedString.string.range(of: price)!, in: attributedString.string)
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 24, weight: .semibold), range: priceRange)
-        
-        let benefitsRange = NSRange(attributedString.string.range(of: benefits)!, in: attributedString.string)
-        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 14, weight: .semibold), range: benefitsRange)
-        
-        return attributedString
+    private func hideAllViews() {
+        noConnectionErrorView.isHidden = true
+        alreadyHasPremiumView.isHidden = true
+        productsView.isHidden = true
+        loadingIndicator.isHidden = true
     }
     
     @objc private func closeButtonAction() {

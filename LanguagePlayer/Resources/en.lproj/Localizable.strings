@@ -12,6 +12,8 @@
 "lifetime" = "Lifetime";
 "alreadyHasPremium" = "Congratulations! You already have a premium! 😊";
 "yippee" = "Yippee!";
+"noConnectionErrorTitle" = "The internet connection is probably interrupted ";
+"retry" = "Retry";
 //Video Library
 "videoLibrary" = "Video Library";
 "choose" = "Choose:";
