@@ -93,7 +93,7 @@ class SubtitlesConvertorFromSrt: SubtitlesConvertor {
             let endTimeInterval = parse(timeString: endResult!)
             
             allTitles.append(
-                SubtitlePart(number: indexResult!, fromTime: startTimeInterval, toTime: endTimeInterval, text: textLines.joined())
+                SubtitlePart(number: indexResult!, fromTime: startTimeInterval, toTime: endTimeInterval, text: textLines.joined(separator: " "))
             )
         }
         

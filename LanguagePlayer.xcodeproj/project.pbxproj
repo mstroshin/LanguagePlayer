@@ -14,6 +14,7 @@
 		944256862590EF1200FB79F6 /* FilesCrawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 944256852590EF1200FB79F6 /* FilesCrawler.swift */; };
 		94867ECF2561F8D8002DE68D /* UploadTutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */; };
 		94867ED32561FA60002DE68D /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94867ED22561FA60002DE68D /* Protocols.swift */; };
+		9499513225C44D08009E0DED /* InterfaceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9499513125C44D08009E0DED /* InterfaceOrientation.swift */; };
 		949C860F25B08758002ED79A /* VideoUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 949C860E25B08758002ED79A /* VideoUploader.swift */; };
 		949C862125B1DCCC002ED79A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 949C862325B1DCCC002ED79A /* Localizable.strings */; };
 		94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9BD3325620A2E00A5E740 /* PurchasesViewModel.swift */; };
@@ -84,6 +85,7 @@
 		944256852590EF1200FB79F6 /* FilesCrawler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilesCrawler.swift; sourceTree = "<group>"; };
 		94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadTutorialViewModel.swift; sourceTree = "<group>"; };
 		94867ED22561FA60002DE68D /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		9499513125C44D08009E0DED /* InterfaceOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceOrientation.swift; sourceTree = "<group>"; };
 		949C860E25B08758002ED79A /* VideoUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUploader.swift; sourceTree = "<group>"; };
 		949C862225B1DCCC002ED79A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		949C862525B1DD78002ED79A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 				94B9BD3A256210FF00A5E740 /* ActivityIndicator.swift */,
 				94B9BDB025647D9C00A5E740 /* BaseCoordinator.swift */,
 				944256852590EF1200FB79F6 /* FilesCrawler.swift */,
+				9499513125C44D08009E0DED /* InterfaceOrientation.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 			files = (
 				D2E327B124E29E7D00CB7B16 /* SupportedFormatsEnums.swift in Sources */,
 				942B40D5257A0137006389E9 /* VideoSettingsViewController.swift in Sources */,
+				9499513225C44D08009E0DED /* InterfaceOrientation.swift in Sources */,
 				D2C0568624C7CADD00810915 /* SelectionGestureRecognizer.swift in Sources */,
 				94B9BDB82564801300A5E740 /* TabBarCoordinator.swift in Sources */,
 				94B9BD3425620A2E00A5E740 /* PurchasesViewModel.swift in Sources */,
@@ -823,7 +827,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LanguagePlayer/Resources/Info.plist;
@@ -1011,7 +1015,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = KM8KTKQCR2;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = LanguagePlayer/Resources/Info.plist;

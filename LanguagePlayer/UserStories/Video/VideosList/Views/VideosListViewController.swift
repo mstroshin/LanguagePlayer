@@ -11,6 +11,16 @@ class VideosListViewController: UIViewController {
     private var videos = [VideoViewEntity]()
     private var disposeBag = DisposeBag()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        InterfaceOrientation.lock(orientation: .portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        InterfaceOrientation.lock(orientation: .all)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("videoLibrary", comment: "")

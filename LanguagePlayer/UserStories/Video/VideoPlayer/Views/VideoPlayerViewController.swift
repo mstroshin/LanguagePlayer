@@ -22,7 +22,15 @@ class VideoPlayerViewController: UIViewController {
         
     override var prefersStatusBarHidden: Bool { true }
     
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask { .landscape }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        InterfaceOrientation.lock(orientation: .landscape)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        InterfaceOrientation.lock(orientation: .all)
+    }
     
     private func setupViews() {
         controlsView.delegate = self

@@ -25,12 +25,27 @@ class PurchasesViewController: UIViewController {
         bind(viewModel: viewModel)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        InterfaceOrientation.lock(orientation: .portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        InterfaceOrientation.lock(orientation: .all)
+    }
+    
     private func localizeLabelsAndButtons() {
         title = "Premium"
         
         benefitsLabel.text = NSLocalizedString("withoutLimit", comment: "") + "\n"
             + NSLocalizedString("supportDeveloper", comment: "")
-        benefitsLabel.font = .systemFont(ofSize: 32, weight: .semibold)
+        
+        if UIDevice.iphone {
+            benefitsLabel.font = .systemFont(ofSize: 24, weight: .semibold)
+        } else {
+            benefitsLabel.font = .systemFont(ofSize: 32, weight: .semibold)
+        }
         
         restoreButton.setTitle(NSLocalizedString("restorePurchase", comment: ""), for: .normal)
         restoreButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
@@ -124,6 +139,7 @@ class PurchasesViewController: UIViewController {
         
         viewModel.output.error
             .drive(onNext: { [weak self] errorText in
+                self?.showAlreadyHasPremuim(false)
                 self?.view.makeToast(
                     errorText,
                     duration: 3,

@@ -17,6 +17,16 @@ class VideoSettingsViewController: UIViewController {
         bind()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        InterfaceOrientation.lock(orientation: .landscape)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        InterfaceOrientation.lock(orientation: .all)
+    }
+    
     private func bind() {
         viewModel.output.changedSettings
             .drive(onNext: { [weak self] settings in

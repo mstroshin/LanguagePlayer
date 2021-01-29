@@ -19,6 +19,16 @@ class CardsViewController: UIViewController {
         setupBindings()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        InterfaceOrientation.lock(orientation: .portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        InterfaceOrientation.lock(orientation: .all)
+    }
+    
     private func setupBindings() {
         viewModel.output.cards
             .map { $0.map(CardViewEntity.init(translation:)) }
