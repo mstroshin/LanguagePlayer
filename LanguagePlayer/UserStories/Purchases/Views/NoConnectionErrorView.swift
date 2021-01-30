@@ -9,12 +9,11 @@ class NoConnectionErrorView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        localize()
     }
     
-    private func localize() {
-        titleLabel.text = NSLocalizedString("noConnectionErrorTitle", comment: "")
-        button.setTitle(NSLocalizedString("retry", comment: ""), for: .normal)
+    func localize(title: String, buttonTitle: String) {
+        titleLabel.text = title
+        button.setTitle(buttonTitle, for: .normal)
     }
     
     @IBAction private func buttonAction(sender: UIButton) {

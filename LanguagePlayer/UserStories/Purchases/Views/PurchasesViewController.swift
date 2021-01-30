@@ -41,6 +41,11 @@ class PurchasesViewController: UIViewController {
         
         alreadyHasPremiumLabel.text = NSLocalizedString("alreadyHasPremium", comment: "")
         alreadyHasPremiumButton.setTitle(NSLocalizedString("yippee", comment: ""), for: .normal)
+        
+        noConnectionErrorView.localize(
+            title: NSLocalizedString("noConnectionErrorTitle", comment: ""),
+            buttonTitle: NSLocalizedString("retry", comment: "")
+        )
     }
     
     private func bind(viewModel: PurchasesViewModel) {

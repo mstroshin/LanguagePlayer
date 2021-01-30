@@ -31,3 +31,4 @@
 "or" = "or";
 //Video downloader
 "videoDownload" = "Download video";
+"wifiError" = "No Wi-Fi connection 😞\nConnect to Wi-Fi and click Retry";

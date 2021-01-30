@@ -54,20 +54,58 @@
                                     </activityIndicatorView>
                                 </subviews>
                             </stackView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLB-ks-WWH" customClass="NoConnectionErrorView" customModule="LanguagePlayer" customModuleProvider="target">
+                                <rect key="frame" x="16" y="302.33333333333331" width="382" height="111.33333333333331"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вероятно, соединение с интернетом прервано 😞" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBy-3m-0aM">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="62.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bU3-Rm-Axe">
+                                        <rect key="frame" x="133" y="70.333333333333371" width="116" height="41"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <state key="normal" title="Повторить"/>
+                                        <connections>
+                                            <action selector="buttonActionWithSender:" destination="YLB-ks-WWH" eventType="touchUpInside" id="3qR-li-KIE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="tBy-3m-0aM" firstAttribute="top" secondItem="YLB-ks-WWH" secondAttribute="top" id="6o2-Xl-nxC"/>
+                                    <constraint firstAttribute="bottom" secondItem="bU3-Rm-Axe" secondAttribute="bottom" id="DSX-II-UVc"/>
+                                    <constraint firstAttribute="trailing" secondItem="tBy-3m-0aM" secondAttribute="trailing" id="Id3-LH-0c3"/>
+                                    <constraint firstItem="bU3-Rm-Axe" firstAttribute="top" secondItem="tBy-3m-0aM" secondAttribute="bottom" constant="8" id="eQf-ah-AyP"/>
+                                    <constraint firstItem="tBy-3m-0aM" firstAttribute="leading" secondItem="YLB-ks-WWH" secondAttribute="leading" id="kw0-mn-sFf"/>
+                                    <constraint firstItem="bU3-Rm-Axe" firstAttribute="centerX" secondItem="YLB-ks-WWH" secondAttribute="centerX" id="xD5-ur-nGN"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="button" destination="bU3-Rm-Axe" id="bda-PO-z86"/>
+                                    <outlet property="titleLabel" destination="tBy-3m-0aM" id="PMC-Bu-jgz"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cth-9F-sro"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="YLB-ks-WWH" secondAttribute="trailing" constant="16" id="D8x-mW-lcT"/>
                             <constraint firstItem="DNv-Ua-CHN" firstAttribute="top" secondItem="cth-9F-sro" secondAttribute="top" constant="20" id="Fef-nx-IRr"/>
+                            <constraint firstItem="YLB-ks-WWH" firstAttribute="leading" secondItem="BDd-1T-Eu8" secondAttribute="leading" constant="16" id="JmI-oo-Uch"/>
                             <constraint firstItem="cth-9F-sro" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="DNv-Ua-CHN" secondAttribute="bottom" id="XXk-Nr-Aaw"/>
                             <constraint firstAttribute="trailing" secondItem="DNv-Ua-CHN" secondAttribute="trailing" constant="16" id="Yyi-vM-tnA"/>
                             <constraint firstItem="DNv-Ua-CHN" firstAttribute="leading" secondItem="cth-9F-sro" secondAttribute="leading" constant="16" id="c83-Kf-uHy"/>
+                            <constraint firstItem="YLB-ks-WWH" firstAttribute="centerY" secondItem="BDd-1T-Eu8" secondAttribute="centerY" id="reN-ij-HRZ"/>
+                            <constraint firstItem="YLB-ks-WWH" firstAttribute="centerX" secondItem="BDd-1T-Eu8" secondAttribute="centerX" id="tve-Cx-3Lb"/>
                         </constraints>
                     </view>
                     <modalPageSheetSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="activityIndicator" destination="QQy-FM-oe2" id="6pR-Un-sxy"/>
                         <outlet property="addressLabel" destination="Pv9-2w-Z8C" id="0u1-xq-CMS"/>
+                        <outlet property="addressesStackView" destination="DNv-Ua-CHN" id="uaf-V6-dLG"/>
+                        <outlet property="errorView" destination="YLB-ks-WWH" id="jnc-VG-fT7"/>
                         <outlet property="ipAddressLabel" destination="Xaq-pt-Rfb" id="rXl-LX-GWl"/>
                         <outlet property="orLabel" destination="NV4-7i-5fe" id="rDa-jR-kkl"/>
                         <outlet property="tutorialLabel" destination="fil-hW-2lm" id="9cr-Sb-OsD"/>

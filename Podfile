@@ -15,6 +15,7 @@ target 'LanguagePlayer' do
   pod 'MobileVLCKit'
   pod 'Toast-Swift'
   pod 'Purchases'
+  pod 'ReachabilitySwift'
 end
 
 post_install do |installer|
