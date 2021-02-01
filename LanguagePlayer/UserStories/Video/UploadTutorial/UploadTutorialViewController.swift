@@ -18,10 +18,11 @@ class UploadTutorialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonAction))
+        addressesStackView.isHidden = true
+
         localization()
         bind()
         
-        addressesStackView.isHidden = true
         viewModel.input.startServer.onNext(())
     }
     
@@ -59,6 +60,7 @@ class UploadTutorialViewController: UIViewController {
     
     private func bind() {
         viewModel.output.addresses
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] addresses in
                 self?.errorView.isHidden = true
                 self?.addressesStackView.isHidden = false
