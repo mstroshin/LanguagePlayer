@@ -25,6 +25,20 @@ class UploadTutorialViewController: UIViewController {
         viewModel.input.startServer.onNext(())
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .portrait, rotation: .portrait)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .portrait, rotation: .portrait)
+        }
+    }
+    
     private func localization() {
         if UIDevice.iphone {
             tutorialLabel.font = .systemFont(ofSize: 18, weight: .regular)

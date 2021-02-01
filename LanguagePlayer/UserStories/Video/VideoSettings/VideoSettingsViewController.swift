@@ -19,12 +19,16 @@ class VideoSettingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        InterfaceOrientation.lock(orientation: .landscape)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .landscape, rotation: .landscapeLeft)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        InterfaceOrientation.lock(orientation: .all)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .landscape, rotation: .landscapeLeft)
+        }
     }
     
     private func bind() {

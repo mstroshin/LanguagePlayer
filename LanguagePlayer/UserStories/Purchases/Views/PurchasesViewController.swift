@@ -28,12 +28,16 @@ class PurchasesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        InterfaceOrientation.lock(orientation: .portrait)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .portrait, rotation: .portrait)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        InterfaceOrientation.lock(orientation: .all)
+        if UIDevice.iphone {
+            InterfaceOrientation.lock(orientation: .portrait, rotation: .portrait)
+        }
     }
     
     private func localizeLabelsAndButtons() {

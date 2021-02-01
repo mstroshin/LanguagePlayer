@@ -186,8 +186,8 @@
 		942B40D32579F990006389E9 /* VideoSettings */ = {
 			isa = PBXGroup;
 			children = (
-				942B40D4257A0137006389E9 /* VideoSettingsViewController.swift */,
 				942B40D8257A0155006389E9 /* VideoSettingsViewModel.swift */,
+				942B40D4257A0137006389E9 /* VideoSettingsViewController.swift */,
 			);
 			path = VideoSettings;
 			sourceTree = "<group>";
@@ -401,8 +401,8 @@
 		D2B29E8C24F6737000AF06A9 /* UploadTutorial */ = {
 			isa = PBXGroup;
 			children = (
-				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
 				94867ECE2561F8D8002DE68D /* UploadTutorialViewModel.swift */,
+				D2F7CAE224F460990069659F /* UploadTutorialViewController.swift */,
 				94F6945D258B9C3D0004B4C5 /* TemporaryVideo.swift */,
 			);
 			path = UploadTutorial;
