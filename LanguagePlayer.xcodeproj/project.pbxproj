@@ -3,23 +3,79 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		CBA931DF269215D8007DA2F9 /* LanguagePlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931DE269215D8007DA2F9 /* LanguagePlayerApp.swift */; };
-		CBA931E1269215D8007DA2F9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931E0269215D8007DA2F9 /* ContentView.swift */; };
+		CBA931E1269215D8007DA2F9 /* VideoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931E0269215D8007DA2F9 /* VideoListView.swift */; };
 		CBA931E3269215D9007DA2F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBA931E2269215D9007DA2F9 /* Assets.xcassets */; };
 		CBA931E6269215D9007DA2F9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBA931E5269215D9007DA2F9 /* Preview Assets.xcassets */; };
+		CBA931F12692192E007DA2F9 /* VideoDownloadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931F02692192E007DA2F9 /* VideoDownloadingView.swift */; };
+		CBA931F326921A08007DA2F9 /* VideoDownloadingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931F226921A08007DA2F9 /* VideoDownloadingViewModel.swift */; };
+		CBA931F826921C38007DA2F9 /* VideoDownloadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931F726921C38007DA2F9 /* VideoDownloadingService.swift */; };
+		CBA9320F26921E3A007DA2F9 /* jsconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = CBA931FA26921E3A007DA2F9 /* jsconfig.json */; };
+		CBA9321026921E3A007DA2F9 /* jquery.ui.widget.js in Resources */ = {isa = PBXBuildFile; fileRef = CBA931FC26921E3A007DA2F9 /* jquery.ui.widget.js */; };
+		CBA9321126921E3A007DA2F9 /* jquery.fileupload.js in Resources */ = {isa = PBXBuildFile; fileRef = CBA931FD26921E3A007DA2F9 /* jquery.fileupload.js */; };
+		CBA9321226921E3A007DA2F9 /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = CBA931FE26921E3A007DA2F9 /* index.js */; };
+		CBA9321326921E3A007DA2F9 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = CBA931FF26921E3A007DA2F9 /* jquery.min.js */; };
+		CBA9321426921E3A007DA2F9 /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320026921E3A007DA2F9 /* bootstrap.min.js */; };
+		CBA9321526921E3A007DA2F9 /* fontawesome-webfont.svg in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320326921E3A007DA2F9 /* fontawesome-webfont.svg */; };
+		CBA9321626921E3A007DA2F9 /* fontawesome-webfont.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320426921E3A007DA2F9 /* fontawesome-webfont.woff2 */; };
+		CBA9321726921E3A007DA2F9 /* fontawesome-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320526921E3A007DA2F9 /* fontawesome-webfont.ttf */; };
+		CBA9321826921E3A007DA2F9 /* fontawesome-webfont.woff in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320626921E3A007DA2F9 /* fontawesome-webfont.woff */; };
+		CBA9321926921E3A007DA2F9 /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320826921E3A007DA2F9 /* bootstrap.min.css */; };
+		CBA9321A26921E3A007DA2F9 /* index.css in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320926921E3A007DA2F9 /* index.css */; };
+		CBA9321B26921E3A007DA2F9 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320B26921E3A007DA2F9 /* index.html */; };
+		CBA9321C26921E3A007DA2F9 /* file-video-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320D26921E3A007DA2F9 /* file-video-solid.svg */; };
+		CBA9321D26921E3A007DA2F9 /* file-invoice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */; };
+		CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */ = {isa = PBXBuildFile; productRef = CBA932BA26922C51007DA2F9 /* GDCWebServer */; };
+		CBA932C026922D93007DA2F9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932BF26922D93007DA2F9 /* Extensions.swift */; };
+		CBA932C226922E60007DA2F9 /* WebServerUploadConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CBA932B526922ADF007DA2F9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CBA931DB269215D8007DA2F9 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA931DE269215D8007DA2F9 /* LanguagePlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePlayerApp.swift; sourceTree = "<group>"; };
-		CBA931E0269215D8007DA2F9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CBA931E0269215D8007DA2F9 /* VideoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListView.swift; sourceTree = "<group>"; };
 		CBA931E2269215D9007DA2F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBA931E5269215D9007DA2F9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CBA931E7269215D9007DA2F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBA931F02692192E007DA2F9 /* VideoDownloadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingView.swift; sourceTree = "<group>"; };
+		CBA931F226921A08007DA2F9 /* VideoDownloadingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingViewModel.swift; sourceTree = "<group>"; };
+		CBA931F726921C38007DA2F9 /* VideoDownloadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDownloadingService.swift; sourceTree = "<group>"; };
+		CBA931FA26921E3A007DA2F9 /* jsconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = jsconfig.json; sourceTree = "<group>"; };
+		CBA931FC26921E3A007DA2F9 /* jquery.ui.widget.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.ui.widget.js; sourceTree = "<group>"; };
+		CBA931FD26921E3A007DA2F9 /* jquery.fileupload.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.fileupload.js; sourceTree = "<group>"; };
+		CBA931FE26921E3A007DA2F9 /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = index.js; sourceTree = "<group>"; };
+		CBA931FF26921E3A007DA2F9 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		CBA9320026921E3A007DA2F9 /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
+		CBA9320126921E3A007DA2F9 /* bootstrap.min.js.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.js.map; sourceTree = "<group>"; };
+		CBA9320326921E3A007DA2F9 /* fontawesome-webfont.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "fontawesome-webfont.svg"; sourceTree = "<group>"; };
+		CBA9320426921E3A007DA2F9 /* fontawesome-webfont.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff2"; sourceTree = "<group>"; };
+		CBA9320526921E3A007DA2F9 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
+		CBA9320626921E3A007DA2F9 /* fontawesome-webfont.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.woff"; sourceTree = "<group>"; };
+		CBA9320826921E3A007DA2F9 /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
+		CBA9320926921E3A007DA2F9 /* index.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = index.css; sourceTree = "<group>"; };
+		CBA9320A26921E3A007DA2F9 /* bootstrap.min.css.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = bootstrap.min.css.map; sourceTree = "<group>"; };
+		CBA9320B26921E3A007DA2F9 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		CBA9320D26921E3A007DA2F9 /* file-video-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-video-solid.svg"; sourceTree = "<group>"; };
+		CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
+		CBA932BF26922D93007DA2F9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServerUploadConnection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +109,10 @@
 		CBA931DD269215D8007DA2F9 /* LanguagePlayer */ = {
 			isa = PBXGroup;
 			children = (
+				CBA932BE26922D64007DA2F9 /* Misc */,
+				CBA932BC26922D2A007DA2F9 /* Services */,
+				CBA931ED269218EF007DA2F9 /* UserStories */,
 				CBA931DE269215D8007DA2F9 /* LanguagePlayerApp.swift */,
-				CBA931E0269215D8007DA2F9 /* ContentView.swift */,
 				CBA931E2269215D9007DA2F9 /* Assets.xcassets */,
 				CBA931E7269215D9007DA2F9 /* Info.plist */,
 				CBA931E4269215D9007DA2F9 /* Preview Content */,
@@ -69,6 +128,114 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		CBA931ED269218EF007DA2F9 /* UserStories */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931EF26921906007DA2F9 /* VideoDownloading */,
+				CBA931EE269218FD007DA2F9 /* VideoList */,
+			);
+			path = UserStories;
+			sourceTree = "<group>";
+		};
+		CBA931EE269218FD007DA2F9 /* VideoList */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931E0269215D8007DA2F9 /* VideoListView.swift */,
+			);
+			path = VideoList;
+			sourceTree = "<group>";
+		};
+		CBA931EF26921906007DA2F9 /* VideoDownloading */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931F02692192E007DA2F9 /* VideoDownloadingView.swift */,
+				CBA931F226921A08007DA2F9 /* VideoDownloadingViewModel.swift */,
+			);
+			path = VideoDownloading;
+			sourceTree = "<group>";
+		};
+		CBA931F926921E23007DA2F9 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				CBA9320726921E3A007DA2F9 /* css */,
+				CBA9320226921E3A007DA2F9 /* fonts */,
+				CBA9320C26921E3A007DA2F9 /* icons */,
+				CBA9320B26921E3A007DA2F9 /* index.html */,
+				CBA931FB26921E3A007DA2F9 /* js */,
+				CBA931FA26921E3A007DA2F9 /* jsconfig.json */,
+			);
+			path = HTML;
+			sourceTree = "<group>";
+		};
+		CBA931FB26921E3A007DA2F9 /* js */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931FC26921E3A007DA2F9 /* jquery.ui.widget.js */,
+				CBA931FD26921E3A007DA2F9 /* jquery.fileupload.js */,
+				CBA931FE26921E3A007DA2F9 /* index.js */,
+				CBA931FF26921E3A007DA2F9 /* jquery.min.js */,
+				CBA9320026921E3A007DA2F9 /* bootstrap.min.js */,
+				CBA9320126921E3A007DA2F9 /* bootstrap.min.js.map */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		CBA9320226921E3A007DA2F9 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CBA9320326921E3A007DA2F9 /* fontawesome-webfont.svg */,
+				CBA9320426921E3A007DA2F9 /* fontawesome-webfont.woff2 */,
+				CBA9320526921E3A007DA2F9 /* fontawesome-webfont.ttf */,
+				CBA9320626921E3A007DA2F9 /* fontawesome-webfont.woff */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		CBA9320726921E3A007DA2F9 /* css */ = {
+			isa = PBXGroup;
+			children = (
+				CBA9320826921E3A007DA2F9 /* bootstrap.min.css */,
+				CBA9320926921E3A007DA2F9 /* index.css */,
+				CBA9320A26921E3A007DA2F9 /* bootstrap.min.css.map */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		CBA9320C26921E3A007DA2F9 /* icons */ = {
+			isa = PBXGroup;
+			children = (
+				CBA9320D26921E3A007DA2F9 /* file-video-solid.svg */,
+				CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */,
+			);
+			path = icons;
+			sourceTree = "<group>";
+		};
+		CBA932BC26922D2A007DA2F9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CBA932BD26922D30007DA2F9 /* WebServer */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CBA932BD26922D30007DA2F9 /* WebServer */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931F726921C38007DA2F9 /* VideoDownloadingService.swift */,
+				CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */,
+			);
+			path = WebServer;
+			sourceTree = "<group>";
+		};
+		CBA932BE26922D64007DA2F9 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				CBA931F926921E23007DA2F9 /* HTML */,
+				CBA932BF26922D93007DA2F9 /* Extensions.swift */,
+			);
+			path = Misc;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -79,12 +246,16 @@
 				CBA931D7269215D8007DA2F9 /* Sources */,
 				CBA931D8269215D8007DA2F9 /* Frameworks */,
 				CBA931D9269215D8007DA2F9 /* Resources */,
+				CBA932B526922ADF007DA2F9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LanguagePlayer;
+			packageProductDependencies = (
+				CBA932BA26922C51007DA2F9 /* GDCWebServer */,
+			);
 			productName = LanguagePlayer;
 			productReference = CBA931DB269215D8007DA2F9 /* LanguagePlayer.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +283,9 @@
 				Base,
 			);
 			mainGroup = CBA931D2269215D8007DA2F9;
+			packageReferences = (
+				CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */,
+			);
 			productRefGroup = CBA931DC269215D8007DA2F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -126,7 +300,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBA9321B26921E3A007DA2F9 /* index.html in Resources */,
+				CBA9321726921E3A007DA2F9 /* fontawesome-webfont.ttf in Resources */,
+				CBA9321526921E3A007DA2F9 /* fontawesome-webfont.svg in Resources */,
+				CBA9321826921E3A007DA2F9 /* fontawesome-webfont.woff in Resources */,
+				CBA9321026921E3A007DA2F9 /* jquery.ui.widget.js in Resources */,
+				CBA9321A26921E3A007DA2F9 /* index.css in Resources */,
+				CBA9320F26921E3A007DA2F9 /* jsconfig.json in Resources */,
+				CBA9321326921E3A007DA2F9 /* jquery.min.js in Resources */,
+				CBA9321D26921E3A007DA2F9 /* file-invoice-solid.svg in Resources */,
+				CBA9321426921E3A007DA2F9 /* bootstrap.min.js in Resources */,
+				CBA9321626921E3A007DA2F9 /* fontawesome-webfont.woff2 in Resources */,
 				CBA931E6269215D9007DA2F9 /* Preview Assets.xcassets in Resources */,
+				CBA9321226921E3A007DA2F9 /* index.js in Resources */,
+				CBA9321126921E3A007DA2F9 /* jquery.fileupload.js in Resources */,
+				CBA9321926921E3A007DA2F9 /* bootstrap.min.css in Resources */,
+				CBA9321C26921E3A007DA2F9 /* file-video-solid.svg in Resources */,
 				CBA931E3269215D9007DA2F9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,8 +327,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBA931E1269215D8007DA2F9 /* ContentView.swift in Sources */,
+				CBA932C226922E60007DA2F9 /* WebServerUploadConnection.swift in Sources */,
+				CBA931E1269215D8007DA2F9 /* VideoListView.swift in Sources */,
+				CBA932C026922D93007DA2F9 /* Extensions.swift in Sources */,
+				CBA931F826921C38007DA2F9 /* VideoDownloadingService.swift in Sources */,
 				CBA931DF269215D8007DA2F9 /* LanguagePlayerApp.swift in Sources */,
+				CBA931F12692192E007DA2F9 /* VideoDownloadingView.swift in Sources */,
+				CBA931F326921A08007DA2F9 /* VideoDownloadingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +522,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mstroshin/GCDWebServer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CBA932BA26922C51007DA2F9 /* GDCWebServer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */;
+			productName = GDCWebServer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CBA931D3269215D8007DA2F9 /* Project object */;
 }

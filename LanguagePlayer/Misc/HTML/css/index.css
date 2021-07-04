@@ -1,0 +1,88 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background: #6190E8;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #6190E8, #A7BFE8);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #6190E8, #A7BFE8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.title {
+  text-align: center;
+  color: #ffffff;
+}
+
+#pageTitle {
+  margin-top: 20px;
+}
+
+.drop-zone-container {
+  position: center;
+}
+
+.drop-zone {
+  width: 300px;
+  height: 300px;
+  padding: 25px;
+  margin: 20px;
+/*  display: inline-block;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+  text-align: center;
+  font-size: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  border: 4px dashed #0077ff;
+  border-radius: 10px;
+}
+
+.drop-zone__prompt {
+  align-content: center;
+}
+
+.drop-zone--over {
+  border-style: solid;
+}
+
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: rgb(204, 204, 204, 0.25);
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+
+.dropzoneIcon {
+  width: 120px;
+  height: 120px;
+}

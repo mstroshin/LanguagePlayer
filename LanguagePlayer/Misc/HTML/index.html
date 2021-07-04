@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>LanguagePlayer Video Uploader</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="jquery.fileupload.js"></script>
+    <script type="text/javascript" src="bootstrap.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    
+<!--    <link rel="stylesheet" href="css/bootstrap.min.css">-->
+<!--    <link rel="stylesheet" href="css/index.css">-->
+<!--    <script type="text/javascript" src="js/jquery.min.js"></script>-->
+<!--    <script type="text/javascript" src="js/jquery.ui.widget.js"></script>-->
+<!--    <script type="text/javascript" src="js/jquery.fileupload.js"></script>-->
+<!--    <script type="text/javascript" src="js/bootstrap.min.js"></script>-->
+<!--    <script type="text/javascript" src="js/index.js"></script>-->
+</head>
+
+<body>
+    <h1 id="pageTitle" class="title">Language Player Video Uploader</h1>
+    <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <div class="row justify-content-sm-center drop-zone-container">
+            <div class="drop-zone">
+                <span id="videoDropzoneDescription" class="drop-zone__prompt">Drop video (mp4) here or click to
+                    upload</span>
+                <input id="videoInput" type="file" class="drop-zone__input" name="video">
+            </div>
+        </div>
+        <div class="row justify-content-sm-center drop-zone-container">
+            <div class="drop-zone">
+                <span id="firstSubtitleDropzoneDescription" class="drop-zone__prompt">Drop source subtitle (srt) here
+                    or click to upload</span>
+                <input id="firstSubtitleInput" type="file" class="drop-zone__input" name="firstSubtitle">
+            </div>
+            <div class="drop-zone">
+                <span id="secondSubtitleDropzoneDescription" class="drop-zone__prompt">Drop source subtitle (srt) here
+                    or click to upload</span>
+                <input id="secondSubtitleInput" type="file" class="drop-zone__input" name="secondSubtitle">
+            </div>
+        </div>
+        <div class="row justify-content-sm-center">
+            <input id="uploadButton" class="w-50 btn btn-primary btn-lg btn-block" type="submit" value="Upload"
+                disabled>
+            <input id="cancelButton" class="w-50 btn btn-danger btn-lg btn-block" type="button" value="Cancel" hidden>
+        </div>
+    </form>
+    <div class="row justify-content-sm-center">
+        <div id="progressBarContainer" class="progress w-50" hidden>
+            <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%</div>
+        </div>
+    </div>
+</body>
+
+</html>
