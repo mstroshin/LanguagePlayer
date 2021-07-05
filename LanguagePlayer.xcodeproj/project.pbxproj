@@ -32,6 +32,8 @@
 		CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */ = {isa = PBXBuildFile; productRef = CBA932BA26922C51007DA2F9 /* GDCWebServer */; };
 		CBA932C026922D93007DA2F9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932BF26922D93007DA2F9 /* Extensions.swift */; };
 		CBA932C226922E60007DA2F9 /* WebServerUploadConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */; };
+		CBD42DD32693A61A000F06CD /* mobileffmpeg.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */; };
+		CBD42DD42693A61A000F06CD /* MobileVLCKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +78,8 @@
 		CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
 		CBA932BF26922D93007DA2F9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServerUploadConnection.swift; sourceTree = "<group>"; };
+		CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = mobileffmpeg.xcframework; sourceTree = "<group>"; };
+		CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = MobileVLCKit.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +87,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBD42DD32693A61A000F06CD /* mobileffmpeg.xcframework in Frameworks */,
+				CBD42DD42693A61A000F06CD /* MobileVLCKit.xcframework in Frameworks */,
 				CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,6 +99,7 @@
 		CBA931D2269215D8007DA2F9 = {
 			isa = PBXGroup;
 			children = (
+				CBD42DD02693A61A000F06CD /* Frameworks */,
 				CBA931DD269215D8007DA2F9 /* LanguagePlayer */,
 				CBA931DC269215D8007DA2F9 /* Products */,
 			);
@@ -234,6 +241,15 @@
 				CBA932BF26922D93007DA2F9 /* Extensions.swift */,
 			);
 			path = Misc;
+			sourceTree = "<group>";
+		};
+		CBD42DD02693A61A000F06CD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */,
+				CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */,
+			);
+			path = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
