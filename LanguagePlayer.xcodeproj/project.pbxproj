@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD78983B9D71727344496905 /* Pods_LanguagePlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F12CBFE29AE432CD7AA92972 /* Pods_LanguagePlayer.framework */; };
 		CBA931DF269215D8007DA2F9 /* LanguagePlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931DE269215D8007DA2F9 /* LanguagePlayerApp.swift */; };
 		CBA931E1269215D8007DA2F9 /* VideoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA931E0269215D8007DA2F9 /* VideoListView.swift */; };
 		CBA931E3269215D9007DA2F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBA931E2269215D9007DA2F9 /* Assets.xcassets */; };
@@ -29,27 +30,26 @@
 		CBA9321B26921E3A007DA2F9 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320B26921E3A007DA2F9 /* index.html */; };
 		CBA9321C26921E3A007DA2F9 /* file-video-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320D26921E3A007DA2F9 /* file-video-solid.svg */; };
 		CBA9321D26921E3A007DA2F9 /* file-invoice-solid.svg in Resources */ = {isa = PBXBuildFile; fileRef = CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */; };
-		CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */ = {isa = PBXBuildFile; productRef = CBA932BA26922C51007DA2F9 /* GDCWebServer */; };
 		CBA932C026922D93007DA2F9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932BF26922D93007DA2F9 /* Extensions.swift */; };
 		CBA932C226922E60007DA2F9 /* WebServerUploadConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */; };
-		CBD42DD32693A61A000F06CD /* mobileffmpeg.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */; };
-		CBD42DD42693A61A000F06CD /* MobileVLCKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		CBA932B526922ADF007DA2F9 /* Embed Frameworks */ = {
+		CB202218269503DE00A6194F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
 			);
 			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		86AD766DDFC716C4034EE694 /* Pods-LanguagePlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.debug.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		A4D5A30DC2A34C3612CC67C7 /* Pods-LanguagePlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LanguagePlayer.release.xcconfig"; path = "Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer.release.xcconfig"; sourceTree = "<group>"; };
 		CBA931DB269215D8007DA2F9 /* LanguagePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LanguagePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBA931DE269215D8007DA2F9 /* LanguagePlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePlayerApp.swift; sourceTree = "<group>"; };
 		CBA931E0269215D8007DA2F9 /* VideoListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListView.swift; sourceTree = "<group>"; };
@@ -78,8 +78,7 @@
 		CBA9320E26921E3A007DA2F9 /* file-invoice-solid.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "file-invoice-solid.svg"; sourceTree = "<group>"; };
 		CBA932BF26922D93007DA2F9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		CBA932C126922E60007DA2F9 /* WebServerUploadConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServerUploadConnection.swift; sourceTree = "<group>"; };
-		CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = mobileffmpeg.xcframework; sourceTree = "<group>"; };
-		CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = MobileVLCKit.xcframework; sourceTree = "<group>"; };
+		F12CBFE29AE432CD7AA92972 /* Pods_LanguagePlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LanguagePlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,21 +86,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBD42DD32693A61A000F06CD /* mobileffmpeg.xcframework in Frameworks */,
-				CBD42DD42693A61A000F06CD /* MobileVLCKit.xcframework in Frameworks */,
-				CBA932BB26922C51007DA2F9 /* GDCWebServer in Frameworks */,
+				BD78983B9D71727344496905 /* Pods_LanguagePlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		087D6B36FEC929259FCA5867 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F12CBFE29AE432CD7AA92972 /* Pods_LanguagePlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		54B189EA2D28249D01218D5A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				86AD766DDFC716C4034EE694 /* Pods-LanguagePlayer.debug.xcconfig */,
+				A4D5A30DC2A34C3612CC67C7 /* Pods-LanguagePlayer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CBA931D2269215D8007DA2F9 = {
 			isa = PBXGroup;
 			children = (
-				CBD42DD02693A61A000F06CD /* Frameworks */,
 				CBA931DD269215D8007DA2F9 /* LanguagePlayer */,
 				CBA931DC269215D8007DA2F9 /* Products */,
+				54B189EA2D28249D01218D5A /* Pods */,
+				087D6B36FEC929259FCA5867 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -243,15 +258,6 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
-		CBD42DD02693A61A000F06CD /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CBD42DD12693A61A000F06CD /* mobileffmpeg.xcframework */,
-				CBD42DD22693A61A000F06CD /* MobileVLCKit.xcframework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -259,19 +265,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CBA931EA269215D9007DA2F9 /* Build configuration list for PBXNativeTarget "LanguagePlayer" */;
 			buildPhases = (
+				57622313949F1B02AEFB1565 /* [CP] Check Pods Manifest.lock */,
 				CBA931D7269215D8007DA2F9 /* Sources */,
 				CBA931D8269215D8007DA2F9 /* Frameworks */,
 				CBA931D9269215D8007DA2F9 /* Resources */,
-				CBA932B526922ADF007DA2F9 /* Embed Frameworks */,
+				CB202218269503DE00A6194F /* Embed Frameworks */,
+				EC5768F6E7362AFD5F43B9EF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = LanguagePlayer;
-			packageProductDependencies = (
-				CBA932BA26922C51007DA2F9 /* GDCWebServer */,
-			);
 			productName = LanguagePlayer;
 			productReference = CBA931DB269215D8007DA2F9 /* LanguagePlayer.app */;
 			productType = "com.apple.product-type.application";
@@ -299,9 +304,6 @@
 				Base,
 			);
 			mainGroup = CBA931D2269215D8007DA2F9;
-			packageReferences = (
-				CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */,
-			);
 			productRefGroup = CBA931DC269215D8007DA2F9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -337,6 +339,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		57622313949F1B02AEFB1565 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LanguagePlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC5768F6E7362AFD5F43B9EF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LanguagePlayer/Pods-LanguagePlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CBA931D7269215D8007DA2F9 /* Sources */ = {
@@ -474,19 +518,23 @@
 		};
 		CBA931EB269215D9007DA2F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86AD766DDFC716C4034EE694 /* Pods-LanguagePlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LanguagePlayer/Preview Content\"";
-				DEVELOPMENT_TEAM = G2BR4WD3R4;
+				DEVELOPMENT_TEAM = KM8KTKQCR2;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LanguagePlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = net.maksima.LanguagePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -496,19 +544,23 @@
 		};
 		CBA931EC269215D9007DA2F9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4D5A30DC2A34C3612CC67C7 /* Pods-LanguagePlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"LanguagePlayer/Preview Content\"";
-				DEVELOPMENT_TEAM = G2BR4WD3R4;
+				DEVELOPMENT_TEAM = KM8KTKQCR2;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LanguagePlayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = net.maksima.LanguagePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -538,25 +590,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mstroshin/GCDWebServer.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.5.4;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		CBA932BA26922C51007DA2F9 /* GDCWebServer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CBA932B926922C51007DA2F9 /* XCRemoteSwiftPackageReference "GCDWebServer" */;
-			productName = GDCWebServer;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CBA931D3269215D8007DA2F9 /* Project object */;
 }

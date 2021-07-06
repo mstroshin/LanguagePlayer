@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import ffmpegkit
 
 final class VideoDownloadingViewModel: ObservableObject {
     private let downloadingService = VideoDownloadingService.shared
@@ -18,6 +19,8 @@ final class VideoDownloadingViewModel: ObservableObject {
         downloadingService.$uploadedVideo.sink { video in
             print(video?.videoPath.absoluteString ?? "123")
         }.store(in: &cancellables)
+
+        print(FFmpegKitConfig.version())
     }
 
 }
