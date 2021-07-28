@@ -21,14 +21,14 @@ class VideosListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = NSLocalizedString("videoLibrary", comment: "")
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "purchased.circle.fill"),
-            landscapeImagePhone: nil,
-            style: .plain,
-            target: self,
-            action: #selector(premiumButtonPressed)
-        )
+
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(
+//            image: UIImage(systemName: "purchased.circle.fill"),
+//            landscapeImagePhone: nil,
+//            style: .plain,
+//            target: self,
+//            action: #selector(premiumButtonPressed)
+//        )
         
         collectionView.collectionViewLayout = UICollectionViewLayout.idiomicCellLayout()
         collectionView.dataSource = self

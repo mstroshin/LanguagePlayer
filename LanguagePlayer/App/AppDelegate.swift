@@ -1,5 +1,5 @@
 import UIKit
-import Purchases
+//import Purchases
 import RxSwift
 
 @UIApplicationMain
@@ -9,8 +9,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private var checkPremiumDisposable: Disposable?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        Purchases.debugLogsEnabled = true
-        Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX")
+//        Purchases.debugLogsEnabled = true
+//        Purchases.configure(withAPIKey: "yWTYRGqunmhPVPdBQsYzrpQiWtWqkstX")
         
         FileManager.clearTmpDirectory()
         
@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func checkPremium() {
-        checkPremiumDisposable = PurchaseService().checkPremium().subscribe()
+//        checkPremiumDisposable = PurchaseService().checkPremium().subscribe()
     }
 
     // MARK: UISceneSession Lifecycle

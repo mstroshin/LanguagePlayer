@@ -1,9 +1,9 @@
 import Foundation
-import Purchases
+//import Purchases
 import RxSwift
 
 class PurchaseService {
-    static var isPremium = false
+    static var isPremium = true
     
     func retrieveProductsInfo() -> Single<[Purchases.Package]> {
         Single.create { single -> Disposable in

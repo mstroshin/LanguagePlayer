@@ -30,18 +30,15 @@ class VideoCoordinator: BaseCoordinator<Void> {
         
         viewModel.route.openUploadTutorial
             .subscribe(onNext: { [weak self] video in
-                if PurchaseService.isPremium {
-                    
-                }
                 self?.openUploadTutorial()
             })
             .disposed(by: disposeBag)
         
-        viewModel.route.openPremium
-            .subscribe(onNext: { [weak self] in
-                self?.openPremium()
-            })
-            .disposed(by: disposeBag)
+//        viewModel.route.openPremium
+//            .subscribe(onNext: { [weak self] in
+//                self?.openPremium()
+//            })
+//            .disposed(by: disposeBag)
     }
     
     private func openVideoPlayer(with video: VideoEntity, on navController: UINavigationController) {
@@ -79,21 +76,21 @@ class VideoCoordinator: BaseCoordinator<Void> {
         navigationController.present(navController, animated: true, completion: nil)
     }
     
-    private func openPremium() {
-        let viewModel = PurchasesViewModel()
-        let viewController: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
-        viewController.viewModel = viewModel
-        
-        let navController = UINavigationController(rootViewController: viewController)
-        navController.modalPresentationStyle = .formSheet
-        navigationController.present(navController, animated: true, completion: nil)
-        
-        viewModel.route.close
-            .drive(onNext: { [weak viewController] in
-                viewController?.dismiss(animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
-    }
+//    private func openPremium() {
+//        let viewModel = PurchasesViewModel()
+//        let viewController: PurchasesViewController = PurchasesViewController.createFromMainStoryboard()
+//        viewController.viewModel = viewModel
+//
+//        let navController = UINavigationController(rootViewController: viewController)
+//        navController.modalPresentationStyle = .formSheet
+//        navigationController.present(navController, animated: true, completion: nil)
+//
+//        viewModel.route.close
+//            .drive(onNext: { [weak viewController] in
+//                viewController?.dismiss(animated: true, completion: nil)
+//            })
+//            .disposed(by: disposeBag)
+//    }
     
     private func openVideoSettings(with settingsSubject: BehaviorSubject<VideoSettings>, on vc: UIViewController) {
         let viewModel = VideoSettingsViewModel(settingsSubject: settingsSubject)

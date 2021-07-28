@@ -67,16 +67,16 @@ class VideosListViewModel: ViewModel, ViewModelCoordinatable {
         
         let openFreeUploadTutorial = openUploadTutorial.asObservable()
             .withLatestFrom(realmVideoEntities.map(\.count))
-            .filter({ videosCount -> Bool in
-                videosCount == 0 || PurchaseService.isPremium
-            })
+//            .filter({ videosCount -> Bool in
+//                videosCount == 0 || PurchaseService.isPremium
+//            })
             .map { _ -> Void in }
         
         let openPremiumFromUpload = openUploadTutorial.asObservable()
             .withLatestFrom(realmVideoEntities.map(\.count))
-            .filter({ videosCount -> Bool in
-                videosCount > 0 && !PurchaseService.isPremium
-            })
+//            .filter({ videosCount -> Bool in
+//                videosCount > 0 && !PurchaseService.isPremium
+//            })
             .map { _ -> Void in }
         
         self.route = Route(

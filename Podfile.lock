@@ -5,14 +5,10 @@ PODS:
   - DifferenceKit/Core (1.1.5)
   - DifferenceKit/UIKitExtension (1.1.5):
     - DifferenceKit/Core
+  - ffmpeg-kit-ios-min (4.4)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
-  - mobile-ffmpeg-full (4.4)
-  - MobileVLCKit (3.3.15)
-  - Purchases (3.10.2):
-    - PurchasesCoreSwift (= 3.10.2)
-  - PurchasesCoreSwift (3.10.2)
   - ReachabilitySwift (5.0.0)
   - Realm (10.5.1):
     - Realm/Headers (= 10.5.1)
@@ -42,10 +38,8 @@ PODS:
 
 DEPENDENCIES:
   - DifferenceKit
+  - ffmpeg-kit-ios-min (~> 4.4.LTS)
   - GCDWebServer
-  - mobile-ffmpeg-full (~> 4.4)
-  - MobileVLCKit
-  - Purchases
   - ReachabilitySwift
   - RealmSwift
   - RxCocoa
@@ -57,11 +51,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - DifferenceKit
+    - ffmpeg-kit-ios-min
     - GCDWebServer
-    - mobile-ffmpeg-full
-    - MobileVLCKit
-    - Purchases
-    - PurchasesCoreSwift
     - ReachabilitySwift
     - Realm
     - RealmSwift
@@ -74,11 +65,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
+  ffmpeg-kit-ios-min: 520508a9feff4896c4c47b15f06951018f1a6553
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
-  mobile-ffmpeg-full: 505c583d91ac1c4fb2b015787e69d83f83fb8f29
-  MobileVLCKit: 9a04c9fa19e35c376ddf59425dd82e397d5899ad
-  Purchases: 21017feccb2bd2f50c65f690be2ceddf40bf09ce
-  PurchasesCoreSwift: db1370f94aab8c9bc64fcf0bafd767d3504a5f95
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
   RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
@@ -89,6 +77,6 @@ SPEC CHECKSUMS:
   RxSwiftExt: 6637802b67dd4b60c00c661cc640316b693c0387
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: d16d1b3d9cc14ea194accb6d25a7534eed5f2bb3
+PODFILE CHECKSUM: d4c0a2bbe9155ee35fde67ba872542d63a4b96e0
 
 COCOAPODS: 1.10.1

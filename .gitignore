@@ -1,4 +1,5 @@
 *.DS_Store
+MobileVLCKit.xcframework/
 
 # Xcode
 #

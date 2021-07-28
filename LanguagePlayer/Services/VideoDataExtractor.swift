@@ -1,5 +1,5 @@
 import Foundation
-import mobileffmpeg
+import ffmpegkit
 import RxSwift
 import RxCocoa
 
@@ -10,18 +10,18 @@ class VideoDataExtractor {
     }
     
     func extractData(from filePath: URL) -> Single<VideoData> {
-        MobileFFmpegConfig.setLogLevel(AV_LOG_QUIET)
-        
+        FFmpegKitConfig.setLogLevel(LOG_ERR)
+
         return Single.create { single -> Disposable in
             guard let path = filePath.absoluteString.removingPercentEncoding,
-                  let mediaInfo = MobileFFprobe.getMediaInformation(path) else {
+                  let mediaInfo = FFprobeKit.getMediaInformation(path) else {
                 let error = NSError(domain: "Media info is nil", code: 1, userInfo: nil)
                 single(.failure(error))
                 return Disposables.create()
             }
             
-            let subtitlePathsResult = self.extractSubtitles(from: mediaInfo, filePath: filePath)
-            let audioTracksTitlesResult = self.extractAudio(from: mediaInfo)
+            let subtitlePathsResult = self.extractSubtitles(from: mediaInfo.getMediaInformation(), filePath: filePath)
+            let audioTracksTitlesResult = self.extractAudio(from: mediaInfo.getMediaInformation())
             let data = VideoData(
                 extractedSubtitlesPaths: (try? subtitlePathsResult.get()) ?? [],
                 audioTracksTitles: (try? audioTracksTitlesResult.get()) ?? []
@@ -57,12 +57,13 @@ class VideoDataExtractor {
             
             subtitlesPaths.append(subFileUrl)
         }
-        let result = MobileFFmpeg.execute(command)
-        
-        if result == RETURN_CODE_SUCCESS {
+        let error = NSError(domain: "Extract subtitles error", code: 1, userInfo: nil)
+        guard let result = FFmpegKit.execute(command) else {
+            return .failure(error)
+        }
+        if result.getReturnCode().isSuccess() {
             return .success(subtitlesPaths)
         } else {
-            let error = NSError(domain: "Extract subtitles error", code: Int(result), userInfo: nil)
             return .failure(error)
         }
     }
