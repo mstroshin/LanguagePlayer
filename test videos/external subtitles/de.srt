@@ -1,0 +1,180 @@
+1
+00:00:00,000 --> 00:00:07,000
+Übersetzung: Michael Hert Lektorat: Angelika Lueckert Leon
+
+2
+00:00:00,079 --> 00:00:02,873
+Sind wir für ein Nickerchen am Tag geschaffen?
+
+3
+00:00:03,290 --> 00:00:05,416
+[Schlafen mit Wissenschaft]
+
+4
+00:00:07,919 --> 00:00:12,090
+Die meisten Menschen versuchen die empfohlenen sieben bis neun Stunden Schlaf
+
+5
+00:00:12,090 --> 00:00:14,425
+in einem Stück nachts zu bekommen.
+
+6
+00:00:14,426 --> 00:00:17,636
+Der Fachbegriff dafür ist “monophasischer Schlaf”.
+
+7
+00:00:17,679 --> 00:00:21,016
+In anderen Worten ein einzige Runde Schlaf in der Nacht.
+
+8
+00:00:21,059 --> 00:00:26,022
+Möglicherweise sind wir aber nicht für diese Art von Schlaf geschaffen.
+
+9
+00:00:26,064 --> 00:00:28,858
+Bestimmt haben Sie schon die Erfahrung gemacht,
+
+10
+00:00:28,899 --> 00:00:32,109
+dass Ihre Aufmerksamkeit am Nachmittag nachlässt
+
+11
+00:00:32,152 --> 00:00:34,612
+und Sie sich ein wenig schläfrig fühlen.
+
+12
+00:00:34,613 --> 00:00:37,157
+Und man kann es auch bei anderen Menschen beobachten,
+
+13
+00:00:37,200 --> 00:00:40,078
+wenn ihre Köpfe während der Nachmittagssitzungen
+
+14
+00:00:40,078 --> 00:00:41,870
+auf und ab wandern.
+
+15
+00:00:41,912 --> 00:00:46,083
+Sie denken jetzt vielleicht, dass dieser nachmittägige Abfall Ihrer Aufmerksamkeit
+
+16
+00:00:46,125 --> 00:00:48,376
+auf ein großes Mittagessen zurückzuführen ist,
+
+17
+00:00:48,418 --> 00:00:50,003
+aber in Wirklichkeit
+
+18
+00:00:50,045 --> 00:00:52,089
+scheint er fest eingeplant zu sein.
+
+19
+00:00:52,090 --> 00:00:55,009
+Denn wenn ich Ihnen Elektroden auf den Kopf setze,
+
+20
+00:00:55,009 --> 00:00:58,553
+sinkt die Wachheit Ihres Gehirns zuverlässig und vorprogrammiert
+
+21
+00:00:58,554 --> 00:01:01,223
+während des Nachmittags.
+
+22
+00:01:01,265 --> 00:01:05,686
+Die geschieht bei den meisten von uns irgendwann zwischen 13 und 16 Uhr.
+
+23
+00:01:05,686 --> 00:01:06,853
+Dies legt nahe,
+
+24
+00:01:06,896 --> 00:01:10,816
+dass wir dazu geschaffen sind, nach einem biphasischen Muster zu schlafen
+
+25
+00:01:10,816 --> 00:01:13,985
+nämlich einer längeren Schlafphase in der Nacht
+
+26
+00:01:14,028 --> 00:01:17,240
+und einem kürzerem Nickerchen tagsüber,
+
+27
+00:01:17,281 --> 00:01:20,951
+ähnlich wie die Siesta-Kulturen rund um die Welt.
+
+28
+00:01:20,992 --> 00:01:23,995
+Aber ist ein Nickerchen immer eine gute Sache?
+
+29
+00:01:23,995 --> 00:01:25,996
+Nun, nicht unbedingt.
+
+30
+00:01:26,331 --> 00:01:28,166
+Obwohl wir und andere Wissenschaftler
+
+31
+00:01:28,209 --> 00:01:30,837
+herausgefunden haben, dass Nickerchen Vorteile
+
+32
+00:01:30,878 --> 00:01:33,547
+für Gehirn und Körper mit sich bringen können,
+
+33
+00:01:33,588 --> 00:01:36,257
+können Nickerchen auch Nachteile haben.
+
+34
+00:01:36,259 --> 00:01:39,971
+Lange Nickerchen am Nachmittag oder am frühen Abend
+
+35
+00:01:39,971 --> 00:01:43,431
+können die notwendige Müdigkeit für den langen Schlaf nehmen.
+
+36
+00:01:43,474 --> 00:01:46,686
+Es ist ein bisschen wie ein Snack vor der Hauptmahlzeit.
+
+37
+00:01:46,727 --> 00:01:49,896
+Wenn Sie also nachts mit Schlafproblemen zu kämpfen haben,
+
+38
+00:01:49,938 --> 00:01:53,900
+ist der beste Rat tagsüber kein Nickerchen zu machen.
+
+39
+00:01:53,942 --> 00:01:57,736
+Lassen Sie stattdessen diese Müdigkeit zu,
+
+40
+00:01:57,780 --> 00:02:02,076
+sodass Sie die besten Chancen haben leicht einzuschlafen
+
+41
+00:02:02,075 --> 00:02:05,744
+und die ganze Nacht durchzuschlafen.
+
+42
+00:02:05,745 --> 00:02:07,955
+Haben Sie nicht mit Schlafproblemen zu kämpfen
+
+43
+00:02:07,956 --> 00:02:11,209
+und können tagsüber regelmäßig ein Nickerchen machen,
+
+44
+00:02:11,252 --> 00:02:15,548
+könnte ein Nickerchen von etwa 20 Minuten früh am Tag
+
+45
+00:02:15,590 --> 00:02:17,340
+genau richtig sein.
+

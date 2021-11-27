@@ -1,5 +1,5 @@
 import Foundation
-import mobileffmpeg
+import ffmpegkit
 import RxSwift
 import RxCocoa
 
@@ -10,11 +10,10 @@ class VideoDataExtractor {
     }
     
     func extractData(from filePath: URL) -> Single<VideoData> {
-        MobileFFmpegConfig.setLogLevel(AV_LOG_QUIET)
-        
-        return Single.create { single -> Disposable in
+        Single.create { single -> Disposable in
             guard let path = filePath.absoluteString.removingPercentEncoding,
-                  let mediaInfo = MobileFFprobe.getMediaInformation(path) else {
+                  let mediaInfoSession = FFprobeKit.getMediaInformation(path),
+                  let mediaInfo = mediaInfoSession.getMediaInformation() else {
                 let error = NSError(domain: "Media info is nil", code: 1, userInfo: nil)
                 single(.failure(error))
                 return Disposables.create()
@@ -43,7 +42,7 @@ class VideoDataExtractor {
         let pathToSave = filePath.deletingLastPathComponent()
         
         let path = filePath.absoluteString.removingPercentEncoding!
-        var command = "-i \(path)"
+        var command = "-i \"\(path)\""
         for subStream in subtitleStreams {
             guard let index = subStream.getIndex()?.intValue else {
                 continue
@@ -57,12 +56,23 @@ class VideoDataExtractor {
             
             subtitlesPaths.append(subFileUrl)
         }
-        let result = MobileFFmpeg.execute(command)
         
-        if result == RETURN_CODE_SUCCESS {
+        guard let sessionResult = FFmpegKit.execute(command) else {
+            let error = NSError(
+                domain: "Extract subtitles result is nil",
+                code: 1,
+                userInfo: nil
+            )
+            return .failure(error)
+        }
+        if sessionResult.getReturnCode().isSuccess() {
             return .success(subtitlesPaths)
         } else {
-            let error = NSError(domain: "Extract subtitles error", code: Int(result), userInfo: nil)
+            let error = NSError(
+                domain: "Extract subtitles error",
+                code: Int(sessionResult.getReturnCode().getValue()),
+                userInfo: nil
+            )
             return .failure(error)
         }
     }

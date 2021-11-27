@@ -1,49 +1,49 @@
 PODS:
-  - DifferenceKit (1.1.5):
-    - DifferenceKit/Core (= 1.1.5)
-    - DifferenceKit/UIKitExtension (= 1.1.5)
-  - DifferenceKit/Core (1.1.5)
-  - DifferenceKit/UIKitExtension (1.1.5):
+  - DifferenceKit (1.2.0):
+    - DifferenceKit/Core (= 1.2.0)
+    - DifferenceKit/UIKitExtension (= 1.2.0)
+  - DifferenceKit/Core (1.2.0)
+  - DifferenceKit/UIKitExtension (1.2.0):
     - DifferenceKit/Core
+  - ffmpeg-kit-ios-full (4.5)
   - GCDWebServer (3.5.4):
     - GCDWebServer/Core (= 3.5.4)
   - GCDWebServer/Core (3.5.4)
-  - mobile-ffmpeg-full (4.4)
-  - MobileVLCKit (3.3.15)
-  - Purchases (3.10.2):
-    - PurchasesCoreSwift (= 3.10.2)
-  - PurchasesCoreSwift (3.10.2)
+  - MobileVLCKit (3.3.17)
+  - Purchases (3.13.0):
+    - PurchasesCoreSwift (= 3.13.0)
+  - PurchasesCoreSwift (3.13.0)
   - ReachabilitySwift (5.0.0)
-  - Realm (10.5.1):
-    - Realm/Headers (= 10.5.1)
-  - Realm/Headers (10.5.1)
-  - RealmSwift (10.5.1):
-    - Realm (= 10.5.1)
-  - RxCocoa (6.0.0):
-    - RxRelay (= 6.0.0)
-    - RxSwift (= 6.0.0)
-  - RxRealm (5.0.1):
-    - Realm (~> 10.5)
-    - RealmSwift (~> 10.5)
+  - Realm (10.20.0):
+    - Realm/Headers (= 10.20.0)
+  - Realm/Headers (10.20.0)
+  - RealmSwift (10.20.0):
+    - Realm (= 10.20.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxRealm (5.0.3):
+    - Realm (~> 10.7)
+    - RealmSwift (~> 10.7)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
-  - RxRelay (6.0.0):
-    - RxSwift (= 6.0.0)
-  - RxSwift (6.0.0)
-  - RxSwiftExt (6.0.0):
-    - RxSwiftExt/Core (= 6.0.0)
-    - RxSwiftExt/RxCocoa (= 6.0.0)
-  - RxSwiftExt/Core (6.0.0):
-    - RxSwift (= 6.0.0)
-  - RxSwiftExt/RxCocoa (6.0.0):
-    - RxCocoa (= 6.0.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
+  - RxSwiftExt (6.0.1):
+    - RxSwiftExt/Core (= 6.0.1)
+    - RxSwiftExt/RxCocoa (= 6.0.1)
+  - RxSwiftExt/Core (6.0.1):
+    - RxSwift (~> 6.0)
+  - RxSwiftExt/RxCocoa (6.0.1):
+    - RxCocoa (~> 6.0)
     - RxSwiftExt/Core
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - DifferenceKit
+  - ffmpeg-kit-ios-full
   - GCDWebServer
-  - mobile-ffmpeg-full (~> 4.4)
   - MobileVLCKit
   - Purchases
   - ReachabilitySwift
@@ -57,8 +57,8 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - DifferenceKit
+    - ffmpeg-kit-ios-full
     - GCDWebServer
-    - mobile-ffmpeg-full
     - MobileVLCKit
     - Purchases
     - PurchasesCoreSwift
@@ -73,22 +73,22 @@ SPEC REPOS:
     - Toast-Swift
 
 SPEC CHECKSUMS:
-  DifferenceKit: 516f12e336ed65a3a0665847b5c3cb5cad4bd4ea
+  DifferenceKit: 5659c430bb7fe45876fa32ce5cba5d6167f0c805
+  ffmpeg-kit-ios-full: c4cb480c1ba316d7f578191e39b079ef5691af00
   GCDWebServer: 2c156a56c8226e2d5c0c3f208a3621ccffbe3ce4
-  mobile-ffmpeg-full: 505c583d91ac1c4fb2b015787e69d83f83fb8f29
-  MobileVLCKit: 9a04c9fa19e35c376ddf59425dd82e397d5899ad
-  Purchases: 21017feccb2bd2f50c65f690be2ceddf40bf09ce
-  PurchasesCoreSwift: db1370f94aab8c9bc64fcf0bafd767d3504a5f95
+  MobileVLCKit: c5dd1b0ae933dc9c2348099840e753496dcdd908
+  Purchases: a545d402454bc9395495cceaf0e893360670e0ad
+  PurchasesCoreSwift: e7f7267a6dc526da226baad19c61e8977fa664b4
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
-  Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
-  RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
-  RxCocoa: 3f79328fafa3645b34600f37c31e64c73ae3a80e
-  RxRealm: bd7c601e78cfebe48c24d4550db83c31e1ab2c33
-  RxRelay: 8d593be109c06ea850df027351beba614b012ffb
-  RxSwift: c14e798c59b9f6e9a2df8fd235602e85cc044295
-  RxSwiftExt: 6637802b67dd4b60c00c661cc640316b693c0387
+  Realm: ae32bdc1da7d19c7617e0400201a77acd4a211b9
+  RealmSwift: c95eec6a712924870b2e36c4c081d63ec07e5414
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxRealm: d9fedf16e3ead54b0be2077d2ff4a1b2dc27be39
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  RxSwiftExt: d61c4b9b06e0a448041b1c659e0f1b5c5a035afc
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: d16d1b3d9cc14ea194accb6d25a7534eed5f2bb3
+PODFILE CHECKSUM: d38714ac2e46640f646a5fe43f9786b22d915209
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

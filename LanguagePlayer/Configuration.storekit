@@ -1,4 +1,8 @@
 {
+  "identifier" : "6A6E80CB",
+  "nonRenewingSubscriptions" : [
+
+  ],
   "products" : [
     {
       "displayPrice" : "79.99",
@@ -80,6 +84,6 @@
   ],
   "version" : {
     "major" : 1,
-    "minor" : 0
+    "minor" : 1
   }
 }
